@@ -9,7 +9,7 @@
     tools:context=".NovoLugar" >
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/button_lugares"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/imageView1"
@@ -20,7 +20,7 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button1"
+        android:layout_alignLeft="@+id/button_lugares"
         android:layout_alignParentTop="true"
         android:text="@string/lugar"
         android:textAppearance="?android:attr/textAppearanceLarge"

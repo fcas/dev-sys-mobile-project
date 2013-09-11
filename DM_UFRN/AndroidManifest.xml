@@ -50,6 +50,14 @@
             android:name="dimap.ufrn.dm.UsuarioPerfil"
             android:label="@string/title_activity_usuario_perfil" >
         </activity>
+        <activity
+            android:name="dimap.ufrn.dm.InfoLugar"
+            android:label="@string/title_activity_info_lugar" >
+        </activity>
+        <activity
+            android:name="dimap.ufrn.dm.ListaLugares"
+            android:label="@string/title_activity_lista_lugares" >
+        </activity>
     </application>
 
 </manifest>
