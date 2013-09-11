@@ -22,6 +22,34 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="dimap.ufrn.dm.NovoLugar"
+            android:label="@string/title_activity_novo_lugar" >
+        </activity>
+        <activity
+            android:name="dimap.ufrn.dm.ListaComentarios"
+            android:label="@string/title_activity_comentarios" >
+        </activity>
+        <activity
+            android:name="dimap.ufrn.dm.Comentario"
+            android:label="@string/title_activity_comentario" >
+        </activity>
+        <activity
+            android:name="dimap.ufrn.dm.NovoComentario"
+            android:label="@string/title_activity_comentario_novo" >
+        </activity>
+        <activity
+            android:name="dimap.ufrn.dm.ListaTarefas"
+            android:label="@string/title_activity_tarefas" >
+        </activity>
+        <activity
+            android:name="dimap.ufrn.dm.NovaTarefa"
+            android:label="@string/title_activity_tarefa" >
+        </activity>
+        <activity
+            android:name="dimap.ufrn.dm.UsuarioPerfil"
+            android:label="@string/title_activity_usuario_perfil" >
+        </activity>
     </application>
 
 </manifest>
