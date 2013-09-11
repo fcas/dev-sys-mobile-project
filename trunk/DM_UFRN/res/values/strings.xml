@@ -53,5 +53,6 @@
     <string name="lugar_sala_prof">Sala dos professores</string>
     <string name="lugar_localizacao">Localização:</string>
     <string name="lugar_ok">Pronto! </string>
+    <string name="title_activity_lista_lugares">ListaLugares</string>
 
 </resources>

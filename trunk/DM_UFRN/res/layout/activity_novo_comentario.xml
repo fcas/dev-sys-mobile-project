@@ -46,12 +46,12 @@
         android:id="@+id/button2"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/button1"
+        android:layout_above="@+id/button_lugares"
         android:layout_alignLeft="@+id/launch_codes"
         android:text="@string/usuario_anonimo" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/button_lugares"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/button2"

@@ -13,32 +13,32 @@
         android:id="@+id/imageButton1"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_alignLeft="@+id/button1"
+        android:layout_alignLeft="@+id/button_lugares"
         android:src="@drawable/ic_launcher"
         android:contentDescription="@string/usuario_foto" />
 
     <Button
-        android:id="@+id/Button02"
+        android:id="@+id/button_tarefas"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/Button01"
-        android:layout_below="@+id/Button01"
+        android:layout_alignLeft="@+id/button_comentarios"
+        android:layout_below="@+id/button_comentarios"
         android:gravity="center_vertical|center_horizontal|center|start"
         android:minHeight="48dp"
         android:text="@string/app_tarefas" />
 
     <Button
-        android:id="@+id/Button01"
+        android:id="@+id/button_comentarios"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button1"
-        android:layout_below="@+id/button1"
+        android:layout_alignLeft="@+id/button_lugares"
+        android:layout_below="@+id/button_lugares"
         android:gravity="center_vertical|center_horizontal|center|start"
         android:minHeight="48dp"
         android:text="@string/app_comentarios" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/button_lugares"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageButton1"
@@ -81,7 +81,7 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/button1"
+        android:layout_above="@+id/button_lugares"
         android:layout_toRightOf="@+id/button2"
         android:gravity="left|center_vertical|center_horizontal"
         android:text="@string/usuario_seguindo" />
