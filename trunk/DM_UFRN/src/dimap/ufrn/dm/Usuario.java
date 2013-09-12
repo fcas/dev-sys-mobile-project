@@ -8,6 +8,7 @@ public class Usuario {
 	private String curso;
 	private List<Comentarios> comentarios;
 	private List<Tarefas> tarefas;
+	private String senha;
 
 	public String getNome() {
 		return nome;
@@ -39,6 +40,14 @@ public class Usuario {
 
 	public void setTarefas(List<Tarefas> tarefas) {
 		this.tarefas = tarefas;
+	}
+	
+	public String getSenha() {
+		return senha;
+	}
+	
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 }

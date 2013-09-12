@@ -2,16 +2,16 @@ package dimap.ufrn.dm;
 
 public class Tarefas {
 
-	private String nome;
+	private String local;
 	private String horario;
 	private String descricao;
 
-	public String getNome() {
-		return nome;
+	public String getLocal() {
+		return local;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setLocal(String nome) {
+		this.local = nome;
 	}
 
 	public String getHorario() {

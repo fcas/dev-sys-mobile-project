@@ -20,10 +20,10 @@
         android:textSize="40sp" />
 
      <EditText
-         android:id="@+id/editText1"
+         android:id="@+id/tarefa_horario"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:layout_alignLeft="@+id/launch_codes"
+         android:layout_alignLeft="@+id/tarefa_descricao"
          android:layout_below="@+id/textView1"
          android:layout_marginTop="20dp"
          android:ems="10"
@@ -34,17 +34,17 @@
      </EditText>
 
      <EditText
-         android:id="@+id/editText2"
+         android:id="@+id/tarefa_local"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:layout_alignLeft="@+id/editText1"
-         android:layout_below="@+id/editText1"
+         android:layout_alignLeft="@+id/tarefa_horario"
+         android:layout_below="@+id/tarefa_horario"
          android:layout_marginTop="18dp"
          android:ems="10"
          android:hint="@string/tarefa_local" />
 
      <EditText
-         android:id="@+id/launch_codes"
+         android:id="@+id/tarefa_descricao"
          android:layout_width="fill_parent"
          android:layout_height="wrap_content"
          android:layout_alignLeft="@+id/textView1"
@@ -55,11 +55,11 @@
          android:inputType="text" />
 
      <Button
-         android:id="@+id/button_lugar_novo"
+         android:id="@+id/button_tarefa_nova"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
          android:layout_alignParentBottom="true"
-         android:layout_alignRight="@+id/launch_codes"
+         android:layout_alignRight="@+id/tarefa_descricao"
          android:layout_marginBottom="31dp"
          android:text="@string/tarefa_ok" />
 
