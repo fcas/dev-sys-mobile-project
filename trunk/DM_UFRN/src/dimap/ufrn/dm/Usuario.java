@@ -1,9 +1,14 @@
 package dimap.ufrn.dm;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Usuario {
+public class Usuario implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String nome;
 	private String curso;
 	private List<Comentarios> comentarios;

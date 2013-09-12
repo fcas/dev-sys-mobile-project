@@ -19,11 +19,10 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		setTitle("UFRN ON TOUCH");
 		setButtons();
-
 	}
 
 	private void setButtons() {
-
+		
 		lugares = (Button) findViewById(R.id.button_lugares);
 		lugares.setOnClickListener(new View.OnClickListener() {
 
