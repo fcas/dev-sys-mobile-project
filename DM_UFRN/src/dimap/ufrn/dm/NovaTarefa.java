@@ -31,7 +31,8 @@ public class NovaTarefa extends Activity {
 				Tarefas tarefas = new Tarefas();
 				Intent minhasTarefasIntent = new Intent();
 				minhasTarefasIntent = getIntent();
-				Usuario usuario = (Usuario) minhasTarefasIntent.getSerializableExtra("usuario");
+				Usuario usuario = (Usuario) minhasTarefasIntent
+						.getSerializableExtra("usuario");
 
 				EditText editText = (EditText) findViewById(R.id.tarefa_local);
 				tarefas.setLocal(editText.getText().toString());
@@ -39,7 +40,7 @@ public class NovaTarefa extends Activity {
 				tarefas.setHorario(editText.getText().toString());
 				editText = (EditText) findViewById(R.id.tarefa_descricao);
 				tarefas.setDescricao(editText.getText().toString());
-				
+
 				usuario.getTarefas().add(tarefas);
 
 				minhasTarefasIntent.setClass(NovaTarefa.this,

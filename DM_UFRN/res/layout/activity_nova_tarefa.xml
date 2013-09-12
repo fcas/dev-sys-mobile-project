@@ -19,41 +19,12 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textSize="40sp" />
 
-     <EditText
-         android:id="@+id/tarefa_horario"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignLeft="@+id/tarefa_descricao"
-         android:layout_below="@+id/textView1"
-         android:layout_marginTop="20dp"
-         android:ems="10"
-         android:hint="@string/tarefa_hora"
-         android:inputType="time" >
-
-         <requestFocus />
-     </EditText>
-
-     <EditText
-         android:id="@+id/tarefa_local"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignLeft="@+id/tarefa_horario"
-         android:layout_below="@+id/tarefa_horario"
-         android:layout_marginTop="18dp"
-         android:ems="10"
-         android:hint="@string/tarefa_local" />
-
-     <EditText
-         android:id="@+id/tarefa_descricao"
-         android:layout_width="fill_parent"
-         android:layout_height="wrap_content"
-         android:layout_alignLeft="@+id/textView1"
-         android:layout_centerVertical="true"
-         android:ems="10"
-         android:hint="@string/tarefa_descricao"
-         android:imeActionLabel="@string/tarefa_nova"
-         android:inputType="text" />
-
+     <DatePicker android:id="@+id/datePicker1" 
+          android:layout_width="wrap_content" 
+          android:layout_height="wrap_content">
+      </DatePicker>
+     
+     
      <Button
          android:id="@+id/button_tarefa_nova"
          android:layout_width="wrap_content"
@@ -62,5 +33,45 @@
          android:layout_alignRight="@+id/tarefa_descricao"
          android:layout_marginBottom="31dp"
          android:text="@string/tarefa_ok" />
+
+     <EditText
+         android:id="@+id/tarefa_local"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_above="@+id/tarefa_descricao"
+         android:layout_alignLeft="@+id/timePicker1"
+         android:layout_marginBottom="14dp"
+         android:ems="10"
+         android:hint="@string/tarefa_local" />
+
+     <EditText
+         android:id="@+id/tarefa_descricao"
+         android:layout_width="fill_parent"
+         android:layout_height="wrap_content"
+         android:layout_above="@+id/button_tarefa_nova"
+         android:layout_alignLeft="@+id/tarefa_local"
+         android:layout_marginBottom="18dp"
+         android:ems="10"
+         android:hint="@string/tarefa_descricao"
+         android:imeActionLabel="@string/tarefa_nova"
+         android:inputType="text" />
+
+     <TimePicker
+         android:id="@+id/tarefa_horario"
+         android:layout_width="250dp"
+         android:layout_height="100dp"
+         android:layout_above="@+id/tarefa_local"
+         android:layout_alignLeft="@+id/textView1"
+         android:layout_marginBottom="21dp" />
+
+     <TextView
+         android:id="@+id/textView2"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_above="@+id/tarefa_horario"
+         android:layout_alignLeft="@+id/tarefa_horario"
+         android:layout_marginBottom="18dp"
+         android:text="@string/tarefa_hora"
+         android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>
