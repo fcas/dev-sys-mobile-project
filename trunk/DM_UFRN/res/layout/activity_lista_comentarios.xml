@@ -49,7 +49,7 @@
     </ExpandableListView>
 
     <Button
-        android:id="@+id/button_lugares"
+        android:id="@+id/button_comentario_novo"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/expandableListView1"
@@ -61,7 +61,7 @@
         android:id="@+id/button2"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/button_lugares"
+        android:layout_below="@+id/button_comentario_novo"
         android:layout_centerHorizontal="true"
         android:text="@string/lugar_top" />
 

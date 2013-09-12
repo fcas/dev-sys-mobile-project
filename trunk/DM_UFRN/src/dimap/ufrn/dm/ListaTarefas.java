@@ -2,14 +2,20 @@ package dimap.ufrn.dm;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
+import android.view.View;
+import android.widget.Button;
 
 public class ListaTarefas extends Activity {
+	private Button button;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_lista_tarefas);
+		setTitle("UFRN ON TOUCH");
+		setButtons();
 	}
 
 	@Override
@@ -18,5 +24,18 @@ public class ListaTarefas extends Activity {
 		getMenuInflater().inflate(R.menu.tarefas, menu);
 		return true;
 	}
+	
+	private void setButtons() {
+		button = (Button) findViewById(R.id.button_tarefa_nova);
+		button.setOnClickListener(new View.OnClickListener() {
 
+			@Override
+			public void onClick(View view) {
+				Intent novaTarefaIntent = new Intent();
+				novaTarefaIntent.setClass(ListaTarefas.this, NovaTarefa.class);
+				startActivity(novaTarefaIntent);
+				finish();
+			}
+		});
+	}
 }
