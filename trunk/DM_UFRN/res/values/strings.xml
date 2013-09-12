@@ -60,5 +60,6 @@
     <string name="usuario_senha">Senha:</string>
     <string name="usuario_cadastrar">Cadastrar-se</string>
     <string name="title_activity_main">ActivityMain</string>
+    <string name="title_activity_teste">Teste</string>
 
 </resources>

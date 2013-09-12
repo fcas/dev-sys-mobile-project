@@ -18,6 +18,7 @@
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -60,6 +61,10 @@
         <activity
             android:name="dimap.ufrn.dm.MainActivity"
             android:label="@string/title_activity_main" >
+        </activity>
+        <activity
+            android:name="dimap.ufrn.dm.Teste"
+            android:label="@string/title_activity_teste" >
         </activity>
     </application>
 
