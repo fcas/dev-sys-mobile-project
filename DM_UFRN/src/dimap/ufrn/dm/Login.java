@@ -35,8 +35,7 @@ public class Login extends Activity {
 				editText = (EditText) findViewById(R.id.usuario_senha);
 				usuario.setSenha(editText.getText().toString());
 				
-				mainIntent.putExtra("usuario_nome", usuario.getNome());
-				mainIntent.putExtra("usuario_senha", usuario.getSenha());
+				mainIntent.putExtra("usuario", usuario);
 				
 				mainIntent.setClass(Login.this,
 						MainActivity.class);
