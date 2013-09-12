@@ -15,7 +15,7 @@
     <string name="comentarios">Comentários</string>
     <string name="avaliacao_lugar">Avaliação do lugar:</string>
     <string name="avaliacao_wifi">Avaliação do Wi-fi:</string>
-    <string name="usuario_nome">Nome</string>
+    <string name="usuario_nome">Nome:</string>
     <string name="usuario_curso">Curso</string>
     <string name="usuario_seguidores">Seguidores</string>
     <string name="usuario_seguindo">Seguindo</string>
@@ -54,5 +54,10 @@
     <string name="lugar_localizacao">Localização:</string>
     <string name="lugar_ok">Pronto! </string>
     <string name="title_activity_lista_lugares">ListaLugares</string>
+    <string name="comentario_anonimo">Comentar anonimante </string>
+    <string name="comentario_ok">Pronto! </string>
+    <string name="title_activity_login">Login</string>
+    <string name="usuario_senha">Senha:</string>
+    <string name="usuario_cadastrar">Cadastrar-se</string>
 
 </resources>

@@ -58,6 +58,10 @@
             android:name="dimap.ufrn.dm.ListaLugares"
             android:label="@string/title_activity_lista_lugares" >
         </activity>
+        <activity
+            android:name="dimap.ufrn.dm.Login"
+            android:label="@string/title_activity_login" >
+        </activity>
     </application>
 
 </manifest>
