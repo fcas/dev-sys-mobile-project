@@ -32,7 +32,7 @@
         android:id="@+id/expandableListView1"
         android:layout_width="fill_parent"
         android:layout_height="100dp"
-        android:layout_above="@+id/button_lugares"
+        android:layout_above="@+id/button_lugar_novo"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="80dp" >
     </ExpandableListView>
@@ -49,7 +49,7 @@
         android:textSize="35sp" />
 
     <Button
-        android:id="@+id/button_lugares"
+        android:id="@+id/button_lugar_novo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/imageView1"

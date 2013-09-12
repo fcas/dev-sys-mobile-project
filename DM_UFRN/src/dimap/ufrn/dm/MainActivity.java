@@ -9,7 +9,9 @@ import android.widget.Button;
 
 public class MainActivity extends Activity {
 
-	private Button button;
+	private Button lugares;
+	private Button comentarios;
+	private Button tarefas;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -22,14 +24,38 @@ public class MainActivity extends Activity {
 
 	private void setButtons() {
 
-		button = (Button) findViewById(R.id.button_lugares);
-		button.setOnClickListener(new View.OnClickListener() {
+		lugares = (Button) findViewById(R.id.button_lugares);
+		lugares.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View view) {
-				Intent lugarIntent = new Intent();
-				lugarIntent.setClass(MainActivity.this, ListaLugares.class);
-				startActivity(lugarIntent);
+				Intent lugaresIntent = new Intent();
+				lugaresIntent.setClass(MainActivity.this, ListaLugares.class);
+				startActivity(lugaresIntent);
+				finish();
+			}
+		});
+		
+		comentarios = (Button) findViewById(R.id.button_comentarios);
+		comentarios.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View view) {
+				Intent comentariosIntent = new Intent();
+				comentariosIntent.setClass(MainActivity.this, ListaComentarios.class);
+				startActivity(comentariosIntent);
+				finish();
+			}
+		});
+		
+		tarefas = (Button) findViewById(R.id.button_tarefas);
+		tarefas.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View view) {
+				Intent tarefasIntent = new Intent();
+				tarefasIntent.setClass(MainActivity.this, ListaTarefas.class);
+				startActivity(tarefasIntent);
 				finish();
 			}
 		});
