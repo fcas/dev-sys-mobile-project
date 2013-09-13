@@ -66,6 +66,10 @@
             android:name="dimap.ufrn.dm.Teste"
             android:label="@string/title_activity_teste" >
         </activity>
+        <activity
+            android:name="dimap.ufrn.dm.Cadastro"
+            android:label="@string/title_activity_cadastro" >
+        </activity>
     </application>
 
 </manifest>

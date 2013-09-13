@@ -11,7 +11,7 @@ import android.widget.EditText;
 public class Login extends Activity {
 	
 	Button login;
-
+	Button cadastro; 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -21,6 +21,22 @@ public class Login extends Activity {
 	}
 
 	private void setButtons() {
+
+		/*
+		cadastro = (Button)findViewById(R.id.button_cadastro);
+		cadastro.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Intent mainIntent = new Intent();
+				mainIntent.setClass(Login.this,
+						Cadastro.class);
+				startActivity(mainIntent);
+
+				finish();
+			}
+		});*/
+		
+		
 		login = (Button) findViewById(R.id.button_fazerLogin);
 		login.setOnClickListener(new View.OnClickListener() {
 
