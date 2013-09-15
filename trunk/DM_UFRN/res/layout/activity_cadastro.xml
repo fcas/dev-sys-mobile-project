@@ -33,6 +33,25 @@
 	    </EditText>
     </LinearLayout>
     
+        <LinearLayout 
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+	    <TextView
+	    android:id="@+id/text_login"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="@string/text_login" />
+	        
+	    <EditText
+	        android:id="@+id/edit_login"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:inputType="text" >
+	    </EditText>
+    </LinearLayout>
+    
+    
     <LinearLayout 
         android:orientation="horizontal"
         android:layout_width="fill_parent"
@@ -47,7 +66,8 @@
         android:id="@+id/edit_senha"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:inputType="text" >
+        android:inputType="textPassword" >
+        
     </EditText>
     </LinearLayout>
     
@@ -65,9 +85,32 @@
         android:id="@+id/edit_confirmasenha"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:inputType="text" >
+        android:inputType="textPassword" >
     </EditText>
     </LinearLayout>
+    
+    <LinearLayout 
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:lines="5"
+        android:layout_height="wrap_content" >  
+          
+    <TextView
+    android:id="@+id/text_descricao"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/text_descricao"/>
+        
+    <EditText
+        android:id="@+id/edit_descricao"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:lines="5"
+        android:maxLength="140"
+        android:inputType="textMultiLine">
+        
+    </EditText>
+    </LinearLayout>    
      <Button
          android:id="@+id/button_cadastro"
          android:layout_width="wrap_content"
