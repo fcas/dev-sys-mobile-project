@@ -22,19 +22,19 @@ public class Login extends Activity {
 
 	private void setButtons() {
 
-		/*
-		cadastro = (Button)findViewById(R.id.button_cadastro);
+		
+		cadastro = (Button)findViewById(R.id.button_cadastrar);
 		cadastro.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Intent mainIntent = new Intent();
-				mainIntent.setClass(Login.this,
+				Intent cadIntent = new Intent();
+				cadIntent.setClass(Login.this,
 						Cadastro.class);
-				startActivity(mainIntent);
+				startActivity(cadIntent);
 
 				finish();
 			}
-		});*/
+		});
 		
 		
 		login = (Button) findViewById(R.id.button_fazerLogin);
