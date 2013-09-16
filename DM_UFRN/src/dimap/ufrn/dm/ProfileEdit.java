@@ -2,6 +2,7 @@ package dimap.ufrn.dm;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 
 public class ProfileEdit extends Activity {
@@ -17,6 +18,15 @@ public class ProfileEdit extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.profile_edit, menu);
 		return true;
+	}
+	
+	//Botão voltar...
+	@Override
+	public void onBackPressed() {
+		Intent voltaIntent = new Intent();
+		voltaIntent.setClass(ProfileEdit.this, MainActivity.class);
+		startActivity(voltaIntent);
+		finish();
 	}
 
 }

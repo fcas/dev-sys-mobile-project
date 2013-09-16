@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class MainActivity extends Activity {
@@ -15,7 +16,9 @@ public class MainActivity extends Activity {
 	private Button lugares;
 	private Button comentarios;
 	private Button tarefas;
+	private ImageButton profile;
 	Usuario usuario;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -39,6 +42,19 @@ public class MainActivity extends Activity {
 	}
 
 	private void setButtons() {
+		
+		profile = (ImageButton) findViewById(R.id.trocaImagem);
+		profile.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View view) {
+				Intent ProfileIntent = new Intent();
+				ProfileIntent.setClass(MainActivity.this, ProfileEdit.class);
+				startActivity(ProfileIntent);
+				finish();
+			}
+		});
+		
 		
 		lugares = (Button) findViewById(R.id.button_lugares);
 		lugares.setOnClickListener(new View.OnClickListener() {
