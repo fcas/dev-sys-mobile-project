@@ -9,20 +9,25 @@ import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 
 public class NovoComentario extends Activity {
-
+	CheckBox comentario_anonimo;
+	EditText descricao;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_novo_comentario);
 		setTitle("UFRN ON TOUCH");
+		descricao = (EditText) findViewById(R.id.launch_codes);
+		comentario_anonimo = (CheckBox) findViewById(R.id.checkBox1);
 		setButtons();
 	}
 	Button comentario;
 	private void setButtons() {
 		
-		comentario = (Button) findViewById(R.id.button2);
+		comentario = (Button) findViewById(R.id.button_comentar);
 		comentario.setOnClickListener(new View.OnClickListener() {
 		
 				@Override
@@ -34,7 +39,16 @@ public class NovoComentario extends Activity {
 			        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() { 
 			        	public void onClick(DialogInterface arg0, int arg1) {
 			        		Intent intent = new Intent();
-			        		intent.setClass(NovoComentario.this, Comentarios.class);
+			        		Comentarios comentario = new Comentarios();
+			        		if(comentario_anonimo.isChecked()){
+			        			comentario.setAutor("Anonimo");
+			        		}
+			        		else{
+			        			comentario.setAutor("Aluno 1");
+			        		}
+			        		comentario.setComentario(descricao.getText().toString());
+			        		intent.putExtra("comentario", comentario);
+			        		intent.setClass(NovoComentario.this, ListaComentarios.class);
 							startActivity(intent);
 							finish();
 			        	}
