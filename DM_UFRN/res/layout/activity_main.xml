@@ -14,7 +14,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_alignLeft="@+id/button_lugares"
-        android:src="@drawable/ic_launcher"
+        android:src="@drawable/bomb"
         android:contentDescription="@string/usuario_foto" />
 
     <Button
