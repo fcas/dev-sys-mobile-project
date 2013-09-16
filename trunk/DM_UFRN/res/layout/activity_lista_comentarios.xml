@@ -8,61 +8,42 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".ListaComentarios" >
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/expandableListView1"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="19dp"
-        android:text="@string/comentarios"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="40sp" />
-
     <ImageView
         android:id="@+id/imageView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textView1"
-        android:layout_alignRight="@+id/expandableListView1"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/button_comentario_listar"
+        android:layout_marginTop="17dp"
         android:contentDescription="@string/comentarios_logo"
         android:src="@drawable/ic_launcher" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/textView1"
-        android:layout_marginTop="28dp"
-        android:text="@string/comentarios_lista_ultimos"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="20sp" />
-
-    <ExpandableListView
-        android:id="@+id/expandableListView1"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true" >
-
-    </ExpandableListView>
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/imageView1"
+        android:text="@string/comentarios"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="40sp" />
 
     <Button
-        android:id="@+id/button_comentario_novo"
+        android:id="@+id/button_comentario_all"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/expandableListView1"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
+        android:layout_alignBottom="@+id/button_comentario_listar"
+        android:layout_alignLeft="@+id/button_comentario_listar"
+        android:layout_marginBottom="52dp"
         android:text="@string/comentario_novo" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/button_comentario_listar"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/button_comentario_novo"
-        android:layout_centerHorizontal="true"
-        android:text="@string/lugar_top" />
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_below="@+id/imageView1"
+        android:layout_marginTop="156dp"
+        android:text="@string/comentario_listar" />
 
 </RelativeLayout>
