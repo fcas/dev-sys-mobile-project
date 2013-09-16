@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="dimap.ufrn.dm"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="17" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="dimap.ufrn.dm.SplashActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="dimap.ufrn.dm.NovoLugar"
+            android:label="@string/title_activity_novo_lugar" >
+        </activity>
+        <activity
+            android:name="dimap.ufrn.dm.ListaComentarios"
+            android:label="@string/title_activity_comentarios" >
+        </activity>
+        <activity
+            android:name="dimap.ufrn.dm.Comentario"
+            android:label="@string/title_activity_comentario" >
+        </activity>
+        <activity
+            android:name="dimap.ufrn.dm.NovoComentario"
+            android:label="@string/title_activity_comentario_novo" >
+        </activity>
+        <activity
+            android:name="dimap.ufrn.dm.ListaTarefas"
+            android:label="@string/title_activity_tarefas" >
+        </activity>
+        <activity
+            android:name="dimap.ufrn.dm.NovaTarefa"
+            android:label="@string/title_activity_tarefa" >
+        </activity>
+        <activity
+            android:name="dimap.ufrn.dm.UsuarioPerfil"
+            android:label="@string/title_activity_usuario_perfil" >
+        </activity>
+        <activity
+            android:name="dimap.ufrn.dm.InfoLugar"
+            android:label="@string/title_activity_info_lugar" >
+        </activity>
+        <activity
+            android:name="dimap.ufrn.dm.ListaLugares"
+            android:label="@string/title_activity_lista_lugares" >
+        </activity>
+        <activity
+            android:name="dimap.ufrn.dm.MainActivity"
+            android:label="@string/title_activity_main" >
+        </activity>
+        <activity
+            android:name="dimap.ufrn.dm.Teste"
+            android:label="@string/title_activity_teste" >
+        </activity>
+        <activity
+            android:name="dimap.ufrn.dm.Cadastro"
+            android:label="@string/title_activity_cadastro" >
+        </activity>
+        <activity
+            android:name="dimap.ufrn.dm.Login"
+            android:label="@string/title_activity_login" >
+        </activity>
+        <activity
+            android:name="dimap.ufrn.dm.ProfileEdit"
+            android:label="@string/title_activity_profile_edit" >
+        </activity>
+    </application>
+
+</manifest>
