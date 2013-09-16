@@ -36,8 +36,8 @@ public class NovaTarefa extends Activity {
 
 				EditText editText = (EditText) findViewById(R.id.tarefa_local);
 				tarefas.setLocal(editText.getText().toString());
-				editText = (EditText) findViewById(R.id.tarefa_horario);
-				tarefas.setHorario(editText.getText().toString());
+				//editText = (EditText) findViewById(R.id.tarefa_horario);
+				//tarefas.setHorario(editText.getText().toString());
 				editText = (EditText) findViewById(R.id.tarefa_descricao);
 				tarefas.setDescricao(editText.getText().toString());
 
