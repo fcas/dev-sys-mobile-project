@@ -48,43 +48,23 @@
         android:text="@string/app_lugares" />
 
     <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button2"
-        android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/button3"
-        android:text="@string/usuario_nome"
-        android:textSize="20sp" />
-    
-
-    <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/button2"
+        android:layout_alignBottom="@+id/imageButton1"
+        android:layout_marginBottom="20dp"
         android:layout_toRightOf="@+id/imageButton1"
         android:text="@string/usuario_curso"
         android:textSize="15sp" />
 
-    <Button
-        android:id="@+id/button2"
-        style="?android:attr/buttonStyleSmall"
+    <TextView
+        android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imageButton1"
+        android:layout_alignTop="@+id/imageButton1"
+        android:layout_marginTop="14dp"
         android:layout_toRightOf="@+id/imageButton1"
-        android:gravity="left|center_vertical|center_horizontal"
-        android:text="@string/usuario_seguidores" />
-
-    <Button
-        android:id="@+id/button3"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/button_lugares"
-        android:layout_toRightOf="@+id/button2"
-        android:gravity="left|center_vertical|center_horizontal"
-        android:text="@string/usuario_seguindo" />
+        android:text="@string/usuario_nome"
+        android:textSize="20sp" />
 
 </RelativeLayout>
