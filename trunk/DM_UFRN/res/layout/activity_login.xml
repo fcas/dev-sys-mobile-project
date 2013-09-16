@@ -73,6 +73,7 @@
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
     android:layout_centerHorizontal="true"
+    android:layout_below="@+id/button_cadastrar"
     android:contentDescription="@string/comentarios_logo"
     android:src="@drawable/logo" />
 
