@@ -1,7 +1,10 @@
 package dimap.ufrn.dm;
 
+//O botão voltar está voltando para a lista de lugares
+
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 
 public class NovoLugar extends Activity {
@@ -11,6 +14,15 @@ public class NovoLugar extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_novo_lugar);
 		setTitle("UFRN ON TOUCH");
+	}
+	
+	//botão voltar...
+	@Override
+	public void onBackPressed() {
+		Intent voltaIntent = new Intent();
+		voltaIntent.setClass(NovoLugar.this, ListaLugares.class);
+		startActivity(voltaIntent);
+		finish();
 	}
 
 	@Override

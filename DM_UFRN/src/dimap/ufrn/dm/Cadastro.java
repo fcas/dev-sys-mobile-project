@@ -1,5 +1,7 @@
 package dimap.ufrn.dm;
 
+//O botão voltar está voltando para a tela de login...
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -61,5 +63,14 @@ private void setButtons() {
 		getMenuInflater().inflate(R.menu.cadastro, menu);
 		return true;
 	}
+	
+	//Botão voltar...
+		@Override
+		public void onBackPressed() {
+			Intent voltaIntent = new Intent();
+			voltaIntent.setClass(Cadastro.this, Login.class);
+			startActivity(voltaIntent);
+			finish();
+		}
 
 }
