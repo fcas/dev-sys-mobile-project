@@ -1,5 +1,7 @@
 package dimap.ufrn.dm;
 
+//O botão voltar está voltando para a tela de login
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -19,6 +21,15 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		setTitle("UFRN ON TOUCH");
 		setButtons();
+	}
+	
+	//Botão voltar...
+	@Override
+	public void onBackPressed() {
+		Intent voltaIntent = new Intent();
+		voltaIntent.setClass(MainActivity.this, Login.class);
+		startActivity(voltaIntent);
+		finish();
 	}
 
 	private void setButtons() {

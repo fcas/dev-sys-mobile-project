@@ -1,5 +1,7 @@
 package dimap.ufrn.dm;
 
+//O botão voltar está voltando para a lista de tarefas...
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -18,6 +20,15 @@ public class NovaTarefa extends Activity {
 		setContentView(R.layout.activity_nova_tarefa);
 		setTitle("UFRN ON TOUCH");
 		setButtons();
+	}
+	
+	//botão voltar 
+	@Override
+	public void onBackPressed() {
+		Intent voltaIntent = new Intent();
+		voltaIntent.setClass(NovaTarefa.this, ListaTarefas.class);
+		startActivity(voltaIntent);
+		finish();
 	}
 
 	private void setButtons() {

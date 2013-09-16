@@ -1,5 +1,7 @@
 package dimap.ufrn.dm;
 
+//O botão voltar está voltando para a tela principal
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -16,6 +18,15 @@ public class ListaComentarios extends Activity {
 		setContentView(R.layout.activity_lista_comentarios);
 		setTitle("UFRN ON TOUCH");
 		setButtons();
+	}
+	
+	//Botão voltar...
+	@Override
+	public void onBackPressed() {
+		Intent voltaIntent = new Intent();
+		voltaIntent.setClass(ListaComentarios.this, MainActivity.class);
+		startActivity(voltaIntent);
+		finish();
 	}
 
 	@Override
