@@ -1,7 +1,13 @@
 package dimap.ufrn.dm;
 
-public class Tarefas {
+import java.io.Serializable;
 
+public class Tarefas implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String local;
 	private String horario;
 	private String descricao;

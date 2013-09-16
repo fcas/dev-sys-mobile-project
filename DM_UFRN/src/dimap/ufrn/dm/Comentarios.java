@@ -1,7 +1,13 @@
 package dimap.ufrn.dm;
 
-public class Comentarios {
+import java.io.Serializable;
 
+public class Comentarios implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 9179267868462004746L;
 	private String comentario;
 
 	public String getComentario() {
