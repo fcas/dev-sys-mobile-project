@@ -19,28 +19,32 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textSize="40sp" />
 
-     <DatePicker android:id="@+id/datePicker1" 
-          android:layout_width="wrap_content" 
-          android:layout_height="wrap_content">
-      </DatePicker>
-     
-     
      <Button
          android:id="@+id/button_tarefa_nova"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
          android:layout_alignParentBottom="true"
          android:layout_alignRight="@+id/tarefa_descricao"
-         android:layout_marginBottom="31dp"
+         android:layout_marginBottom="22dp"
          android:text="@string/tarefa_ok" />
+
+     <TextView
+         android:id="@+id/textView2"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignLeft="@+id/textView1"
+         android:layout_below="@+id/textView1"
+         android:layout_marginTop="18dp"
+         android:text="@string/tarefa_hora"
+         android:textAppearance="?android:attr/textAppearanceMedium" />
 
      <EditText
          android:id="@+id/tarefa_local"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:layout_above="@+id/tarefa_descricao"
-         android:layout_alignLeft="@+id/timePicker1"
-         android:layout_marginBottom="14dp"
+         android:layout_alignLeft="@+id/textView2"
+         android:layout_below="@+id/textView2"
+         android:layout_marginTop="20dp"
          android:ems="10"
          android:hint="@string/tarefa_local" />
 
@@ -48,30 +52,14 @@
          android:id="@+id/tarefa_descricao"
          android:layout_width="fill_parent"
          android:layout_height="wrap_content"
-         android:layout_above="@+id/button_tarefa_nova"
          android:layout_alignLeft="@+id/tarefa_local"
-         android:layout_marginBottom="18dp"
+         android:layout_below="@+id/tarefa_local"
          android:ems="10"
          android:hint="@string/tarefa_descricao"
          android:imeActionLabel="@string/tarefa_nova"
-         android:inputType="text" />
+         android:inputType="text|textMultiLine" >
 
-     <TimePicker
-         android:id="@+id/tarefa_horario"
-         android:layout_width="250dp"
-         android:layout_height="100dp"
-         android:layout_above="@+id/tarefa_local"
-         android:layout_alignLeft="@+id/textView1"
-         android:layout_marginBottom="21dp" />
-
-     <TextView
-         android:id="@+id/textView2"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_above="@+id/tarefa_horario"
-         android:layout_alignLeft="@+id/tarefa_horario"
-         android:layout_marginBottom="18dp"
-         android:text="@string/tarefa_hora"
-         android:textAppearance="?android:attr/textAppearanceMedium" />
+         <requestFocus />
+     </EditText>
 
 </RelativeLayout>
