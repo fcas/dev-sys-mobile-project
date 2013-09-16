@@ -11,13 +11,14 @@ import android.widget.Button;
 
 public class ListaTarefas extends Activity {
 	private Button button;
-
+	Usuario usuario;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_lista_tarefas);
 		setTitle("UFRN ON TOUCH");
 		setButtons();
+		usuario = (Usuario) getIntent().getSerializableExtra("usuario");
 	}
 	
 	//Botão voltar...
@@ -25,6 +26,7 @@ public class ListaTarefas extends Activity {
 	public void onBackPressed() {
 		Intent voltaIntent = new Intent();
 		voltaIntent.setClass(ListaTarefas.this, MainActivity.class);
+		voltaIntent.putExtra("usuario", usuario);
 		startActivity(voltaIntent);
 		finish();
 	}
@@ -43,6 +45,7 @@ public class ListaTarefas extends Activity {
 			@Override
 			public void onClick(View view) {
 				Intent novaTarefaIntent = new Intent();
+				novaTarefaIntent.putExtra("usuario", usuario);
 				novaTarefaIntent.setClass(ListaTarefas.this, NovaTarefa.class);
 				startActivity(novaTarefaIntent);
 				finish();

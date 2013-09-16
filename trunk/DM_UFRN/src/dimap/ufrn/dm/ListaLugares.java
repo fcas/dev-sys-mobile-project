@@ -5,18 +5,21 @@ package dimap.ufrn.dm;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 
 public class ListaLugares extends Activity {
 	private Button button;
-
+	Usuario usuario;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_lista_lugares);
 		setTitle("UFRN ON TOUCH");
+		usuario = (Usuario) getIntent().getSerializableExtra("usuario");
+		Log.w("NOME", usuario.getNome());
 		setButtons();
 	}
 	
@@ -24,6 +27,7 @@ public class ListaLugares extends Activity {
 	@Override
 	public void onBackPressed() {
 		Intent voltaIntent = new Intent();
+		voltaIntent.putExtra("usuario", usuario);
 		voltaIntent.setClass(ListaLugares.this, MainActivity.class);
 		startActivity(voltaIntent);
 		finish();
@@ -43,6 +47,7 @@ public class ListaLugares extends Activity {
 			@Override
 			public void onClick(View view) {
 				Intent novoLugarIntent = new Intent();
+				novoLugarIntent.putExtra("usuario", usuario);
 				novoLugarIntent.setClass(ListaLugares.this, NovoLugar.class);
 				startActivity(novoLugarIntent);
 				finish();
