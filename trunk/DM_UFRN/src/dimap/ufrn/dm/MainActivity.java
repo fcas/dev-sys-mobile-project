@@ -49,6 +49,7 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View view) {
 				Intent ProfileIntent = new Intent();
+				ProfileIntent.putExtra("usuario", usuario);
 				ProfileIntent.setClass(MainActivity.this, ProfileEdit.class);
 				startActivity(ProfileIntent);
 				finish();
