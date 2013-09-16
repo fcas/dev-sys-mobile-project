@@ -16,6 +16,7 @@ public class NovoComentario extends Activity {
 	CheckBox comentario_anonimo;
 	EditText descricao;
 	Usuario usuario;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -26,51 +27,56 @@ public class NovoComentario extends Activity {
 		comentario_anonimo = (CheckBox) findViewById(R.id.checkBox1);
 		setButtons();
 	}
+
 	Button comentario;
+
 	private void setButtons() {
-		
+
 		comentario = (Button) findViewById(R.id.button_comentar);
 		comentario.setOnClickListener(new View.OnClickListener() {
-		
-				@Override
-				public void onClick(View view) {
-					Builder builder = new AlertDialog.Builder(NovoComentario.this);  
-			        builder.setTitle("Sucesso");  
-			        builder.setMessage("Comentario adicionado com sucesso");  
-			        
-			        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() { 
-			        	public void onClick(DialogInterface arg0, int arg1) {
-			        		Intent intent = new Intent();
-			        		Comentarios comentario = new Comentarios();
-			        		if(comentario_anonimo.isChecked()){
-			        			comentario.setAutor("Anonimo");
-			        		}
-			        		else{
-			        			comentario.setAutor("Aluno 1");
-			        		}
-			        		comentario.setComentario(descricao.getText().toString());
-			        		intent.putExtra("usuario", usuario);
-			        		intent.putExtra("comentario", comentario);
-			        		intent.setClass(NovoComentario.this, ListaComentarios.class);
-							startActivity(intent);
-							finish();
-			        	}
-			        });
 
-			        AlertDialog alert = builder.create();  
-			        alert.show();
-					
-				}
-			});
-		}
-		
-	
+			@Override
+			public void onClick(View view) {
+				Builder builder = new AlertDialog.Builder(NovoComentario.this);
+				builder.setTitle("Sucesso");
+				builder.setMessage("Comentario adicionado com sucesso");
+
+				builder.setPositiveButton("OK",
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface arg0, int arg1) {
+								Intent intent = new Intent();
+								Comentarios comentario = new Comentarios();
+								if (comentario_anonimo.isChecked()) {
+									comentario.setAutor("Anonimo");
+								} else {
+									comentario.setAutor(usuario.getNome());
+								}
+								comentario.setComentario(descricao.getText()
+										.toString());
+								usuario.getComentarios().add(comentario);
+								intent.putExtra("usuario", usuario);
+								intent.putExtra("comentario", comentario);
+								intent.setClass(NovoComentario.this,
+										ComentariosTodos.class);
+								startActivity(intent);
+								finish();
+							}
+						});
+
+				AlertDialog alert = builder.create();
+				alert.show();
+
+			}
+		});
+	}
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.comentario_novo, menu);
 		return true;
 	}
+
 	@Override
 	public void onBackPressed() {
 		Intent voltaIntent = new Intent();
