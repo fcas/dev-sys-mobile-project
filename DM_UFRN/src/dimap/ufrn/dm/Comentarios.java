@@ -2,8 +2,6 @@ package dimap.ufrn.dm;
 
 import java.io.Serializable;
 
-import java.io.Serializable;
-
 public class Comentarios implements Serializable {
 
 	/**
