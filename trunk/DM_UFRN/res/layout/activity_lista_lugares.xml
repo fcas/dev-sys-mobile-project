@@ -15,7 +15,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignRight="@+id/expandableListView1"
         android:contentDescription="@string/comentarios_logo"
-        android:src="@drawable/ic_launcher" />
+        android:src="@drawable/search" />
 
     <ImageView
         android:id="@+id/imageView1"
