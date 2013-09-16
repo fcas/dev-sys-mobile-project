@@ -63,9 +63,11 @@
     <string name="title_activity_main">ActivityMain</string>
     <string name="title_activity_teste">Teste</string>
     <string name="title_activity_cadastro">Cadastro</string>
-	<string name="preencher_dados">Preencha seus dados:</string>
+    <string name="preencher_dados">Preencha seus dados:</string>
     <string name="confirma_senha">Confirmar Senha:</string>
-	<string name="text_descricao">Sobre mim:</string>
-	<string name="text_login">Login:</string>
-	<string name="title_activity_splash">SplashActivity</string>
+    <string name="text_descricao">Sobre mim:</string>
+    <string name="text_login">Login:</string>
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="title_activity_profile_edit">ProfileEdit</string>
+
 </resources>
