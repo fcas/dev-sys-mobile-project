@@ -15,12 +15,14 @@ import android.widget.EditText;
 public class NovoComentario extends Activity {
 	CheckBox comentario_anonimo;
 	EditText descricao;
+	Usuario usuario;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_novo_comentario);
 		setTitle("UFRN ON TOUCH");
 		descricao = (EditText) findViewById(R.id.launch_codes);
+		usuario = (Usuario) getIntent().getSerializableExtra("usuario");
 		comentario_anonimo = (CheckBox) findViewById(R.id.checkBox1);
 		setButtons();
 	}
@@ -47,6 +49,7 @@ public class NovoComentario extends Activity {
 			        			comentario.setAutor("Aluno 1");
 			        		}
 			        		comentario.setComentario(descricao.getText().toString());
+			        		intent.putExtra("usuario", usuario);
 			        		intent.putExtra("comentario", comentario);
 			        		intent.setClass(NovoComentario.this, ListaComentarios.class);
 							startActivity(intent);
@@ -67,6 +70,14 @@ public class NovoComentario extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.comentario_novo, menu);
 		return true;
+	}
+	@Override
+	public void onBackPressed() {
+		Intent voltaIntent = new Intent();
+		voltaIntent.putExtra("usuario", usuario);
+		voltaIntent.setClass(NovoComentario.this, ListaComentarios.class);
+		startActivity(voltaIntent);
+		finish();
 	}
 
 }

@@ -52,6 +52,7 @@ public class NovaTarefa extends Activity {
 		        	public void onClick(DialogInterface arg0, int arg1) {
 		        		Tarefas tarefas = new Tarefas();
 						Intent minhasTarefasIntent = new Intent();
+						minhasTarefasIntent.putExtra("usuario", usuario);
 						minhasTarefasIntent.setClass(NovaTarefa.this, ListaTarefas.class);
 						startActivity(minhasTarefasIntent);
 						finish();
