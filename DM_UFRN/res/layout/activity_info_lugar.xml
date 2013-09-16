@@ -34,7 +34,7 @@
         android:layout_marginBottom="16dp" />
 
     <ImageButton
-        android:id="@+id/imageButton1"
+        android:id="@+id/trocaImagem"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_above="@+id/textView3"
@@ -48,7 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView1"
-        android:layout_toRightOf="@+id/imageButton1"
+        android:layout_toRightOf="@+id/trocaImagem"
         android:text="@string/lugar_tipo"
         android:textSize="30sp" />
 
@@ -57,7 +57,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textView2"
-        android:layout_alignTop="@+id/imageButton1"
+        android:layout_alignTop="@+id/trocaImagem"
         android:text="@string/lugar_nome"
         android:textSize="40sp" />
 
