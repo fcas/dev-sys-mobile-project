@@ -28,23 +28,31 @@
          android:layout_marginBottom="22dp"
          android:text="@string/tarefa_ok" />
 
-     <TextView
-         android:id="@+id/textView2"
+     <EditText
+         android:id="@+id/tarefa_data"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:layout_alignLeft="@+id/textView1"
          android:layout_below="@+id/textView1"
-         android:layout_marginTop="18dp"
-         android:text="@string/tarefa_hora"
-         android:textAppearance="?android:attr/textAppearanceMedium" />
-
+         android:layout_marginTop="20dp"
+         android:ems="10"
+         android:inputType="date"
+         android:hint="@string/tarefa_data" />
+          
+     <EditText
+         android:id="@+id/tarefa_hora"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_below="@+id/tarefa_data"
+         android:ems="10"
+         android:inputType="time"
+         android:hint="@string/tarefa_hora" />
+          
      <EditText
          android:id="@+id/tarefa_local"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:layout_alignLeft="@+id/textView2"
-         android:layout_below="@+id/textView2"
-         android:layout_marginTop="20dp"
+         android:layout_below="@+id/tarefa_hora"
+
          android:ems="10"
          android:hint="@string/tarefa_local" />
 
