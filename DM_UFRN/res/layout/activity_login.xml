@@ -35,27 +35,8 @@
         android:inputType="textPassword" >
 
         <requestFocus />
+        
     </EditText>
-
-    <EditText
-        android:id="@+id/usuario_nome"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="106dp"
-        android:ems="10"
-        android:inputType="text" />
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/usuario_nome"
-        android:layout_alignRight="@+id/textView2"
-        android:layout_marginBottom="28dp"
-        android:text="@string/usuario_nome"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
         android:id="@+id/textView2"
@@ -66,5 +47,33 @@
         android:layout_marginTop="14dp"
         android:text="@string/usuario_senha"
         android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/usuario_nome"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_below="@+id/textView1"
+        android:ems="10"
+        android:inputType="text" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/textView2"
+        android:layout_marginTop="16dp"
+        android:text="@string/usuario_nome"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+<ImageView
+    android:id="@+id/imageView1"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_centerHorizontal="true"
+    android:contentDescription="@string/comentarios_logo"
+    android:src="@drawable/logo" />
 
 </RelativeLayout>
