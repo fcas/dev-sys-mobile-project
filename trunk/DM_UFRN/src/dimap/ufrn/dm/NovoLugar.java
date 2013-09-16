@@ -44,6 +44,7 @@ public class NovoLugar extends Activity {
 			        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() { 
 			        	public void onClick(DialogInterface arg0, int arg1) {
 			        		Intent intent = new Intent();
+			        		intent.putExtra("usuario", usuario);
 			        		intent.setClass(NovoLugar.this, ListaLugares.class);
 							startActivity(intent);
 							finish();
