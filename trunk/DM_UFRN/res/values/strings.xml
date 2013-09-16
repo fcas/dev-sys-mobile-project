@@ -18,7 +18,7 @@
     <string name="usuario_nome">Nome:</string>
     <string name="usuario_curso">Curso</string>
     <string name="usuario_seguidores">Seguidores</string>
-
+    <string name="tarefa_data">Data:</string>
     <string name="usuario_seguindo">Seguindo</string>
     <string name="usuario_foto">Foto do usuário</string>
     <string name="app_lugares">Lugares</string>
