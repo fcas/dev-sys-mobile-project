@@ -11,12 +11,13 @@ import android.widget.Button;
 
 public class ListaComentarios extends Activity {
 	private Button button;
-
+	Usuario usuario;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_lista_comentarios);
 		setTitle("UFRN ON TOUCH");
+		usuario = (Usuario) getIntent().getSerializableExtra("usuario");
 		setButtons();
 	}
 	
@@ -24,6 +25,7 @@ public class ListaComentarios extends Activity {
 	@Override
 	public void onBackPressed() {
 		Intent voltaIntent = new Intent();
+		voltaIntent.putExtra("usuario", usuario);
 		voltaIntent.setClass(ListaComentarios.this, MainActivity.class);
 		startActivity(voltaIntent);
 		finish();
@@ -43,6 +45,7 @@ public class ListaComentarios extends Activity {
 			@Override
 			public void onClick(View view) {
 				Intent novoComentarioIntent = new Intent();
+				novoComentarioIntent.putExtra("usuario", usuario);
 				novoComentarioIntent.setClass(ListaComentarios.this, NovoComentario.class);
 				startActivity(novoComentarioIntent);
 				finish();

@@ -43,7 +43,7 @@ private void setButtons() {
 		        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() { 
 		        	public void onClick(DialogInterface arg0, int arg1) {
 		        		Intent mainIntent = new Intent();
-						mainIntent.setClass(Cadastro.this, MainActivity.class);
+						mainIntent.setClass(Cadastro.this, Login.class);
 						startActivity(mainIntent);
 						finish();
 		        	}

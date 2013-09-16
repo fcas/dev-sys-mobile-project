@@ -19,11 +19,13 @@ import android.widget.Button;
 public class NovoLugar extends Activity {
 
 	Button button;
+	Usuario usuario;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_novo_lugar);
 		setTitle("UFRN ON TOUCH");
+		usuario = (Usuario) getIntent().getSerializableExtra("usuario");
 		setButtons();
 	}
 
@@ -60,6 +62,7 @@ public class NovoLugar extends Activity {
 	@Override
 	public void onBackPressed() {
 		Intent voltaIntent = new Intent();
+		voltaIntent.putExtra("usuario", usuario);
 		voltaIntent.setClass(NovoLugar.this, ListaLugares.class);
 		startActivity(voltaIntent);
 		finish();
