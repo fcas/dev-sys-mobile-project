@@ -1,5 +1,8 @@
 package dimap.ufrn.dm;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.app.ListActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,7 +15,7 @@ import android.widget.Toast;
 
 public class ComentariosTodos extends ListActivity {
 
-	String[] comentarios = new String[] {};
+	List<String> comentarios = new ArrayList<String>();
 	Usuario usuario;
 
 	@Override
@@ -23,10 +26,13 @@ public class ComentariosTodos extends ListActivity {
 
 		// no more this
 		// setContentView(R.layout.list_fruit);
+		
+		for (int i = 0; i < usuario.getComentarios().size(); i++) {
+			comentarios.add(usuario.getComentarios().get(i).getComentario());
+		}
 
 		setListAdapter(new ArrayAdapter<String>(this,
-				R.layout.activity_list_comment, usuario.getComentarios()
-						.toArray(comentarios)));
+				R.layout.activity_list_comment,comentarios));
 
 		ListView listView = getListView();
 		listView.setTextFilterEnabled(true);
