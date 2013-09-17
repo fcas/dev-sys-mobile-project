@@ -6,6 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/time"
     tools:context=".ListaTarefas" >
 
     <TextView
@@ -32,17 +33,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/imageView1"
-        android:layout_marginBottom="54dp"
-        android:text="@string/tarefa_nova" />
-
-    <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_alignRight="@+id/expandableListView1"
-        android:layout_alignTop="@+id/textView1"
-        android:contentDescription="@string/comentarios_logo"
-        android:src="@drawable/ic_launcher" />
+        android:layout_marginBottom="64dp"
+        android:text="@string/tarefa_nova" />
 
 </RelativeLayout>
