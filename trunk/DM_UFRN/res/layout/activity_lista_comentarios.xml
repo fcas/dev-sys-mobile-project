@@ -6,6 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/papel"
     tools:context=".ListaComentarios" >
 
     <ImageView
@@ -16,7 +17,7 @@
         android:layout_alignRight="@+id/button_comentario_listar"
         android:layout_marginTop="17dp"
         android:contentDescription="@string/comentarios_logo"
-        android:src="@drawable/ic_launcher" />
+        android:src="@drawable/comment" />
 
     <TextView
         android:id="@+id/textView1"
