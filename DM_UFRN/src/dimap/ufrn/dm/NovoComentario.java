@@ -57,7 +57,7 @@ public class NovoComentario extends Activity {
 								intent.putExtra("usuario", usuario);
 								intent.putExtra("comentario", comentario);
 								intent.setClass(NovoComentario.this,
-										ComentariosTodos.class);
+										ListaComentarios.class);
 								startActivity(intent);
 								finish();
 							}
