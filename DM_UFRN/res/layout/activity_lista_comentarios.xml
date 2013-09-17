@@ -29,7 +29,7 @@
         android:textSize="40sp" />
 
     <Button
-        android:id="@+id/button_comentario_all"
+        android:id="@+id/button_comentario_novo"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/button_comentario_listar"
