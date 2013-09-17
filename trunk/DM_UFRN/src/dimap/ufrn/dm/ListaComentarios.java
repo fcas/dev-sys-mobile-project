@@ -12,6 +12,7 @@ import android.widget.Button;
 public class ListaComentarios extends Activity {
 	private Button button;
 	Usuario usuario;
+	private Button comentario_novo;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +55,21 @@ public class ListaComentarios extends Activity {
 				startActivity(novoComentarioIntent);
 				finish();
 			}
+		});
+		
+		comentario_novo = (Button) findViewById(R.id.button_comentario_novo);
+		comentario_novo.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View view) {
+				Intent comentariosIntent = new Intent();
+				comentariosIntent.putExtra("usuario", usuario);
+				comentariosIntent.setClass(ListaComentarios.this,
+						NovoComentario.class);
+				startActivity(comentariosIntent);
+				finish();
+			}
+
 		});
 	}
 
