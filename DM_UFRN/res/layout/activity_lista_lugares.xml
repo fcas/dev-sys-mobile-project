@@ -6,6 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/mapa"
     tools:context=".ListaLugares" >
 
     <ImageView
@@ -17,43 +18,33 @@
         android:contentDescription="@string/comentarios_logo"
         android:src="@drawable/search" />
 
-    <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginBottom="19dp"
-        android:layout_marginLeft="116dp"
-        android:contentDescription="@string/comentarios_logo"
-        android:src="@drawable/ic_launcher" />
-
     <ExpandableListView
         android:id="@+id/expandableListView1"
         android:layout_width="fill_parent"
         android:layout_height="100dp"
-        android:layout_above="@+id/button_lugar_novo"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="80dp" >
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_below="@+id/ImageView01"
+        android:layout_marginTop="28dp" >
     </ExpandableListView>
+
+    <Button
+        android:id="@+id/button_lugar_novo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/ImageView01"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="34dp"
+        android:text="@string/lugar_novo" />
 
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/ImageView01"
-        android:layout_alignRight="@+id/imageView1"
-        android:layout_marginRight="15dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="27dp"
         android:text="@string/app_lugares"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="35sp" />
-
-    <Button
-        android:id="@+id/button_lugar_novo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/imageView1"
-        android:layout_alignParentRight="true"
-        android:text="@string/lugar_novo" />
 
 </RelativeLayout>

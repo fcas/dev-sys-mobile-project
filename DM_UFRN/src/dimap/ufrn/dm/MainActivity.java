@@ -2,6 +2,7 @@ package dimap.ufrn.dm;
 
 //O botão voltar está voltando para a tela de login
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -28,6 +29,7 @@ public class MainActivity extends Activity {
 		 
 		usuario = (Usuario) getIntent().getSerializableExtra("usuario");
 		nome.setText(usuario.getNome());
+		
 		
 		setButtons();
 	}
