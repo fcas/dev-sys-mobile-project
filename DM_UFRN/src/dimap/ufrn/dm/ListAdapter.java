@@ -13,26 +13,24 @@ public class ListAdapter extends BaseAdapter {
 
 	private List<Comentarios> items;
 	private Context context;
-	private int numItems = 0;
+	private Comentarios comentario;
 
 	public ListAdapter(Context context, int resource, List<Comentarios> items) {
-
 		super();
-
+		this.context = context;
 		this.items = items;
-
 	}
 
 	public int getCount() {
-		return numItems;
+		return items.size();
 	}
 
-	public Comentarios getItem(int position) {
-		return items.get(position);
+	public String getItem(int position) {
+		return items.get(position).getComentario();
 	}
 
 	public long getItemId(int position) {
-		return 0;
+		return position;
 	}
 
 	public View getView(int position, View convertView, ViewGroup parent) {
@@ -45,6 +43,12 @@ public class ListAdapter extends BaseAdapter {
 			vi = LayoutInflater.from(getContext());
 			v = vi.inflate(R.layout.activity_list_comment, null);
 
+			comentario = new Comentarios();
+			comentario.setAutor("Ninguem comentou");
+			comentario.setComentario("Nenhum comentario");
+
+			v.setTag(comentario);
+
 		}
 
 		Comentarios p = items.get(position);
@@ -52,7 +56,7 @@ public class ListAdapter extends BaseAdapter {
 		if (p != null) {
 
 			TextView tt = (TextView) v.findViewById(R.id.id);
-			TextView tt1 = (TextView) v.findViewById(R.id.categoryId);
+			TextView tt1 = (TextView) v.findViewById(R.id.description);
 
 			if (tt != null) {
 				tt.setText(p.getAutor());
