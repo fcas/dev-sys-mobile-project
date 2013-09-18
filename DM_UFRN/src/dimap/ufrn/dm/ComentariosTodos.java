@@ -22,7 +22,7 @@ public class ComentariosTodos extends ListActivity {
 		final List<Comentarios> comentarios = usuario.getComentarios();
 
 		ListView lv = getListView();
-		ListAdapter adapter = new ListAdapter(this, R.layout.activity_list_comment, comentarios);
+		ListAdapterComentarios adapter = new ListAdapterComentarios(this, R.layout.activity_list_comment, comentarios);
 
 		lv.setAdapter(adapter);
 		lv.setTextFilterEnabled(true);
