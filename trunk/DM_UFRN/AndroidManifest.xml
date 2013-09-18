@@ -94,6 +94,11 @@
             android:label="@string/title_activity_profile_edit" 
             android:screenOrientation="portrait" android:configChanges="orientation">
         </activity>
+        <activity
+            android:name="dimap.ufrn.dm.ComentariosTodos"
+            android:label="@string/title_activity_list_comment"
+            android:screenOrientation="portrait" android:configChanges="orientation">
+        </activity>
     </application>
 
 </manifest>
