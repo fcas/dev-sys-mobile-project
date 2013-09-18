@@ -9,6 +9,19 @@ public class Comentarios implements Serializable {
 	 */
 	private static final long serialVersionUID = 9179267868462004746L;
 	private String comentario;
+	private Lugar lugar;
+	
+	public Comentarios(){
+		
+	}
+
+	public Lugar getLugar() {
+		return lugar;
+	}
+
+	public void setLugar(Lugar lugar) {
+		this.lugar = lugar;
+	}
 
 	public String getAutor() {
 		return autor;
