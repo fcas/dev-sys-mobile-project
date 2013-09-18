@@ -11,7 +11,6 @@ import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 
 public class NovaTarefa extends Activity {
 
@@ -50,7 +49,8 @@ public class NovaTarefa extends Activity {
 		        
 		        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() { 
 		        	public void onClick(DialogInterface arg0, int arg1) {
-		        		Tarefas tarefas = new Tarefas();
+		        		@SuppressWarnings("unused")
+						Tarefas tarefas = new Tarefas();
 						Intent minhasTarefasIntent = new Intent();
 						minhasTarefasIntent.putExtra("usuario", usuario);
 						minhasTarefasIntent.setClass(NovaTarefa.this, ListaTarefas.class);

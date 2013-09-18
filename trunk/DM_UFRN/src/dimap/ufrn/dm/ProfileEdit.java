@@ -12,6 +12,7 @@ public class ProfileEdit extends Activity {
 
 	Usuario usuario;
 	Button feito;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -25,52 +26,47 @@ public class ProfileEdit extends Activity {
 		getMenuInflater().inflate(R.menu.profile_edit, menu);
 		setTitle("UFRN ON TOUCH");
 		usuario = (Usuario) getIntent().getSerializableExtra("usuario");
-		
-		
-		
+
 		return true;
 	}
-	
-	//Botão voltar...
-		@Override
-		public void onBackPressed() {
-			Intent voltaIntent = new Intent();
-			voltaIntent.putExtra("usuario", usuario);
-			voltaIntent.setClass(ProfileEdit.this, MainActivity.class);
-			startActivity(voltaIntent);
-			finish();
-			
-			
-		}
-		
-		private void setButtons() {
 
-			
-			
-			feito = (Button) findViewById(R.id.button1);
-			feito.setOnClickListener(new View.OnClickListener() {
+	// Botão voltar...
+	@Override
+	public void onBackPressed() {
+		Intent voltaIntent = new Intent();
+		voltaIntent.putExtra("usuario", usuario);
+		voltaIntent.setClass(ProfileEdit.this, MainActivity.class);
+		startActivity(voltaIntent);
+		finish();
 
-				@Override
-				public void onClick(View view) {
-					
-					Usuario usuario = new Usuario();
-					Intent mainIntent = new Intent();
+	}
 
-					EditText editText = (EditText) findViewById(R.id.editText1);
-					usuario.setNome(editText.getText().toString());
-					EditText editText2 = (EditText) findViewById(R.id.editText2);
-					usuario.setCurso(editText2.getText().toString());
-					
-					mainIntent.putExtra("usuario", usuario);
-					
-					mainIntent.setClass(ProfileEdit.this,
-							MainActivity.class);
-					startActivity(mainIntent);
+	@SuppressWarnings("unused")
+	private void setButtons() {
 
-					finish();
-				}
-			});
-			
-		}
+		feito = (Button) findViewById(R.id.button1);
+		feito.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View view) {
+
+				Usuario usuario = new Usuario();
+				Intent mainIntent = new Intent();
+
+				EditText editText = (EditText) findViewById(R.id.editText1);
+				usuario.setNome(editText.getText().toString());
+				EditText editText2 = (EditText) findViewById(R.id.editText2);
+				usuario.setCurso(editText2.getText().toString());
+
+				mainIntent.putExtra("usuario", usuario);
+
+				mainIntent.setClass(ProfileEdit.this, MainActivity.class);
+				startActivity(mainIntent);
+
+				finish();
+			}
+		});
+
+	}
 
 }
