@@ -71,7 +71,7 @@
     <string name="title_activity_profile_edit">ProfileEdit</string>
     <string name="title_activity_list_comment">ListComment</string>
     <string name="comentario_listar">Veja o que estão comentando</string>
-    <string name="categoryId">categoryId</string>
+    <string name="comentario">comentou:</string>
     <string name="description">description</string>
     <string name="id">id</string>
 
