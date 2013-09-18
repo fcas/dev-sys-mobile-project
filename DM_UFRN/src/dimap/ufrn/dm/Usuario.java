@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.graphics.drawable.Drawable;
+
 public class Usuario implements Serializable {
 
 	/**
@@ -15,6 +17,7 @@ public class Usuario implements Serializable {
 	private List<Comentarios> comentarios;
 	private List<Tarefas> tarefas;
 	private String senha;
+	private Drawable imagem;
 	
 	public Usuario(){
 		this.comentarios = new ArrayList<Comentarios>();

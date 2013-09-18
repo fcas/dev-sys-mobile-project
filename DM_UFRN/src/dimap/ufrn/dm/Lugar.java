@@ -1,10 +1,26 @@
 package dimap.ufrn.dm;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Lugar {
 	private String nome;
 	private String localizacao;
 	private String tipo;
 	private int rate;
+	private List<Comentarios> listaComentarios;
+
+	public Lugar(){
+		this.listaComentarios = new ArrayList<Comentarios>();
+	}
+	
+	public List<Comentarios> getListaComentarios() {
+		return listaComentarios;
+	}
+
+	public void setListaComentarios(List<Comentarios> listaComentarios) {
+		this.listaComentarios = listaComentarios;
+	}
 
 	public String getNome() {
 		return nome;
