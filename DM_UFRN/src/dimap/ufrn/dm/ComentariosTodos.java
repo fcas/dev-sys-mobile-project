@@ -3,6 +3,7 @@ package dimap.ufrn.dm;
 import java.util.List;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -37,6 +38,15 @@ public class ComentariosTodos extends ListActivity {
 			}
 
 		});
+	}
+	
+	@Override
+	public void onBackPressed() {
+		Intent voltaIntent = new Intent();
+		voltaIntent.putExtra("usuario", usuario);
+		voltaIntent.setClass(ComentariosTodos.this, ListaComentarios.class);
+		startActivity(voltaIntent);
+		finish();
 	}
 
 }
