@@ -1,6 +1,7 @@
 package dimap.ufrn.dm;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Usuario implements Serializable {
@@ -14,6 +15,11 @@ public class Usuario implements Serializable {
 	private List<Comentarios> comentarios;
 	private List<Tarefas> tarefas;
 	private String senha;
+	
+	public Usuario(){
+		this.comentarios = new ArrayList<Comentarios>();
+		this.tarefas = new ArrayList<Tarefas>();
+	}
 
 	public String getNome() {
 		return nome;
