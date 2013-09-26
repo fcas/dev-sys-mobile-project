@@ -2,6 +2,7 @@ package dimap.ufrn.dm;
 
 import java.util.List;
 
+import model.Comentarios;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;

@@ -1,5 +1,8 @@
 package dimap.ufrn.dm;
 
+import dimap.ufrn.dm.R;
+import dimap.ufrn.dm.R.layout;
+import dimap.ufrn.dm.R.menu;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;

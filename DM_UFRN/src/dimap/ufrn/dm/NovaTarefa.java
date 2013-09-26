@@ -1,7 +1,9 @@
 package dimap.ufrn.dm;
 
-//O botão voltar está voltando para a lista de tarefas...
+//O botï¿½o voltar estï¿½ voltando para a lista de tarefas...
 
+import model.Tarefas;
+import model.Usuario;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -25,7 +27,7 @@ public class NovaTarefa extends Activity {
 		setButtons();
 	}
 	
-	//botão voltar 
+	//botï¿½o voltar 
 	@Override
 	public void onBackPressed() {
 		Intent voltaIntent = new Intent();

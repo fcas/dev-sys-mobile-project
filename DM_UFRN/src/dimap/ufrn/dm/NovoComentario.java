@@ -1,5 +1,7 @@
 package dimap.ufrn.dm;
 
+import model.Comentarios;
+import model.Usuario;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;

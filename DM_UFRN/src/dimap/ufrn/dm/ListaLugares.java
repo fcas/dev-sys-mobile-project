@@ -1,7 +1,8 @@
 package dimap.ufrn.dm;
 
-//O botão voltar está voltando para a tela principal
+//O botï¿½o voltar estï¿½ voltando para a tela principal
 
+import model.Usuario;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -23,7 +24,7 @@ public class ListaLugares extends Activity {
 		setButtons();
 	}
 	
-	//Botão voltar...
+	//Botï¿½o voltar...
 	@Override
 	public void onBackPressed() {
 		Intent voltaIntent = new Intent();
