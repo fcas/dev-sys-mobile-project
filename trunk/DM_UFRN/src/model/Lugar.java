@@ -1,4 +1,4 @@
-package dimap.ufrn.dm;
+package model;
 
 import java.util.ArrayList;
 import java.util.List;

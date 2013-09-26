@@ -1,5 +1,6 @@
 package dimap.ufrn.dm;
 
+import model.Usuario;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -30,7 +31,7 @@ public class ProfileEdit extends Activity {
 		return true;
 	}
 
-	// Botão voltar...
+	// Botï¿½o voltar...
 	@Override
 	public void onBackPressed() {
 		Intent voltaIntent = new Intent();

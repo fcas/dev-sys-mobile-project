@@ -2,6 +2,8 @@ package dimap.ufrn.dm;
 
 import java.util.List;
 
+import model.Comentarios;
+import model.Usuario;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;

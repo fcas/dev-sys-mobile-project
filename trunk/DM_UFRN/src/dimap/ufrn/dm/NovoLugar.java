@@ -1,15 +1,14 @@
 package dimap.ufrn.dm;
 
-//O botão voltar está voltando para a lista de lugares
+//O botï¿½o voltar estï¿½ voltando para a lista de lugares
 
+import model.Usuario;
 import android.os.Bundle;
 import android.app.Activity;
-
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
-
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -58,7 +57,7 @@ public class NovoLugar extends Activity {
 		});
 	}
 
-	// botão voltar...
+	// botï¿½o voltar...
 	@Override
 	public void onBackPressed() {
 		Intent voltaIntent = new Intent();

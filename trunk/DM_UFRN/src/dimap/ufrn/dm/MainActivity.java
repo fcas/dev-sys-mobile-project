@@ -1,7 +1,8 @@
 package dimap.ufrn.dm;
 
-//O botão voltar está voltando para a tela de login
+//O botï¿½o voltar estï¿½ voltando para a tela de login
 
+import model.Usuario;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -33,7 +34,7 @@ public class MainActivity extends Activity {
 		setButtons();
 	}
 	
-	//Botão voltar...
+	//Botï¿½o voltar...
 	@Override
 	public void onBackPressed() {
 		Intent voltaIntent = new Intent();
