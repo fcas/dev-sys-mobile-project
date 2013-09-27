@@ -6,8 +6,7 @@
     android:padding="10dp" >
  
     <TextView
+        style="@style/padrao"     
         android:id="@+id/laptop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:paddingLeft="25dp"/>
 </LinearLayout>

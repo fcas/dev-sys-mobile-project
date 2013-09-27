@@ -10,35 +10,31 @@
     tools:context=".Comentario" >
 
     <TextView
+        style="@style/titulo"     
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:text="@string/comentarios"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="40sp" />
+     />
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textView1"
         android:layout_below="@+id/textView1"
         android:layout_marginTop="50dp"
         android:text="@string/usuario_nome"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="20sp" />
+        style="@style/padrao"      />
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textView2"
         android:layout_below="@+id/textView2"
         android:text="@string/usuario_comentario"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="20sp" />
+        style="@style/padrao"     />
 
     <ImageView
         android:id="@+id/imageView1"
