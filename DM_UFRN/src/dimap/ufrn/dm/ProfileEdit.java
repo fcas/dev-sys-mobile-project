@@ -1,24 +1,34 @@
 package dimap.ufrn.dm;
 
+import java.io.ByteArrayOutputStream;
+
 import model.Usuario;
+
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.util.Base64;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 
 public class ProfileEdit extends Activity {
 
 	Usuario usuario;
 	Button feito;
-
+	ImageButton trocaImagem;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		usuario = (Usuario) getIntent().getSerializableExtra("usuario");
 		setContentView(R.layout.activity_profile_edit);
+		setButtons();
 	}
 
 	@Override
@@ -31,7 +41,7 @@ public class ProfileEdit extends Activity {
 		return true;
 	}
 
-	// Botï¿½o voltar...
+	// Botão voltar...
 	@Override
 	public void onBackPressed() {
 		Intent voltaIntent = new Intent();
@@ -42,7 +52,15 @@ public class ProfileEdit extends Activity {
 
 	}
 
-	@SuppressWarnings("unused")
+	 protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		 
+		 if (requestCode == 100) {
+		 Bitmap image = (Bitmap) data.getExtras().get("data");
+		 trocaImagem.setImageBitmap(image);	 
+		 }
+		 
+	}
+	
 	private void setButtons() {
 
 		feito = (Button) findViewById(R.id.button1);
@@ -58,14 +76,32 @@ public class ProfileEdit extends Activity {
 				usuario.setNome(editText.getText().toString());
 				EditText editText2 = (EditText) findViewById(R.id.editText2);
 				usuario.setCurso(editText2.getText().toString());
-
 				mainIntent.putExtra("usuario", usuario);
-
 				mainIntent.setClass(ProfileEdit.this, MainActivity.class);
 				startActivity(mainIntent);
 
 				finish();
 			}
+		});
+		trocaImagem = (ImageButton)findViewById(R.id.trocaImagem);
+		trocaImagem.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View view) {
+				Intent intent = new Intent(Intent.ACTION_PICK, null);
+                intent.setType("image/*");
+                intent.putExtra("crop", "true");  //opção de cropar.
+                intent.putExtra("outputX", 150);  //poe a resolução que vc quiser.
+                intent.putExtra("outputY", 150); 
+                intent.putExtra("aspectX", 1);  //poe aspect ratio que vc quiser
+                intent.putExtra("aspectY", 1);
+
+                intent.putExtra("return-data", true);
+			    startActivityForResult(intent, 100);
+			
+				
+			}
+			
 		});
 
 	}
