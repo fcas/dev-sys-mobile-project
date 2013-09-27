@@ -1,12 +1,13 @@
 package model;
 
-import java.util.List;
+import android.content.ContentValues;
+import android.database.Cursor;
 
 public interface IServicoLugar {
 	
-	public void addLugar(Lugar lugar);
-	public void editLugar(Lugar lugar);
-	public void deleteLugar (Lugar lugar);
-	public List<Lugar> searchLugar(String nome);
+	public void addLugar(ContentValues values) ;
+	public void editLugar(ContentValues values, long id);
+	public void deleteLugar(long id);
+	public Cursor listLugares(String where, String[] colunas);
 
 }

@@ -1,15 +1,19 @@
 package model;
 
-import java.util.List;
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
 import dao.DAOUsuario;
 
 public class ServicoUsuario implements IServicoUsuario{
 	
 	private static ServicoUsuario singleton = null;
 	private DAOUsuario daoUsuario;
+	private static final String DATABASE_TABLE = "USUARIOS";
+	static Context context; 
 
 	public ServicoUsuario() {
-		this.daoUsuario = new DAOUsuario();
+		this.daoUsuario = new DAOUsuario(context);
 	}
 
 	public static ServicoUsuario getInstance() {
@@ -20,28 +24,28 @@ public class ServicoUsuario implements IServicoUsuario{
 	}
 
 	@Override
-	public void addUsuario(Usuario usuario) {
-		daoUsuario.add(usuario);
+	public void addUsuario(ContentValues values) {
+		daoUsuario.add(DATABASE_TABLE, values);
 	}
 
 	@Override
-	public void editUsuario(Usuario usuario) {
-		daoUsuario.edit(usuario);
+	public void editUsuario(long id, ContentValues values) {
+		daoUsuario.edit(DATABASE_TABLE, id, values);
 	}
 
 	@Override
-	public void deleteUsuario(Usuario usuario) {
-		daoUsuario.delete(usuario);
+	public void deleteUsuario(Usuario usuario, long id) {
+		daoUsuario.delete(DATABASE_TABLE, id);
 	}
 
 	@Override
-	public List<Usuario> searchUsuario(Usuario usuario) {
-		return daoUsuario.searchUsuario(usuario);
+	public Cursor listUsuarios(String where, String[] colunas) {
+		return daoUsuario.list(DATABASE_TABLE, colunas, where);
 	}
 
 	@Override
-	public List<Usuario> searchUsuarioCurso(String curso) {
-		return daoUsuario.searchUsuarioCurso(curso);
+	public Cursor listUsuariosCurso(String where, String[] colunas) {
+		return daoUsuario.list(DATABASE_TABLE, colunas, where);
 	}
 
 	@Override

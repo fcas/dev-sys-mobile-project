@@ -1,14 +1,13 @@
 package dao;
 
-import java.util.List;
-
+import android.content.Context;
 import model.Tarefas;
 
 public class DAOTarefa extends DAOGenerico<Tarefas> implements IDAOTarefa {
 
-	public List<Tarefas> searchTarefas(String lugar) {
-		// TODO Auto-generated method stub
-		return null;
+	public DAOTarefa(Context context) {
+		super(context, nomeTabela, nomeTabela);
+		// TODO Auto-generated constructor stub
 	}
-
+	
 }

@@ -1,15 +1,12 @@
 package dao;
 
-import java.util.List;
-
+import android.content.Context;
 import model.Comentarios;
 
 public class DAOComentario extends DAOGenerico<Comentarios> implements IDAOComentario{
 
-	public List<Comentarios> searchComentario(String lugar) {
-		// TODO Auto-generated method stub
-		return null;
+	public DAOComentario(Context context) {
+		super(context, nomeTabela, nomeTabela);
 	}
 	
-
 }
