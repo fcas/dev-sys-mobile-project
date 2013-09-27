@@ -11,13 +11,10 @@
 
     <TextView
         android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:text="@string/tarefas"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="35sp" />
+        style="@style/titulo"     />
 
     <ExpandableListView
         android:id="@+id/expandableListView1"
@@ -29,9 +26,8 @@
     </ExpandableListView>
 
     <Button
+        style="@style/buttonPadrao"
         android:id="@+id/button_tarefa_nova"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/expandableListView1"
         android:layout_marginBottom="64dp"
