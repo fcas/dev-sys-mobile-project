@@ -1,12 +1,13 @@
 package model;
 
-import java.util.List;
+import android.content.ContentValues;
+import android.database.Cursor;
 
 public interface IServicoTarefa {
 	
-	public void addTarefas(Tarefas tarefa);
-	public void editTarefas(Tarefas tarefas);
-	public void deleteTarefas (Tarefas tarefas);
-	public List<Tarefas> searchTarefas(String Lugar);
+	public void addTarefas(ContentValues values);
+	public void editTarefas(ContentValues values);
+	public void deleteTarefas(long id);
+	public Cursor listTarefas(String[] colunas, String where);
 
 }

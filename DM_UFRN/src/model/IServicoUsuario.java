@@ -1,14 +1,20 @@
 package model;
 
-import java.util.List;
+import android.content.ContentValues;
+import android.database.Cursor;
 
 public interface IServicoUsuario {
-	
-	public void addUsuario(Usuario usuario);
-	public void editUsuario(Usuario usuario);
-	public void deleteUsuario (Usuario usuario);
-	public List<Usuario> searchUsuarioCurso(String curso);
+
+	public void addUsuario(ContentValues values);
+
+	public void editUsuario(long id, ContentValues values);
+
+	public void deleteUsuario(Usuario usuario, long id);
+
+	public Cursor listUsuarios(String where, String[] colunas);
+
+	public Cursor listUsuariosCurso(String where, String[] colunas);
+
 	public boolean logar(String usuario, String senha);
-	List<Usuario> searchUsuario(Usuario usuario);
 
 }

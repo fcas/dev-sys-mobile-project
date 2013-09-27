@@ -1,11 +1,15 @@
 package model;
 
-import java.util.List;
+import android.content.ContentValues;
+import android.database.Cursor;
 
 public interface IServicoComentario {
-	
-	public void addComentario(Comentarios comentario);
-	public void editComentario(Comentarios comentario);
-	public void deleteComentario (Comentarios comentario);
-	public List<Comentarios> searchComentario(String Lugar);
+
+	public void addComentario(ContentValues values);
+
+	public void editComentario(ContentValues values, long id);
+
+	public void deleteComentario(long id);
+
+	public Cursor listComentarios(String where, String[] colunas);
 }

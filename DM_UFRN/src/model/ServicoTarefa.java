@@ -1,16 +1,19 @@
 package model;
 
-import java.util.List;
-
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
 import dao.DAOTarefa;
 
 public class ServicoTarefa implements IServicoTarefa {
 
 	private static ServicoTarefa singleton = null;
 	private DAOTarefa daoTarefa;
+	private static final String DATABASE_TABLE = "TAREFAS";
+	static Context context;
 
 	public ServicoTarefa() {
-		this.daoTarefa = new DAOTarefa();
+		this.daoTarefa = new DAOTarefa(context);
 	}
 
 	public static ServicoTarefa getInstance() {
@@ -20,20 +23,20 @@ public class ServicoTarefa implements IServicoTarefa {
 		return singleton;
 	}
 
-	public void addTarefas(Tarefas tarefa) {
-		daoTarefa.add(tarefa);
+	public void addTarefas(ContentValues values) {
+		daoTarefa.add(DATABASE_TABLE, values);
 	}
 
-	public void editTarefas(Tarefas tarefas) {
-		daoTarefa.edit(tarefas);
+	public void editTarefas(ContentValues values) {
+		daoTarefa.add(DATABASE_TABLE, values);
 	}
 
-	public void deleteTarefas(Tarefas tarefas) {
-		daoTarefa.delete(tarefas);
+	public void deleteTarefas(long id) {
+		daoTarefa.delete(DATABASE_TABLE, id);
 	}
 
-	public List<Tarefas> searchTarefas(String Lugar) {
-		return daoTarefa.searchTarefas(Lugar);
+	public Cursor listTarefas(String[] colunas, String where) {
+		return daoTarefa.list(DATABASE_TABLE, colunas, where);
 	}
 
 }

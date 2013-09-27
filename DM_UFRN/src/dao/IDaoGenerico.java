@@ -1,12 +1,15 @@
 package dao;
 
-import java.util.List;
-
+import android.content.ContentValues;
+import android.database.Cursor;
 
 public interface IDaoGenerico<T> {
-	
-	  public void add(T entidade);
-	  public void edit(T entidade);
-      public void delete(T entidade);
-      public List<T> search(T entidade);
+
+	public void add(String table, ContentValues values);
+
+	public void edit(String table, long id, ContentValues values);
+
+	public void delete(String table, long id);
+
+	public Cursor list(String tabela, String[] colunas, String where);
 }
