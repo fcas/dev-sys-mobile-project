@@ -9,6 +9,7 @@
     tools:context=".ProfileEdit" >
 
     <EditText
+        style="@style/editPadrao"
         android:id="@+id/editText1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -19,6 +20,7 @@
         android:textSize="20sp" />
 
     <EditText
+        style="@style/editPadrao"
         android:id="@+id/editText2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -32,18 +34,15 @@
     </EditText>
 
     <TextView
+        style="@style/padrao"     
         android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/editText1"
         android:layout_below="@+id/editText1"
-        android:text="Curso:"
-        android:textSize="20sp" />
+        android:text="Curso:" />
 
-    <Button
+    <Button     
         android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+		style="@style/buttonPadrao"
         android:layout_alignRight="@+id/editText2"
         android:layout_below="@+id/editText2"
         android:layout_marginTop="19dp"
@@ -58,12 +57,10 @@
         android:src="@drawable/bomb" />
 
     <TextView
+        style="@style/padrao"     
         android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/trocaImagem"
         android:layout_below="@+id/trocaImagem"
-        android:text="Nome:"
-        android:textSize="20sp" />
+        android:text="Nome:"/>
 
 </RelativeLayout>

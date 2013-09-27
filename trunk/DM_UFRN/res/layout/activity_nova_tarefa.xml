@@ -9,26 +9,24 @@
     tools:context=".NovaTarefa" >
 
     <TextView
+        style="@style/titulo" 
         android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="16dp"
         android:text="@string/tarefa_nova"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textSize="40sp" />
+        />
 
      <Button
+         style="@style/buttonPadrao"
          android:id="@+id/button_tarefa_nova"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
          android:layout_alignParentBottom="true"
          android:layout_alignRight="@+id/tarefa_descricao"
          android:layout_marginBottom="22dp"
          android:text="@string/tarefa_ok" />
 
      <EditText
+         style="@style/editPadrao"
          android:id="@+id/tarefa_data"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
@@ -39,6 +37,7 @@
          android:hint="@string/tarefa_data" />
           
      <EditText
+         style="@style/editPadrao"
          android:id="@+id/tarefa_hora"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
@@ -48,6 +47,7 @@
          android:hint="@string/tarefa_hora" />
           
      <EditText
+         style="@style/editPadrao"
          android:id="@+id/tarefa_local"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
@@ -58,6 +58,7 @@
 
      <EditText
          android:id="@+id/tarefa_descricao"
+         style="@style/editPadrao"
          android:layout_width="fill_parent"
          android:layout_height="wrap_content"
          android:layout_alignLeft="@+id/tarefa_local"
