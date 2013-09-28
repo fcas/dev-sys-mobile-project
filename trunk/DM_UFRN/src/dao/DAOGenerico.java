@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
@@ -18,10 +17,8 @@ public class DAOGenerico<T> extends SQLiteOpenHelper implements IDaoGenerico<T> 
 	@SuppressWarnings("unused")
 	private static String sql;
 	private static DAOGenerico instance;
-	private static SQLiteDatabase db;
+	protected SQLiteDatabase db;
 	public static final String ID = "id";
-	private static final String COMENTARIO_TABLE_CREATE = " CREATE TABLE COMENTARIO ("
-			+ "LUGAR TEXT, " + "AUTOR TEXT, " + "COMENTARIO);";
 
 	public DAOGenerico(Context contexto, String sql, String nomeTabela) {
 		super(contexto, DATABASE_NAME, null, DATABASE_VERSION);
@@ -29,28 +26,9 @@ public class DAOGenerico<T> extends SQLiteOpenHelper implements IDaoGenerico<T> 
 		DAOGenerico.nomeTabela = nomeTabela;
 	}
 
-	public static DAOGenerico getInstance(Context contexto, String sql,
-			String nomeTabela) {
-		if (instance == null) {
-			instance = new DAOGenerico(contexto, sql, nomeTabela);
-			try {
-				db = instance.getWritableDatabase();
-			} catch (SQLiteException se) {
-				Log.e("", "Exception na instanciacao do DAOGenerico", se);
-			} catch (Exception e) {
-				Log.e("", "Exception em DAOGenerico", e);
-			}
-		}
-		return instance;
-	}
-
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		try {
-			db.execSQL(COMENTARIO_TABLE_CREATE);
-		} catch (SQLException se) {
-			Log.e("", "Nao foi possible criar o banco de dados", se);
-		}
+		this.db = db;
 	}
 
 	@Override
