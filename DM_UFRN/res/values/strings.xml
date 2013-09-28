@@ -74,5 +74,6 @@
     <string name="comentario">comentou:</string>
     <string name="description">description</string>
     <string name="id">id</string>
+    <string name="imagem">Imagem do Perfil</string>
 
 </resources>
