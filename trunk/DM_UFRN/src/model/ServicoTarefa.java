@@ -36,7 +36,7 @@ public class ServicoTarefa implements IServicoTarefa {
 	}
 
 	public Cursor listTarefas(String[] colunas, String where) {
-		return daoTarefa.list(DATABASE_TABLE, colunas, where);
+		return daoTarefa.listWhere(DATABASE_TABLE, colunas, where);
 	}
 
 }

@@ -11,5 +11,8 @@ public interface IDaoGenerico<T> {
 
 	public void delete(String table, long id);
 
-	public Cursor list(String tabela, String[] colunas, String where);
+	public Cursor list(String tabela, String[] colunas);
+	
+	public Cursor listWhere(String tabela, String[] colunas, String where);
+	
 }

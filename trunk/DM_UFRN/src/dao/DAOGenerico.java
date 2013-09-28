@@ -84,12 +84,20 @@ public class DAOGenerico<T> extends SQLiteOpenHelper implements IDaoGenerico<T> 
 	}
 
 	@Override
-	public Cursor list(String tabela, String[] colunas, String where) {
-        Cursor cursor = db.query(true, tabela, colunas, where, null, null, null, null, null);
+	public Cursor list(String tabela, String[] colunas) {
+        Cursor cursor = db.query(tabela, colunas, null, null, null, null, null);
         if (cursor != null) {
             cursor.moveToFirst();
         }
         return cursor;
     }
+	
+	  public Cursor listWhere(String tabela, String[] colunas, String where) {
+	        Cursor cursor = db.query(true, tabela, colunas, where, null, null, null, null, null);
+	        if (cursor != null) {
+	            cursor.moveToFirst();
+	        }
+	        return cursor;
+	    }
 
 }

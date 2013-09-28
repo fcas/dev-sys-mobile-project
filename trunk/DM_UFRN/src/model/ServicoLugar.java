@@ -38,7 +38,7 @@ public class ServicoLugar implements IServicoLugar {
 	}
 
 	public Cursor listLugares(String where, String[] colunas) {
-		return daoLugar.list(DATABASE_TABLE, colunas, where);
+		return daoLugar.listWhere(DATABASE_TABLE, colunas, where);
 	}
 
 }
