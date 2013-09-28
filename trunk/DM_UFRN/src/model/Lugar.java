@@ -9,6 +9,9 @@ public class Lugar {
 	private String tipo;
 	private int rate;
 	private List<Comentarios> listaComentarios;
+	public static final String DATABASE_TABLE = "LUGAR";
+	public static final String LUGAR_TABLE_CREATE = " CREATE TABLE LUGAR ("
+			+ "NOME TEXT, " + "LOCALIZACAO TEXT, " + "RATE INTEGER, " + "TIPO TEXT);";
 
 	public Lugar(){
 		this.listaComentarios = new ArrayList<Comentarios>();

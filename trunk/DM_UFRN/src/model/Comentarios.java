@@ -4,15 +4,16 @@ import java.io.Serializable;
 
 public class Comentarios implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 9179267868462004746L;
+	public static final String DATABASE_TABLE = "COMENTARIO";
+	public static final String COMENTARIO_TABLE_CREATE = " CREATE TABLE COMENTARIO ("
+			+ "LUGAR TEXT, " + "AUTOR TEXT, " + "COMENTARIO);";
 	private String comentario;
+	private String autor;
 	private Lugar lugar;
-	
-	public Comentarios(){
-		
+
+	public Comentarios() {
+
 	}
 
 	public Lugar getLugar() {
@@ -30,8 +31,6 @@ public class Comentarios implements Serializable {
 	public void setAutor(String autor) {
 		this.autor = autor;
 	}
-
-	private String autor;
 
 	public String getComentario() {
 		return comentario;
