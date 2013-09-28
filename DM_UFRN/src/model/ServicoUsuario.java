@@ -1,8 +1,11 @@
 package model;
 
+import java.io.ByteArrayOutputStream;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import dao.DAOUsuario;
 
 public class ServicoUsuario implements IServicoUsuario{
@@ -24,7 +27,17 @@ public class ServicoUsuario implements IServicoUsuario{
 	}
 
 	@Override
-	public void addUsuario(ContentValues values) {
+	public void addUsuario(Usuario usuario) {
+		ContentValues values = new ContentValues();		
+		values.put("login", usuario.getLogin());
+		values.put("senha", usuario.getSenha());
+		values.put("nome", usuario.getNome());
+		values.put("curso", usuario.getCurso());
+		values.put("sobreMim", usuario.getSobreMim());		
+		ByteArrayOutputStream stream = new ByteArrayOutputStream();
+		usuario.getImagemPerfil().compress(Bitmap.CompressFormat.JPEG, 100, stream);
+		byte[] b = stream.toByteArray();
+		values.put("imagem", b);
 		daoUsuario.add(DATABASE_TABLE, values);
 	}
 
