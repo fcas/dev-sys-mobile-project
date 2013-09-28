@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 
 public class Usuario implements Serializable {
@@ -12,12 +13,22 @@ public class Usuario implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String nome;
+	private String login;
 	private String curso;
+	private String sobreMim;
 	private List<Comentarios> comentarios;
 	private List<Tarefas> tarefas;
 	private String senha;
 	private Drawable imagem;
+	private Bitmap imagemPerfil;
+	
+	public final static String SQL_DATABASE_CREATE = "CREATE TABLE Usuario(" +
+			"login text PRIMARY KEY, " +
+			"senha text, " +
+			"nome text, " +
+			"curso text, "+
+			"sobreMim text," +
+			"imagem blob)";
 	
 	public Usuario(){
 		this.comentarios = new ArrayList<Comentarios>();
@@ -30,6 +41,15 @@ public class Usuario implements Serializable {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	private String nome;	
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
 	}
 
 	public String getCurso() {
@@ -62,6 +82,21 @@ public class Usuario implements Serializable {
 	
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+	public String getSobreMim() {
+		return sobreMim;
+	}
+
+	public void setSobreMim(String sobreMim) {
+		this.sobreMim = sobreMim;
+	}
+
+	public Bitmap getImagemPerfil() {
+		return imagemPerfil;
+	}
+
+	public void setImagemPerfil(Bitmap imagemPerfil) {
+		this.imagemPerfil = imagemPerfil;
 	}
 
 }

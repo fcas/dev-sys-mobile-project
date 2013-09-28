@@ -5,8 +5,6 @@ import android.database.Cursor;
 
 public interface IServicoUsuario {
 
-	public void addUsuario(ContentValues values);
-
 	public void editUsuario(long id, ContentValues values);
 
 	public void deleteUsuario(Usuario usuario, long id);
@@ -16,5 +14,7 @@ public interface IServicoUsuario {
 	public Cursor listUsuariosCurso(String where, String[] colunas);
 
 	public boolean logar(String usuario, String senha);
+
+	void addUsuario(Usuario usuario);
 
 }
