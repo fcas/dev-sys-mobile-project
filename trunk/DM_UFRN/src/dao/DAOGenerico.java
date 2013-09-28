@@ -19,7 +19,7 @@ public class DAOGenerico<T> extends SQLiteOpenHelper implements IDaoGenerico<T> 
 	private static String sql;
 	private static DAOGenerico instance;
 	protected static SQLiteDatabase db;
-	public static final String ID = "id";
+	public static final String ID = "ID";
 
 	public DAOGenerico(Context contexto, String sql, String nomeTabela) {
 		super(contexto, DATABASE_NAME, null, DATABASE_VERSION);

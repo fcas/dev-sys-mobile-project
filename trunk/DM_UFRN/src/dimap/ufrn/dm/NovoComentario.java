@@ -1,10 +1,13 @@
 package dimap.ufrn.dm;
 
 import model.Comentarios;
+import model.IServicoComentario;
+import model.ServicoComentario;
 import model.Usuario;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,6 +21,7 @@ public class NovoComentario extends Activity {
 	CheckBox comentario_anonimo;
 	EditText descricao;
 	Usuario usuario;
+	IServicoComentario sComentario;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +31,7 @@ public class NovoComentario extends Activity {
 		descricao = (EditText) findViewById(R.id.launch_codes);
 		usuario = (Usuario) getIntent().getSerializableExtra("usuario");
 		comentario_anonimo = (CheckBox) findViewById(R.id.checkBox1);
+		sComentario = new ServicoComentario(this);
 		setButtons();
 	}
 
@@ -56,13 +61,14 @@ public class NovoComentario extends Activity {
 								comentario.setComentario(descricao.getText()
 										.toString());
 								usuario.getComentarios().add(comentario);
-								intent.putExtra("usuario", usuario);
-								intent.putExtra("comentario", comentario);
+								ContentValues values = toContentValue(comentario);
+								sComentario.addComentario(values);
 								intent.setClass(NovoComentario.this,
 										ListaComentarios.class);
 								startActivity(intent);
 								finish();
 							}
+
 						});
 
 				AlertDialog alert = builder.create();
@@ -86,6 +92,15 @@ public class NovoComentario extends Activity {
 		voltaIntent.setClass(NovoComentario.this, ListaComentarios.class);
 		startActivity(voltaIntent);
 		finish();
+	}
+
+	private ContentValues toContentValue(Comentarios comentario) {
+		ContentValues values = new ContentValues();
+		// TODO Antes de se fazer o comentario, deve-se escolher o lugar
+		// values.put("LUGAR", value);
+		values.put("AUTOR", comentario.getAutor());
+		values.put("COMENTARIO", comentario.getComentario());
+		return values;
 	}
 
 }
