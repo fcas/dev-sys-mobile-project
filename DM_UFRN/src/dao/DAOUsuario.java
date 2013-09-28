@@ -11,7 +11,6 @@ public class DAOUsuario extends DAOGenerico<Usuario> implements IDAOUsuario {
 	}
 
 	public boolean logar(String usuario, String senha) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
