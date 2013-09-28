@@ -2,6 +2,9 @@ package dimap.ufrn.dm;
 
 //O botão voltar está voltando para a tela de login...
 
+import model.IServicoUsuario;
+import model.ServicoUsuario;
+import model.Usuario;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -9,14 +12,19 @@ import android.app.AlertDialog.Builder;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 public class Cadastro extends Activity {
 	Button cadastro;
-	EditText edit_nome, edit_login, edit_senha, edit_confirmasenha, edit_descricao;
+	Usuario usuario;
+	ImageButton trocaImagem;
+	EditText edit_nome, edit_login, edit_senha, edit_confirmasenha, edit_descricao, edit_curso;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -26,6 +34,7 @@ public class Cadastro extends Activity {
 		edit_senha = (EditText)findViewById(R.id.edit_senha);
 		edit_confirmasenha = (EditText)findViewById(R.id.edit_confirmasenha);
 		edit_descricao = (EditText)findViewById(R.id.edit_descricao);
+		edit_curso = (EditText)findViewById(R.id.edit_curso);
 		setButtons();
 	}
 
@@ -36,16 +45,32 @@ private void setButtons() {
 	
 			@Override
 			public void onClick(View view) {
-				Builder builder = new AlertDialog.Builder(Cadastro.this);  
-		        builder.setTitle("Sucesso");  
-		        builder.setMessage("Cadastro efetuado com sucesso");  
-		        
+				final boolean senhaValida = edit_senha.getText().toString().equals(edit_confirmasenha.getText().toString());
+				final Builder builder = new AlertDialog.Builder(Cadastro.this);  
+				if(senhaValida){
+					builder.setTitle("Sucesso");  
+				    builder.setMessage("Cadastro efetuado com sucesso");  
+				}
+			    else{
+        			builder.setTitle("Erro");  
+			        builder.setMessage("Senhas não se correspondem");  
+        		}
 		        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() { 
 		        	public void onClick(DialogInterface arg0, int arg1) {
-		        		Intent mainIntent = new Intent();
-						mainIntent.setClass(Cadastro.this, Login.class);
-						startActivity(mainIntent);
-						finish();
+		        		if(senhaValida){
+			        		Usuario usuario = new Usuario();
+			        		usuario.setNome(edit_nome.getText().toString());
+			        		usuario.setCurso(edit_curso.getText().toString());
+			        		usuario.setSenha(edit_senha.getText().toString());
+			        		usuario.setCurso(edit_curso.getText().toString());
+			        		usuario.setImagemPerfil(((BitmapDrawable)trocaImagem.getDrawable()).getBitmap());
+			        		IServicoUsuario sUsuario = new ServicoUsuario();
+			        		//sUsuario.addUsuario(usuario);
+			        		Intent mainIntent = new Intent();
+							mainIntent.setClass(Cadastro.this, Login.class);
+							startActivity(mainIntent);
+							finish();
+		        		}
 		        	}
 		        });
 
@@ -54,6 +79,35 @@ private void setButtons() {
 				
 			}
 		});
+	trocaImagem = (ImageButton)findViewById(R.id.trocaImagem);
+	trocaImagem.setOnClickListener(new View.OnClickListener() {
+
+		@Override
+		public void onClick(View view) {
+			Intent intent = new Intent(Intent.ACTION_PICK, null);
+            intent.setType("image/*");
+            intent.putExtra("crop", "true");  //opção de cropar.
+            intent.putExtra("outputX", 150);  //poe a resolução que vc quiser.
+            intent.putExtra("outputY", 150); 
+            intent.putExtra("aspectX", 1);  //poe aspect ratio que vc quiser
+            intent.putExtra("aspectY", 1);
+
+            intent.putExtra("return-data", true);
+		    startActivityForResult(intent, 100);
+		
+			
+		}
+		
+	});
+	
+	}
+
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		 if (requestCode == 100) {
+		 Bitmap image = (Bitmap) data.getExtras().get("data");
+		 trocaImagem.setImageBitmap(image);	 
+		 }
+		 
 	}
 	
 	
