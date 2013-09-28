@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 
 public class Usuario implements Serializable {
 
@@ -19,10 +18,9 @@ public class Usuario implements Serializable {
 	private List<Comentarios> comentarios;
 	private List<Tarefas> tarefas;
 	private String senha;
-	private Drawable imagem;
 	private Bitmap imagemPerfil;
-	
-	public final static String SQL_DATABASE_CREATE = "CREATE TABLE Usuario(" +
+	public static final String DATABASE_TABLE = "USUARIO";
+	public final static String USUARIO_TABLE_CREATE = "CREATE TABLE USUARIO(" +
 			"login text PRIMARY KEY, " +
 			"senha text, " +
 			"nome text, " +
