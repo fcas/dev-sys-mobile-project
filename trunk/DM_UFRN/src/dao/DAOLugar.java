@@ -15,7 +15,7 @@ public class DAOLugar extends DAOGenerico<Lugar> implements IDAOLugar {
 			+ "LUGAR TEXT, " + "AUTOR TEXT, " + "COMENTARIO);";
 
 	public DAOLugar(Context context) {
-		super(context, nomeTabela, nomeTabela);
+		super(context);
 		try {
 			db.execSQL(LUGAR_TABLE_CREATE);
 			super.onCreate(db);

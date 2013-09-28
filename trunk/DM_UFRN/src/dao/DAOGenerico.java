@@ -14,23 +14,18 @@ public class DAOGenerico<T> extends SQLiteOpenHelper implements IDaoGenerico<T> 
 
 	private static final int DATABASE_VERSION = 1;
 	private static final String DATABASE_NAME = "dxproductions";
-	protected static String nomeTabela;
-	@SuppressWarnings("unused")
-	private static String sql;
 	private static DAOGenerico instance;
 	protected static SQLiteDatabase db;
 	public static final String ID = "ID";
 
-	public DAOGenerico(Context contexto, String sql, String nomeTabela) {
+	public DAOGenerico(Context contexto) {
 		super(contexto, DATABASE_NAME, null, DATABASE_VERSION);
-		DAOGenerico.sql = sql;
-		DAOGenerico.nomeTabela = nomeTabela;
 	}
 	
 	public static DAOGenerico getInstance(Context contexto, String sql,
 			String nomeTabela) {
 		if (instance == null) {
-			instance = new DAOGenerico(contexto, nomeTabela, nomeTabela);
+			instance = new DAOGenerico(contexto);
 			try {
 				db = instance.getWritableDatabase();
 			} catch (SQLiteException se) {
@@ -52,7 +47,10 @@ public class DAOGenerico<T> extends SQLiteOpenHelper implements IDaoGenerico<T> 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		try {
-			db.execSQL("DROP TABLE IF EXISTS " + nomeTabela);
+			for (String nomeTabela : Tabelas.TABLES) {
+				db.execSQL("DROP TABLE IF EXISTS " + nomeTabela);
+	        }
+			
 		} catch (SQLException se) {
 			Log.e("", "Nao foi possivel atualizar o banco de dados", se);
 		}

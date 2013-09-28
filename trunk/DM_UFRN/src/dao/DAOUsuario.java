@@ -6,7 +6,7 @@ import model.Usuario;
 public class DAOUsuario extends DAOGenerico<Usuario> implements IDAOUsuario {
 
 	public DAOUsuario(Context context) {
-		super(context, nomeTabela, nomeTabela);
+		super(context);
 		// TODO Auto-generated constructor stub
 	}
 
