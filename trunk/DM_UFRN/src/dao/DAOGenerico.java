@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
@@ -17,7 +18,7 @@ public class DAOGenerico<T> extends SQLiteOpenHelper implements IDaoGenerico<T> 
 	@SuppressWarnings("unused")
 	private static String sql;
 	private static DAOGenerico instance;
-	protected SQLiteDatabase db;
+	protected static SQLiteDatabase db;
 	public static final String ID = "id";
 
 	public DAOGenerico(Context contexto, String sql, String nomeTabela) {
@@ -25,10 +26,27 @@ public class DAOGenerico<T> extends SQLiteOpenHelper implements IDaoGenerico<T> 
 		DAOGenerico.sql = sql;
 		DAOGenerico.nomeTabela = nomeTabela;
 	}
+	
+	public static DAOGenerico getInstance(Context contexto, String sql,
+			String nomeTabela) {
+		if (instance == null) {
+			instance = new DAOGenerico(contexto, nomeTabela, nomeTabela);
+			try {
+				db = instance.getWritableDatabase();
+			} catch (SQLiteException se) {
+				Log.e("", "Exception na instanciacao do DAOGenerico", se);
+			} catch (Exception e) {
+				Log.e("", "Exception em DAOGenerico", e);
+			}
+		}
+		return instance;
+	}
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		this.db = db;
+		for (String criarTabela : Tabelas.SQL_DATABASE_CREATE) {
+            db.execSQL(criarTabela);
+        }
 	}
 
 	@Override
