@@ -1,22 +1,15 @@
 package dimap.ufrn.dm;
 
-import java.io.ByteArrayOutputStream;
-
 import model.Usuario;
-
-import android.net.Uri;
-import android.os.Bundle;
-import android.provider.MediaStore;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.util.Base64;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 
 public class ProfileEdit extends Activity {
 
@@ -41,7 +34,7 @@ public class ProfileEdit extends Activity {
 		return true;
 	}
 
-	// Botão voltar...
+	// Botï¿½o voltar...
 	@Override
 	public void onBackPressed() {
 		Intent voltaIntent = new Intent();
@@ -90,8 +83,8 @@ public class ProfileEdit extends Activity {
 			public void onClick(View view) {
 				Intent intent = new Intent(Intent.ACTION_PICK, null);
                 intent.setType("image/*");
-                intent.putExtra("crop", "true");  //opção de cropar.
-                intent.putExtra("outputX", 150);  //poe a resolução que vc quiser.
+                intent.putExtra("crop", "true");  //opï¿½ï¿½o de cropar.
+                intent.putExtra("outputX", 150);  //poe a resoluï¿½ï¿½o que vc quiser.
                 intent.putExtra("outputY", 150); 
                 intent.putExtra("aspectX", 1);  //poe aspect ratio que vc quiser
                 intent.putExtra("aspectY", 1);
