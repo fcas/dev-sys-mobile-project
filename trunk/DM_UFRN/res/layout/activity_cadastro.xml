@@ -82,7 +82,19 @@
         android:inputType="textPassword" >
     </EditText>
 
-
+    <TextView
+        style="@style/padrao" 
+    	android:id="@+id/text_curso"
+    	android:text="@string/usuario_curso"/>
+        
+    <EditText
+        style="@style/editPadrao" 
+        android:id="@+id/edit_curso"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:inputType="text" >
+    </EditText>
           
     <TextView
         style="@style/padrao" 
@@ -101,6 +113,19 @@
         
     </EditText>
 
+    <TextView
+        style="@style/padrao"     
+        android:id="@+id/text_imagem"
+        android:text="@string/imagem"/>
+    
+    <ImageButton
+        android:id="@+id/trocaImagem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/bomb" />
+
+
+    
      <Button
          style="@style/buttonPadrao" 
          android:id="@+id/button_cadastro"
