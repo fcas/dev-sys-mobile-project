@@ -11,5 +11,7 @@ public interface IServicoComentario {
 
 	public void deleteComentario(long id);
 
-	public Cursor listComentarios(String where, String[] colunas);
+	public Cursor listComentarios(String[] colunas);
+
+	public Cursor listComentariosWhere(String tabela, String where, String[] colunas);
 }

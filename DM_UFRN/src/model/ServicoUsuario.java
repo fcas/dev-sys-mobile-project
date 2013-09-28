@@ -53,12 +53,12 @@ public class ServicoUsuario implements IServicoUsuario{
 
 	@Override
 	public Cursor listUsuarios(String where, String[] colunas) {
-		return daoUsuario.list(DATABASE_TABLE, colunas, where);
+		return daoUsuario.listWhere(DATABASE_TABLE, colunas, where);
 	}
 
 	@Override
 	public Cursor listUsuariosCurso(String where, String[] colunas) {
-		return daoUsuario.list(DATABASE_TABLE, colunas, where);
+		return daoUsuario.listWhere(DATABASE_TABLE, colunas, where);
 	}
 
 	@Override

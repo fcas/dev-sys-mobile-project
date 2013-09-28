@@ -31,7 +31,7 @@ public class NovoComentario extends Activity {
 		descricao = (EditText) findViewById(R.id.launch_codes);
 		usuario = (Usuario) getIntent().getSerializableExtra("usuario");
 		comentario_anonimo = (CheckBox) findViewById(R.id.checkBox1);
-		sComentario = new ServicoComentario(this);
+		sComentario = ServicoComentario.getInstance();
 		setButtons();
 	}
 

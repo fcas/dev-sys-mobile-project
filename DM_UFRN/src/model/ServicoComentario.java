@@ -39,8 +39,13 @@ public class ServicoComentario implements IServicoComentario {
 	}
 
 	@Override
-	public Cursor listComentarios(String where, String[] colunas) {
-		return daoComentario.list(DATABASE_TABLE, colunas, where);
+	public Cursor listComentarios(String[] colunas) {
+		return daoComentario.list(DATABASE_TABLE, colunas);
+	}
+	
+	@Override
+	public Cursor listComentariosWhere(String tabela, String where, String[] colunas) {
+		return daoComentario.listWhere(tabela, colunas, where);
 	}
 
 }

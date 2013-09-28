@@ -3,7 +3,6 @@ package dimap.ufrn.dm;
 import java.util.List;
 
 import model.Comentarios;
-import model.Usuario;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,18 +13,17 @@ import android.widget.ListView;
 
 public class ComentariosTodos extends ListActivity {
 
-	Usuario usuario;
+	Comentarios comentarios;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setTitle("UFRN ON TOUCH");
 
-		usuario = (Usuario) getIntent().getSerializableExtra("usuario");
-		final List<Comentarios> comentarios = usuario.getComentarios();
+		final List<Comentarios> listComentarios = comentarios.getComentarios();
 
 		ListView lv = getListView();
-		ListAdapter adapter = new ListAdapter(this, R.layout.activity_list_comment, comentarios);
+		ListAdapter adapter = new ListAdapter(this, R.layout.activity_list_comment, listComentarios);
 
 		lv.setAdapter(adapter);
 		lv.setTextFilterEnabled(true);
@@ -45,7 +43,7 @@ public class ComentariosTodos extends ListActivity {
 	@Override
 	public void onBackPressed() {
 		Intent voltaIntent = new Intent();
-		voltaIntent.putExtra("usuario", usuario);
+		voltaIntent.putExtra("usuario", comentarios);
 		voltaIntent.setClass(ComentariosTodos.this, ListaComentarios.class);
 		startActivity(voltaIntent);
 		finish();
