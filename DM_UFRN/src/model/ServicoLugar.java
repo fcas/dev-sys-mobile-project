@@ -3,18 +3,18 @@ package model;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import dao.DAOLugar;
-import dao.IDAOLugar;
+import dao.DAOGenerico;
+import dao.IDaoGenerico;
 
 public class ServicoLugar implements IServicoLugar {
 
 	private static ServicoLugar singleton = null;
-	private IDAOLugar daoLugar;
+	private IDaoGenerico dao;
 	private static final String DATABASE_TABLE = "LUGARES";
-	static Context context;
+	static Context contexto;
 
 	public ServicoLugar() {
-		this.daoLugar = new DAOLugar(context);
+		this.dao = DAOGenerico.getInstance(contexto);
 
 	}
 
@@ -26,19 +26,19 @@ public class ServicoLugar implements IServicoLugar {
 	}
 
 	public void addLugar(ContentValues values) {
-		daoLugar.add(DATABASE_TABLE, values);
+		dao.add(DATABASE_TABLE, values);
 	}
 
 	public void editLugar(ContentValues values, long id) {
-		daoLugar.edit(DATABASE_TABLE, id, values);
+		dao.edit(DATABASE_TABLE, id, values);
 	}
 
 	public void deleteLugar(long id) {
-		daoLugar.delete(DATABASE_TABLE, id);
+		dao.delete(DATABASE_TABLE, id);
 	}
 
 	public Cursor listLugares(String where, String[] colunas) {
-		return daoLugar.listWhere(DATABASE_TABLE, colunas, where);
+		return dao.listWhere(DATABASE_TABLE, colunas, where);
 	}
 
 }

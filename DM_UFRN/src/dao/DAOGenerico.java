@@ -9,8 +9,7 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-@SuppressWarnings("rawtypes")
-public class DAOGenerico<T> extends SQLiteOpenHelper implements IDaoGenerico<T> {
+public class DAOGenerico extends SQLiteOpenHelper implements IDaoGenerico {
 
 	private static final int DATABASE_VERSION = 1;
 	private static final String DATABASE_NAME = "dxproductions";
@@ -21,9 +20,8 @@ public class DAOGenerico<T> extends SQLiteOpenHelper implements IDaoGenerico<T> 
 	public DAOGenerico(Context contexto) {
 		super(contexto, DATABASE_NAME, null, DATABASE_VERSION);
 	}
-	
-	public static DAOGenerico getInstance(Context contexto, String sql,
-			String nomeTabela) {
+
+	public static DAOGenerico getInstance(Context contexto) {
 		if (instance == null) {
 			instance = new DAOGenerico(contexto);
 			try {
@@ -40,8 +38,8 @@ public class DAOGenerico<T> extends SQLiteOpenHelper implements IDaoGenerico<T> 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		for (String criarTabela : Tabelas.SQL_DATABASE_CREATE) {
-            db.execSQL(criarTabela);
-        }
+			db.execSQL(criarTabela);
+		}
 	}
 
 	@Override
@@ -49,8 +47,8 @@ public class DAOGenerico<T> extends SQLiteOpenHelper implements IDaoGenerico<T> 
 		try {
 			for (String nomeTabela : Tabelas.TABLES) {
 				db.execSQL("DROP TABLE IF EXISTS " + nomeTabela);
-	        }
-			
+			}
+
 		} catch (SQLException se) {
 			Log.e("", "Nao foi possivel atualizar o banco de dados", se);
 		}
@@ -83,19 +81,24 @@ public class DAOGenerico<T> extends SQLiteOpenHelper implements IDaoGenerico<T> 
 
 	@Override
 	public Cursor list(String tabela, String[] colunas) {
-        Cursor cursor = db.query(tabela, colunas, null, null, null, null, null);
-        if (cursor != null) {
-            cursor.moveToFirst();
-        }
-        return cursor;
-    }
-	
-	  public Cursor listWhere(String tabela, String[] colunas, String where) {
-	        Cursor cursor = db.query(true, tabela, colunas, where, null, null, null, null, null);
-	        if (cursor != null) {
-	            cursor.moveToFirst();
-	        }
-	        return cursor;
-	    }
+		Cursor cursor = db.query(tabela, colunas, null, null, null, null, null);
+		if (cursor != null) {
+			cursor.moveToFirst();
+		}
+		return cursor;
+	}
+
+	public Cursor listWhere(String tabela, String[] colunas, String where) {
+		Cursor cursor = db.query(true, tabela, colunas, where, null, null,
+				null, null, null);
+		if (cursor != null) {
+			cursor.moveToFirst();
+		}
+		return cursor;
+	}
+
+	public boolean logar(String usuario, String senha) {
+		return false;
+	}
 
 }

@@ -3,7 +3,7 @@ package dao;
 import android.content.ContentValues;
 import android.database.Cursor;
 
-public interface IDaoGenerico<T> {
+public interface IDaoGenerico {
 
 	public void add(String table, ContentValues values);
 
@@ -14,5 +14,7 @@ public interface IDaoGenerico<T> {
 	public Cursor list(String tabela, String[] colunas);
 	
 	public Cursor listWhere(String tabela, String[] colunas, String where);
+	
+	public boolean logar(String usuario, String senha);
 	
 }
