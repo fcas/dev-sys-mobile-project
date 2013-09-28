@@ -5,9 +5,11 @@ import model.Comentarios;
 
 public class DAOComentario extends DAOGenerico<Comentarios> implements
 		IDAOComentario {
-	
-	public DAOComentario(Context context) {
-		super(context, nomeTabela, nomeTabela);
+
+	public DAOComentario(Context contexto) {
+		super(contexto);
+		// TODO Auto-generated constructor stub
 	}
+
 	
 }
