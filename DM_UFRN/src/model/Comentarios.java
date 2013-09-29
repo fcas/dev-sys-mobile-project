@@ -1,36 +1,44 @@
 package model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
-import android.app.Activity;
-import android.database.Cursor;
+import dao.MySQLiteHelper;
+//import java.util.ArrayList;
+//import java.util.List;
+
+//import android.database.Cursor;
 
 public class Comentarios implements Serializable {
 
 	private static final long serialVersionUID = 9179267868462004746L;
-	public static final String DATABASE_TABLE = "COMENTARIO";
-	public static final String[] COLUMNS = new String[] { "LUGAR", "AUTOR",
-			"COMENTARIO" };
-	public static final String COMENTARIO_TABLE_CREATE = " CREATE TABLE COMENTARIO ("
-			+ "LUGAR TEXT, " + "AUTOR TEXT, " + "COMENTARIO);";
-	private String comentario;
+	  // Database creation sql statement
+	public static final String TABLE_COMMENTS = "comments";
+	public static final String COLUMN_COMMENT = "comment";
+	public static final String CREATE_COMMENTS = "create table "
+	      + TABLE_COMMENTS + "(" + MySQLiteHelper.COLUMN_ID
+	      + " integer primary key autoincrement, " + COLUMN_COMMENT
+	      + " text not null);";
+	
+
 	private String autor;
 	private Lugar lugar;
-	private List<Comentarios> comentarios;
-	private IServicoComentario sComentario;
+	private long id;
+	private String comentario;
 
-	public Comentarios() {
-		this.comentarios = new ArrayList<Comentarios>();
+	public long getId() {
+		return id;
 	}
 
-	public Lugar getLugar() {
-		return lugar;
+	public void setId(long id) {
+		this.id = id;
 	}
 
-	public void setLugar(Lugar lugar) {
-		this.lugar = lugar;
+	public String getComment() {
+		return comentario;
+	}
+
+	public void setComment(String comment) {
+		this.comentario = comment;
 	}
 
 	public String getAutor() {
@@ -41,45 +49,17 @@ public class Comentarios implements Serializable {
 		this.autor = autor;
 	}
 
-	public String getComentario() {
+	public Lugar getLugar() {
+		return lugar;
+	}
+
+	public void setLugar(Lugar lugar) {
+		this.lugar = lugar;
+	}
+	
+	@Override
+	public String toString() {
 		return comentario;
-	}
-
-	public List<Comentarios> getComentarios(Activity activity) {
-		Cursor cursor = null;
-		sComentario = new ServicoComentario(activity);
-		cursor = sComentario.listComentarios(Comentarios.COLUMNS);
-		if (cursor != null) {
-			if (cursor.moveToFirst()) {
-				int count = cursor.getCount();
-				for (int i = 0; i < count; i++) {
-					Comentarios alimentoRet = cursorParaComentarios(cursor);
-					comentarios.add(alimentoRet);
-					cursor.moveToNext();
-				}
-			}
-		}
-
-		return comentarios;
-
-	}
-
-	private Comentarios cursorParaComentarios(Cursor cursor) {
-		if (cursor.getCount() == 0) {
-			return null;
-		}
-		int autor = cursor.getColumnIndex("AUTOR");
-		int comentario = cursor.getColumnIndex("COMENTARIO");
-		Comentarios comentarios = new Comentarios();
-
-		comentarios.setAutor(cursor.getString(autor));
-		comentarios.setComentario(cursor.getString(comentario));
-
-		return comentarios;
-	}
-
-	public void setComentario(String comentario) {
-		this.comentario = comentario;
 	}
 
 }
