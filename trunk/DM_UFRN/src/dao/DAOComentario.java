@@ -13,7 +13,7 @@ public class DAOComentario {
 
 	  private SQLiteDatabase database;
 	  private MySQLiteHelper dbHelper;
-	  private String[] allColumns = { MySQLiteHelper.COLUNA_ID,
+	  private String[] allColumns = { MySQLiteHelper.COLUNA_ID, Comentarios.COLUNA_AUTOR,
 	      Comentarios.COLUNA_COMENTARIO};
 
 	  public DAOComentario(Context context) {
@@ -28,9 +28,10 @@ public class DAOComentario {
 	    dbHelper.close();
 	  }
 
-	  public Comentarios createComentarios(String comment) {
+	  public Comentarios createComentarios(Comentarios comment) {
 	    ContentValues values = new ContentValues();
-	    values.put(Comentarios.COLUNA_COMENTARIO, comment);
+	    values.put(Comentarios.COLUNA_AUTOR, comment.getAutor());
+	    values.put(Comentarios.COLUNA_COMENTARIO, comment.getComment());
 	    long insertId = database.insert(Comentarios.TABELA_COMENTARIOS, null,
 	        values);
 	    Cursor cursor = database.query(Comentarios.TABELA_COMENTARIOS,
@@ -69,7 +70,8 @@ public class DAOComentario {
 	  private Comentarios cursorToComentarios(Cursor cursor) {
 	    Comentarios Comentarios = new Comentarios();
 	    Comentarios.setId(cursor.getLong(0));
-	    Comentarios.setComment(cursor.getString(1));
+	    Comentarios.setAutor(cursor.getString(1));
+	    Comentarios.setComment(cursor.getString(2));
 	    return Comentarios;
 	  }
 
