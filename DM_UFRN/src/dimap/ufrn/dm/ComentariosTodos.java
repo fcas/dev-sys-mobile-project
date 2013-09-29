@@ -14,13 +14,13 @@ import android.widget.ListView;
 public class ComentariosTodos extends ListActivity {
 
 	Comentarios comentarios;
-
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setTitle("UFRN ON TOUCH");
 
-		final List<Comentarios> listComentarios = comentarios.getComentarios();
+		final List<Comentarios> listComentarios = comentarios.getComentarios(this);
 
 		ListView lv = getListView();
 		ListAdapter adapter = new ListAdapter(this, R.layout.activity_list_comment, listComentarios);
