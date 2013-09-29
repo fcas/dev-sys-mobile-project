@@ -1,13 +1,11 @@
 package dimap.ufrn.dm;
 
+import dao.DAOComentario;
 import model.Comentarios;
-import model.IServicoComentario;
-import model.ServicoComentario;
 import model.Usuario;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
-import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,7 +19,7 @@ public class NovoComentario extends Activity {
 	CheckBox comentario_anonimo;
 	EditText descricao;
 	Usuario usuario;
-	IServicoComentario sComentario;
+	private DAOComentario datasource;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +29,8 @@ public class NovoComentario extends Activity {
 		descricao = (EditText) findViewById(R.id.launch_codes);
 		usuario = (Usuario) getIntent().getSerializableExtra("usuario");
 		comentario_anonimo = (CheckBox) findViewById(R.id.checkBox1);
-		sComentario = new ServicoComentario(this);
+		datasource = new DAOComentario(this);
+	    datasource.open();
 		setButtons();
 	}
 
@@ -56,13 +55,13 @@ public class NovoComentario extends Activity {
 								if (comentario_anonimo.isChecked()) {
 									comentario.setAutor("Anonimo");
 								} else {
-									comentario.setAutor(usuario.getNome());
+									//comentario.setAutor(usuario.getNome());
 								}
-								comentario.setComentario(descricao.getText()
+								comentario.setComment(descricao.getText()
 										.toString());
 								usuario.getComentarios().add(comentario);
-								ContentValues values = toContentValue(comentario);
-								sComentario.addComentario(values);
+								//ContentValues values = toContentValue(comentario);
+								datasource.createComentarios(comentario.getComment());
 								intent.setClass(NovoComentario.this,
 										ListaComentarios.class);
 								startActivity(intent);
@@ -94,13 +93,13 @@ public class NovoComentario extends Activity {
 		finish();
 	}
 
-	private ContentValues toContentValue(Comentarios comentario) {
-		ContentValues values = new ContentValues();
-		// TODO Antes de se fazer o comentario, deve-se escolher o lugar
-		// values.put("LUGAR", value);
-		values.put("AUTOR", comentario.getAutor());
-		values.put("COMENTARIO", comentario.getComentario());
-		return values;
-	}
+//	private ContentValues toContentValue(Comentarios comentario) {
+//		ContentValues values = new ContentValues();
+//		// TODO Antes de se fazer o comentario, deve-se escolher o lugar
+//		// values.put("LUGAR", value);
+//		//values.put("AUTOR", comentario.getAutor());
+//		values.put("COMENTARIO", comentario.getComment());
+//		return values;
+//	}
 
 }
