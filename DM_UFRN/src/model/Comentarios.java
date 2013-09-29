@@ -11,14 +11,14 @@ import dao.MySQLiteHelper;
 public class Comentarios implements Serializable {
 
 	private static final long serialVersionUID = 9179267868462004746L;
-	  // Database creation sql statement
+	// Database creation sql statement
 	public static final String TABELA_COMENTARIOS = "Comentarios";
 	public static final String COLUNA_COMENTARIO = "Comentario";
+	public static final String COLUNA_AUTOR = "Autor";
 	public static final String CREATE_COMENTARIOS = "CREATE TABLE "
-	      + TABELA_COMENTARIOS + "(" + MySQLiteHelper.COLUNA_ID
-	      + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUNA_COMENTARIO
-	      + " TEXT NOT NULL);";
-	
+			+ TABELA_COMENTARIOS + "(" + MySQLiteHelper.COLUNA_ID
+			+ " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUNA_AUTOR
+			+ " TEXT NOT NULL," + COLUNA_COMENTARIO + " TEXT NOT NULL);";
 
 	private String autor;
 	private Lugar lugar;
@@ -56,7 +56,7 @@ public class Comentarios implements Serializable {
 	public void setLugar(Lugar lugar) {
 		this.lugar = lugar;
 	}
-	
+
 	@Override
 	public String toString() {
 		return comentario;
