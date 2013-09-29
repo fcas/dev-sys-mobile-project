@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.Activity;
 import android.database.Cursor;
 
 public class Comentarios implements Serializable {
@@ -22,7 +23,6 @@ public class Comentarios implements Serializable {
 
 	public Comentarios() {
 		this.comentarios = new ArrayList<Comentarios>();
-		this.sComentario = ServicoComentario.getInstance();
 	}
 
 	public Lugar getLugar() {
@@ -45,9 +45,9 @@ public class Comentarios implements Serializable {
 		return comentario;
 	}
 
-	public List<Comentarios> getComentarios() {
-
+	public List<Comentarios> getComentarios(Activity activity) {
 		Cursor cursor = null;
+		sComentario = new ServicoComentario(activity);
 		cursor = sComentario.listComentarios(Comentarios.COLUMNS);
 		if (cursor != null) {
 			if (cursor.moveToFirst()) {

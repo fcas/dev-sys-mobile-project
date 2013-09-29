@@ -9,7 +9,7 @@ public class ServicoComentario implements IServicoComentario {
 
 	private static ServicoComentario singleton = null;
 	private DAOGenerico dao;
-	private static final String DATABASE_TABLE = "COMENTARIOS";
+	private static final String DATABASE_TABLE = "COMENTARIO";
 	static Context context;
 
 	public ServicoComentario(Context contexto) {
