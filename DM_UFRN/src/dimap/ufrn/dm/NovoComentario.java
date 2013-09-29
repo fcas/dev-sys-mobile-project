@@ -62,6 +62,7 @@ public class NovoComentario extends Activity {
 								usuario.getComentarios().add(comentario);
 								//ContentValues values = toContentValue(comentario);
 								datasource.createComentarios(comentario.getComment());
+								intent.putExtra("usuario", usuario);
 								intent.setClass(NovoComentario.this,
 										ListaComentarios.class);
 								startActivity(intent);
