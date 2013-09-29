@@ -7,13 +7,14 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 public class MySQLiteHelper extends SQLiteOpenHelper {
-	public static final String COLUMN_ID = "_id";
+	public static final String COLUNA_ID = "_id";
 
 	private static final String DATABASE_NAME = "xdproductions";
 	private static final int DATABASE_VERSION = 1;
 
 	public MySQLiteHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
+		//context.deleteDatabase(DATABASE_NAME);
 	}
 
 	@Override

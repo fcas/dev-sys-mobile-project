@@ -1,19 +1,16 @@
 package dimap.ufrn.dm;
 
-//O botão voltar está voltando para a tela de login...
+//O botï¿½o voltar estï¿½ voltando para a tela de login...
 
-import model.IServicoUsuario;
-import model.ServicoUsuario;
 import model.Usuario;
-import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -53,7 +50,7 @@ private void setButtons() {
 				}
 			    else{
         			builder.setTitle("Erro");  
-			        builder.setMessage("Senhas não se correspondem");  
+			        builder.setMessage("Senhas nï¿½o se correspondem");  
         		}
 		        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() { 
 		        	public void onClick(DialogInterface arg0, int arg1) {
@@ -64,7 +61,7 @@ private void setButtons() {
 			        		usuario.setSenha(edit_senha.getText().toString());
 			        		usuario.setCurso(edit_curso.getText().toString());
 			        		usuario.setImagemPerfil(((BitmapDrawable)trocaImagem.getDrawable()).getBitmap());
-			        		IServicoUsuario sUsuario = new ServicoUsuario();
+			        	//	IServicoUsuario sUsuario = new ServicoUsuario();
 			        		//sUsuario.addUsuario(usuario);
 			        		Intent mainIntent = new Intent();
 							mainIntent.setClass(Cadastro.this, Login.class);
@@ -86,8 +83,8 @@ private void setButtons() {
 		public void onClick(View view) {
 			Intent intent = new Intent(Intent.ACTION_PICK, null);
             intent.setType("image/*");
-            intent.putExtra("crop", "true");  //opção de cropar.
-            intent.putExtra("outputX", 150);  //poe a resolução que vc quiser.
+            intent.putExtra("crop", "true");  //opï¿½ï¿½o de cropar.
+            intent.putExtra("outputX", 150);  //poe a resoluï¿½ï¿½o que vc quiser.
             intent.putExtra("outputY", 150); 
             intent.putExtra("aspectX", 1);  //poe aspect ratio que vc quiser
             intent.putExtra("aspectY", 1);
@@ -118,7 +115,7 @@ private void setButtons() {
 		return true;
 	}
 	
-	//Botão voltar...
+	//Botï¿½o voltar...
 		@Override
 		public void onBackPressed() {
 			Intent voltaIntent = new Intent();

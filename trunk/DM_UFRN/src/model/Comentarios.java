@@ -12,12 +12,12 @@ public class Comentarios implements Serializable {
 
 	private static final long serialVersionUID = 9179267868462004746L;
 	  // Database creation sql statement
-	public static final String TABLE_COMMENTS = "comments";
-	public static final String COLUMN_COMMENT = "comment";
-	public static final String CREATE_COMMENTS = "create table "
-	      + TABLE_COMMENTS + "(" + MySQLiteHelper.COLUMN_ID
-	      + " integer primary key autoincrement, " + COLUMN_COMMENT
-	      + " text not null);";
+	public static final String TABELA_COMENTARIOS = "Comentarios";
+	public static final String COLUNA_COMENTARIO = "Comentario";
+	public static final String CREATE_COMENTARIOS = "CREATE TABLE "
+	      + TABELA_COMENTARIOS + "(" + MySQLiteHelper.COLUNA_ID
+	      + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUNA_COMENTARIO
+	      + " TEXT NOT NULL);";
 	
 
 	private String autor;

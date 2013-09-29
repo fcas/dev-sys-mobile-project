@@ -13,8 +13,8 @@ public class DAOComentario {
 
 	  private SQLiteDatabase database;
 	  private MySQLiteHelper dbHelper;
-	  private String[] allColumns = { MySQLiteHelper.COLUMN_ID,
-	      Comentarios.COLUMN_COMMENT};
+	  private String[] allColumns = { MySQLiteHelper.COLUNA_ID,
+	      Comentarios.COLUNA_COMENTARIO};
 
 	  public DAOComentario(Context context) {
 	    dbHelper = new MySQLiteHelper(context);
@@ -30,11 +30,11 @@ public class DAOComentario {
 
 	  public Comentarios createComentarios(String comment) {
 	    ContentValues values = new ContentValues();
-	    values.put(Comentarios.COLUMN_COMMENT, comment);
-	    long insertId = database.insert(Comentarios.TABLE_COMMENTS, null,
+	    values.put(Comentarios.COLUNA_COMENTARIO, comment);
+	    long insertId = database.insert(Comentarios.TABELA_COMENTARIOS, null,
 	        values);
-	    Cursor cursor = database.query(Comentarios.TABLE_COMMENTS,
-	        allColumns, MySQLiteHelper.COLUMN_ID + " = " + insertId, null,
+	    Cursor cursor = database.query(Comentarios.TABELA_COMENTARIOS,
+	        allColumns, MySQLiteHelper.COLUNA_ID + " = " + insertId, null,
 	        null, null, null);
 	    cursor.moveToFirst();
 	    Comentarios newComentarios = cursorToComentarios(cursor);
@@ -45,14 +45,14 @@ public class DAOComentario {
 	  public void deleteComentarios(Comentarios comment) {
 	    long id = comment.getId();
 	    System.out.println("Comentarios deleted with id: " + id);
-	    database.delete(Comentarios.TABLE_COMMENTS, MySQLiteHelper.COLUMN_ID
+	    database.delete(Comentarios.TABELA_COMENTARIOS, MySQLiteHelper.COLUNA_ID
 	        + " = " + id, null);
 	  }
 
 	  public List<Comentarios> getAllComments() {
 	    List<Comentarios> Comentarioss = new ArrayList<Comentarios>();
 
-	    Cursor cursor = database.query(Comentarios.TABLE_COMMENTS,
+	    Cursor cursor = database.query(Comentarios.TABELA_COMENTARIOS,
 	        allColumns, null, null, null, null, null);
 
 	    cursor.moveToFirst();
