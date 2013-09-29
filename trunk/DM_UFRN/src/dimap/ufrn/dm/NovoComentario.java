@@ -16,10 +16,10 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 
 public class NovoComentario extends Activity {
-	CheckBox comentario_anonimo;
-	EditText descricao;
-	Usuario usuario;
 	private DAOComentario datasource;
+	private CheckBox comentario_anonimo;
+	private EditText descricao;
+	private Usuario usuario;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +30,7 @@ public class NovoComentario extends Activity {
 		usuario = (Usuario) getIntent().getSerializableExtra("usuario");
 		comentario_anonimo = (CheckBox) findViewById(R.id.checkBox1);
 		datasource = new DAOComentario(this);
-	    datasource.open();
+		datasource.open();
 		setButtons();
 	}
 
@@ -55,13 +55,15 @@ public class NovoComentario extends Activity {
 								if (comentario_anonimo.isChecked()) {
 									comentario.setAutor("Anonimo");
 								} else {
-									comentario.setAutor(usuario.getNome());
+									comentario.setAutor(usuario.getNome()
+											.toString());
 								}
 								comentario.setComment(descricao.getText()
 										.toString());
 								usuario.getComentarios().add(comentario);
-								//ContentValues values = toContentValue(comentario);
-								datasource.createComentarios(comentario.getComment());
+								// ContentValues values =
+								// toContentValue(comentario);
+								datasource.createComentarios(comentario);
 								intent.putExtra("usuario", usuario);
 								intent.setClass(NovoComentario.this,
 										ListaComentarios.class);
@@ -94,13 +96,13 @@ public class NovoComentario extends Activity {
 		finish();
 	}
 
-//	private ContentValues toContentValue(Comentarios comentario) {
-//		ContentValues values = new ContentValues();
-//		// TODO Antes de se fazer o comentario, deve-se escolher o lugar
-//		// values.put("LUGAR", value);
-//		//values.put("AUTOR", comentario.getAutor());
-//		values.put("COMENTARIO", comentario.getComment());
-//		return values;
-//	}
+	// private ContentValues toContentValue(Comentarios comentario) {
+	// ContentValues values = new ContentValues();
+	// // TODO Antes de se fazer o comentario, deve-se escolher o lugar
+	// // values.put("LUGAR", value);
+	// //values.put("AUTOR", comentario.getAutor());
+	// values.put("COMENTARIO", comentario.getComment());
+	// return values;
+	// }
 
 }
