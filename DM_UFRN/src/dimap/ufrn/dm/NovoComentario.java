@@ -55,7 +55,7 @@ public class NovoComentario extends Activity {
 								if (comentario_anonimo.isChecked()) {
 									comentario.setAutor("Anonimo");
 								} else {
-									//comentario.setAutor(usuario.getNome());
+									comentario.setAutor(usuario.getNome());
 								}
 								comentario.setComment(descricao.getText()
 										.toString());

@@ -2,10 +2,8 @@ package dimap.ufrn.dm;
 
 import java.util.List;
 
-import dao.DAOComentario;
 import model.Comentarios;
-import model.IServicoComentario;
-import model.ServicoComentario;
+import model.Usuario;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,16 +11,18 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import dao.DAOComentario;
 
 public class ComentariosTodos extends ListActivity {
 
 	  private DAOComentario datasource;
+	  Usuario usuario;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setTitle("UFRN ON TOUCH");
-
+		usuario = (Usuario) getIntent().getSerializableExtra("usuario");
 		datasource = new DAOComentario(this);
 	    datasource.open();
 
@@ -49,7 +49,7 @@ public class ComentariosTodos extends ListActivity {
 	@Override
 	public void onBackPressed() {
 		Intent voltaIntent = new Intent();
-		//voltaIntent.putExtra("usuario", comentarios);
+		voltaIntent.putExtra("usuario", usuario);
 		voltaIntent.setClass(ComentariosTodos.this, ListaComentarios.class);
 		startActivity(voltaIntent);
 		finish();

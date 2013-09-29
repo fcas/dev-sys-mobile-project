@@ -7,11 +7,10 @@ import model.Usuario;
 
 public class Tabelas {
 
-	public static final String DATABASE_NAME = "dxproductions";
-	public static final int DATABASE_VERSION = 1;
+	public static final String DATABASE_NAME = "xdproductions";
 	public static final String[] SQL_DATABASE_CREATE = {
-			Comentarios.CREATE_COMMENTS, Lugar.LUGAR_TABLE_CREATE,
+			Comentarios.CREATE_COMENTARIOS, Lugar.LUGAR_TABLE_CREATE,
 			Tarefas.TAREFA_TABLE_CREATE, Usuario.USUARIO_TABLE_CREATE };
-	public static final String[] TABLES = { "comments", "LUGAR", "USUARIO",
+	public static final String[] TABLES = { "Comentarios", "LUGAR", "USUARIO",
 			"TAREFA" };
 }
