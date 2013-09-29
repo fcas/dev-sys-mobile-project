@@ -12,7 +12,7 @@ import android.util.Log;
 public class DAOGenerico extends SQLiteOpenHelper implements IDaoGenerico {
 
 	private static final int DATABASE_VERSION = 1;
-	private static final String DATABASE_NAME = "dxproductions";
+	private static final String DATABASE_NAME = "xdproductions";
 	private static DAOGenerico instance;
 	protected static SQLiteDatabase db;
 	public static final String ID = "ID";
@@ -22,6 +22,7 @@ public class DAOGenerico extends SQLiteOpenHelper implements IDaoGenerico {
 	}
 
 	public static DAOGenerico getInstance(Context contexto) {
+	      Log.i("", "Tentando criar o banco...");
 		if (instance == null) {
 			instance = new DAOGenerico(contexto);
 			try {
@@ -37,22 +38,22 @@ public class DAOGenerico extends SQLiteOpenHelper implements IDaoGenerico {
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		for (String criarTabela : Tabelas.SQL_DATABASE_CREATE) {
-			db.execSQL(criarTabela);
-		}
+//		for (String criarTabela : Tabelas.SQL_DATABASE_CREATE) {
+//			db.execSQL(criarTabela);
+//		}
 	}
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		try {
-			for (String nomeTabela : Tabelas.TABLES) {
-				db.execSQL("DROP TABLE IF EXISTS " + nomeTabela);
-			}
-
-		} catch (SQLException se) {
-			Log.e("", "Nao foi possivel atualizar o banco de dados", se);
-		}
-		onCreate(db);
+//		try {
+//			for (String nomeTabela : Tabelas.TABLES) {
+//				db.execSQL("DROP TABLE IF EXISTS " + nomeTabela);
+//			}
+//
+//		} catch (SQLException se) {
+//			Log.e("", "Nao foi possivel atualizar o banco de dados", se);
+//		}
+//		onCreate(db);
 	}
 
 	@Override
@@ -81,11 +82,7 @@ public class DAOGenerico extends SQLiteOpenHelper implements IDaoGenerico {
 
 	@Override
 	public Cursor list(String tabela, String[] colunas) {
-		Cursor cursor = db.query(tabela, colunas, null, null, null, null, null);
-		if (cursor != null) {
-			cursor.moveToFirst();
-		}
-		return cursor;
+		return db.query(tabela, colunas, null, null, null, null, null);
 	}
 
 	public Cursor listWhere(String tabela, String[] colunas, String where) {
