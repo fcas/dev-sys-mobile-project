@@ -9,66 +9,91 @@
     tools:context=".NovaTarefa" >
 
     <TextView
-        style="@style/titulo" 
         android:id="@+id/textView1"
+        style="@style/titulo"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="16dp"
-        android:text="@string/tarefa_nova"
-        />
+        android:text="@string/tarefa_nova" />
 
-     <Button
-         style="@style/buttonPadrao"
-         android:id="@+id/button_tarefa_nova"
-         android:layout_alignParentBottom="true"
-         android:layout_alignRight="@+id/tarefa_descricao"
-         android:layout_marginBottom="22dp"
-         android:text="@string/tarefa_ok" />
+    <Button
+        android:id="@+id/button_tarefa_nova"
+        style="@style/buttonPadrao"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/tarefa_descricao"
+        android:layout_marginBottom="22dp"
+        android:text="@string/tarefa_ok" />
 
-     <EditText
-         style="@style/editPadrao"
-         android:id="@+id/tarefa_data"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_below="@+id/textView1"
-         android:layout_marginTop="20dp"
-         android:ems="10"
-         android:inputType="date"
-         android:hint="@string/tarefa_data" />
-          
-     <EditText
-         style="@style/editPadrao"
-         android:id="@+id/tarefa_hora"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_below="@+id/tarefa_data"
-         android:ems="10"
-         android:inputType="time"
-         android:hint="@string/tarefa_hora" />
-          
-     <EditText
-         style="@style/editPadrao"
-         android:id="@+id/tarefa_local"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_below="@+id/tarefa_hora"
+    <EditText
+        android:id="@+id/tarefa_hora"
+        style="@style/editPadrao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tarefa_data"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/button2"
+        android:ems="10"
+        android:hint="@string/tarefa_hora"
+        android:inputType="time" />
 
-         android:ems="10"
-         android:hint="@string/tarefa_local" />
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tarefa_hora"
+        android:layout_alignRight="@+id/button2"
+        android:onClick="showTimeDialog"
+        android:text="Definir hora" />
 
-     <EditText
-         android:id="@+id/tarefa_descricao"
-         style="@style/editPadrao"
-         android:layout_width="fill_parent"
-         android:layout_height="wrap_content"
-         android:layout_alignLeft="@+id/tarefa_local"
-         android:layout_below="@+id/tarefa_local"
-         android:ems="10"
-         android:hint="@string/tarefa_descricao"
-         android:imeActionLabel="@string/tarefa_nova"
-         android:inputType="text|textMultiLine" >
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button1"
+        android:layout_alignParentRight="true"
+        android:onClick="showDateDialog"
+        android:text="Definir Data" />
 
-         <requestFocus />
-     </EditText>
+    <EditText
+        android:id="@+id/tarefa_data"
+        style="@style/editPadrao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/button2"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_toLeftOf="@+id/button1"
+        android:ems="10"
+        android:hint="@string/tarefa_data"
+        android:inputType="date" >
+
+    </EditText>
+
+    <EditText
+        android:id="@+id/tarefa_local"
+        style="@style/editPadrao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tarefa_hora"
+        android:layout_below="@+id/tarefa_hora"
+        android:layout_marginTop="18dp"
+        android:ems="10"
+        android:hint="@string/tarefa_local" />
+
+    <EditText
+        
+        android:id="@+id/tarefa_descricao"
+        style="@style/editPadrao"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button2"
+        android:layout_alignRight="@+id/button2"
+        android:layout_marginBottom="18dp"
+        android:ems="10"
+        android:hint="@string/tarefa_descricao"
+        android:imeActionLabel="@string/tarefa_nova"
+        
+        android:inputType="text|textMultiLine" 
+        />        <requestFocus />
+    
 
 </RelativeLayout>

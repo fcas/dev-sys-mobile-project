@@ -8,13 +8,18 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.app.DatePickerDialog.OnDateSetListener;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.TimePicker;
 
-public class NovaTarefa extends Activity {
+public class NovaTarefa extends Activity implements OnDateSetListener{
 
 	private Button pronto;
 	Usuario usuario;
@@ -78,6 +83,8 @@ public class NovaTarefa extends Activity {
 
 			}
 		});
+		
+		
 
 	}
 
@@ -88,4 +95,74 @@ public class NovaTarefa extends Activity {
 		return true;
 	}
 
-}
+	
+	public void showTimeDialog(View v) {
+		
+		final Dialog dialog = new Dialog(this);
+
+		dialog.setContentView(R.layout.dialog_time);
+		final TimePicker tp = (TimePicker)dialog.findViewById(R.id.timePicker1);
+		final EditText hora = (EditText) findViewById(R.id.tarefa_hora);
+		Button confirmar = (Button) dialog.findViewById(R.id.buttonOk);
+        Button cancelar = (Button) dialog.findViewById(R.id.buttonCancel);
+ 
+		confirmar.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                hora.setText(String.valueOf(tp.getCurrentHour()+ ":"+tp.getCurrentMinute()));
+             //finaliza o dialog
+             dialog.dismiss();
+            }
+        });
+ 
+        cancelar.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+             //finaliza o dialog
+                dialog.dismiss();
+            }
+        });
+         
+        
+		dialog.setTitle("Escolha a data");
+		dialog.show();
+	}
+	
+	public void showDateDialog(View v) {
+		
+		final Dialog dialog = new Dialog(this);
+
+		dialog.setContentView(R.layout.dialog_date);
+		final DatePicker dp = (DatePicker)dialog.findViewById(R.id.datePicker1);
+		final EditText data = (EditText) findViewById(R.id.tarefa_data);
+		Button confirmar = (Button) dialog.findViewById(R.id.buttonOk);
+        Button cancelar = (Button) dialog.findViewById(R.id.buttonCancel);
+ 
+		confirmar.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                data.setText(String.valueOf(dp.getDayOfMonth()+"/"+dp.getMonth()+"/"+dp.getYear()));
+                 
+             //finaliza o dialog
+             dialog.dismiss();
+            }
+        });
+ 
+        cancelar.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+             //finaliza o dialog
+                dialog.dismiss();
+            }
+        });
+         
+        
+		dialog.setTitle("Escolha a data");
+		dialog.show();
+		
+		
+	}
+
+	@Override
+	public void onDateSet(DatePicker view, int year, int monthOfYear,
+			int dayOfMonth) {
+		
+		
+	}
+}	
