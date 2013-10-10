@@ -138,7 +138,8 @@ public class NovaTarefa extends Activity implements OnDateSetListener{
  
 		confirmar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                data.setText(String.valueOf(dp.getDayOfMonth()+"/"+dp.getMonth()+"/"+dp.getYear()));
+            	int mes = dp.getMonth() + 1;
+                data.setText(String.valueOf(dp.getDayOfMonth()+"/"+mes+"/"+dp.getYear()));
                  
              //finaliza o dialog
              dialog.dismiss();
