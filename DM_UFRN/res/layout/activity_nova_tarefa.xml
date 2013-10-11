@@ -93,7 +93,7 @@
         android:imeActionLabel="@string/tarefa_nova"
         
         android:inputType="text|textMultiLine" 
-        />        <requestFocus />
+        />        
     
 
 </RelativeLayout>
