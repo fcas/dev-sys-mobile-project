@@ -103,7 +103,7 @@
         
     <EditText
         style="@style/editPadrao" 
-        android:id="@+id/edit_descricao"
+        android:id="@+id/edit_sobre"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:lines="3"
