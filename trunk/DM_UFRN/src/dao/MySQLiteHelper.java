@@ -34,7 +34,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	} catch (SQLException se) {
 		Log.e("", "Nao foi possivel atualizar o banco de dados", se);
 	}
-	onCreate(db);
+		onCreate(db);
 	}
 
 }
