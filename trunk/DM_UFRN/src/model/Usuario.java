@@ -3,6 +3,8 @@ package model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import dao.MySQLiteHelper;
 import android.graphics.Bitmap;
 
 public class Usuario implements Serializable {
@@ -16,10 +18,21 @@ public class Usuario implements Serializable {
 	private String senha;
 	private Bitmap imagemPerfil;
 
-	public static final String DATABASE_TABLE = "USUARIO";
-	public final static String USUARIO_TABLE_CREATE = "CREATE TABLE USUARIO("
-			+ "login text PRIMARY KEY, " + "senha text, " + "nome text, "
-			+ "curso text, " + "sobreMim text," + "imagem blob)";
+	public static final String DATABASE_TABLE = "Usuario";
+	public static final String TABELA_USUARIO = "Usuario";
+	public static final String COLUNA_LOGIN = "Login";
+	public static final String COLUNA_SENHA = "Senha";
+	public static final String COLUNA_NOME = "Nome";
+	public static final String COLUNA_CURSO = "Curso";
+	public static final String COLUNA_SOBRE = "SobreMim";
+	
+	
+	public static final String CREATE_USUARIO = " CREATE TABLE "+TABELA_USUARIO+"("
+	+COLUNA_LOGIN+" TEXT PRIMARY KEY NOT NULL, "
+	+COLUNA_SENHA+ " TEXT NOT NULL, "
+	+COLUNA_NOME +" TEXT NOT NULL, "
+	+COLUNA_CURSO +" TEXT, "
+	+COLUNA_SOBRE +" TEXT);";
 
 	public Usuario() {
 		this.comentarios = new ArrayList<Comentarios>();
