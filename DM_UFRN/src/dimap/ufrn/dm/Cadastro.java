@@ -2,6 +2,8 @@ package dimap.ufrn.dm;
 
 //O bot�o voltar est� voltando para a tela de login...
 
+import dao.DAOImagem;
+import dao.DAOUsuario;
 import model.Usuario;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -21,7 +23,9 @@ public class Cadastro extends Activity {
 	Button cadastro;
 	Usuario usuario;
 	ImageButton trocaImagem;
-	EditText edit_nome, edit_login, edit_senha, edit_confirmasenha, edit_descricao, edit_curso;
+	DAOUsuario daoUsuario;
+	DAOImagem daoImagem;
+	EditText edit_nome, edit_login, edit_senha, edit_confirmasenha, edit_sobre, edit_curso;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -30,8 +34,11 @@ public class Cadastro extends Activity {
 		edit_login = (EditText)findViewById(R.id.edit_login);
 		edit_senha = (EditText)findViewById(R.id.edit_senha);
 		edit_confirmasenha = (EditText)findViewById(R.id.edit_confirmasenha);
-		edit_descricao = (EditText)findViewById(R.id.edit_descricao);
+		edit_sobre= (EditText)findViewById(R.id.edit_sobre);
 		edit_curso = (EditText)findViewById(R.id.edit_curso);
+		daoUsuario = new DAOUsuario(this);
+		daoImagem = new DAOImagem(this);
+		daoUsuario.open();
 		setButtons();
 	}
 
@@ -59,8 +66,15 @@ private void setButtons() {
 			        		usuario.setNome(edit_nome.getText().toString());
 			        		usuario.setCurso(edit_curso.getText().toString());
 			        		usuario.setSenha(edit_senha.getText().toString());
-			        		usuario.setCurso(edit_curso.getText().toString());
+			        		usuario.setSobreMim(edit_sobre.getText().toString());
+			        		usuario.setLogin(edit_login.getText().toString());
 			        		usuario.setImagemPerfil(((BitmapDrawable)trocaImagem.getDrawable()).getBitmap());
+			        		
+			        		daoImagem.putImagem(usuario.getLogin(), usuario.getImagemPerfil());
+			        		
+			        		
+			        		daoUsuario.createUsuario(usuario);
+			        		daoUsuario.close();
 			        	//	IServicoUsuario sUsuario = new ServicoUsuario();
 			        		//sUsuario.addUsuario(usuario);
 			        		Intent mainIntent = new Intent();
