@@ -3,15 +3,19 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import dao.MySQLiteHelper;
+
 public class Lugar {
 	private String nome;
 	private String localizacao;
 	private String tipo;
+
+	private int id_local;
 	private int rate;
 	private List<Comentarios> listaComentarios;
 	public static final String DATABASE_TABLE = "LUGAR";
 	public static final String LUGAR_TABLE_CREATE = " CREATE TABLE LUGAR ("
-			+ "NOME TEXT, " + "LOCALIZACAO TEXT, " + "RATE INTEGER, " + "TIPO TEXT);";
+			+ MySQLiteHelper.COLUNA_ID+" INTEGER PRIMARY KEY AUTOINCREMENT," + "NOME TEXT, " + "LOCALIZACAO TEXT, " + "RATE INTEGER, " + "TIPO TEXT);";
 
 	public Lugar(){
 		this.listaComentarios = new ArrayList<Comentarios>();
@@ -56,5 +60,14 @@ public class Lugar {
 	public void setRate(int rate) {
 		this.rate = rate;
 	}
+	public int getId_local() {
+		return id_local;
+	}
 
+	public void setId_local(int id_local) {
+		this.id_local = id_local;
+	}
+
+	
+	
 }
