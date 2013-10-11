@@ -2,6 +2,7 @@ package dimap.ufrn.dm;
 
 //O bot�o voltar est� voltando para a lista de tarefas...
 
+import dao.DAOTarefa;
 import model.Tarefas;
 import model.Usuario;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -20,14 +22,21 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 
 public class NovaTarefa extends Activity implements OnDateSetListener{
-
+	private DAOTarefa daoTarefa;
 	private Button pronto;
+	private EditText tarefa_hora, tarefa_data, tarefa_local, tarefa_descricao;
 	Usuario usuario;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_nova_tarefa);
 		setTitle("UFRN ON TOUCH");
+		daoTarefa = new DAOTarefa(this);
+		daoTarefa.open();
+		tarefa_hora = (EditText)findViewById(R.id.tarefa_hora);
+		tarefa_data = (EditText)findViewById(R.id.tarefa_data);
+		tarefa_descricao = (EditText)findViewById(R.id.tarefa_descricao);
+		tarefa_local = (EditText)findViewById(R.id.tarefa_local);
 		usuario = (Usuario) getIntent().getSerializableExtra("usuario");
 		setButtons();
 	}
@@ -57,7 +66,15 @@ public class NovaTarefa extends Activity implements OnDateSetListener{
 		        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() { 
 		        	public void onClick(DialogInterface arg0, int arg1) {
 		        		@SuppressWarnings("unused")
-						Tarefas tarefas = new Tarefas();
+						Tarefas tarefa = new Tarefas();
+		        		tarefa.setDescricao(tarefa_descricao.getText().toString());
+		        		tarefa.setUsuario(usuario.getLogin());
+		        		tarefa.setData(tarefa_data.getText().toString());
+		        		tarefa.setHorario(tarefa_hora.getText().toString());
+		        		tarefa.setLocal(tarefa_data.getText().toString());
+		        		Log.d("Tabela tarefa", Tarefas.CREATE_TAREFA);
+		        		daoTarefa.createTarefa(tarefa);
+		        		
 						Intent minhasTarefasIntent = new Intent();
 						minhasTarefasIntent.putExtra("usuario", usuario);
 						minhasTarefasIntent.setClass(NovaTarefa.this, ListaTarefas.class);
