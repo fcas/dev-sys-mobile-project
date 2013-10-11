@@ -14,9 +14,7 @@ public class Tarefas implements Serializable {
 	private String local;
 	private String data;
 	private String horario;
-	private String descricao;
-	public static final String DATABASE_TABLE = "TAREFA";
-	
+	private String descricao;	
 	public static final String TABELA_TAREFA = "Tarefa";
 	public static final String COLUNA_USUARIO = "Usuario";
 	public static final String COLUNA_LOCAL = "Local";
@@ -24,13 +22,12 @@ public class Tarefas implements Serializable {
 	public static final String COLUNA_HORARIO = "Horario";
 	public static final String COLUNA_DESCRICAO = "Descricao";
 	
-	public static final String CREATE_TAREFA = " CREATE TABLE "+TABELA_TAREFA+"("+MySQLiteHelper.COLUNA_ID+"INTEGER PRIMARY KEY AUTOINCREMENT, "
-	+COLUNA_USUARIO+" TEXT NOT NULL,"
-	+COLUNA_LOCAL +"TEXT NOT NULL,"
-	+COLUNA_DATA +"TEXT NOT NULL,"
-	+COLUNA_HORARIO +"TEXT NOT NULL,"
-	+COLUNA_LOCAL +"TEXT NOT NULL,"
-	+COLUNA_DESCRICAO +"TEXT NOT NULL);";
+	public static final String CREATE_TAREFA = " CREATE TABLE "+TABELA_TAREFA+"("+MySQLiteHelper.COLUNA_ID+" INTEGER PRIMARY KEY AUTOINCREMENT, "
+	+COLUNA_USUARIO+" TEXT NOT NULL, "
+	+COLUNA_LOCAL+ " TEXT NOT NULL, "
+	+COLUNA_DATA +" TEXT NOT NULL, "
+	+COLUNA_HORARIO +" TEXT NOT NULL, "
+	+COLUNA_DESCRICAO +" TEXT NOT NULL);";
 	
 	public String getLocal() {
 		return local;
