@@ -24,6 +24,7 @@ import android.widget.TimePicker;
 public class NovaTarefa extends Activity implements OnDateSetListener{
 	private DAOTarefa daoTarefa;
 	private Button pronto;
+	@SuppressWarnings("unused")
 	private EditText tarefa_hora, tarefa_data, tarefa_local, tarefa_descricao;
 	Usuario usuario;
 	@Override
@@ -65,8 +66,7 @@ public class NovaTarefa extends Activity implements OnDateSetListener{
 		        
 		        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() { 
 		        	public void onClick(DialogInterface arg0, int arg1) {
-		        		@SuppressWarnings("unused")
-						Tarefas tarefa = new Tarefas();
+		        		Tarefas tarefa = new Tarefas();
 		        		tarefa.setDescricao(tarefa_descricao.getText().toString());
 		        		tarefa.setUsuario(usuario.getLogin());
 		        		tarefa.setData(tarefa_data.getText().toString());
