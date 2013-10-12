@@ -2,6 +2,7 @@ package dao;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import model.Usuario;
 import android.content.ContentValues;
 import android.content.Context;
@@ -37,7 +38,8 @@ public class DAOUsuario {
 	    values.put(Usuario.COLUNA_CURSO, usuario.getCurso());
 	    values.put(Usuario.COLUNA_SOBRE , usuario.getSobreMim());
 	    daoImagem.putImagem(usuario.getLogin(), usuario.getImagemPerfil());
-	    long insertId = database.insert(Usuario.TABELA_USUARIO, null,
+	    @SuppressWarnings("unused")
+		long insertId = database.insert(Usuario.TABELA_USUARIO, null,
 	        values);
 	    /*Cursor cursor = database.query(Usuario.TABELA_Usuario,
 	        allColumns, MySQLiteHelper.COLUNA_ID + " = " + insertId, null,
