@@ -55,13 +55,15 @@ public class Login extends Activity {
 
 				daoUsuario.open();
 				usuario = daoUsuario.autenticar(user.getText().toString(), (senha.getText().toString()));
+				daoUsuario.close();
+				
 				if(usuario != null){
 					mainIntent.putExtra("usuario", usuario);
 					
 					mainIntent.setClass(Login.this,
 							MainActivity.class);
 					startActivity(mainIntent);
-	
+					
 					finish();
 				}
 			}

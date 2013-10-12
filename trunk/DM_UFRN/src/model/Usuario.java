@@ -16,7 +16,6 @@ public class Usuario implements Serializable {
 	private String senha;
 	private Bitmap imagemPerfil;
 
-	public static final String DATABASE_TABLE = "Usuario";
 	public static final String TABELA_USUARIO = "Usuario";
 	public static final String COLUNA_LOGIN = "Login";
 	public static final String COLUNA_SENHA = "Senha";
@@ -25,7 +24,7 @@ public class Usuario implements Serializable {
 	public static final String COLUNA_SOBRE = "SobreMim";
 	
 	
-	public static final String CREATE_USUARIO = " CREATE TABLE "+TABELA_USUARIO+"("
+	public static final String CREATE_USUARIO = "CREATE TABLE "+TABELA_USUARIO+"("
 	+COLUNA_LOGIN+" TEXT PRIMARY KEY NOT NULL, "
 	+COLUNA_SENHA+ " TEXT NOT NULL, "
 	+COLUNA_NOME +" TEXT NOT NULL, "
