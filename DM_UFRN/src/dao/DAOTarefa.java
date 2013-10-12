@@ -2,6 +2,7 @@ package dao;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import model.Tarefas;
 import android.content.ContentValues;
 import android.content.Context;
@@ -33,7 +34,8 @@ public class DAOTarefa {
 	    values.put(Tarefas.COLUNA_DATA, tarefa.getData());
 	    values.put(Tarefas.COLUNA_HORARIO, tarefa.getHorario());
 	    values.put(Tarefas.COLUNA_DESCRICAO, tarefa.getDescricao());
-	    long insertId = database.insert(Tarefas.TABELA_TAREFA, null, values);
+	    @SuppressWarnings("unused")
+		long insertId = database.insert(Tarefas.TABELA_TAREFA, null, values);
 	    /*Cursor cursor = database.query(Tarefas.TABELA_TAREFA,
 	        allColumns, MySQLiteHelper.COLUNA_ID + " = " + insertId, null,
 	        null, null, null, null);

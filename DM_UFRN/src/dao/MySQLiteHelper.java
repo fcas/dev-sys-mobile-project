@@ -27,13 +27,13 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		try {
-		for (String nomeTabela : Tabelas.TABLES) {
-			db.execSQL("DROP TABLE IF EXISTS " + nomeTabela);
-		}
+			for (String nomeTabela : Tabelas.TABLES) {
+				db.execSQL("DROP TABLE IF EXISTS " + nomeTabela);
+			}
 
-	} catch (SQLException se) {
-		Log.e("", "Nao foi possivel atualizar o banco de dados", se);
-	}
+		} catch (SQLException se) {
+			Log.e("", "Nao foi possivel atualizar o banco de dados", se);
+		}
 		onCreate(db);
 	}
 
