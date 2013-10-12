@@ -53,16 +53,13 @@ public class DAOUsuario {
 	  public Usuario updateUsuario(String login, Usuario usuario) {
 		    ContentValues values = new ContentValues();
 
-		    String strFilter = "login=" + login;
+		    String strFilter = "login='" + login+"'";
 		    ContentValues args = new ContentValues();
 		    args.put(Usuario.COLUNA_NOME, usuario.getNome());
 		    args.put(Usuario.COLUNA_CURSO, usuario.getCurso());
 		    args.put(Usuario.COLUNA_SENHA, usuario.getSenha());
 		    args.put(Usuario.COLUNA_SOBRE, usuario.getSobreMim());
 		    database.update(Usuario.TABELA_USUARIO, args, strFilter, null);
-		    //daoImagem.putImagem(usuario.getLogin(), usuario.getImagemPerfil());
-		    long insertId = database.insert(Usuario.TABELA_USUARIO, null,
-		        values);
 		    return usuario;
 		  }
 
