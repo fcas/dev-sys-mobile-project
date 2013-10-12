@@ -68,11 +68,7 @@ private void setButtons() {
 			        		usuario.setSenha(edit_senha.getText().toString());
 			        		usuario.setSobreMim(edit_sobre.getText().toString());
 			        		usuario.setLogin(edit_login.getText().toString());
-			        		usuario.setImagemPerfil(((BitmapDrawable)trocaImagem.getDrawable()).getBitmap());
-			        		
-			        		daoImagem.putImagem(usuario.getLogin(), usuario.getImagemPerfil());
-			        		
-			        		
+			        		usuario.setImagemPerfil(((BitmapDrawable)trocaImagem.getDrawable()).getBitmap());		        		
 			        		daoUsuario.createUsuario(usuario);
 			        		daoUsuario.close();
 			        	//	IServicoUsuario sUsuario = new ServicoUsuario();
