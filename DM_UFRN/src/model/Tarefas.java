@@ -22,7 +22,7 @@ public class Tarefas implements Serializable {
 	public static final String COLUNA_HORARIO = "Horario";
 	public static final String COLUNA_DESCRICAO = "Descricao";
 	
-	public static final String CREATE_TAREFA = " CREATE TABLE "+TABELA_TAREFA+"("+MySQLiteHelper.COLUNA_ID+" INTEGER PRIMARY KEY AUTOINCREMENT, "
+	public static final String CREATE_TAREFA = "CREATE TABLE "+TABELA_TAREFA+"("+MySQLiteHelper.COLUNA_ID+" INTEGER PRIMARY KEY AUTOINCREMENT, "
 	+COLUNA_USUARIO+" TEXT NOT NULL, "
 	+COLUNA_LOCAL+ " TEXT NOT NULL, "
 	+COLUNA_DATA +" TEXT NOT NULL, "
