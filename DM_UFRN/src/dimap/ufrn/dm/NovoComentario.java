@@ -105,11 +105,13 @@ public class NovoComentario extends Activity implements OnItemSelectedListener {
 
 				if (label.trim().length() > 0) {
 					DAOLugar db = new DAOLugar(getApplicationContext());
+					db.open();
 					db.salvarLugar(label);
 					inputLabel.setText("");
 					InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 					imm.hideSoftInputFromWindow(inputLabel.getWindowToken(), 0);
 					loadSpinnerData();
+					db.close();
 				} else {
 					Toast.makeText(getApplicationContext(),
 							"Please enter label name", Toast.LENGTH_SHORT)
@@ -138,9 +140,9 @@ public class NovoComentario extends Activity implements OnItemSelectedListener {
 
 	private void loadSpinnerData() {
 		DAOLugar db = new DAOLugar(getApplicationContext());
-
+		db.open();
 		List<String> lables = db.listarLugares();
-
+		
 		ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
 				android.R.layout.simple_spinner_item, lables);
 
@@ -148,6 +150,7 @@ public class NovoComentario extends Activity implements OnItemSelectedListener {
 				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
 		spinner.setAdapter(dataAdapter);
+		db.close();
 	}
 
 	@Override
