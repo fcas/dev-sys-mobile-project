@@ -13,14 +13,16 @@ public class Lugar {
 	private int id_local;
 	private int rate;
 	private List<Comentarios> listaComentarios;
-	public static final String DATABASE_TABLE = "LUGAR";
-	public static final String LUGAR_TABLE_CREATE = " CREATE TABLE LUGAR ("
-			+ MySQLiteHelper.COLUNA_ID+" INTEGER PRIMARY KEY AUTOINCREMENT," + "NOME TEXT, " + "LOCALIZACAO TEXT, " + "RATE INTEGER, " + "TIPO TEXT);";
+	public static final String DATABASE_TABLE = "Lugar";
+	public static final String COLUNA_NOME_LUGAR = "Nome";
+	public static final String LUGAR_TABLE_CREATE = "CREATE TABLE "
+			+ DATABASE_TABLE + "(" + MySQLiteHelper.COLUNA_ID
+			+ " INTEGER PRIMARY KEY," + COLUNA_NOME_LUGAR + " TEXT)";
 
-	public Lugar(){
+	public Lugar() {
 		this.listaComentarios = new ArrayList<Comentarios>();
 	}
-	
+
 	public List<Comentarios> getListaComentarios() {
 		return listaComentarios;
 	}
@@ -60,6 +62,7 @@ public class Lugar {
 	public void setRate(int rate) {
 		this.rate = rate;
 	}
+
 	public int getId_local() {
 		return id_local;
 	}
@@ -68,6 +71,4 @@ public class Lugar {
 		this.id_local = id_local;
 	}
 
-	
-	
 }
