@@ -1,5 +1,6 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -8,59 +9,66 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".ProfileEdit" >
 
-    <EditText
-        style="@style/editPadrao"
-        android:id="@+id/editText1"
+	<ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+    <LinearLayout
+            android:layout_width="match_parent"
+		    android:orientation="vertical"
+		    android:layout_height="wrap_content"> 
+	<ImageButton
+        android:id="@+id/trocaImagem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/textView1"
-        android:ems="10"
+        android:src="@drawable/bomb" />	    
+        
+    <TextView
+        style="@style/padrao"     
+        android:id="@+id/textView1"
+        android:text="Nome:"/>        
+    <EditText
+        style="@style/editPadrao"
+        android:id="@+id/edit_nome"
+	        android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:textSize="20sp" />
-
-    <EditText
-        style="@style/editPadrao"
-        android:id="@+id/editText2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView2"
-        android:layout_below="@+id/textView2"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:textSize="20sp" >
-
-        <requestFocus />
-    </EditText>
 
     <TextView
         style="@style/padrao"     
         android:id="@+id/textView2"
-        android:layout_alignLeft="@+id/editText1"
-        android:layout_below="@+id/editText1"
         android:text="Curso:" />
-
-    <Button     
-        android:id="@+id/button1"
-		style="@style/buttonPadrao"
-        android:layout_alignRight="@+id/editText2"
-        android:layout_below="@+id/editText2"
-        android:layout_marginTop="19dp"
-        android:text="Feito!" />
-
-    <ImageButton
-        android:id="@+id/trocaImagem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:src="@drawable/bomb" />
-
+    <EditText
+        style="@style/editPadrao"
+        android:id="@+id/edit_curso"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textSize="20sp" >
+    </EditText>
+    
     <TextView
         style="@style/padrao"     
-        android:id="@+id/textView1"
-        android:layout_alignLeft="@+id/trocaImagem"
-        android:layout_below="@+id/trocaImagem"
-        android:text="Nome:"/>
-
-</RelativeLayout>
+        android:id="@+id/textView2"
+        android:text="Sobre Mim:" />
+    
+    <EditText
+        style="@style/editPadrao"
+        android:id="@+id/edit_sobre"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:textSize="20sp" />
+    
+     <Button     
+        android:id="@+id/button_redefine_senha"
+		style="@style/buttonPadrao"
+        android:layout_marginTop="10dp"
+     	android:text="Redefinir Senha" /> 
+     	
+    <Button     
+        android:id="@+id/button_feito"
+		style="@style/buttonPadrao"
+        android:layout_marginTop="10dp"
+        android:text="Feito!" />
+	
+	</LinearLayout>
+	</ScrollView>
+</LinearLayout>
