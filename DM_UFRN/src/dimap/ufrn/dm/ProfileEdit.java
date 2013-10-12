@@ -1,5 +1,6 @@
 package dimap.ufrn.dm;
 
+import dao.DAOUsuario;
 import model.Usuario;
 import android.app.Activity;
 import android.content.Intent;
@@ -13,14 +14,28 @@ import android.widget.ImageButton;
 
 public class ProfileEdit extends Activity {
 
+	DAOUsuario daoUsuario;
 	Usuario usuario;
 	Button feito;
 	ImageButton trocaImagem;
+	EditText edit_nome, edit_sobre, edit_curso; 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		daoUsuario = new DAOUsuario(this);
+		daoUsuario.open();
 		usuario = (Usuario) getIntent().getSerializableExtra("usuario");
 		setContentView(R.layout.activity_profile_edit);
+		
+		edit_nome = (EditText) findViewById(R.id.edit_nome);
+		edit_curso = (EditText) findViewById(R.id.edit_curso);
+		edit_sobre = (EditText) findViewById(R.id.edit_sobre);
+		
+		edit_nome.setText(usuario.getNome());
+		edit_curso.setText(usuario.getCurso());
+		edit_nome.setText(usuario.getSobreMim());
+		
+		
 		setButtons();
 	}
 
@@ -56,19 +71,19 @@ public class ProfileEdit extends Activity {
 	
 	private void setButtons() {
 
-		feito = (Button) findViewById(R.id.button1);
+		feito = (Button) findViewById(R.id.button_feito);
 		feito.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View view) {
-
-				Usuario usuario = new Usuario();
 				Intent mainIntent = new Intent();
 
-				EditText editText = (EditText) findViewById(R.id.editText1);
-				usuario.setNome(editText.getText().toString());
-				EditText editText2 = (EditText) findViewById(R.id.editText2);
-				usuario.setCurso(editText2.getText().toString());
+				usuario.setNome(edit_nome.getText().toString());
+				usuario.setCurso(edit_curso.getText().toString());
+				usuario.setSobreMim(edit_sobre.getText().toString());
+				daoUsuario.updateUsuario(usuario.getLogin(), usuario);
+				daoUsuario.close();
+				
 				mainIntent.putExtra("usuario", usuario);
 				mainIntent.setClass(ProfileEdit.this, MainActivity.class);
 				startActivity(mainIntent);
@@ -91,8 +106,6 @@ public class ProfileEdit extends Activity {
 
                 intent.putExtra("return-data", true);
 			    startActivityForResult(intent, 100);
-			
-				
 			}
 			
 		});
