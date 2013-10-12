@@ -1,5 +1,6 @@
 package dimap.ufrn.dm;
 
+import dao.DAOUsuario;
 import model.Usuario;
 import android.os.Bundle;
 import android.app.Activity;
@@ -13,12 +14,17 @@ public class Login extends Activity {
 	
 	Button login;
 	Button cadastro; 
+	EditText user, senha;
+	private DAOUsuario daoUsuario;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
 		setTitle("UFRN ON TOUCH");
 		setButtons();
+		user = (EditText)findViewById(R.id.usuario_nome);
+		senha = (EditText)findViewById(R.id.usuario_senha);
+		daoUsuario = new DAOUsuario(this);
 	}
 
 	private void setButtons() {
@@ -47,18 +53,17 @@ public class Login extends Activity {
 				Usuario usuario = new Usuario();
 				Intent mainIntent = new Intent();
 
-				EditText editText = (EditText) findViewById(R.id.usuario_nome);
-				usuario.setNome(editText.getText().toString());
-				editText = (EditText) findViewById(R.id.usuario_senha);
-				usuario.setSenha(editText.getText().toString());
-				
-				mainIntent.putExtra("usuario", usuario);
-				
-				mainIntent.setClass(Login.this,
-						MainActivity.class);
-				startActivity(mainIntent);
-
-				finish();
+				daoUsuario.open();
+				usuario = daoUsuario.autenticar(user.getText().toString(), (senha.getText().toString()));
+				if(usuario != null){
+					mainIntent.putExtra("usuario", usuario);
+					
+					mainIntent.setClass(Login.this,
+							MainActivity.class);
+					startActivity(mainIntent);
+	
+					finish();
+				}
 			}
 		});
 		
