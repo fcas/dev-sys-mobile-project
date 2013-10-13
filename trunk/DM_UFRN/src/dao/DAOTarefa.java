@@ -9,6 +9,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 public class DAOTarefa {
 
@@ -62,6 +63,10 @@ public class DAOTarefa {
 	    cursor.moveToFirst();
 	    while (!cursor.isAfterLast()) {
 	    	Tarefas tarefa = cursorToTarefa(cursor);
+	    	Log.d("Login", tarefa.getUsuario());
+	    	Log.d("Data", tarefa.getData());
+	    	Log.d("Hora", tarefa.getHorario());
+	    	Log.d("Descricao", tarefa.getDescricao());
 	    	tarefas.add(tarefa);
 	      cursor.moveToNext();
 	    }
@@ -70,13 +75,34 @@ public class DAOTarefa {
 	    return tarefas;
 	  }
 
+	  public List<Tarefas> getTasksByUser(String login) {
+		    List<Tarefas> tarefas = new ArrayList<Tarefas>();
+		    Cursor cursor = database.rawQuery("Select * from "+Tarefas.TABELA_TAREFA+" where "+Tarefas.COLUNA_USUARIO+" = ?",  new String[] {login});
+
+		    cursor.moveToFirst();
+		    while (!cursor.isAfterLast()) {
+		    	Tarefas tarefa = cursorToTarefa(cursor);
+		    	Log.d("Login", tarefa.getUsuario());
+		    	Log.d("Data", tarefa.getData());
+		    	Log.d("Hora", tarefa.getHorario());
+		    	Log.d("Descricao", tarefa.getHorario());
+		    	tarefas.add(tarefa);
+		      cursor.moveToNext();
+		    }
+		    // Make sure to close the cursor
+		    cursor.close();
+		    return tarefas;
+		  }
+
+	  
 	  private Tarefas cursorToTarefa(Cursor cursor) {
 	    Tarefas tarefa = new Tarefas();
-	    tarefa.setUsuario(cursor.getString(0));
-	    tarefa.setLocal(cursor.getString(1));
-	    tarefa.setData(cursor.getString(2));
-	    tarefa.setHorario(cursor.getString(3));
-	    tarefa.setDescricao(cursor.getString(4));
+	    tarefa.setId(cursor.getLong(0));
+	    tarefa.setUsuario(cursor.getString(1));
+	    tarefa.setLocal(cursor.getString(2));
+	    tarefa.setData(cursor.getString(3));
+	    tarefa.setHorario(cursor.getString(4));
+	    tarefa.setDescricao(cursor.getString(5));
 	    return tarefa;
 	  }
 

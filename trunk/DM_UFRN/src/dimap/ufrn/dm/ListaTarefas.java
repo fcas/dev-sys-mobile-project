@@ -2,17 +2,24 @@ package dimap.ufrn.dm;
 
 //O bot�o voltar est� voltando para a tela principal
 
+import java.util.List;
+
+import dao.DAOTarefa;
+import model.Tarefas;
 import model.Usuario;
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.ListActivity;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 
 public class ListaTarefas extends Activity {
 	private Button button;
 	Usuario usuario;
+	DAOTarefa daoTarefa;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -20,6 +27,18 @@ public class ListaTarefas extends Activity {
 		setTitle("UFRN ON TOUCH");
 		setButtons();
 		usuario = (Usuario) getIntent().getSerializableExtra("usuario");
+
+		daoTarefa = new DAOTarefa(this);
+		daoTarefa.open();
+
+	    List<Tarefas> listaTarefas = daoTarefa.getAllTasks();
+	    daoTarefa.close();
+	    
+		ListView lv = (ListView)findViewById(R.id.list_tarefas);
+		TarefasListAdapter adapter = new TarefasListAdapter(this, listaTarefas);
+
+		lv.setAdapter(adapter);
+		lv.setTextFilterEnabled(true);
 	}
 	
 	//Bot�o voltar...

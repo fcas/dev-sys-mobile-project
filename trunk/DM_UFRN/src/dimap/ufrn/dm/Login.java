@@ -5,9 +5,12 @@ import model.Usuario;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 public class Login extends Activity {
@@ -15,16 +18,35 @@ public class Login extends Activity {
 	Button login;
 	Button cadastro; 
 	EditText user, senha;
+	CheckBox manter_autenticado;
 	private DAOUsuario daoUsuario;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
 		setTitle("UFRN ON TOUCH");
 		setButtons();
 		user = (EditText)findViewById(R.id.usuario_nome);
 		senha = (EditText)findViewById(R.id.usuario_senha);
+		manter_autenticado = (CheckBox)findViewById(R.id.manter_autenticado);
 		daoUsuario = new DAOUsuario(this);
+
+		SharedPreferences settings = getSharedPreferences("login", Activity.MODE_PRIVATE);
+		boolean autoSave = settings.getBoolean("ManterAutenticado", false);
+		Log.d("ManterAutenticado-Login", String.valueOf(autoSave));
+		String login = settings.getString("Login", "");
+		if(autoSave == true){
+			manter_autenticado.setChecked(true);
+			daoUsuario.open();
+			Usuario usuario = daoUsuario.getUsuarioByLogin(login);
+			daoUsuario.close();
+			Intent mainIntent = new Intent();
+			mainIntent.putExtra("usuario", usuario);
+			mainIntent.setClass(Login.this,
+					MainActivity.class);
+			startActivity(mainIntent);
+		}
 	}
 
 	private void setButtons() {
@@ -50,6 +72,9 @@ public class Login extends Activity {
 			@Override
 			public void onClick(View view) {
 				
+				
+				
+				
 				Usuario usuario = new Usuario();
 				Intent mainIntent = new Intent();
 
@@ -58,6 +83,13 @@ public class Login extends Activity {
 				daoUsuario.close();
 				
 				if(usuario != null){
+					
+					SharedPreferences settings = getSharedPreferences("login", Activity.MODE_PRIVATE);
+					SharedPreferences.Editor editor = settings.edit();
+					editor.putBoolean("ManterAutenticado", manter_autenticado.isChecked());
+					editor.putString("Login", usuario.getLogin());
+					editor.commit();
+					
 					mainIntent.putExtra("usuario", usuario);
 					
 					mainIntent.setClass(Login.this,

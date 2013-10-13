@@ -112,6 +112,29 @@ public class DAOUsuario {
 		  }
 		return user;
 	  }
+	  
+	  public Usuario getUsuarioByLogin(String login){
+		  Cursor result = database.rawQuery("Select * from Usuario where login = ?",  new String[] {login});
+		  Usuario user = new Usuario();
+		  if(result.moveToNext()){
+			  user.setLogin(result.getString(0));
+			  user.setSenha(result.getString(1));
+			  user.setNome(result.getString(2));
+			  user.setCurso(result.getString(3));
+			  user.setSobreMim(result.getString(4));
+			  try {
+				Bitmap img = daoImagem.getImagem(user.getLogin());
+				//user.setImagemPerfil(img);
+			  } catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		  }else{
+			  user = null;
+		  }
+		return user;
+	  }
+
 
 	  private Usuario cursorToUsuario(Cursor cursor) {
 	    Usuario usuario = new Usuario();

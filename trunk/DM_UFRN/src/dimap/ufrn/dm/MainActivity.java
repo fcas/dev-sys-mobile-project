@@ -5,7 +5,9 @@ package dimap.ufrn.dm;
 import model.Usuario;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +19,8 @@ public class MainActivity extends Activity {
 	private Button lugares;
 	private Button comentarios;
 	private Button tarefas;
+	private Button button_logoff;
+	private Button button_sair;
 	private ImageButton profile;
 	Usuario usuario;
 	
@@ -34,13 +38,18 @@ public class MainActivity extends Activity {
 		setButtons();
 	}
 	
-	//Bot�o voltar...
 	@Override
 	public void onBackPressed() {
+		SharedPreferences settings = getSharedPreferences("login", Activity.MODE_PRIVATE);
+		SharedPreferences.Editor editor = settings.edit();
+		editor.putBoolean("ManterAutenticado", false);
+		editor.commit();
+		Log.d("ManterAutenticado-Main", String.valueOf(settings.getBoolean("ManterAutenticado", false)));
 		Intent voltaIntent = new Intent();
 		voltaIntent.setClass(MainActivity.this, Login.class);
 		startActivity(voltaIntent);
 		finish();
+		
 	}
 
 	private void setButtons() {
@@ -99,6 +108,34 @@ public class MainActivity extends Activity {
 				finish();
 			}
 		});
+		
+		button_logoff = (Button) findViewById(R.id.button_logoff);
+		button_logoff.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View view) {
+				Intent loginIntent = new Intent();
+				SharedPreferences settings = getSharedPreferences("login", Activity.MODE_PRIVATE);
+				SharedPreferences.Editor editor = settings.edit();
+				editor.putBoolean("ManterAutenticado", false);
+				editor.commit();
+				loginIntent.setClass(MainActivity.this, Login.class);
+				startActivity(loginIntent);
+				finish();
+			}
+		});
+		
+		button_sair = (Button) findViewById(R.id.button_sair);
+		button_sair.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				SharedPreferences settings = getSharedPreferences("login", Activity.MODE_PRIVATE);
+				Log.d("ManterAutenticado-Main-Sair", String.valueOf(settings.getBoolean("ManterAutenticado", false)));
+				
+				finish();
+			}
+		});
+		
 
 	}
 
