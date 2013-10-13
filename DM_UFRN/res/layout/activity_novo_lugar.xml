@@ -121,11 +121,12 @@
 		        android:text="@string/lugar_sala_prof" />
 
 		    </RadioGroup>
-		        
-		    <Button
-		        style="@style/buttonPadrao"
-		        android:id="@+id/button2"
-		        android:text="@string/lugar_ok" />
+
+		<Button
+		    android:id="@+id/button2"
+		    style="@style/buttonPadrao"
+		    android:text="@string/lugar_ok" />
+
 	    </LinearLayout>
 	 </ScrollView>
 </LinearLayout>
