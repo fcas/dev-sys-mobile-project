@@ -2,7 +2,11 @@ package dimap.ufrn.dm;
 
 //O bot�o voltar est� voltando para a lista de tarefas...
 
+import java.util.List;
+
+import dao.DAOComentario;
 import dao.DAOTarefa;
+import model.Comentarios;
 import model.Tarefas;
 import model.Usuario;
 import android.os.Bundle;
@@ -19,6 +23,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TimePicker;
 
 public class NovaTarefa extends Activity implements OnDateSetListener{
@@ -33,13 +38,16 @@ public class NovaTarefa extends Activity implements OnDateSetListener{
 		setContentView(R.layout.activity_nova_tarefa);
 		setTitle("UFRN ON TOUCH");
 		daoTarefa = new DAOTarefa(this);
-		daoTarefa.open();
+		
 		tarefa_hora = (EditText)findViewById(R.id.tarefa_hora);
 		tarefa_data = (EditText)findViewById(R.id.tarefa_data);
 		tarefa_descricao = (EditText)findViewById(R.id.tarefa_descricao);
 		tarefa_local = (EditText)findViewById(R.id.tarefa_local);
 		usuario = (Usuario) getIntent().getSerializableExtra("usuario");
 		setButtons();
+		
+		
+		
 	}
 	
 	//bot�o voltar 
@@ -73,8 +81,9 @@ public class NovaTarefa extends Activity implements OnDateSetListener{
 		        		tarefa.setHorario(tarefa_hora.getText().toString());
 		        		tarefa.setLocal(tarefa_data.getText().toString());
 		        		Log.d("Tabela tarefa", Tarefas.CREATE_TAREFA);
+		        		daoTarefa.open();
 		        		daoTarefa.createTarefa(tarefa);
-		        		
+		        		daoTarefa.close();
 						Intent minhasTarefasIntent = new Intent();
 						minhasTarefasIntent.putExtra("usuario", usuario);
 						minhasTarefasIntent.setClass(NovaTarefa.this, ListaTarefas.class);
