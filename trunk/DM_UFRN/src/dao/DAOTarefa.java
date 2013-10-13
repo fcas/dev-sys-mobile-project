@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Tarefas;
+import model.Usuario;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -47,6 +48,21 @@ public class DAOTarefa {
 	    return tarefa;
 	  }
 
+	  public Tarefas updateTarefa(Tarefas tarefa) {
+		  
+		    ContentValues values = new ContentValues();
+		    
+		    String strFilter = MySQLiteHelper.COLUNA_ID+"='" + tarefa.getId()+"'";
+		    ContentValues args = new ContentValues();
+		    args.put(Tarefas.COLUNA_DESCRICAO, tarefa.getDescricao());
+		    args.put(Tarefas.COLUNA_DATA, tarefa.getData());
+		    args.put(Tarefas.COLUNA_HORARIO, tarefa.getHorario());
+		    args.put(Tarefas.COLUNA_LOCAL, tarefa.getLocal());
+
+		    database.update(Tarefas.TABELA_TAREFA, args, strFilter, null);
+		    return tarefa;
+		  }
+	  
 	  public void deleteTarefa(Tarefas tarefa) {
 	    long id = tarefa.getId();
 	    System.out.println("Tarefa deleted with id: " + id);

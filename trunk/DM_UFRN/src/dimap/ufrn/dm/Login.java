@@ -36,6 +36,7 @@ public class Login extends Activity {
 		boolean autoSave = settings.getBoolean("ManterAutenticado", false);
 		Log.d("ManterAutenticado-Login", String.valueOf(autoSave));
 		String login = settings.getString("Login", "");
+		//autoSave = false;
 		if(autoSave == true){
 			manter_autenticado.setChecked(true);
 			daoUsuario.open();

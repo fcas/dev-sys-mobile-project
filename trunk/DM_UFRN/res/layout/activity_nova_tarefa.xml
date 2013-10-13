@@ -35,7 +35,7 @@
         android:ems="10"
         android:hint="@string/tarefa_hora"
         android:inputType="time" />
-
+<requestFocus />
     <Button
         android:id="@+id/button1"
         android:layout_width="wrap_content"
