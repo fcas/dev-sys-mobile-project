@@ -63,6 +63,23 @@
         android:layout_toRightOf="@+id/trocaImagem"
         android:text="@string/usuario_nome"
 />
-    
+        <Button
+            android:id="@+id/button_sair"
+            style="@style/buttonFill"
+            android:layout_below="@+id/button_logoff"
+
+            android:gravity="center_vertical|center_horizontal|center|start"
+            android:minHeight="48dp"
+            android:text="Sair" />
+
+        <Button
+            android:id="@+id/button_logoff"
+            style="@style/buttonFill"
+            android:layout_alignLeft="@+id/button_tarefas"
+            android:layout_below="@+id/button_tarefas"
+            android:layout_marginTop="37dp"
+            android:gravity="center_vertical|center_horizontal|center|start"
+            android:minHeight="48dp"
+            android:text="Logoff" />
 
 </RelativeLayout>

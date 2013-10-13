@@ -1,5 +1,6 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -7,54 +8,52 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".Login" >
-    <Button
-        android:id="@+id/button_cadastrar"
-		style="@style/buttonFill"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="59dp"
-        android:text="@string/usuario_cadastrar" />
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:id="@+id/textView1"
+        style="@style/padrao"
+        android:text="Login" />
+       
+
+    <EditText
+        android:id="@+id/usuario_nome"
+        style="@style/editPadrao"
+        android:layout_marginBottom="14dp"
+        android:ems="10"
+        android:inputType="text" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/textView2"
+        style="@style/padrao"
+        android:layout_marginBottom="16dp"
+        android:text="@string/usuario_senha"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/usuario_senha"
+        style="@style/editPadrao"
+        android:layout_marginBottom="30dp"
+        android:ems="10"
+        android:inputType="textPassword" />
+
+    <CheckBox
+        android:id="@+id/manter_autenticado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:text="Manter-se Autenticado" />
+    
     <Button
         android:id="@+id/button_fazerLogin"
         style="@style/buttonFill"
-        android:layout_above="@+id/button_cadastrar"
-        android:layout_centerHorizontal="true"
-        android:text="@string/usuario_login" />
-    <EditText
-        android:id="@+id/usuario_nome"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/textView2"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_marginBottom="41dp"
-        android:ems="10"
-        android:inputType="text" >
-        <requestFocus />
-    </EditText>
-    <TextView
-        style="@style/padrao"     
-        android:id="@+id/textView1"
-        android:layout_above="@+id/usuario_nome"
-        android:layout_alignRight="@+id/textView2"
-        android:text="@string/usuario_nome"
-/>
-    <EditText
-        style="@style/editPadrao"
-        android:id="@+id/usuario_senha"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button_fazerLogin"
-        android:layout_centerVertical="true"
-        android:ems="10"
-        android:inputType="textPassword" />
-    
-    <TextView
-        style="@style/padrao"     
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/usuario_senha"
-        android:layout_alignLeft="@+id/usuario_senha"
-        android:text="@string/usuario_senha"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-</RelativeLayout>
+        android:text="@string/usuario_login" />    
+    <Button
+        android:id="@+id/button_cadastrar"
+		style="@style/buttonFill"
+        android:text="@string/usuario_cadastrar" />
+
+</LinearLayout>

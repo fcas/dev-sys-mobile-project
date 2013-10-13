@@ -16,20 +16,19 @@
         android:text="@string/tarefas"
         style="@style/titulo"     />
 
-    <ExpandableListView
-        android:id="@+id/expandableListView1"
+    <ListView
+        android:id="@+id/list_tarefas"
         android:layout_width="fill_parent"
         android:layout_height="100dp"
         android:layout_alignLeft="@+id/textView1"
         android:layout_below="@+id/textView1"
         android:layout_marginTop="36dp" >
-    </ExpandableListView>
+    </ListView>
 
     <Button
         style="@style/buttonPadrao"
         android:id="@+id/button_tarefa_nova"
         android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/expandableListView1"
         android:layout_marginBottom="64dp"
         android:text="@string/tarefa_nova" />
 
