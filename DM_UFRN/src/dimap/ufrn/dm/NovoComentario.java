@@ -33,6 +33,8 @@ public class NovoComentario extends Activity implements OnItemSelectedListener {
 	private Spinner spinner;
 	private Button btnAdd;
 	private EditText inputLabel;
+	DAOLugar db;
+	String label;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -55,12 +57,13 @@ public class NovoComentario extends Activity implements OnItemSelectedListener {
 	Button comentario;
 
 	private void setButtons() {
-
+		db = new DAOLugar(getApplicationContext());
 		comentario = (Button) findViewById(R.id.button_comentar);
 		comentario.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View view) {
+				label = inputLabel.getText().toString();
 				Builder builder = new AlertDialog.Builder(NovoComentario.this);
 				builder.setTitle("Sucesso");
 				builder.setMessage("Comentario adicionado com sucesso");
@@ -78,6 +81,7 @@ public class NovoComentario extends Activity implements OnItemSelectedListener {
 								}
 								comentario.setComment(descricao.getText()
 										.toString());
+								comentario.setId_lugar(db.idLugar(label));
 								usuario.getComentarios().add(comentario);
 								// ContentValues values =
 								// toContentValue(comentario);
@@ -101,10 +105,8 @@ public class NovoComentario extends Activity implements OnItemSelectedListener {
 
 			@Override
 			public void onClick(View arg0) {
-				String label = inputLabel.getText().toString();
-
-				if (label.trim().length() > 0) {
-					DAOLugar db = new DAOLugar(getApplicationContext());
+				label = inputLabel.getText().toString();
+				if (label.trim().length() > 0) {	
 					db.open();
 					db.salvarLugar(label);
 					inputLabel.setText("");
