@@ -17,7 +17,7 @@ public class Lugar {
 	public static final String COLUNA_NOME_LUGAR = "Nome";
 	public static final String LUGAR_TABLE_CREATE = "CREATE TABLE "
 			+ DATABASE_TABLE + "(" + MySQLiteHelper.COLUNA_ID
-			+ " INTEGER PRIMARY KEY," + COLUNA_NOME_LUGAR + " TEXT)";
+			+ " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUNA_NOME_LUGAR + " TEXT)";
 
 	public Lugar() {
 		this.listaComentarios = new ArrayList<Comentarios>();
