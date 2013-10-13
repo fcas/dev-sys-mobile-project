@@ -15,15 +15,18 @@ public class Comentarios implements Serializable {
 	public static final String TABELA_COMENTARIOS = "Comentarios";
 	public static final String COLUNA_COMENTARIO = "Comentario";
 	public static final String COLUNA_AUTOR = "Autor";
+	public static final String COLUNA_ID_LUGAR = "id_lugar";
 	public static final String CREATE_COMENTARIOS = "CREATE TABLE "
 			+ TABELA_COMENTARIOS + "(" + MySQLiteHelper.COLUNA_ID
 			+ " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUNA_AUTOR
-			+ " TEXT NOT NULL," + COLUNA_COMENTARIO + " TEXT NOT NULL);";
+			+ " TEXT NOT NULL," + COLUNA_COMENTARIO + " TEXT NOT NULL,"
+			+ COLUNA_ID_LUGAR + " INTEGER" + ");";
 
 	private String autor;
 	private Lugar lugar;
 	private long id;
 	private String comentario;
+	private int id_lugar; 
 
 	public long getId() {
 		return id;
@@ -56,7 +59,15 @@ public class Comentarios implements Serializable {
 	public void setLugar(Lugar lugar) {
 		this.lugar = lugar;
 	}
-
+	
+	public int getId_lugar() {
+		return id_lugar;
+	}
+	
+	public void setId_lugar(int id_lugar) {
+		this.id_lugar = id_lugar;
+	}
+	
 	@Override
 	public String toString() {
 		return comentario;
