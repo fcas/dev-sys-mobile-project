@@ -1,5 +1,6 @@
 package dao;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +10,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.util.Log;
 
 public class DAOUsuario {
 
@@ -59,6 +62,7 @@ public class DAOUsuario {
 		    args.put(Usuario.COLUNA_CURSO, usuario.getCurso());
 		    args.put(Usuario.COLUNA_SENHA, usuario.getSenha());
 		    args.put(Usuario.COLUNA_SOBRE, usuario.getSobreMim());
+		    daoImagem.putImagem(usuario.getLogin(), usuario.getImagemPerfil());
 		    database.update(Usuario.TABELA_USUARIO, args, strFilter, null);
 		    return usuario;
 		  }
@@ -96,6 +100,13 @@ public class DAOUsuario {
 			  user.setNome(result.getString(2));
 			  user.setCurso(result.getString(3));
 			  user.setSobreMim(result.getString(4));
+			  try {
+				Bitmap img = daoImagem.getImagem(user.getLogin());
+				//user.setImagemPerfil(img);
+			  } catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		  }else{
 			  user = null;
 		  }

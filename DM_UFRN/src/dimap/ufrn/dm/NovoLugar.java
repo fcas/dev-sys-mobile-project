@@ -37,7 +37,7 @@ public class NovoLugar extends Activity {
 	private void setButtons() {
 
 		button = (Button) findViewById(R.id.button2);
-		inputLabel = (EditText) findViewById(R.id.input_label);
+		inputLabel = (EditText) findViewById(R.id.editText1);
 
 		button.setOnClickListener(new View.OnClickListener() {
 
