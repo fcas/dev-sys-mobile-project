@@ -54,4 +54,22 @@ public class DAOLugar {
 		return labels;
 	}
 
+	public int idLugar(String lugar) {
+		open();
+		int id = -1;
+		String selectQuery = "SELECT * FROM " + Lugar.DATABASE_TABLE
+				+ " WHERE " + Lugar.COLUNA_NOME_LUGAR + " = '" + lugar + "'";
+		Cursor cursor = database.rawQuery(selectQuery, null);
+
+		if (cursor != null && cursor.moveToFirst()) {
+			cursor.moveToFirst();
+			id = Integer.parseInt(cursor.getString(0));
+		}
+		
+		cursor.close();
+		database.close();
+
+		return id;
+	}
+
 }
