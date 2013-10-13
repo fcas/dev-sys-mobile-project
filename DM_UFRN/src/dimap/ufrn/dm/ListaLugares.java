@@ -3,10 +3,9 @@ package dimap.ufrn.dm;
 //O bot�o voltar est� voltando para a tela principal
 
 import model.Usuario;
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
-import android.util.Log;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -20,7 +19,7 @@ public class ListaLugares extends Activity {
 		setContentView(R.layout.activity_lista_lugares);
 		setTitle("UFRN ON TOUCH");
 		usuario = (Usuario) getIntent().getSerializableExtra("usuario");
-		Log.w("NOME", usuario.getNome());
+		//Log.w("NOME", usuario.getNome());
 		setButtons();
 	}
 	
