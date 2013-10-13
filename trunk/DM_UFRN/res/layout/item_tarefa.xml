@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content" 
+    android:orientation="vertical" 
+    android:padding="5sp"> 
+
+    
+    <TextView
+        android:id="@+id/tarefa"
+        style="@style/padrao" 
+        android:layout_marginLeft="5sp"
+        android:text="Tarefa" />
+    <LinearLayout
+        android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+    <TextView
+        android:id="@+id/data"
+        style="@style/padrao" 
+        android:layout_marginLeft="5sp"
+        android:textColor="#FF000000"
+        android:text="Data" />
+	    
+    <TextView
+        android:id="@+id/horario"
+        style="@style/padrao" 
+        android:layout_marginLeft="5sp"
+        android:text="Descricao"
+        android:textColor="#FF000000" />
+	</LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+	    <ImageView
+	        android:id="@+id/button_editar"
+	        android:layout_width="50dp"
+	        android:layout_height="30dp"
+	        android:layout_marginRight="5dp"
+	        android:contentDescription="Editar"
+	        android:src="@drawable/edit" />
+	    
+	    	    <ImageView
+	        android:id="@+id/button_apagar"
+	        android:layout_width="50dp"
+	        android:layout_height="30dp"
+	        android:layout_marginRight="5dp"
+	        android:contentDescription="Editar"
+	        android:onClick="deletar"
+	        android:src="@drawable/remove" />   
+	    
+	</LinearLayout>
+	
+    </LinearLayout> 
