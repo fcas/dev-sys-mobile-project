@@ -46,6 +46,8 @@ public class MainActivity extends Activity {
 	private void setButtons() {
 		
 		profile = (ImageButton) findViewById(R.id.trocaImagem);
+
+		profile.setImageBitmap(usuario.getImagemPerfil());	 
 		profile.setOnClickListener(new View.OnClickListener() {
 
 			@Override

@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -91,16 +92,7 @@ private void setButtons() {
 
 		@Override
 		public void onClick(View view) {
-			Intent intent = new Intent(Intent.ACTION_PICK, null);
-            intent.setType("image/*");
-            intent.putExtra("crop", "true");  //op��o de cropar.
-            intent.putExtra("outputX", 150);  //poe a resolu��o que vc quiser.
-            intent.putExtra("outputY", 150); 
-            intent.putExtra("aspectX", 1);  //poe aspect ratio que vc quiser
-            intent.putExtra("aspectY", 1);
-
-            intent.putExtra("return-data", true);
-		    startActivityForResult(intent, 100);
+			selectImage();
 		
 			
 		}
@@ -110,7 +102,7 @@ private void setButtons() {
 	}
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		 if (requestCode == 100) {
+		 if (requestCode == 1 || requestCode == 100) {
 		 Bitmap image = (Bitmap) data.getExtras().get("data");
 		 trocaImagem.setImageBitmap(image);	 
 		 }
@@ -133,5 +125,44 @@ private void setButtons() {
 			startActivity(voltaIntent);
 			finish();
 		}
+		
+	    private void selectImage() {
+	    	 
+	        final CharSequence[] options = { "Camera", "Galeria","Cancelar" };
+	 
+	        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+	        builder.setTitle("Add Photo!");
+	        builder.setItems(options, new DialogInterface.OnClickListener() {
+	            @Override
+	            public void onClick(DialogInterface dialog, int item) {
+	                if (options[item].equals("Camera"))
+	                {
+	                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+	                    intent.putExtra("outputX", 150);  //poe a resolu��o que vc quiser.
+	                    intent.putExtra("outputY", 150); 
+	                    
+	                    startActivityForResult(intent, 1);
+	                }
+	                else if (options[item].equals("Galeria"))
+	                {
+	    				Intent intent = new Intent(Intent.ACTION_PICK, null);
+	                    intent.setType("image/*");
+	                    intent.putExtra("crop", "true");  //op��o de cropar.
+	                    intent.putExtra("outputX", 150);  //poe a resolu��o que vc quiser.
+	                    intent.putExtra("outputY", 150); 
+	                    intent.putExtra("aspectX", 1);  //poe aspect ratio que vc quiser
+	                    intent.putExtra("aspectY", 1);
+
+	                    intent.putExtra("return-data", true);
+	    			    startActivityForResult(intent, 100);
+	 
+	                }
+	                else if (options[item].equals("Cancelar")) {
+	                    dialog.dismiss();
+	                }
+	            }
+	        });
+	        builder.show();
+	    }
 
 }

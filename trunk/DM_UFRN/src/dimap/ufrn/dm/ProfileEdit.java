@@ -1,11 +1,17 @@
 package dimap.ufrn.dm;
 
+import java.io.File;
+
 import dao.DAOUsuario;
 import model.Usuario;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -33,8 +39,8 @@ public class ProfileEdit extends Activity {
 		
 		edit_nome.setText(usuario.getNome());
 		edit_curso.setText(usuario.getCurso());
-		edit_nome.setText(usuario.getSobreMim());
-		
+		edit_sobre.setText(usuario.getSobreMim());
+
 		
 		setButtons();
 	}
@@ -62,9 +68,9 @@ public class ProfileEdit extends Activity {
 
 	 protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		 
-		 if (requestCode == 100) {
-		 Bitmap image = (Bitmap) data.getExtras().get("data");
-		 trocaImagem.setImageBitmap(image);	 
+		 if (requestCode == 100 || requestCode == 1) {
+			 Bitmap image = (Bitmap) data.getExtras().get("data");
+			 trocaImagem.setImageBitmap(image);	 
 		 }
 		 
 	}
@@ -92,11 +98,12 @@ public class ProfileEdit extends Activity {
 			}
 		});
 		trocaImagem = (ImageButton)findViewById(R.id.trocaImagem);
+		trocaImagem.setImageBitmap(usuario.getImagemPerfil());	 
 		trocaImagem.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View view) {
-				Intent intent = new Intent(Intent.ACTION_PICK, null);
+				/*Intent intent = new Intent(Intent.ACTION_PICK, null);
                 intent.setType("image/*");
                 intent.putExtra("crop", "true");  //op��o de cropar.
                 intent.putExtra("outputX", 150);  //poe a resolu��o que vc quiser.
@@ -105,11 +112,55 @@ public class ProfileEdit extends Activity {
                 intent.putExtra("aspectY", 1);
 
                 intent.putExtra("return-data", true);
-			    startActivityForResult(intent, 100);
+			    startActivityForResult(intent, 100);*/
+				selectImage();
 			}
 			
 		});
+		
+		
+		
+		
+		
 
 	}
+    private void selectImage() {
+    	 
+        final CharSequence[] options = { "Camera", "Galeria","Cancelar" };
+ 
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Add Photo!");
+        builder.setItems(options, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int item) {
+                if (options[item].equals("Camera"))
+                {
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    intent.putExtra("outputX", 150);  //poe a resolu��o que vc quiser.
+                    intent.putExtra("outputY", 150); 
+                    
+                    startActivityForResult(intent, 1);
+                }
+                else if (options[item].equals("Galeria"))
+                {
+    				Intent intent = new Intent(Intent.ACTION_PICK, null);
+                    intent.setType("image/*");
+                    intent.putExtra("crop", "true");  //op��o de cropar.
+                    intent.putExtra("outputX", 150);  //poe a resolu��o que vc quiser.
+                    intent.putExtra("outputY", 150); 
+                    intent.putExtra("aspectX", 1);  //poe aspect ratio que vc quiser
+                    intent.putExtra("aspectY", 1);
+
+                    intent.putExtra("return-data", true);
+    			    startActivityForResult(intent, 100);
+ 
+                }
+                else if (options[item].equals("Cancelar")) {
+                    dialog.dismiss();
+                }
+            }
+        });
+        builder.show();
+    }
 
 }

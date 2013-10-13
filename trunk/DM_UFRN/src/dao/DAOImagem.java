@@ -23,7 +23,7 @@ public class DAOImagem {
 	public void putImagem(String usuario, Bitmap imagem){
 		Log.d("Usuario", usuario);
 		filename = usuario;
-		File file = new File(Environment.getExternalStorageDirectory(), ""+usuario+".png");
+		File file = new File(Environment.getExternalStorageDirectory(), ""+usuario+".jpeg");
 		FileOutputStream fos = null;
 		
 		try {
@@ -33,7 +33,7 @@ public class DAOImagem {
 		}
 		
 		ByteArrayOutputStream stream = new ByteArrayOutputStream();
-		imagem.compress(Bitmap.CompressFormat.PNG, 100, stream);
+		imagem.compress(Bitmap.CompressFormat.JPEG, 100, stream);
 		byte[] byteArray = stream.toByteArray();
 		
 		try {
@@ -49,16 +49,23 @@ public class DAOImagem {
 	
 	@SuppressLint("NewApi")
 	public Bitmap getImagem(String usuario) throws IOException{
-		filename = ""+usuario+".png";
-		File file = new File(context.getExternalFilesDir("xdproductions"), filename);	
-		FileInputStream fis = null;
-		
-		try {
-			fis = new FileInputStream(file);
-		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+		filename = ""+usuario+".jpeg";
+		Bitmap bitmap = null;
+		File file = new File(Environment.getExternalStorageDirectory(), ""+usuario+".jpeg");
+		if(file.exists()){
+			FileInputStream fis = null;
+			try {
+				fis = new FileInputStream(file);
+			} catch (FileNotFoundException e1) {
+				// TODO Auto-generated catch block
+				Log.d("ERRO", "ERRO");
+			}
+			Log.d("Decodificando", "Decodificando");
+			bitmap = BitmapFactory.decodeStream(fis, null, null);
+			Log.d("Pronto", String.valueOf(bitmap.getHeight()));
 		}
+		
+		/*
 		byte b;
 		int i = 0;
 		byte[] data = new byte[(int) file.getTotalSpace()]; 
@@ -66,9 +73,15 @@ public class DAOImagem {
 			data[i] = (byte)b;
 			i++;
 		}
+		Log.d("Byte", String.valueOf(data[0]));
+		Log.d("Byte", String.valueOf(data[3]));
+		Log.d("Byte", String.valueOf(data[7]));
+		Log.d("Byte", String.valueOf(data[10]));
+		Log.d("Byte", String.valueOf(data[44]));
 		fis.close();
-		Bitmap bitmap = BitmapFactory.decodeByteArray(data , 0, data.length);
-	    return bitmap;
+		Bitmap bitmap = BitmapFactory.decodeByteArray(data , 0, data.length);*/
+	    
+		return bitmap;
 		
 	}
 }
