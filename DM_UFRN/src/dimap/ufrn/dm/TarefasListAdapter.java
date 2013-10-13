@@ -6,9 +6,11 @@ import dao.DAOTarefa;
 
 import model.Tarefas;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,17 +77,17 @@ public class TarefasListAdapter extends BaseAdapter {
 			img.setOnClickListener(new View.OnClickListener() {		
 				@Override
 				public void onClick(View v) {
-					// 1. Instantiate an AlertDialog.Builder with its constructor
 					AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
-					// 2. Chain together various setter methods to set the dialog characteristics
 					builder.setMessage("Tem certeza que deseja apagar essa tarefa?");
 					builder.setTitle("Aviso");
 					
 					builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
 				           public void onClick(DialogInterface dialog, int id) {
-				        	   itens.remove(position);
+				        	   dao.open();
 							   dao.deleteTarefa(itens.get(position));
+							   dao.close();
+							   itens.remove(position);
 							   notifyDataSetChanged();
 							   dialog.dismiss();
 				           }
@@ -102,6 +104,21 @@ public class TarefasListAdapter extends BaseAdapter {
 					dialog.show();
 				}
 			});
+			
+			
+			ImageView update = (ImageView)v.findViewById(R.id.button_editar);
+			update.setOnClickListener(new View.OnClickListener() {		
+				@Override
+				public void onClick(View v) {
+					Intent updateIntent = new Intent();
+	        	    updateIntent.putExtra("usuario", ((Activity)context).getIntent().getSerializableExtra("usuario"));
+	        	    updateIntent.putExtra("tarefa", itens.get(position));
+	        	    updateIntent.setClass(context, UpdateTarefa.class);
+		   			context.startActivity(updateIntent);
+				}
+			});
+			
+			
 			
 			if (tarefa != null) {
 				tarefa.setText(p.getDescricao());
@@ -122,5 +139,6 @@ public class TarefasListAdapter extends BaseAdapter {
 	private Context getContext() {
 		return context;
 	}
+	
 
 }

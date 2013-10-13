@@ -51,6 +51,7 @@
             android:label="@string/title_activity_tarefas" 
             android:screenOrientation="portrait" android:configChanges="orientation">
         </activity>
+
         <activity
             android:name="dimap.ufrn.dm.NovaTarefa"
             android:label="@string/title_activity_tarefa" 
@@ -99,6 +100,11 @@
         <activity
             android:name="dimap.ufrn.dm.ComentariosTodos"
             android:label="@string/title_activity_list_comment"
+            android:screenOrientation="portrait" android:configChanges="orientation">
+        </activity>
+        <activity
+            android:name="dimap.ufrn.dm.UpdateTarefa"
+            android:label="@string/title_activity_update_tarefa"
             android:screenOrientation="portrait" android:configChanges="orientation">
         </activity>
     </application>
