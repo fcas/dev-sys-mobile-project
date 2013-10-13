@@ -2,9 +2,13 @@ package dimap.ufrn.dm;
 
 import java.util.List;
 
+import dao.DAOTarefa;
+
 import model.Tarefas;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,14 +16,17 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+
 public class TarefasListAdapter extends BaseAdapter {
 	private LayoutInflater mInflater;
     private List<Tarefas> itens;
     private Context context;
+    DAOTarefa dao;
     private Tarefas tarefa;
-
+    
     public TarefasListAdapter(Context context, List<Tarefas> itens) {
     	this.itens = itens;
+    	dao = new DAOTarefa(context);
     	this.context = context;
     }
 
@@ -68,7 +75,31 @@ public class TarefasListAdapter extends BaseAdapter {
 			img.setOnClickListener(new View.OnClickListener() {		
 				@Override
 				public void onClick(View v) {
-					itens.remove(position);
+					// 1. Instantiate an AlertDialog.Builder with its constructor
+					AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+					// 2. Chain together various setter methods to set the dialog characteristics
+					builder.setMessage("Tem certeza que deseja apagar essa tarefa?");
+					builder.setTitle("Aviso");
+					
+					builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+				           public void onClick(DialogInterface dialog, int id) {
+				        	   itens.remove(position);
+							   dao.deleteTarefa(itens.get(position));
+							   notifyDataSetChanged();
+							   dialog.dismiss();
+				           }
+				       });
+					builder.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+				           public void onClick(DialogInterface dialog, int id) {
+				              dialog.dismiss();
+				           }
+				       });
+					
+
+					// 3. Get the AlertDialog from create()
+					AlertDialog dialog = builder.create();
+					dialog.show();
 				}
 			});
 			
