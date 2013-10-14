@@ -2,8 +2,15 @@ package activities;
 
 //O bot�o voltar est� voltando para a lista de tarefas...
 
+import java.util.List;
+
+import dao.DAOComentario;
+import dao.DAOLugar;
+import dao.DAOTarefa;
+import model.Comentarios;
 import model.Tarefas;
 import model.Usuario;
+import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -11,21 +18,28 @@ import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TimePicker;
-import dao.DAOTarefa;
-import dimap.ufrn.dm.R;
+import android.widget.Toast;
 
 public class UpdateTarefa extends Activity implements OnDateSetListener{
 	private DAOTarefa daoTarefa;
 	private Button pronto;
+	private DAOLugar daoLugar;
+	private String label;
+	@SuppressWarnings("unused")
 	private EditText tarefa_hora, tarefa_data, tarefa_local, tarefa_descricao;
 	Usuario usuario;
+	private Spinner spinner;
 	Tarefas t; 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,19 +47,21 @@ public class UpdateTarefa extends Activity implements OnDateSetListener{
 		setContentView(R.layout.activity_update_tarefa);
 		setTitle("UFRN ON TOUCH");
 		daoTarefa = new DAOTarefa(this);
+		daoLugar = new DAOLugar(this);
 		
+		spinner = (Spinner) findViewById(R.id.spinner);
 		tarefa_hora = (EditText)findViewById(R.id.tarefa_hora);
 		tarefa_data = (EditText)findViewById(R.id.tarefa_data);
 		tarefa_descricao = (EditText)findViewById(R.id.tarefa_descricao);
-		tarefa_local = (EditText)findViewById(R.id.tarefa_local);
 		
 		usuario = (Usuario) getIntent().getSerializableExtra("usuario");
 		t = (Tarefas) getIntent().getSerializableExtra("tarefa");
 		tarefa_hora.setText(t.getHorario());
 		tarefa_data.setText(t.getData());
 		tarefa_descricao.setText(t.getDescricao());
-		tarefa_local.setText(t.getLocal());
+		//tarefa_local.setText(t.getLocal());
 		usuario = (Usuario) getIntent().getSerializableExtra("usuario");
+		loadSpinnerData();
 		setButtons();
 		
 		
@@ -69,7 +85,7 @@ public class UpdateTarefa extends Activity implements OnDateSetListener{
 
 			@Override
 			public void onClick(View view) {
-
+				label = "";
 				Builder builder = new AlertDialog.Builder(UpdateTarefa.this);  
 		        builder.setTitle("Sucesso");  
 		        builder.setMessage("Tarefa atualizada com sucesso");  
@@ -82,7 +98,8 @@ public class UpdateTarefa extends Activity implements OnDateSetListener{
 		        		tarefa.setUsuario(usuario.getLogin());
 		        		tarefa.setData(tarefa_data.getText().toString());
 		        		tarefa.setHorario(tarefa_hora.getText().toString());
-		        		tarefa.setLocal(tarefa_data.getText().toString());
+		        		tarefa.setIdLugar(daoLugar.idLugar(label));
+		        		//tarefa.setLocal(tarefa_data.getText().toString());
 		        		daoTarefa.open();
 		        		daoTarefa.updateTarefa(tarefa);
 		        		daoTarefa.close();
@@ -191,11 +208,34 @@ public class UpdateTarefa extends Activity implements OnDateSetListener{
 		
 		
 	}
+	
+	private void loadSpinnerData() {
+		DAOLugar db = new DAOLugar(getApplicationContext());
+		db.open();
+		List<String> lables = db.listarLugares();
+		
+		ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+				android.R.layout.simple_spinner_item, lables);
+
+		dataAdapter
+				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+		spinner.setAdapter(dataAdapter);
+		db.close();
+	}
+
+	public void onItemSelected(AdapterView<?> parent, View view, int position,
+			long id) {
+		label = parent.getItemAtPosition(position).toString();
+
+		Toast.makeText(parent.getContext(), "Voce selecionou: " + label,
+				Toast.LENGTH_LONG).show();
+
+	}
 
 	@Override
 	public void onDateSet(DatePicker view, int year, int monthOfYear,
 			int dayOfMonth) {
-		
 		
 	}
 }	

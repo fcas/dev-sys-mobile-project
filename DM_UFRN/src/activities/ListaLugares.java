@@ -5,6 +5,7 @@ package activities;
 import java.util.List;
 
 import model.Usuario;
+import activities.R;
 import adapters.LugarAdapter;
 import android.app.Activity;
 import android.content.Intent;
@@ -14,7 +15,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import dao.DAOLugar;
-import dimap.ufrn.dm.R;
 
 public class ListaLugares extends Activity {
 	private Button button;

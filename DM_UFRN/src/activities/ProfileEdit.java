@@ -1,6 +1,7 @@
 package activities;
 
 import model.Usuario;
+import activities.R;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -14,7 +15,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import dao.DAOUsuario;
-import dimap.ufrn.dm.R;
 
 public class ProfileEdit extends Activity {
 

@@ -3,6 +3,7 @@ package activities;
 //O bot�o voltar est� voltando para a lista de lugares
 
 import model.Usuario;
+import activities.R;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -17,7 +18,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import dao.DAOLugar;
-import dimap.ufrn.dm.R;
 
 public class NovoLugar extends Activity {
 

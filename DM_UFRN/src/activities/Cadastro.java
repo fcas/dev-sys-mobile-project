@@ -4,7 +4,6 @@ package activities;
 
 import dao.DAOImagem;
 import dao.DAOUsuario;
-import dimap.ufrn.dm.R;
 import model.Usuario;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -39,7 +38,7 @@ public class Cadastro extends Activity {
 		edit_sobre= (EditText)findViewById(R.id.edit_sobre);
 		edit_curso = (EditText)findViewById(R.id.edit_curso);
 		daoUsuario = new DAOUsuario(this);
-		daoImagem = new DAOImagem(this);
+		daoImagem = new DAOImagem();
 		daoUsuario.open();
 		setButtons();
 	}
