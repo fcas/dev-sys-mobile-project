@@ -9,33 +9,6 @@
     android:background="@drawable/mapa"
     tools:context=".ListaLugares" >
 
-    <ImageView
-        android:id="@+id/ImageView01"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/expandableListView1"
-        android:contentDescription="@string/comentarios_logo"
-        android:src="@drawable/search" />
-
-    <ExpandableListView
-        android:id="@+id/expandableListView1"
-        android:layout_width="fill_parent"
-        android:layout_height="100dp"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/ImageView01"
-        android:layout_marginTop="28dp" >
-    </ExpandableListView>
-
-    <Button
-        android:id="@+id/button_lugar_novo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/ImageView01"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="34dp"
-        android:text="@string/lugar_novo" />
-
     <TextView
         style="@style/titulo"     
         android:id="@+id/textView1"
@@ -44,7 +17,33 @@
         android:layout_marginBottom="27dp"
         android:text="@string/app_lugares" />
 
+    <ImageView
+        android:id="@+id/ImageView01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="32dp"
+        android:layout_marginTop="37dp"
+        android:contentDescription="@string/comentarios_logo"
+        android:src="@drawable/search" />
 
+     <ListView
+        android:id="@+id/list_lugares"
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_below="@+id/textView1"
+        android:layout_marginTop="36dp" >
+    </ListView>
 
+    <Button
+        android:id="@+id/button_lugar_novo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="22dp"
+        android:text="@string/lugar_novo" />
 
 </RelativeLayout>
