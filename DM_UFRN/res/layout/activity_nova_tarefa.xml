@@ -69,17 +69,6 @@
     </EditText>
 
     <EditText
-        android:id="@+id/tarefa_local"
-        style="@style/editPadrao"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tarefa_hora"
-        android:layout_below="@+id/tarefa_hora"
-        android:layout_marginTop="18dp"
-        android:ems="10"
-        android:hint="@string/tarefa_local" />
-
-    <EditText
         
         android:id="@+id/tarefa_descricao"
         style="@style/editPadrao"
@@ -93,7 +82,15 @@
         android:imeActionLabel="@string/tarefa_nova"
         
         android:inputType="text|textMultiLine" 
-        />        
-    
+        />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tarefa_hora"
+        android:layout_below="@+id/tarefa_hora"
+        android:layout_marginTop="10dp"
+        android:prompt="@string/spinner_title" />
 
 </RelativeLayout>

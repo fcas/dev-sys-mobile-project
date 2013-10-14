@@ -30,7 +30,7 @@
         android:id="@+id/button_tarefa_nova"
         android:layout_below="@+id/list_tarefas"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20dp"
+        android:layout_height="20dp"
         android:text="@string/tarefa_nova" />
 
 </RelativeLayout>
