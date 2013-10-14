@@ -14,28 +14,39 @@ public class Tarefas implements Serializable {
 	private String local;
 	private String data;
 	private String horario;
-	private String descricao;	
+	private String descricao;
+	private Lugar lugar;
+	private int idLugar;
 	public static final String TABELA_TAREFA = "Tarefa";
 	public static final String COLUNA_USUARIO = "Usuario";
-	public static final String COLUNA_LOCAL = "Local";
+	public static final String COLUNA_ID_LUGAR = "IDLocal";
 	public static final String COLUNA_DATA = "Data";
 	public static final String COLUNA_HORARIO = "Horario";
 	public static final String COLUNA_DESCRICAO = "Descricao";
 	
 	public static final String CREATE_TAREFA = "CREATE TABLE "+TABELA_TAREFA+"("+MySQLiteHelper.COLUNA_ID+" INTEGER PRIMARY KEY AUTOINCREMENT, "
 	+COLUNA_USUARIO+" TEXT NOT NULL, "
-	+COLUNA_LOCAL+ " TEXT NOT NULL, "
+	+COLUNA_ID_LUGAR+ " INTEGER, "
 	+COLUNA_DATA +" TEXT NOT NULL, "
 	+COLUNA_HORARIO +" TEXT NOT NULL, "
 	+COLUNA_DESCRICAO +" TEXT NOT NULL);";
 	
-	public String getLocal() {
-		return local;
+	public Lugar getLugar() {
+		return lugar;
 	}
 
-	public void setLocal(String nome) {
-		this.local = nome;
+	public void setLugar(Lugar l) {
+		this.lugar = l;
 	}
+	
+	public long getIdtLugar() {
+		return idLugar;
+	}
+
+	public void setIdLugar(int id) {
+		this.idLugar = id;
+	}
+
 
 	public String getHorario() {
 		return horario;
