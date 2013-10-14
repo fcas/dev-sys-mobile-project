@@ -32,6 +32,7 @@ public class UpdateTarefa extends Activity implements OnDateSetListener{
 	@SuppressWarnings("unused")
 	private EditText tarefa_hora, tarefa_data, tarefa_local, tarefa_descricao;
 	Usuario usuario;
+	Tarefas t; 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -43,6 +44,13 @@ public class UpdateTarefa extends Activity implements OnDateSetListener{
 		tarefa_data = (EditText)findViewById(R.id.tarefa_data);
 		tarefa_descricao = (EditText)findViewById(R.id.tarefa_descricao);
 		tarefa_local = (EditText)findViewById(R.id.tarefa_local);
+		
+		usuario = (Usuario) getIntent().getSerializableExtra("usuario");
+		t = (Tarefas) getIntent().getSerializableExtra("tarefa");
+		tarefa_hora.setText(t.getHorario());
+		tarefa_data.setText(t.getData());
+		tarefa_descricao.setText(t.getDescricao());
+		tarefa_local.setText(t.getLocal());
 		usuario = (Usuario) getIntent().getSerializableExtra("usuario");
 		setButtons();
 		
@@ -75,6 +83,7 @@ public class UpdateTarefa extends Activity implements OnDateSetListener{
 		        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() { 
 		        	public void onClick(DialogInterface arg0, int arg1) {
 		        		Tarefas tarefa = new Tarefas();
+		        		tarefa.setId(t.getId());
 		        		tarefa.setDescricao(tarefa_descricao.getText().toString());
 		        		tarefa.setUsuario(usuario.getLogin());
 		        		tarefa.setData(tarefa_data.getText().toString());
@@ -133,7 +142,8 @@ public class UpdateTarefa extends Activity implements OnDateSetListener{
  
 		confirmar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                hora.setText(String.valueOf(tp.getCurrentHour()+ ":"+tp.getCurrentMinute()));
+            	String horaNormalizada = DataCalculos.normalizarHora(tp.getCurrentHour(), tp.getCurrentMinute());
+                hora.setText(horaNormalizada);
              //finaliza o dialog
              dialog.dismiss();
             }
@@ -147,9 +157,11 @@ public class UpdateTarefa extends Activity implements OnDateSetListener{
         });
          
         
-		dialog.setTitle("Escolha a data");
+		dialog.setTitle("Escolha a hora");
 		dialog.show();
 	}
+	
+
 	
 	public void showDateDialog(View v) {
 		
@@ -164,7 +176,8 @@ public class UpdateTarefa extends Activity implements OnDateSetListener{
 		confirmar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
             	int mes = dp.getMonth() + 1;
-                data.setText(String.valueOf(dp.getDayOfMonth()+"/"+mes+"/"+dp.getYear()));
+            	String dataNormalizada = DataCalculos.normalizarData(dp.getDayOfMonth(), mes, dp.getYear());
+                data.setText(DataCalculos.bancoToVisao(dataNormalizada));
                  
              //finaliza o dialog
              dialog.dismiss();

@@ -31,7 +31,8 @@ public class ListaTarefas extends Activity {
 		daoTarefa = new DAOTarefa(this);
 		daoTarefa.open();
 
-	    List<Tarefas> listaTarefas = daoTarefa.getAllTasks();
+	    List<Tarefas> listaTarefas = daoTarefa.getTasksByUser(usuario.getLogin());
+	    //List<Tarefas> listaTarefas = daoTarefa.getAllTasks();
 	    daoTarefa.close();
 	    
 		ListView lv = (ListView)findViewById(R.id.list_tarefas);

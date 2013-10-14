@@ -134,7 +134,7 @@ public class NovaTarefa extends Activity implements OnDateSetListener{
  
 		confirmar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                hora.setText(String.valueOf(tp.getCurrentHour()+ ":"+tp.getCurrentMinute()));
+                hora.setText(String.valueOf(DataCalculos.normalizarHora(tp.getCurrentHour(), tp.getCurrentMinute())));
              //finaliza o dialog
              dialog.dismiss();
             }
@@ -165,7 +165,8 @@ public class NovaTarefa extends Activity implements OnDateSetListener{
 		confirmar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
             	int mes = dp.getMonth() + 1;
-                data.setText(String.valueOf(dp.getDayOfMonth()+"/"+mes+"/"+dp.getYear()));
+            	String dataNormal = DataCalculos.normalizarData(dp.getDayOfMonth(), mes, dp.getYear());
+                data.setText(DataCalculos.bancoToVisao(dataNormal));
                  
              //finaliza o dialog
              dialog.dismiss();
