@@ -1,4 +1,4 @@
-package dimap.ufrn.dm;
+package activities;
 
 import java.util.List;
 
@@ -24,6 +24,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 import dao.DAOComentario;
 import dao.DAOLugar;
+import dimap.ufrn.dm.R;
 
 public class NovoComentario extends Activity implements OnItemSelectedListener {
 	private DAOComentario datasource;
@@ -81,14 +82,14 @@ public class NovoComentario extends Activity implements OnItemSelectedListener {
 								}
 								comentario.setComment(descricao.getText()
 										.toString());
-								comentario.setId_lugar(db.idLugar(label));
+								comentario.getLugar().setId_local((db.idLugar(label)));
 								usuario.getComentarios().add(comentario);
 								// ContentValues values =
 								// toContentValue(comentario);
 								datasource.createComentarios(comentario);
 								intent.putExtra("usuario", usuario);
 								intent.setClass(NovoComentario.this,
-										ListaComentarios.class);
+										TelaComentarios.class);
 								startActivity(intent);
 								finish();
 							}
@@ -135,7 +136,7 @@ public class NovoComentario extends Activity implements OnItemSelectedListener {
 	public void onBackPressed() {
 		Intent voltaIntent = new Intent();
 		voltaIntent.putExtra("usuario", usuario);
-		voltaIntent.setClass(NovoComentario.this, ListaComentarios.class);
+		voltaIntent.setClass(NovoComentario.this, TelaComentarios.class);
 		startActivity(voltaIntent);
 		finish();
 	}

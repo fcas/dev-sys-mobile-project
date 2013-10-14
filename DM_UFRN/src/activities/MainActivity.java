@@ -1,7 +1,8 @@
-package dimap.ufrn.dm;
+package activities;
 
 //O bot�o voltar est� voltando para a tela de login
 
+import dimap.ufrn.dm.R;
 import model.Usuario;
 import android.app.Activity;
 import android.content.Intent;
@@ -90,7 +91,7 @@ public class MainActivity extends Activity {
 			public void onClick(View view) {
 				Intent comentariosIntent = new Intent();
 				comentariosIntent.putExtra("usuario", usuario);
-				comentariosIntent.setClass(MainActivity.this, ListaComentarios.class);
+				comentariosIntent.setClass(MainActivity.this, TelaComentarios.class);
 				startActivity(comentariosIntent);
 				finish();
 			}

@@ -1,6 +1,7 @@
-package dimap.ufrn.dm;
+package activities;
 
 import dao.DAOUsuario;
+import dimap.ufrn.dm.R;
 import model.Usuario;
 import android.os.Bundle;
 import android.app.Activity;

@@ -1,11 +1,11 @@
-package dimap.ufrn.dm;
+package activities;
 
 //O bot�o voltar est� voltando para a tela principal
 
 import java.util.List;
 
-import model.LugarAdapter;
 import model.Usuario;
+import adapters.LugarAdapter;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import dao.DAOLugar;
+import dimap.ufrn.dm.R;
 
 public class ListaLugares extends Activity {
 	private Button button;

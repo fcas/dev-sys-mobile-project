@@ -1,15 +1,9 @@
-package dimap.ufrn.dm;
+package activities;
 
 //O bot�o voltar est� voltando para a lista de tarefas...
 
-import java.util.List;
-
-import dao.DAOComentario;
-import dao.DAOTarefa;
-import model.Comentarios;
 import model.Tarefas;
 import model.Usuario;
-import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -17,19 +11,19 @@ import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.util.Log;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TimePicker;
+import dao.DAOTarefa;
+import dimap.ufrn.dm.R;
 
 public class UpdateTarefa extends Activity implements OnDateSetListener{
 	private DAOTarefa daoTarefa;
 	private Button pronto;
-	@SuppressWarnings("unused")
 	private EditText tarefa_hora, tarefa_data, tarefa_local, tarefa_descricao;
 	Usuario usuario;
 	Tarefas t; 

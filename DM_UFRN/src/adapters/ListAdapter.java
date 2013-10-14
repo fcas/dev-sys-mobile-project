@@ -1,7 +1,8 @@
-package dimap.ufrn.dm;
+package adapters;
 
 import java.util.List;
 
+import dimap.ufrn.dm.R;
 import model.Comentarios;
 import android.content.Context;
 import android.view.LayoutInflater;
