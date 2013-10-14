@@ -3,6 +3,7 @@ package adapters;
 import java.util.List;
 
 import model.Lugar;
+import activities.R;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 import dao.DAOLugar;
-import dimap.ufrn.dm.R;
 
 public class LugarAdapter extends BaseAdapter {
 
