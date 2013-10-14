@@ -1,9 +1,10 @@
-package dimap.ufrn.dm;
+package activities;
 
 import java.util.List;
 
 import model.Comentarios;
 import model.Usuario;
+import adapters.ListAdapter;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,8 +13,9 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import dao.DAOComentario;
+import dimap.ufrn.dm.R;
 
-public class ComentariosTodos extends ListActivity {
+public class ListaComentarios extends ListActivity {
 
 	  private DAOComentario datasource;
 	  Usuario usuario;
@@ -50,7 +52,7 @@ public class ComentariosTodos extends ListActivity {
 	public void onBackPressed() {
 		Intent voltaIntent = new Intent();
 		voltaIntent.putExtra("usuario", usuario);
-		voltaIntent.setClass(ComentariosTodos.this, ListaComentarios.class);
+		voltaIntent.setClass(ListaComentarios.this, TelaComentarios.class);
 		startActivity(voltaIntent);
 		finish();
 	}

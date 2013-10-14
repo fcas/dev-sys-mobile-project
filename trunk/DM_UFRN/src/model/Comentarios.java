@@ -26,7 +26,10 @@ public class Comentarios implements Serializable {
 	private Lugar lugar;
 	private long id;
 	private String comentario;
-	private int id_lugar; 
+	
+	public Comentarios(){ 
+		lugar = new Lugar();
+	}
 
 	public long getId() {
 		return id;
@@ -58,14 +61,6 @@ public class Comentarios implements Serializable {
 
 	public void setLugar(Lugar lugar) {
 		this.lugar = lugar;
-	}
-	
-	public int getId_lugar() {
-		return id_lugar;
-	}
-	
-	public void setId_lugar(int id_lugar) {
-		this.id_lugar = id_lugar;
 	}
 	
 	@Override

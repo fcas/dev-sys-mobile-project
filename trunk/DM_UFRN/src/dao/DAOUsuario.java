@@ -11,7 +11,6 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
-import android.util.Log;
 
 public class DAOUsuario {
 
@@ -54,7 +53,8 @@ public class DAOUsuario {
 	  }
 	  
 	  public Usuario updateUsuario(String login, Usuario usuario) {
-		    ContentValues values = new ContentValues();
+		    @SuppressWarnings("unused")
+			ContentValues values = new ContentValues();
 
 		    String strFilter = "login='" + login+"'";
 		    ContentValues args = new ContentValues();
@@ -101,6 +101,7 @@ public class DAOUsuario {
 			  user.setCurso(result.getString(3));
 			  user.setSobreMim(result.getString(4));
 			  try {
+				@SuppressWarnings("unused")
 				Bitmap img = daoImagem.getImagem(user.getLogin());
 				//user.setImagemPerfil(img);
 			  } catch (IOException e) {
@@ -123,6 +124,7 @@ public class DAOUsuario {
 			  user.setCurso(result.getString(3));
 			  user.setSobreMim(result.getString(4));
 			  try {
+				@SuppressWarnings("unused")
 				Bitmap img = daoImagem.getImagem(user.getLogin());
 				//user.setImagemPerfil(img);
 			  } catch (IOException e) {

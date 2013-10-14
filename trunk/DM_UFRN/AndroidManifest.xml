@@ -5,6 +5,7 @@
     android:versionName="1.0" >
 
     <uses-permission android:name="android.permission.CAMERA" />
+     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> 
     <uses-feature android:name="android.hardware.camera" />
     <uses-sdk
         android:minSdkVersion="8"
@@ -16,7 +17,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="dimap.ufrn.dm.SplashActivity"
+            android:name="activities.SplashActivity"
             android:label="@string/app_name" 
             android:screenOrientation="portrait" android:configChanges="orientation">
             <intent-filter>
@@ -27,83 +28,83 @@
             
         </activity>
         <activity
-            android:name="dimap.ufrn.dm.NovoLugar"
+            android:name="activities.NovoLugar"
             android:label="@string/title_activity_novo_lugar" 
             android:screenOrientation="portrait" android:configChanges="orientation">
         </activity>
         <activity
-            android:name="dimap.ufrn.dm.ListaComentarios"
+            android:name="activities.TelaComentarios"
             android:label="@string/title_activity_comentarios" 
             android:screenOrientation="portrait" android:configChanges="orientation">
         </activity>
         <activity
-            android:name="dimap.ufrn.dm.Comentario"
+            android:name="activities.Comentario"
             android:label="@string/title_activity_comentario" 
             android:screenOrientation="portrait" android:configChanges="orientation">
         </activity>
         <activity
-            android:name="dimap.ufrn.dm.NovoComentario"
+            android:name="activities.NovoComentario"
             android:label="@string/title_activity_comentario_novo" 
             android:screenOrientation="portrait" android:configChanges="orientation">
         </activity>
         <activity
-            android:name="dimap.ufrn.dm.ListaTarefas"
+            android:name="activities.ListaTarefas"
             android:label="@string/title_activity_tarefas" 
             android:screenOrientation="portrait" android:configChanges="orientation">
         </activity>
 
         <activity
-            android:name="dimap.ufrn.dm.NovaTarefa"
+            android:name="activities.NovaTarefa"
             android:label="@string/title_activity_tarefa" 
             android:screenOrientation="portrait" android:configChanges="orientation">
         </activity>
         <activity
-            android:name="dimap.ufrn.dm.UsuarioPerfil"
+            android:name="activities.UsuarioPerfil"
             android:label="@string/title_activity_usuario_perfil" 
             android:screenOrientation="portrait" android:configChanges="orientation">
         </activity>
         <activity
-            android:name="dimap.ufrn.dm.InfoLugar"
+            android:name="activities.InfoLugar"
             android:label="@string/title_activity_info_lugar" 
             android:screenOrientation="portrait" android:configChanges="orientation">
         </activity>
         <activity
-            android:name="dimap.ufrn.dm.ListaLugares"
+            android:name="activities.ListaLugares"
             android:label="@string/title_activity_lista_lugares" 
             android:screenOrientation="portrait" android:configChanges="orientation">
         </activity>
         <activity
-            android:name="dimap.ufrn.dm.MainActivity"
+            android:name="activities.MainActivity"
             android:label="@string/title_activity_main" 
             android:screenOrientation="portrait" android:configChanges="orientation">
         </activity>
         <activity
-            android:name="dimap.ufrn.dm.Teste"
+            android:name="activities.Teste"
             android:label="@string/title_activity_teste" 
             android:screenOrientation="portrait" android:configChanges="orientation">
         </activity>
         <activity
-            android:name="dimap.ufrn.dm.Cadastro"
+            android:name="activities.Cadastro"
             android:label="@string/title_activity_cadastro" 
             android:screenOrientation="portrait" android:configChanges="orientation">
         </activity>
         <activity
-            android:name="dimap.ufrn.dm.Login"
+            android:name="activities.Login"
             android:label="@string/title_activity_login" 
             android:screenOrientation="portrait" android:configChanges="orientation">
         </activity>
         <activity
-            android:name="dimap.ufrn.dm.ProfileEdit"
+            android:name="activities.ProfileEdit"
             android:label="@string/title_activity_profile_edit" 
             android:screenOrientation="portrait" android:configChanges="orientation">
         </activity>
         <activity
-            android:name="dimap.ufrn.dm.ComentariosTodos"
+            android:name="activities.ListaComentarios"
             android:label="@string/title_activity_list_comment"
             android:screenOrientation="portrait" android:configChanges="orientation">
         </activity>
         <activity
-            android:name="dimap.ufrn.dm.UpdateTarefa"
+            android:name="activities.UpdateTarefa"
             android:label="@string/title_activity_update_tarefa"
             android:screenOrientation="portrait" android:configChanges="orientation">
         </activity>

@@ -1,9 +1,10 @@
-package dimap.ufrn.dm;
+package activities;
 
 //O bot�o voltar est� voltando para a tela de login...
 
 import dao.DAOImagem;
 import dao.DAOUsuario;
+import dimap.ufrn.dm.R;
 import model.Usuario;
 import android.app.Activity;
 import android.app.AlertDialog;

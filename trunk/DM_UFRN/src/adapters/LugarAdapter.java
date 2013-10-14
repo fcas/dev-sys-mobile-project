@@ -1,7 +1,8 @@
-package model;
+package adapters;
 
 import java.util.List;
 
+import model.Lugar;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;

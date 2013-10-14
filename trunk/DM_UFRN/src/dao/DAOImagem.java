@@ -19,6 +19,7 @@ public class DAOImagem {
 	public DAOImagem(Context context){
 		this.context = context;
 	}
+	@SuppressWarnings("unused")
 	private String filename;
 	public void putImagem(String usuario, Bitmap imagem){
 		Log.d("Usuario", usuario);

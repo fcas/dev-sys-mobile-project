@@ -3,10 +3,8 @@ package dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import dimap.ufrn.dm.DataCalculos;
-
 import model.Tarefas;
-import model.Usuario;
+import activities.DataCalculos;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -18,7 +16,8 @@ public class DAOTarefa {
 
 	  private SQLiteDatabase database;
 	  private MySQLiteHelper dbHelper;
-	  private String[] allColumns = {MySQLiteHelper.COLUNA_ID, Tarefas.COLUNA_USUARIO, Tarefas.COLUNA_LOCAL,  Tarefas.COLUNA_DATA,  Tarefas.COLUNA_HORARIO, Tarefas.COLUNA_DESCRICAO};
+	  @SuppressWarnings("unused")
+	private String[] allColumns = {MySQLiteHelper.COLUNA_ID, Tarefas.COLUNA_USUARIO, Tarefas.COLUNA_LOCAL,  Tarefas.COLUNA_DATA,  Tarefas.COLUNA_HORARIO, Tarefas.COLUNA_DESCRICAO};
 	  public DAOTarefa(Context context) {
 	    dbHelper = new MySQLiteHelper(context);
 	  }

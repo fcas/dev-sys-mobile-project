@@ -65,11 +65,25 @@ public class DAOLugar {
 			cursor.moveToFirst();
 			id = Integer.parseInt(cursor.getString(0));
 		}
-		
+
 		cursor.close();
 		database.close();
 
 		return id;
+	}
+
+	public Lugar getLugarById(int id) {
+		Cursor result = database.rawQuery("Select * from Lugar where _id = ?",
+				new String[] { String.valueOf(id) });
+		Lugar lugar = new Lugar();
+		if (result.moveToNext()) {
+			lugar.setId_local((result.getInt(0)));
+			lugar.setNome(result.getString(1));
+			;
+		} else {
+			lugar = null;
+		}
+		return lugar;
 	}
 
 }

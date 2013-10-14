@@ -1,7 +1,8 @@
-package dimap.ufrn.dm;
+package activities;
 
 //O bot�o voltar est� voltando para a tela principal
 
+import dimap.ufrn.dm.R;
 import model.Usuario;
 import android.app.Activity;
 import android.content.Intent;
@@ -10,7 +11,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 
-public class ListaComentarios extends Activity {
+public class TelaComentarios extends Activity {
 	private Button button;
 	Usuario usuario;
 	private Button comentario_novo;
@@ -32,7 +33,7 @@ public class ListaComentarios extends Activity {
 	public void onBackPressed() {
 		Intent voltaIntent = new Intent();
 		voltaIntent.putExtra("usuario", usuario);
-		voltaIntent.setClass(ListaComentarios.this, MainActivity.class);
+		voltaIntent.setClass(TelaComentarios.this, MainActivity.class);
 		startActivity(voltaIntent);
 		finish();
 	}
@@ -52,7 +53,7 @@ public class ListaComentarios extends Activity {
 			public void onClick(View view) {
 				Intent novoComentarioIntent = new Intent();
 				novoComentarioIntent.putExtra("usuario", usuario);
-				novoComentarioIntent.setClass(ListaComentarios.this, ComentariosTodos.class);
+				novoComentarioIntent.setClass(TelaComentarios.this, ListaComentarios.class);
 				startActivity(novoComentarioIntent);
 				finish();
 			}
@@ -65,7 +66,7 @@ public class ListaComentarios extends Activity {
 			public void onClick(View view) {
 				Intent comentariosIntent = new Intent();
 				comentariosIntent.putExtra("usuario", usuario);
-				comentariosIntent.setClass(ListaComentarios.this,
+				comentariosIntent.setClass(TelaComentarios.this,
 						NovoComentario.class);
 				startActivity(comentariosIntent);
 				finish();

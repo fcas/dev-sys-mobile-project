@@ -1,11 +1,11 @@
-package dimap.ufrn.dm;
+package adapters;
 
 import java.util.List;
 
 import dao.DAOTarefa;
-
+import dimap.ufrn.dm.R;
 import model.Tarefas;
-
+import activities.UpdateTarefa;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -21,8 +21,7 @@ import android.widget.TextView;
 
 
 public class TarefasListAdapter extends BaseAdapter {
-	private LayoutInflater mInflater;
-    private List<Tarefas> itens;
+	private List<Tarefas> itens;
     private Context context;
     DAOTarefa dao;
     private Tarefas tarefa;
@@ -60,9 +59,9 @@ public class TarefasListAdapter extends BaseAdapter {
 			v = vi.inflate(R.layout.item_tarefa, null);
 
 			tarefa = new Tarefas();
-			tarefa.setDescricao("Não há nenhuma tarefa");
-			tarefa.setHorario("Não há nenhuma tarefa");
-			tarefa.setData("Não há nenhuma tarefa");
+			tarefa.setDescricao("Nï¿½o hï¿½ nenhuma tarefa");
+			tarefa.setHorario("Nï¿½o hï¿½ nenhuma tarefa");
+			tarefa.setData("Nï¿½o hï¿½ nenhuma tarefa");
 			v.setTag(tarefa);
 
 		}
@@ -94,7 +93,7 @@ public class TarefasListAdapter extends BaseAdapter {
 							   dialog.dismiss();
 				           }
 				       });
-					builder.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+					builder.setNegativeButton("Nï¿½o", new DialogInterface.OnClickListener() {
 				           public void onClick(DialogInterface dialog, int id) {
 				              dialog.dismiss();
 				           }

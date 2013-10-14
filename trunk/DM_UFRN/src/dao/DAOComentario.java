@@ -16,9 +16,11 @@ public class DAOComentario {
 	private String[] allColumns = { MySQLiteHelper.COLUNA_ID,
 			Comentarios.COLUNA_AUTOR, Comentarios.COLUNA_COMENTARIO,
 			Comentarios.COLUNA_ID_LUGAR };
+	private DAOLugar daoLugar;
 
 	public DAOComentario(Context context) {
 		dbHelper = new MySQLiteHelper(context);
+		daoLugar = new DAOLugar(context);
 	}
 
 	public void open() throws SQLException {
@@ -33,16 +35,12 @@ public class DAOComentario {
 		ContentValues values = new ContentValues();
 		values.put(Comentarios.COLUNA_AUTOR, comment.getAutor());
 		values.put(Comentarios.COLUNA_COMENTARIO, comment.getComment());
-		values.put(Comentarios.COLUNA_ID_LUGAR, comment.getId_lugar());
+		values.put(Comentarios.COLUNA_ID_LUGAR, comment.getLugar()
+				.getId_local());
 		long insertId = database.insert(Comentarios.TABELA_COMENTARIOS, null,
 				values);
-		Cursor cursor = database.query(Comentarios.TABELA_COMENTARIOS,
-				allColumns, MySQLiteHelper.COLUNA_ID + " = " + insertId, null,
-				null, null, null);
-		cursor.moveToFirst();
-		Comentarios newComentarios = cursorToComentarios(cursor);
-		cursor.close();
-		return newComentarios;
+		comment.setId(insertId);
+		return comment;
 	}
 
 	public void deleteComentarios(Comentarios comment) {
@@ -64,17 +62,18 @@ public class DAOComentario {
 			Comentarioss.add(Comentarios);
 			cursor.moveToNext();
 		}
-		// Make sure to close the cursor
 		cursor.close();
 		return Comentarioss;
 	}
 
 	private Comentarios cursorToComentarios(Cursor cursor) {
 		Comentarios Comentarios = new Comentarios();
+		daoLugar.open();
 		Comentarios.setId(cursor.getLong(0));
 		Comentarios.setAutor(cursor.getString(1));
 		Comentarios.setComment(cursor.getString(2));
-		Comentarios.setId_lugar((cursor.getInt(3)));
+		Comentarios.setLugar(daoLugar.getLugarById(cursor.getInt(3)));
+		daoLugar.close();
 		return Comentarios;
 	}
 
