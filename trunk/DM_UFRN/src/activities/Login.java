@@ -1,8 +1,8 @@
 package activities;
 
 import dao.DAOUsuario;
-import dimap.ufrn.dm.R;
 import model.Usuario;
+import activities.R;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -37,7 +37,7 @@ public class Login extends Activity {
 		boolean autoSave = settings.getBoolean("ManterAutenticado", false);
 		Log.d("ManterAutenticado-Login", String.valueOf(autoSave));
 		String login = settings.getString("Login", "");
-		//autoSave = false;
+		autoSave = false;
 		if(autoSave == true){
 			manter_autenticado.setChecked(true);
 			daoUsuario.open();

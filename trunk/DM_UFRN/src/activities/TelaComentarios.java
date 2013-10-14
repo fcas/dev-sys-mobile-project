@@ -2,8 +2,8 @@ package activities;
 
 //O bot�o voltar est� voltando para a tela principal
 
-import dimap.ufrn.dm.R;
 import model.Usuario;
+import activities.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;

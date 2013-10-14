@@ -1,9 +1,8 @@
 package activities;
-
 //O bot�o voltar est� voltando para a tela de login
 
-import dimap.ufrn.dm.R;
 import model.Usuario;
+import activities.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -56,7 +55,6 @@ public class MainActivity extends Activity {
 	private void setButtons() {
 		
 		profile = (ImageButton) findViewById(R.id.trocaImagem);
-
 		profile.setImageBitmap(usuario.getImagemPerfil());	 
 		profile.setOnClickListener(new View.OnClickListener() {
 
@@ -91,7 +89,7 @@ public class MainActivity extends Activity {
 			public void onClick(View view) {
 				Intent comentariosIntent = new Intent();
 				comentariosIntent.putExtra("usuario", usuario);
-				comentariosIntent.setClass(MainActivity.this, TelaComentarios.class);
+				comentariosIntent.setClass(MainActivity.this, ListaComentarios.class);
 				startActivity(comentariosIntent);
 				finish();
 			}

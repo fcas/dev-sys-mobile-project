@@ -4,6 +4,7 @@ import java.util.List;
 
 import model.Comentarios;
 import model.Usuario;
+import activities.R;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -24,7 +25,6 @@ import android.widget.Spinner;
 import android.widget.Toast;
 import dao.DAOComentario;
 import dao.DAOLugar;
-import dimap.ufrn.dm.R;
 
 public class NovoComentario extends Activity implements OnItemSelectedListener {
 	private DAOComentario datasource;

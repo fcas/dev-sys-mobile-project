@@ -1,6 +1,6 @@
 package activities;
 
-import dimap.ufrn.dm.R;
+import activities.R;
 import android.os.Bundle;
 import android.os.Handler;
 import android.app.Activity;

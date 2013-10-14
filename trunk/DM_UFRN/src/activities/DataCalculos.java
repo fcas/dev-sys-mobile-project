@@ -1,6 +1,9 @@
 package activities;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import android.util.Log;
 
@@ -20,15 +23,23 @@ public class DataCalculos {
 	}
 	
 	public static String visaoToBanco(String data){
-		String[] array = data.split("/");
-		String result = array[2] + "-" + array[1] + "-" + array[0];
-		return result;
+		try{
+			String[] array = data.split("/");
+			String result = array[2] + "-" + array[1] + "-" + array[0];
+			return result;
+		}catch(ArrayIndexOutOfBoundsException e){
+			return data;
+		}
 	}
 	
 	public static String bancoToVisao(String data){
+		try{
 		String[] array = data.split("-");
 		String result = array[2] + "/" + array[1] + "/" + array[0];
 		return result;
+		}catch(ArrayIndexOutOfBoundsException e){
+			return data;
+		}
 	}
 	
 	
