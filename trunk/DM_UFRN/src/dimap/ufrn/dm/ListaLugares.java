@@ -2,6 +2,9 @@ package dimap.ufrn.dm;
 
 //O bot�o voltar est� voltando para a tela principal
 
+import java.util.List;
+
+import model.LugarAdapter;
 import model.Usuario;
 import android.app.Activity;
 import android.content.Intent;
@@ -9,21 +12,37 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
+import dao.DAOLugar;
 
 public class ListaLugares extends Activity {
 	private Button button;
+	private DAOLugar daoLugar;
 	Usuario usuario;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_lista_lugares);
 		setTitle("UFRN ON TOUCH");
-		usuario = (Usuario) getIntent().getSerializableExtra("usuario");
-		//Log.w("NOME", usuario.getNome());
 		setButtons();
+		usuario = (Usuario) getIntent().getSerializableExtra("usuario");
+		// Log.w("NOME", usuario.getNome());
+		daoLugar = new DAOLugar(this);
+		daoLugar.open();
+
+		List<String> listaLugares = daoLugar.listarLugares();
+	    daoLugar.close();
+	    
+		ListView lv = (ListView)findViewById(R.id.list_lugares);
+		LugarAdapter adapter = new LugarAdapter(this, listaLugares);
+
+		lv.setAdapter(adapter);
+		lv.setTextFilterEnabled(true);
+
 	}
-	
-	//Bot�o voltar...
+
+	// Bot�o voltar...
 	@Override
 	public void onBackPressed() {
 		Intent voltaIntent = new Intent();
