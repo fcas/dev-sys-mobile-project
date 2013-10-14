@@ -21,7 +21,7 @@ public class DAOUsuario {
 	  private DAOImagem daoImagem;
 	  public DAOUsuario(Context context) {
 	    dbHelper = new MySQLiteHelper(context);
-	    daoImagem = new DAOImagem(context);
+	    daoImagem = new DAOImagem();
 	  }
 
 	  public void open() throws SQLException {
@@ -100,14 +100,11 @@ public class DAOUsuario {
 			  user.setNome(result.getString(2));
 			  user.setCurso(result.getString(3));
 			  user.setSobreMim(result.getString(4));
-			  try {
 				@SuppressWarnings("unused")
 				Bitmap img = daoImagem.getImagem(user.getLogin());
-				//user.setImagemPerfil(img);
-			  } catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+				user.setImagemPerfil(img);
+				//Log.d("Imagem", String.valueOf(img.getWidth()));				user.setImagemPerfil(img);
+			
 		  }else{
 			  user = null;
 		  }
@@ -123,14 +120,9 @@ public class DAOUsuario {
 			  user.setNome(result.getString(2));
 			  user.setCurso(result.getString(3));
 			  user.setSobreMim(result.getString(4));
-			  try {
 				@SuppressWarnings("unused")
 				Bitmap img = daoImagem.getImagem(user.getLogin());
-				//user.setImagemPerfil(img);
-			  } catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+				user.setImagemPerfil(img);
 		  }else{
 			  user = null;
 		  }

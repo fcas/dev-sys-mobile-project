@@ -3,6 +3,7 @@ package dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Comentarios;
 import model.Tarefas;
 import activities.DataCalculos;
 import android.content.ContentValues;
@@ -16,8 +17,7 @@ public class DAOTarefa {
 
 	  private SQLiteDatabase database;
 	  private MySQLiteHelper dbHelper;
-	  @SuppressWarnings("unused")
-	private String[] allColumns = {MySQLiteHelper.COLUNA_ID, Tarefas.COLUNA_USUARIO, Tarefas.COLUNA_LOCAL,  Tarefas.COLUNA_DATA,  Tarefas.COLUNA_HORARIO, Tarefas.COLUNA_DESCRICAO};
+	  private String[] allColumns = {MySQLiteHelper.COLUNA_ID, Tarefas.COLUNA_USUARIO, Tarefas.COLUNA_ID_LUGAR,  Tarefas.COLUNA_DATA,  Tarefas.COLUNA_HORARIO, Tarefas.COLUNA_DESCRICAO};
 	  public DAOTarefa(Context context) {
 	    dbHelper = new MySQLiteHelper(context);
 	  }
@@ -33,7 +33,7 @@ public class DAOTarefa {
 	  public Tarefas createTarefa(Tarefas tarefa) {
 	    ContentValues values = new ContentValues();
 	    values.put(Tarefas.COLUNA_USUARIO, tarefa.getUsuario());
-	    values.put(Tarefas.COLUNA_LOCAL, tarefa.getLocal());
+		values.put(Tarefas.COLUNA_ID_LUGAR, tarefa.getIdtLugar());
 	    values.put(Tarefas.COLUNA_DATA, DataCalculos.visaoToBanco(tarefa.getData()));
 	    values.put(Tarefas.COLUNA_HORARIO, tarefa.getHorario());
 	    values.put(Tarefas.COLUNA_DESCRICAO, tarefa.getDescricao());
@@ -49,9 +49,10 @@ public class DAOTarefa {
 		    String strFilter = MySQLiteHelper.COLUNA_ID+"='" + tarefa.getId()+"'";
 		    ContentValues args = new ContentValues();
 		    args.put(Tarefas.COLUNA_DESCRICAO, tarefa.getDescricao());
+		    args.put(Tarefas.COLUNA_ID_LUGAR, tarefa.getIdtLugar());
 		    args.put(Tarefas.COLUNA_DATA, DataCalculos.visaoToBanco(tarefa.getData()));
 		    args.put(Tarefas.COLUNA_HORARIO, tarefa.getHorario());
-		    args.put(Tarefas.COLUNA_LOCAL, tarefa.getLocal());
+		    //args.put(Tarefas.COLUNA_LOCAL, tarefa.getLocal());
 
 		    database.update(Tarefas.TABELA_TAREFA, args, strFilter, null);
 		    return tarefa;
@@ -78,7 +79,7 @@ public class DAOTarefa {
 	    	Log.d("Data", DataCalculos.bancoToVisao(tarefa.getData()));
 	    	Log.d("Hora", tarefa.getHorario());
 	    	Log.d("Descricao", tarefa.getDescricao());
-	    	//tarefa.setData(DataCalculos.bancoToVisao(tarefa.getData()));
+	    	tarefa.setData(DataCalculos.bancoToVisao(tarefa.getData()));
 	    	tarefas.add(tarefa);
 	    	cursor.moveToNext();
 	    }
@@ -102,7 +103,7 @@ public class DAOTarefa {
 		    	Log.d("Data", DataCalculos.bancoToVisao(tarefa.getData()));
 		    	Log.d("Hora", tarefa.getHorario());
 		    	Log.d("Descricao", tarefa.getDescricao());
-		    	//tarefa.setData(DataCalculos.bancoToVisao(tarefa.getData()));
+		    	tarefa.setData(DataCalculos.bancoToVisao(tarefa.getData()));
 		    	tarefas.add(tarefa);
 		    	cursor.moveToNext();
 		    }
@@ -115,7 +116,7 @@ public class DAOTarefa {
 	    Tarefas tarefa = new Tarefas();
 	    tarefa.setId(cursor.getLong(0));
 	    tarefa.setUsuario(cursor.getString(1));
-	    tarefa.setLocal(cursor.getString(2));
+	    tarefa.setIdLugar(cursor.getInt(2));
 	    tarefa.setData(cursor.getString(3));
 	    tarefa.setHorario(cursor.getString(4));
 	    tarefa.setDescricao(cursor.getString(5));
