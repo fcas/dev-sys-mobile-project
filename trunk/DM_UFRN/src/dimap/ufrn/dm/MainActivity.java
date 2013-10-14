@@ -30,10 +30,10 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		setTitle("UFRN ON TOUCH");
 		TextView nome = (TextView) findViewById(R.id.textView1);
-		 
+		TextView curso = (TextView) findViewById(R.id.textView2);
 		usuario = (Usuario) getIntent().getSerializableExtra("usuario");
 		nome.setText(usuario.getNome());
-		
+		curso.setText(usuario.getCurso());
 		
 		setButtons();
 	}

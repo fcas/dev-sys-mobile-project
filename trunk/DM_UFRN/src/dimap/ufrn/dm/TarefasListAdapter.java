@@ -11,6 +11,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -85,6 +86,7 @@ public class TarefasListAdapter extends BaseAdapter {
 					builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
 				           public void onClick(DialogInterface dialog, int id) {
 				        	   dao.open();
+				        	   Log.d("IDTAREFA-Delete", String.valueOf(itens.get(position).getId()));
 							   dao.deleteTarefa(itens.get(position));
 							   dao.close();
 							   itens.remove(position);
@@ -112,6 +114,7 @@ public class TarefasListAdapter extends BaseAdapter {
 				public void onClick(View v) {
 					Intent updateIntent = new Intent();
 	        	    updateIntent.putExtra("usuario", ((Activity)context).getIntent().getSerializableExtra("usuario"));
+	        	    Log.d("IDTAREFA-Update", String.valueOf(itens.get(position).getId()));
 	        	    updateIntent.putExtra("tarefa", itens.get(position));
 	        	    updateIntent.setClass(context, UpdateTarefa.class);
 		   			context.startActivity(updateIntent);

@@ -3,6 +3,8 @@ package dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import dimap.ufrn.dm.DataCalculos;
+
 import model.Tarefas;
 import model.Usuario;
 import android.content.ContentValues;
@@ -31,31 +33,24 @@ public class DAOTarefa {
 
 	  public Tarefas createTarefa(Tarefas tarefa) {
 	    ContentValues values = new ContentValues();
-	    values.put(Tarefas.COLUNA_USUARIO, "doido");
+	    values.put(Tarefas.COLUNA_USUARIO, tarefa.getUsuario());
 	    values.put(Tarefas.COLUNA_LOCAL, tarefa.getLocal());
-	    values.put(Tarefas.COLUNA_DATA, tarefa.getData());
+	    values.put(Tarefas.COLUNA_DATA, DataCalculos.visaoToBanco(tarefa.getData()));
 	    values.put(Tarefas.COLUNA_HORARIO, tarefa.getHorario());
 	    values.put(Tarefas.COLUNA_DESCRICAO, tarefa.getDescricao());
 	    @SuppressWarnings("unused")
 		long insertId = database.insert(Tarefas.TABELA_TAREFA, null, values);
-	    /*Cursor cursor = database.query(Tarefas.TABELA_TAREFA,
-	        allColumns, MySQLiteHelper.COLUNA_ID + " = " + insertId, null,
-	        null, null, null, null);
-	    cursor.moveToFirst();
-	    Tarefas novaTarefa = cursorToTarefa(cursor);
-	    cursor.close();
-	    return novaTarefa;*/
 	    return tarefa;
 	  }
 
 	  public Tarefas updateTarefa(Tarefas tarefa) {
 		  
-		    ContentValues values = new ContentValues();
-		    
+		    Log.d("Nova Data", tarefa.getData());
+		    Log.d("ID Tarefa", String.valueOf(tarefa.getId()));
 		    String strFilter = MySQLiteHelper.COLUNA_ID+"='" + tarefa.getId()+"'";
 		    ContentValues args = new ContentValues();
 		    args.put(Tarefas.COLUNA_DESCRICAO, tarefa.getDescricao());
-		    args.put(Tarefas.COLUNA_DATA, tarefa.getData());
+		    args.put(Tarefas.COLUNA_DATA, DataCalculos.visaoToBanco(tarefa.getData()));
 		    args.put(Tarefas.COLUNA_HORARIO, tarefa.getHorario());
 		    args.put(Tarefas.COLUNA_LOCAL, tarefa.getLocal());
 
@@ -73,43 +68,49 @@ public class DAOTarefa {
 	  public List<Tarefas> getAllTasks() {
 	    List<Tarefas> tarefas = new ArrayList<Tarefas>();
 
-	    Cursor cursor = database.query(Tarefas.TABELA_TAREFA,
-	        allColumns, null, null, null, null, null);
+	    /*Cursor cursor = database.query(Tarefas.TABELA_TAREFA,
+	        allColumns, null, null, null, null, null);*/
+	    Cursor cursor = database.rawQuery("Select * from "+Tarefas.TABELA_TAREFA+" order by Data, Horario", null);
 
 	    cursor.moveToFirst();
 	    while (!cursor.isAfterLast()) {
 	    	Tarefas tarefa = cursorToTarefa(cursor);
 	    	Log.d("Login", tarefa.getUsuario());
-	    	Log.d("Data", tarefa.getData());
+	    	Log.d("Data", DataCalculos.bancoToVisao(tarefa.getData()));
 	    	Log.d("Hora", tarefa.getHorario());
 	    	Log.d("Descricao", tarefa.getDescricao());
+	    	//tarefa.setData(DataCalculos.bancoToVisao(tarefa.getData()));
 	    	tarefas.add(tarefa);
-	      cursor.moveToNext();
+	    	cursor.moveToNext();
 	    }
 	    // Make sure to close the cursor
 	    cursor.close();
 	    return tarefas;
 	  }
 
-	  public List<Tarefas> getTasksByUser(String login) {
+	  public List<Tarefas> getTasksByUser(String userLogin) {
 		    List<Tarefas> tarefas = new ArrayList<Tarefas>();
-		    Cursor cursor = database.rawQuery("Select * from "+Tarefas.TABELA_TAREFA+" where "+Tarefas.COLUNA_USUARIO+" = ?",  new String[] {login});
+
+		    /*Cursor cursor = database.query(Tarefas.TABELA_TAREFA,
+		        allColumns, null, null, null, null, null);*/
+		    Log.d("Login-Parametro", userLogin);
+		    Cursor cursor = database.rawQuery("Select * from "+Tarefas.TABELA_TAREFA+" where Usuario = ? order by Data, Horario", new String[]{userLogin});
 
 		    cursor.moveToFirst();
 		    while (!cursor.isAfterLast()) {
 		    	Tarefas tarefa = cursorToTarefa(cursor);
 		    	Log.d("Login", tarefa.getUsuario());
-		    	Log.d("Data", tarefa.getData());
+		    	Log.d("Data", DataCalculos.bancoToVisao(tarefa.getData()));
 		    	Log.d("Hora", tarefa.getHorario());
-		    	Log.d("Descricao", tarefa.getHorario());
+		    	Log.d("Descricao", tarefa.getDescricao());
+		    	//tarefa.setData(DataCalculos.bancoToVisao(tarefa.getData()));
 		    	tarefas.add(tarefa);
-		      cursor.moveToNext();
+		    	cursor.moveToNext();
 		    }
 		    // Make sure to close the cursor
 		    cursor.close();
 		    return tarefas;
 		  }
-
 	  
 	  private Tarefas cursorToTarefa(Cursor cursor) {
 	    Tarefas tarefa = new Tarefas();
