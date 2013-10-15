@@ -1,6 +1,5 @@
 package dao;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +38,6 @@ public class DAOUsuario {
 	    values.put(Usuario.COLUNA_NOME, usuario.getNome());
 	    values.put(Usuario.COLUNA_CURSO, usuario.getCurso());
 	    values.put(Usuario.COLUNA_SOBRE , usuario.getSobreMim());
-	    daoImagem.putImagem(usuario.getLogin(), usuario.getImagemPerfil());
 	    @SuppressWarnings("unused")
 		long insertId = database.insert(Usuario.TABELA_USUARIO, null,
 	        values);
@@ -62,7 +60,6 @@ public class DAOUsuario {
 		    args.put(Usuario.COLUNA_CURSO, usuario.getCurso());
 		    args.put(Usuario.COLUNA_SENHA, usuario.getSenha());
 		    args.put(Usuario.COLUNA_SOBRE, usuario.getSobreMim());
-		    daoImagem.putImagem(usuario.getLogin(), usuario.getImagemPerfil());
 		    database.update(Usuario.TABELA_USUARIO, args, strFilter, null);
 		    return usuario;
 		  }
@@ -100,9 +97,6 @@ public class DAOUsuario {
 			  user.setNome(result.getString(2));
 			  user.setCurso(result.getString(3));
 			  user.setSobreMim(result.getString(4));
-				@SuppressWarnings("unused")
-				Bitmap img = daoImagem.getImagem(user.getLogin());
-				user.setImagemPerfil(img);
 				//Log.d("Imagem", String.valueOf(img.getWidth()));				user.setImagemPerfil(img);
 			
 		  }else{
@@ -120,9 +114,6 @@ public class DAOUsuario {
 			  user.setNome(result.getString(2));
 			  user.setCurso(result.getString(3));
 			  user.setSobreMim(result.getString(4));
-				@SuppressWarnings("unused")
-				Bitmap img = daoImagem.getImagem(user.getLogin());
-				user.setImagemPerfil(img);
 		  }else{
 			  user = null;
 		  }
