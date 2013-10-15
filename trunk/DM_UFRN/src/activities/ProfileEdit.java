@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.Menu;
@@ -86,6 +87,7 @@ public class ProfileEdit extends Activity {
 				usuario.setNome(edit_nome.getText().toString());
 				usuario.setCurso(edit_curso.getText().toString());
 				usuario.setSobreMim(edit_sobre.getText().toString());
+				daoImagem.putImagem(usuario.getLogin(), ((BitmapDrawable)trocaImagem.getDrawable()).getBitmap());
 				daoUsuario.updateUsuario(usuario.getLogin(), usuario);
 				daoUsuario.close();
 				
