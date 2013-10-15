@@ -96,7 +96,7 @@ public class MainActivity extends Activity {
 			public void onClick(View view) {
 				Intent comentariosIntent = new Intent();
 				comentariosIntent.putExtra("usuario", usuario);
-				comentariosIntent.setClass(MainActivity.this, ListaComentarios.class);
+				comentariosIntent.setClass(MainActivity.this, TelaComentarios.class);
 				startActivity(comentariosIntent);
 				finish();
 			}
