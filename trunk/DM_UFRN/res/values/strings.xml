@@ -79,5 +79,7 @@
     <string name="spinner_title">Select Label</string>
     <string name="lugar_adicionar">Adicionar lugar</string>
     <string name="lugar_escolher">Lugares:</string>
+    <string name="title_activity_redefine_senha">RedefinirSenha</string>
+   
 
 </resources>
