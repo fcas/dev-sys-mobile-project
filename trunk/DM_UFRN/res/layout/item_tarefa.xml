@@ -11,6 +11,9 @@
         style="@style/padrao" 
         android:layout_marginLeft="5sp"
         android:text="Tarefa" />
+    
+
+    
     <LinearLayout
         android:layout_width="match_parent"
 		android:layout_height="wrap_content"
@@ -52,5 +55,9 @@
 	        android:src="@drawable/remove" />   
 	    
 	</LinearLayout>
-	
+	    <TextView
+        android:id="@+id/lugar"
+        style="@style/padrao" 
+        android:layout_marginLeft="5sp"
+        android:text="Lugar" />
     </LinearLayout> 
