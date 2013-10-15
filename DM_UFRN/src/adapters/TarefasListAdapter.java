@@ -1,12 +1,9 @@
 package adapters;
 
 import java.util.List;
-
-import dao.DAOTarefa;
-
+import dimap.ufrn.dm.R;
+import model.Lugar;
 import model.Tarefas;
-
-import activities.R;
 import activities.UpdateTarefa;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -20,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import dao.DAOTarefa;
 
 
 public class TarefasListAdapter extends BaseAdapter {
@@ -65,6 +63,7 @@ public class TarefasListAdapter extends BaseAdapter {
 			tarefa.setDescricao("Não há nenhuma tarefa");
 			tarefa.setHorario("Não há nenhuma tarefa");
 			tarefa.setData("Não há nenhuma tarefa");
+			tarefa.setLugar(new Lugar());
 			v.setTag(tarefa);
 
 		}
@@ -76,6 +75,7 @@ public class TarefasListAdapter extends BaseAdapter {
 			TextView tarefa = (TextView) v.findViewById(R.id.tarefa);
 			TextView data = (TextView) v.findViewById(R.id.data);
 			TextView horario = (TextView) v.findViewById(R.id.horario);
+			TextView lugar = (TextView) v.findViewById(R.id.lugar);
 			ImageView img = (ImageView)v.findViewById(R.id.button_apagar);
 			img.setOnClickListener(new View.OnClickListener() {		
 				@Override
@@ -133,6 +133,9 @@ public class TarefasListAdapter extends BaseAdapter {
 			}
 			if (horario != null) {
 				horario.setText(p.getHorario());
+			}
+			if (lugar != null) {
+				lugar.setText(p.getLugar().getNome());
 			}
 
 		}
