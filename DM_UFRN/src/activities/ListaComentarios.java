@@ -4,7 +4,6 @@ import java.util.List;
 
 import model.Comentarios;
 import model.Usuario;
-import activities.R;
 import adapters.ListAdapter;
 import android.app.ListActivity;
 import android.content.Intent;
@@ -14,7 +13,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import dao.DAOComentario;
-
+import dimap.ufrn.dm.R;
 public class ListaComentarios extends ListActivity {
 
 	  private DAOComentario datasource;

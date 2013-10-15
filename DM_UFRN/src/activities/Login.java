@@ -1,18 +1,19 @@
 package activities;
-
-import dao.DAOUsuario;
+import dimap.ufrn.dm.R;
 import model.Usuario;
-import activities.R;
-import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import dao.DAOUsuario;
 
 public class Login extends Activity {
 	
@@ -37,7 +38,7 @@ public class Login extends Activity {
 		boolean autoSave = settings.getBoolean("ManterAutenticado", false);
 		Log.d("ManterAutenticado-Login", String.valueOf(autoSave));
 		String login = settings.getString("Login", "");
-		autoSave = false;
+		//autoSave = false;
 		if(autoSave == true){
 			manter_autenticado.setChecked(true);
 			daoUsuario.open();
@@ -99,6 +100,17 @@ public class Login extends Activity {
 					startActivity(mainIntent);
 					
 					finish();
+				}else{
+					AlertDialog.Builder builder = new AlertDialog.Builder(Login.this);
+					builder.setTitle("Login ou Senha incorretos");
+					builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+					           public void onClick(DialogInterface dialog, int id) {
+					               dialog.dismiss();
+					           }
+					       });
+					AlertDialog dialog = builder.create();
+					dialog.show();
+					
 				}
 			}
 		});
@@ -110,6 +122,11 @@ public class Login extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.login, menu);
 		return true;
+	}
+	
+	@Override
+	public void onBackPressed() {
+		finish();
 	}
 
 }

@@ -2,20 +2,18 @@ package activities;
 //O bot�o voltar est� voltando para a tela principal
 
 import java.util.List;
-
-import dao.DAOTarefa;
+import dimap.ufrn.dm.R;
 import model.Tarefas;
 import model.Usuario;
-import activities.R;
 import adapters.TarefasListAdapter;
-import android.os.Bundle;
 import android.app.Activity;
-import android.app.ListActivity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import dao.DAOTarefa;
 
 public class ListaTarefas extends Activity {
 	private Button button;

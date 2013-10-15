@@ -1,11 +1,12 @@
 package activities;
 //O bot�o voltar est� voltando para a tela de login
-
+import dao.DAOImagem;
+import dimap.ufrn.dm.R;
 import model.Usuario;
-import activities.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -22,6 +23,7 @@ public class MainActivity extends Activity {
 	private Button button_logoff;
 	private Button button_sair;
 	private ImageButton profile;
+	private DAOImagem daoImagem;
 	Usuario usuario;
 	
 	@Override
@@ -34,7 +36,7 @@ public class MainActivity extends Activity {
 		usuario = (Usuario) getIntent().getSerializableExtra("usuario");
 		nome.setText(usuario.getNome());
 		curso.setText(usuario.getCurso());
-		
+		daoImagem = new DAOImagem();
 		setButtons();
 	}
 	
@@ -55,7 +57,12 @@ public class MainActivity extends Activity {
 	private void setButtons() {
 		
 		profile = (ImageButton) findViewById(R.id.trocaImagem);
-		profile.setImageBitmap(usuario.getImagemPerfil());	 
+		Bitmap imgPerfil = daoImagem.getImagem(usuario.getLogin());
+		if(imgPerfil == null){
+			profile.setImageResource(R.drawable.bomb);
+		}else{
+			profile.setImageBitmap(imgPerfil);	 
+		}
 		profile.setOnClickListener(new View.OnClickListener() {
 
 			@Override

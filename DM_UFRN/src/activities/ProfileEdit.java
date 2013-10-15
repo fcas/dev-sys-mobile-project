@@ -1,7 +1,6 @@
 package activities;
 
 import model.Usuario;
-import activities.R;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -14,11 +13,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import dao.DAOImagem;
 import dao.DAOUsuario;
-
+import dimap.ufrn.dm.R;
 public class ProfileEdit extends Activity {
 
 	DAOUsuario daoUsuario;
+	DAOImagem daoImagem;
 	Usuario usuario;
 	Button feito;
 	ImageButton trocaImagem;
@@ -27,7 +28,7 @@ public class ProfileEdit extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		daoUsuario = new DAOUsuario(this);
-		daoUsuario.open();
+		daoImagem = new DAOImagem();
 		usuario = (Usuario) getIntent().getSerializableExtra("usuario");
 		setContentView(R.layout.activity_profile_edit);
 		
@@ -81,7 +82,7 @@ public class ProfileEdit extends Activity {
 			@Override
 			public void onClick(View view) {
 				Intent mainIntent = new Intent();
-
+				daoUsuario.open();
 				usuario.setNome(edit_nome.getText().toString());
 				usuario.setCurso(edit_curso.getText().toString());
 				usuario.setSobreMim(edit_sobre.getText().toString());
@@ -96,7 +97,15 @@ public class ProfileEdit extends Activity {
 			}
 		});
 		trocaImagem = (ImageButton)findViewById(R.id.trocaImagem);
-		trocaImagem.setImageBitmap(usuario.getImagemPerfil());	 
+		
+		trocaImagem = (ImageButton) findViewById(R.id.trocaImagem);
+		Bitmap imgPerfil = daoImagem.getImagem(usuario.getLogin());
+		if(imgPerfil == null){
+			trocaImagem.setImageResource(R.drawable.bomb);
+		}else{
+			trocaImagem.setImageBitmap(imgPerfil);	 
+		}
+		
 		trocaImagem.setOnClickListener(new View.OnClickListener() {
 
 			@Override
