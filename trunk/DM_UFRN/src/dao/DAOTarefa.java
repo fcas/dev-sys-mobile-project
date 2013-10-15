@@ -3,7 +3,6 @@ package dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Comentarios;
 import model.Tarefas;
 import activities.DataCalculos;
 import android.content.ContentValues;
@@ -17,9 +16,11 @@ public class DAOTarefa {
 
 	  private SQLiteDatabase database;
 	  private MySQLiteHelper dbHelper;
+	  private DAOLugar daoLugar;
 	  private String[] allColumns = {MySQLiteHelper.COLUNA_ID, Tarefas.COLUNA_USUARIO, Tarefas.COLUNA_ID_LUGAR,  Tarefas.COLUNA_DATA,  Tarefas.COLUNA_HORARIO, Tarefas.COLUNA_DESCRICAO};
 	  public DAOTarefa(Context context) {
 	    dbHelper = new MySQLiteHelper(context);
+	    daoLugar = new DAOLugar(context);
 	  }
 
 	  public void open() throws SQLException {
@@ -33,7 +34,7 @@ public class DAOTarefa {
 	  public Tarefas createTarefa(Tarefas tarefa) {
 	    ContentValues values = new ContentValues();
 	    values.put(Tarefas.COLUNA_USUARIO, tarefa.getUsuario());
-		values.put(Tarefas.COLUNA_ID_LUGAR, tarefa.getIdtLugar());
+		values.put(Tarefas.COLUNA_ID_LUGAR, tarefa.getLugar().getId_local());
 	    values.put(Tarefas.COLUNA_DATA, DataCalculos.visaoToBanco(tarefa.getData()));
 	    values.put(Tarefas.COLUNA_HORARIO, tarefa.getHorario());
 	    values.put(Tarefas.COLUNA_DESCRICAO, tarefa.getDescricao());
@@ -49,7 +50,7 @@ public class DAOTarefa {
 		    String strFilter = MySQLiteHelper.COLUNA_ID+"='" + tarefa.getId()+"'";
 		    ContentValues args = new ContentValues();
 		    args.put(Tarefas.COLUNA_DESCRICAO, tarefa.getDescricao());
-		    args.put(Tarefas.COLUNA_ID_LUGAR, tarefa.getIdtLugar());
+		    args.put(Tarefas.COLUNA_ID_LUGAR, tarefa.getLugar().getId_local());
 		    args.put(Tarefas.COLUNA_DATA, DataCalculos.visaoToBanco(tarefa.getData()));
 		    args.put(Tarefas.COLUNA_HORARIO, tarefa.getHorario());
 		    //args.put(Tarefas.COLUNA_LOCAL, tarefa.getLocal());
@@ -113,13 +114,16 @@ public class DAOTarefa {
 		  }
 	  
 	  private Tarefas cursorToTarefa(Cursor cursor) {
+		daoLugar.open();
 	    Tarefas tarefa = new Tarefas();
 	    tarefa.setId(cursor.getLong(0));
 	    tarefa.setUsuario(cursor.getString(1));
-	    tarefa.setIdLugar(cursor.getInt(2));
+	    tarefa.setLugar(daoLugar.getLugarById(cursor.getInt(2)));
 	    tarefa.setData(cursor.getString(3));
 	    tarefa.setHorario(cursor.getString(4));
+	    
 	    tarefa.setDescricao(cursor.getString(5));
+	    daoLugar.close();
 	    return tarefa;
 	  }
 

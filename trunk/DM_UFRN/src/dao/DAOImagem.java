@@ -3,59 +3,40 @@ import java.io.File;
 import java.io.FileOutputStream;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Bitmap.CompressFormat;
+import android.graphics.BitmapFactory;
 import android.os.Environment;
 import android.util.Log;
 
 public class DAOImagem {
 
-  public File getSavePath() {
-      File path;
-      if (hasSDCard()) { // SD card
-          path = new File(getSDCardPath() + "/myapp/");
-          path.mkdir();
-      } else { 
-          path = Environment.getDataDirectory();
-      }
-      return path;
-  }
-  public String getCacheFilename() {
-      File f = getSavePath();
-      return f.getAbsolutePath() + "/cache.png";
-  }
-
   public Bitmap getImagem(String filename) {
       try {
           //File f = new File("/mnt/sdcard/"+filename);
-          File f = new File("/mnt/sdcard/a.jpeg");
+          File f = new File("/mnt/sdcard/dm_ufrn/"+filename);
           if (!f.exists()) { 
         	  Log.d("Nao existe", "Nao");
         	  return null; 
           }
-          Bitmap tmp = BitmapFactory.decodeFile(filename);
+          Bitmap tmp = BitmapFactory.decodeFile("/mnt/sdcard/dm_ufrn/"+filename);
           
-          
-          Log.d(String.valueOf(tmp.getWidth()), String.valueOf(tmp.getPixel(36, 21)));
           return tmp;
       } catch (Exception e) {
     	  Log.d("Deu erro", "Erro");
           return null;
       }
   }
-  public Bitmap loadFromCacheFile() {
-      return getImagem(getCacheFilename());
-  }
-  public void saveToCacheFile(Bitmap bmp) {
-      putImagem(getCacheFilename(),bmp);
-  }
-  public void putImagem(String filename,Bitmap bmp) {
+
+  public boolean putImagem(String filename,Bitmap bmp) {
       try {
-          FileOutputStream out = new FileOutputStream(filename);
+          FileOutputStream out = new FileOutputStream("/mnt/sdcard/dm_ufrn/"+filename);
           bmp.compress(CompressFormat.PNG, 100, out);
           out.flush();
           out.close();
-      } catch(Exception e) {}
+          return true;
+      } catch(Exception e) {
+    	  return false;
+      }
   }
 
   public boolean hasSDCard() { // SD????????
