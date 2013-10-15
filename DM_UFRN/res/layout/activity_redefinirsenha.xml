@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+        <TextView
+            style="@style/titulo" 
+		    android:id="@+id/text_preencher_dados"
+		    android:text="Redefinir Senha"/>  
+    
+
+         <TextView
+            style="@style/padrao" 
+		    android:id="@+id/senhaatual"
+		    android:text="Senha Atual"/>  
+        <EditText
+	        style="@style/editPadrao" 
+	        android:id="@+id/edit_senhaatual"
+	        android:inputType="textPassword" ></EditText>
+        
+         <TextView
+            style="@style/padrao" 
+		    android:id="@+id/novasenha"
+		    android:text="Nova senha"/>  
+    
+
+            <EditText
+        style="@style/editPadrao" 
+        android:id="@+id/edit_novasenha"
+        android:inputType="textPassword" ></EditText>
+        
+         <TextView
+            style="@style/padrao" 
+		    android:id="@+id/confirmasenha"
+		    android:text="Confirme sua nova senha"/>  
+    
+
+         <EditText
+	        style="@style/editPadrao" 
+	        android:id="@+id/edit_confirmasenha"
+	        android:inputType="textPassword" ></EditText>
+         
+          <Button
+         style="@style/buttonPadrao" 
+         android:id="@+id/pronto"
+         android:text="@string/tarefa_ok" />
+
+</LinearLayout>
