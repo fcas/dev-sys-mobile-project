@@ -3,22 +3,17 @@ package activities;
 //O bot�o voltar est� voltando para a lista de tarefas...
 
 import java.util.List;
-
-import dao.DAOComentario;
-import dao.DAOLugar;
-import dao.DAOTarefa;
-import model.Comentarios;
+import dimap.ufrn.dm.R;
+import model.Lugar;
 import model.Tarefas;
 import model.Usuario;
-import activities.R;
-import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
-import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -27,10 +22,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
+import dao.DAOLugar;
+import dao.DAOTarefa;
 
 public class NovaTarefa extends Activity{
 	private DAOTarefa daoTarefa;
@@ -90,7 +86,7 @@ public class NovaTarefa extends Activity{
 		        		tarefa.setUsuario(usuario.getLogin());
 		        		tarefa.setData(tarefa_data.getText().toString());
 		        		tarefa.setHorario(tarefa_hora.getText().toString());
-		        		tarefa.setIdLugar(daoLugar.idLugar(label));
+		        		tarefa.setLugar(new Lugar(daoLugar.idLugar(label)));
 		        		//tarefa.setLocal(tarefa_data.getText().toString());
 		        		Log.d("Tabela tarefa", Tarefas.CREATE_TAREFA);
 		        		daoTarefa.open();

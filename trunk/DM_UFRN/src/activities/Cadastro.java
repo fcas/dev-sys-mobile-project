@@ -2,8 +2,6 @@ package activities;
 
 //O bot�o voltar est� voltando para a tela de login...
 
-import dao.DAOImagem;
-import dao.DAOUsuario;
 import model.Usuario;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -19,6 +17,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import dao.DAOImagem;
+import dao.DAOUsuario;
+import dimap.ufrn.dm.R;
 
 public class Cadastro extends Activity {
 	Button cadastro;
@@ -69,7 +70,7 @@ private void setButtons() {
 			        		usuario.setSenha(edit_senha.getText().toString());
 			        		usuario.setSobreMim(edit_sobre.getText().toString());
 			        		usuario.setLogin(edit_login.getText().toString());
-			        		usuario.setImagemPerfil(((BitmapDrawable)trocaImagem.getDrawable()).getBitmap());		        		
+			        		daoImagem.putImagem(usuario.getLogin(), ((BitmapDrawable)trocaImagem.getDrawable()).getBitmap());    		
 			        		daoUsuario.createUsuario(usuario);
 			        		daoUsuario.close();
 			        	//	IServicoUsuario sUsuario = new ServicoUsuario();

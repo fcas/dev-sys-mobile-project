@@ -3,14 +3,13 @@ package activities;
 //O bot�o voltar est� voltando para a tela principal
 
 import model.Usuario;
-import activities.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
-
+import dimap.ufrn.dm.R;
 public class TelaComentarios extends Activity {
 	private Button button;
 	Usuario usuario;
