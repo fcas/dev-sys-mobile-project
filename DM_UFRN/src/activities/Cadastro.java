@@ -59,7 +59,7 @@ private void setButtons() {
 				}
 			    else{
         			builder.setTitle("Erro");  
-			        builder.setMessage("Senhas n�o se correspondem");  
+			        builder.setMessage("Senhas nao se correspondem");  
         		}
 		        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() { 
 		        	public void onClick(DialogInterface arg0, int arg1) {

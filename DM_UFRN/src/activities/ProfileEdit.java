@@ -3,6 +3,7 @@ package activities;
 import model.Usuario;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -22,8 +23,9 @@ public class ProfileEdit extends Activity {
 	DAOUsuario daoUsuario;
 	DAOImagem daoImagem;
 	Usuario usuario;
-	Button feito;
+	Button feito, button_redefine_senha;
 	ImageButton trocaImagem;
+	
 	EditText edit_nome, edit_sobre, edit_curso; 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -82,23 +84,47 @@ public class ProfileEdit extends Activity {
 
 			@Override
 			public void onClick(View view) {
-				Intent mainIntent = new Intent();
-				daoUsuario.open();
+				final Builder builder = new AlertDialog.Builder(ProfileEdit.this);  
+				builder.setTitle("Sucesso");  
+				builder.setMessage("Dados Editados com sucesso");  
 				usuario.setNome(edit_nome.getText().toString());
 				usuario.setCurso(edit_curso.getText().toString());
 				usuario.setSobreMim(edit_sobre.getText().toString());
 				daoImagem.putImagem(usuario.getLogin(), ((BitmapDrawable)trocaImagem.getDrawable()).getBitmap());
+				daoUsuario.open();
 				daoUsuario.updateUsuario(usuario.getLogin(), usuario);
 				daoUsuario.close();
-				
-				mainIntent.putExtra("usuario", usuario);
-				mainIntent.setClass(ProfileEdit.this, MainActivity.class);
-				startActivity(mainIntent);
+		        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() { 
+		        	public void onClick(DialogInterface arg0, int arg1) {
+		        		Intent mainIntent = new Intent();
+						mainIntent.putExtra("usuario", usuario);
+						mainIntent.setClass(ProfileEdit.this, MainActivity.class);
+						startActivity(mainIntent);
+//						/this.dismiss();
+		        		finish();
+	        		}
+	        	
+		        });
+		        
 
-				finish();
+				AlertDialog alert = builder.create();  
+		        alert.show();
 			}
 		});
-		trocaImagem = (ImageButton)findViewById(R.id.trocaImagem);
+		
+		button_redefine_senha = (Button) findViewById(R.id.button_redefine_senha);
+		button_redefine_senha.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View view) {
+				Intent redefineSenha = new Intent();
+				redefineSenha.putExtra("usuario", usuario);
+				redefineSenha.setClass(ProfileEdit.this, RedefinirSenha.class);
+				startActivity(redefineSenha);
+//				/this.dismiss();
+        		finish();
+			}
+		});
 		
 		trocaImagem = (ImageButton) findViewById(R.id.trocaImagem);
 		Bitmap imgPerfil = daoImagem.getImagem(usuario.getLogin());
