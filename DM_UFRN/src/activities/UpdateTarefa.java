@@ -15,9 +15,11 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -28,7 +30,7 @@ import android.widget.Toast;
 import dao.DAOLugar;
 import dao.DAOTarefa;
 
-public class UpdateTarefa extends Activity implements OnDateSetListener{
+public class UpdateTarefa extends Activity implements OnDateSetListener, OnItemSelectedListener{
 	private DAOTarefa daoTarefa;
 	private Button pronto;
 	private DAOLugar daoLugar;
@@ -44,9 +46,10 @@ public class UpdateTarefa extends Activity implements OnDateSetListener{
 		setContentView(R.layout.activity_update_tarefa);
 		setTitle("UFRN ON TOUCH");
 		daoTarefa = new DAOTarefa(this);
-		daoLugar = new DAOLugar(this);
 		
 		spinner = (Spinner) findViewById(R.id.spinner);
+		
+		spinner.setOnItemSelectedListener(this);
 		tarefa_hora = (EditText)findViewById(R.id.tarefa_hora);
 		tarefa_data = (EditText)findViewById(R.id.tarefa_data);
 		tarefa_descricao = (EditText)findViewById(R.id.tarefa_descricao);
@@ -78,11 +81,11 @@ public class UpdateTarefa extends Activity implements OnDateSetListener{
 	private void setButtons() {
 
 		pronto = (Button) findViewById(R.id.button_tarefa_nova);
+		daoLugar = new DAOLugar(getApplicationContext());
 		pronto.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View view) {
-				label = "";
 				Builder builder = new AlertDialog.Builder(UpdateTarefa.this);  
 		        builder.setTitle("Sucesso");  
 		        builder.setMessage("Tarefa atualizada com sucesso");  
@@ -96,6 +99,8 @@ public class UpdateTarefa extends Activity implements OnDateSetListener{
 		        		tarefa.setData(tarefa_data.getText().toString());
 		        		tarefa.setHorario(tarefa_hora.getText().toString());
 		        		tarefa.setLugar(new Lugar(daoLugar.idLugar(label)));
+		        		Log.d("LABEL",label);
+		        		Log.d("DAOLUGAR_IDLUGARLABEL", String.valueOf(daoLugar.idLugar(label)));
 		        		//tarefa.setLocal(tarefa_data.getText().toString());
 		        		daoTarefa.open();
 		        		daoTarefa.updateTarefa(tarefa);
@@ -110,19 +115,6 @@ public class UpdateTarefa extends Activity implements OnDateSetListener{
 
 		        AlertDialog alert = builder.create();  
 		        alert.show();
-				
-				//minhasTarefasIntent = getIntent();
-				//Usuario usuario = (Usuario) minhasTarefasIntent.getSerializableExtra("usuario");
-
-				//EditText editText = (EditText) findViewById(R.id.tarefa_local);
-				//tarefas.setLocal(editText.getText().toString());
-				//editText = (EditText) findViewById(R.id.tarefa_horario);
-				//tarefas.setHorario(editText.getText().toString());
-				//editText = (EditText) findViewById(R.id.tarefa_descricao);
-				//tarefas.setDescricao(editText.getText().toString());
-
-				//usuario.getTarefas().add(tarefas);
-
 			}
 		});
 		
@@ -227,12 +219,17 @@ public class UpdateTarefa extends Activity implements OnDateSetListener{
 
 		Toast.makeText(parent.getContext(), "Voce selecionou: " + label,
 				Toast.LENGTH_LONG).show();
-
 	}
 
 	@Override
 	public void onDateSet(DatePicker view, int year, int monthOfYear,
 			int dayOfMonth) {
+		
+	}
+
+	@Override
+	public void onNothingSelected(AdapterView<?> arg0) {
+		// TODO Auto-generated method stub
 		
 	}
 }	

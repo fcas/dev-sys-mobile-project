@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -28,7 +29,7 @@ import android.widget.Toast;
 import dao.DAOLugar;
 import dao.DAOTarefa;
 
-public class NovaTarefa extends Activity{
+public class NovaTarefa extends Activity implements OnItemSelectedListener{
 	private DAOTarefa daoTarefa;
 	private DAOLugar daoLugar;
 	private Button pronto;
@@ -45,6 +46,7 @@ public class NovaTarefa extends Activity{
 		setTitle("UFRN ON TOUCH");
 		daoTarefa = new DAOTarefa(this);
 		spinner = (Spinner) findViewById(R.id.spinner);
+		spinner.setOnItemSelectedListener(this);
 		tarefa_hora = (EditText)findViewById(R.id.tarefa_hora);
 		tarefa_data = (EditText)findViewById(R.id.tarefa_data);
 		tarefa_descricao = (EditText)findViewById(R.id.tarefa_descricao);
@@ -102,19 +104,6 @@ public class NovaTarefa extends Activity{
 
 		        AlertDialog alert = builder.create();  
 		        alert.show();
-				
-				//minhasTarefasIntent = getIntent();
-				//Usuario usuario = (Usuario) minhasTarefasIntent.getSerializableExtra("usuario");
-
-				//EditText editText = (EditText) findViewById(R.id.tarefa_local);
-				//tarefas.setLocal(editText.getText().toString());
-				//editText = (EditText) findViewById(R.id.tarefa_horario);
-				//tarefas.setHorario(editText.getText().toString());
-				//editText = (EditText) findViewById(R.id.tarefa_descricao);
-				//tarefas.setDescricao(editText.getText().toString());
-
-				//usuario.getTarefas().add(tarefas);
-
 			}
 		});
 		
@@ -214,10 +203,16 @@ public class NovaTarefa extends Activity{
 
 	public void onItemSelected(AdapterView<?> parent, View view, int position,
 			long id) {
-		String label = parent.getItemAtPosition(position).toString();
+		label = parent.getItemAtPosition(position).toString();
 
 		Toast.makeText(parent.getContext(), "Voce selecionou: " + label,
 				Toast.LENGTH_LONG).show();
 
+	}
+
+	@Override
+	public void onNothingSelected(AdapterView<?> arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 }	

@@ -49,6 +49,7 @@ public class Login extends Activity {
 			mainIntent.setClass(Login.this,
 					MainActivity.class);
 			startActivity(mainIntent);
+			finish();
 		}
 	}
 
