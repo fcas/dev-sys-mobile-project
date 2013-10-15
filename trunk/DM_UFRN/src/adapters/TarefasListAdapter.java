@@ -134,7 +134,9 @@ public class TarefasListAdapter extends BaseAdapter {
 				horario.setText(p.getHorario());
 			}
 			if (lugar != null) {
-				lugar.setText(p.getLugar().getNome());
+				if(p.getLugar() != null){
+					lugar.setText(p.getLugar().getNome());
+				}
 			}
 
 		}
