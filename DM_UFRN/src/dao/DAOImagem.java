@@ -13,12 +13,12 @@ public class DAOImagem {
   public Bitmap getImagem(String filename) {
       try {
           //File f = new File("/mnt/sdcard/"+filename);
-          File f = new File("/mnt/sdcard/dm_ufrn/"+filename);
+          File f = new File("/mnt/sdcard/dm_ufrn/"+filename+".jpeg");
           if (!f.exists()) { 
         	  Log.d("Nao existe", "Nao");
         	  return null; 
           }
-          Bitmap tmp = BitmapFactory.decodeFile("/mnt/sdcard/dm_ufrn/"+filename);
+          Bitmap tmp = BitmapFactory.decodeFile("/mnt/sdcard/dm_ufrn/"+filename+".jpeg");
           
           return tmp;
       } catch (Exception e) {
@@ -29,7 +29,7 @@ public class DAOImagem {
 
   public boolean putImagem(String filename,Bitmap bmp) {
       try {
-          FileOutputStream out = new FileOutputStream("/mnt/sdcard/dm_ufrn/"+filename);
+          FileOutputStream out = new FileOutputStream("/mnt/sdcard/dm_ufrn/"+filename+".jpeg");
           bmp.compress(CompressFormat.PNG, 100, out);
           out.flush();
           out.close();
