@@ -21,7 +21,6 @@ import dao.DAOTarefa;
 
 
 public class TarefasListAdapter extends BaseAdapter {
-	private LayoutInflater mInflater;
     private List<Tarefas> itens;
     private Context context;
     DAOTarefa dao;
@@ -60,9 +59,9 @@ public class TarefasListAdapter extends BaseAdapter {
 			v = vi.inflate(R.layout.item_tarefa, null);
 
 			tarefa = new Tarefas();
-			tarefa.setDescricao("Não há nenhuma tarefa");
-			tarefa.setHorario("Não há nenhuma tarefa");
-			tarefa.setData("Não há nenhuma tarefa");
+			tarefa.setDescricao("Nï¿½o hï¿½ nenhuma tarefa");
+			tarefa.setHorario("Nï¿½o hï¿½ nenhuma tarefa");
+			tarefa.setData("Nï¿½o hï¿½ nenhuma tarefa");
 			tarefa.setLugar(new Lugar());
 			v.setTag(tarefa);
 
@@ -96,7 +95,7 @@ public class TarefasListAdapter extends BaseAdapter {
 							   dialog.dismiss();
 				           }
 				       });
-					builder.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+					builder.setNegativeButton("Nï¿½o", new DialogInterface.OnClickListener() {
 				           public void onClick(DialogInterface dialog, int id) {
 				              dialog.dismiss();
 				           }

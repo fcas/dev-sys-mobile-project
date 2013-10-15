@@ -3,7 +3,6 @@ package model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import android.graphics.Bitmap;
 
 public class Usuario implements Serializable {
 

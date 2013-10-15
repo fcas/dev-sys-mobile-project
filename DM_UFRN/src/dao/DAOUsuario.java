@@ -9,7 +9,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Bitmap;
 
 public class DAOUsuario {
 
@@ -17,7 +16,8 @@ public class DAOUsuario {
 	  private MySQLiteHelper dbHelper;
 	  private String[] allColumns = { Usuario.COLUNA_LOGIN, Usuario.COLUNA_SENHA,
 			  Usuario.COLUNA_NOME , Usuario.COLUNA_CURSO, Usuario.COLUNA_SOBRE};
-	  private DAOImagem daoImagem;
+	  @SuppressWarnings("unused")
+	private DAOImagem daoImagem;
 	  public DAOUsuario(Context context) {
 	    dbHelper = new MySQLiteHelper(context);
 	    daoImagem = new DAOImagem();
