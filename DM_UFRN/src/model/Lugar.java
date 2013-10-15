@@ -23,6 +23,10 @@ public class Lugar {
 		this.listaComentarios = new ArrayList<Comentarios>();
 	}
 
+	public Lugar(int idLugar) {
+		this.id_local =  idLugar;
+	}
+
 	public List<Comentarios> getListaComentarios() {
 		return listaComentarios;
 	}

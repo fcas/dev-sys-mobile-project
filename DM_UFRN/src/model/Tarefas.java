@@ -38,15 +38,6 @@ public class Tarefas implements Serializable {
 	public void setLugar(Lugar l) {
 		this.lugar = l;
 	}
-	
-	public long getIdtLugar() {
-		return idLugar;
-	}
-
-	public void setIdLugar(int id) {
-		this.idLugar = id;
-	}
-
 
 	public String getHorario() {
 		return horario;

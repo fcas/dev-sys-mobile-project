@@ -14,7 +14,6 @@ public class Usuario implements Serializable {
 	private List<Comentarios> comentarios;
 	private List<Tarefas> tarefas;
 	private String senha;
-	private Bitmap imagemPerfil;
 
 	public static final String TABELA_USUARIO = "Usuario";
 	public static final String COLUNA_LOGIN = "Login";
@@ -94,12 +93,6 @@ public class Usuario implements Serializable {
 		this.sobreMim = sobreMim;
 	}
 
-	public Bitmap getImagemPerfil() {
-		return imagemPerfil;
-	}
 
-	public void setImagemPerfil(Bitmap imagemPerfil) {
-		this.imagemPerfil = imagemPerfil;
-	}
 
 }
