@@ -1,11 +1,13 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import dao.MySQLiteHelper;
 
-public class Lugar {
+@SuppressWarnings("serial")
+public class Lugar implements Serializable{
 	private String nome;
 	private String localizacao;
 	private String tipo;
