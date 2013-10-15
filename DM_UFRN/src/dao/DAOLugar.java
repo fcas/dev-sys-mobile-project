@@ -9,6 +9,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 public class DAOLugar {
 
@@ -75,11 +76,13 @@ public class DAOLugar {
 	public Lugar getLugarById(int id) {
 		Cursor result = database.rawQuery("Select * from Lugar where _id = ?",
 				new String[] { String.valueOf(id) });
+		Log.d("ID", String.valueOf(id));
 		Lugar lugar = new Lugar();
 		if (result.moveToNext()) {
 			lugar.setId_local((result.getInt(0)));
+
+			Log.d("Nome do Lugar", result.getString(1));
 			lugar.setNome(result.getString(1));
-			;
 		} else {
 			lugar = null;
 		}
