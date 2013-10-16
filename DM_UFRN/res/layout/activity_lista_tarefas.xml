@@ -15,6 +15,7 @@
         android:id="@+id/checkTarefas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:checked="true"
         android:text="Ver somente tarefas a partir de hoje" />
 
     <ListView
