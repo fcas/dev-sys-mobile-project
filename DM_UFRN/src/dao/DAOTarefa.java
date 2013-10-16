@@ -74,6 +74,35 @@ public class DAOTarefa {
 				+ id, null);
 	}
 
+
+	public List<Tarefas> getFutureTasksByUser(String userLogin) {
+		List<Tarefas> tarefas = new ArrayList<Tarefas>();
+		Log.d("Login-Parametro", userLogin);
+		String now = DataCalculos.dataHoraAtual();
+		String[] dataHora = new String[2];
+	    dataHora = now.split(" ");
+		Cursor cursor = database.rawQuery("Select * from "
+				+ Tarefas.TABELA_TAREFA
+				+ " where Usuario = ? and Data >= ? order by Data, Horario",
+				new String[] { userLogin , dataHora[0]});
+
+		cursor.moveToFirst();
+		while (!cursor.isAfterLast()) {
+			Tarefas tarefa = cursorToTarefa(cursor);
+			Log.d("Login", tarefa.getUsuario());
+			Log.d("Data", DataCalculos.bancoToVisao(tarefa.getData()));
+			Log.d("Hora", tarefa.getHorario());
+			Log.d("Descricao", tarefa.getDescricao());
+			tarefa.setData(DataCalculos.bancoToVisao(tarefa.getData()));
+			tarefas.add(tarefa);
+			cursor.moveToNext();
+		}
+		// Make sure to close the cursor
+		cursor.close();
+		return tarefas;
+	}
+
+	
 	public List<Tarefas> getAllTasks() {
 		List<Tarefas> tarefas = new ArrayList<Tarefas>();
 
