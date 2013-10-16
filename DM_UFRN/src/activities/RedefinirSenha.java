@@ -39,7 +39,12 @@ public class RedefinirSenha extends Activity {
 			@Override
 			public void onClick(View view) {
 				final boolean senhaValida = edit_confirmasenha.getText().toString().equals(edit_novasenha.getText().toString());
-				final Builder builder = new AlertDialog.Builder(RedefinirSenha.this);  
+				final Builder builder = new AlertDialog.Builder(RedefinirSenha.this); 
+		        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() { 
+		        	public void onClick(DialogInterface arg0, int arg1) {
+		        		arg0.dismiss();
+		        	}
+		        });
 				if(senhaValida){
 					daoUsuario.open();
 					Usuario user = daoUsuario.autenticar(usuario.getLogin(), edit_senhaatual.getText().toString());
@@ -64,15 +69,7 @@ public class RedefinirSenha extends Activity {
 			        builder.setMessage("Senhas nao se correspondem");  
 			        AlertDialog alert = builder.create();  
 			        alert.show();
-        		}
-		        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() { 
-		        	public void onClick(DialogInterface arg0, int arg1) {
-		        		
-		        	}
-		        });
-
-		        
-				
+        		}	        
 			}
 		});
 	}

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Comentarios;
+import model.Tarefas;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -66,6 +67,28 @@ public class DAOComentario {
 		cursor.close();
 		return Comentarioss;
 	}
+	
+	public List<Comentarios> getComentariosByLugar(String lugar) {
+		List<Comentarios> Comentarioss = new ArrayList<Comentarios>();
+		int idLugar = daoLugar.idLugar(lugar);
+		
+		Cursor cursor = database.rawQuery("Select * from "
+				+ Comentarios.TABELA_COMENTARIOS
+				+ " where "+Comentarios.COLUNA_ID_LUGAR+" = ?",
+				new String[] { String.valueOf(idLugar) });
+
+		cursor.moveToFirst();
+		while (!cursor.isAfterLast()) {
+			Comentarios Comentarios = cursorToComentarios(cursor);
+			Comentarioss.add(Comentarios);
+			cursor.moveToNext();
+		}
+		cursor.close();
+		return Comentarioss;
+	}
+
+	
+	
 
 	private Comentarios cursorToComentarios(Cursor cursor) {
 		Comentarios Comentarios = new Comentarios();
@@ -76,6 +99,7 @@ public class DAOComentario {
 		Comentarios.setLugar(daoLugar.getLugarById(cursor.getInt(3)));
 		daoLugar.close();
 		return Comentarios;
+		
 	}
 
 }
