@@ -116,7 +116,7 @@ public class NovoComentario extends Activity implements OnItemSelectedListener {
 					db.close();
 				} else {
 					Toast.makeText(getApplicationContext(),
-							"Please enter label name", Toast.LENGTH_SHORT)
+							"Por favor, insira um nome para lugar", Toast.LENGTH_SHORT)
 							.show();
 				}
 			}
