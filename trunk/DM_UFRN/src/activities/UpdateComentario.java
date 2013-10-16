@@ -68,7 +68,7 @@ public class UpdateComentario extends Activity implements
 				label = inputLabel.getText().toString();
 				Builder builder = new AlertDialog.Builder(UpdateComentario.this);
 				builder.setTitle("Sucesso");
-				builder.setMessage("Comentario adicionado com sucesso");
+				builder.setMessage("Comentario atualizado com sucesso");
 
 				builder.setPositiveButton("OK",
 						new DialogInterface.OnClickListener() {
@@ -121,7 +121,7 @@ public class UpdateComentario extends Activity implements
 					db.close();
 				} else {
 					Toast.makeText(getApplicationContext(),
-							"Please enter label name", Toast.LENGTH_SHORT)
+							"Por favor, insira um nome para lugar", Toast.LENGTH_SHORT)
 							.show();
 				}
 			}
