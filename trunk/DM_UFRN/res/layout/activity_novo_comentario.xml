@@ -76,11 +76,7 @@
         android:layout_marginTop="18dp"
         android:prompt="@string/spinner_title" />
 
-    <Button
-        android:id="@+id/btn_add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/lugar_adicionar" />
+
 
     <TextView
         android:id="@+id/textView2"
@@ -95,6 +91,12 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="text" />
+
+    <Button
+        android:id="@+id/btnadd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/lugar_adicionar" />
 
 	<Button
 	    android:id="@+id/button_comentar"
