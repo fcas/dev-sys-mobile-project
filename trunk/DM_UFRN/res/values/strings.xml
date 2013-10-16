@@ -86,6 +86,6 @@
     <string name="traco">-</string>
     <string name="login">Login</string>
     <string name="login_opcao">Manter-me autenticado</string>
-   
+    <string name="title_activity_update_comentario">UpdateComentario</string>
 
 </resources>

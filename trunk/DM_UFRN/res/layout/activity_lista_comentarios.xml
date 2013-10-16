@@ -9,26 +9,6 @@
     android:background="@drawable/papel"
     tools:context=".TelaComentarios" >
 
-    <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/button_comentario_listar"
-        android:layout_marginTop="17dp"
-        android:contentDescription="@string/comentarios_logo"
-        android:src="@drawable/comment" />
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignTop="@+id/imageView1"
-        android:text="@string/comentarios"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="40sp" />
-
     <Button
         android:id="@+id/button_comentario_novo"
         android:layout_width="fill_parent"
@@ -46,5 +26,24 @@
         android:layout_below="@+id/imageView1"
         android:layout_marginTop="156dp"
         android:text="@string/comentario_listar" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/comentarios"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="40sp" />
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="50dp"
+	    android:layout_height="50dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:contentDescription="@string/comentarios_logo"
+        android:src="@drawable/comment" />
 
 </RelativeLayout>
