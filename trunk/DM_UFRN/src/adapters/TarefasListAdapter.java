@@ -149,6 +149,21 @@ public class TarefasListAdapter extends BaseAdapter {
 	private Context getContext() {
 		return context;
 	}
+
+
+	public void mostrarTudo(String userLogin) {
+		dao.open();
+		itens = dao.getTasksByUser(userLogin);
+		dao.close();
+		notifyDataSetChanged();		
+	}
+	public void mostrarFuturas(String userLogin) {
+		dao.open();
+		itens = dao.getFutureTasksByUser(userLogin);
+		dao.close();
+		notifyDataSetChanged();
+		
+	}
 	
 
 }

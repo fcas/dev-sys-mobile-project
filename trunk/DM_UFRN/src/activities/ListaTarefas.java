@@ -12,7 +12,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ListView;
+import android.widget.RadioGroup;
 import dao.DAOTarefa;
 
 public class ListaTarefas extends Activity {
@@ -30,15 +34,33 @@ public class ListaTarefas extends Activity {
 		daoTarefa = new DAOTarefa(this);
 		daoTarefa.open();
 
-	    List<Tarefas> listaTarefas = daoTarefa.getTasksByUser(usuario.getLogin());
+	    List<Tarefas> listaTarefas = daoTarefa.getFutureTasksByUser(usuario.getLogin());
 	    //List<Tarefas> listaTarefas = daoTarefa.getAllTasks();
 	    daoTarefa.close();
 	    
 		ListView lv = (ListView)findViewById(R.id.list_tarefas);
-		TarefasListAdapter adapter = new TarefasListAdapter(this, listaTarefas);
+		final TarefasListAdapter adapter = new TarefasListAdapter(this, listaTarefas);
 
 		lv.setAdapter(adapter);
 		lv.setTextFilterEnabled(true);
+		
+		final CheckBox checkTarefas = (CheckBox)findViewById(R.id.checkTarefas);
+		checkTarefas.setSelected(true);
+		checkTarefas.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView,
+					boolean isChecked) {
+	            if (isChecked){
+	                adapter.mostrarFuturas(usuario.getLogin());
+	            }else{
+	            	adapter.mostrarTudo(usuario.getLogin());
+	            }
+				
+			}
+
+
+
+	    });
 	}
 	
 	//Bot�o voltar...
