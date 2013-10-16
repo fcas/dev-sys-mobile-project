@@ -5,15 +5,26 @@
     android:orientation="vertical" 
     android:padding="5sp"> 
 
-    
-    <TextView
+        <LinearLayout
+        android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+   	    <TextView
         android:id="@+id/tarefa"
         style="@style/padrao" 
         android:layout_marginLeft="5sp"
         android:text="Tarefa" />
-    
-
-    
+       	    <TextView
+        android:id="@+id/traco"
+        style="@style/padrao" 
+        android:layout_marginLeft="5sp"
+        android:text="-" />
+	    <TextView
+        android:id="@+id/lugar"
+        style="@style/padrao" 
+        android:layout_marginLeft="5sp"
+        android:text="Lugar" />
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
 		android:layout_height="wrap_content"
@@ -29,7 +40,7 @@
         android:id="@+id/horario"
         style="@style/padrao" 
         android:layout_marginLeft="5sp"
-        android:text="Descricao"
+        android:text="Horario"
         android:textColor="#FF000000" />
 	</LinearLayout>
 
@@ -55,9 +66,4 @@
 	        android:src="@drawable/remove" />   
 	    
 	</LinearLayout>
-	    <TextView
-        android:id="@+id/lugar"
-        style="@style/padrao" 
-        android:layout_marginLeft="5sp"
-        android:text="Lugar" />
     </LinearLayout> 
