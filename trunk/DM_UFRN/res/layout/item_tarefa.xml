@@ -13,17 +13,17 @@
         android:id="@+id/tarefa"
         style="@style/padrao" 
         android:layout_marginLeft="5sp"
-        android:text="Tarefa" />
+        android:text="@string/tarefa" />
        	    <TextView
         android:id="@+id/traco"
         style="@style/padrao" 
         android:layout_marginLeft="5sp"
-        android:text="-" />
+        android:text="@string/traco" />
 	    <TextView
         android:id="@+id/lugar"
         style="@style/padrao" 
         android:layout_marginLeft="5sp"
-        android:text="Lugar" />
+        android:text="@string/lugar" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -34,13 +34,13 @@
         style="@style/padrao" 
         android:layout_marginLeft="5sp"
         android:textColor="#FF000000"
-        android:text="Data" />
+        android:text="@string/tarefa_data" />
 	    
     <TextView
         android:id="@+id/horario"
         style="@style/padrao" 
         android:layout_marginLeft="5sp"
-        android:text="Horario"
+        android:text="@string/tarefa_hora"
         android:textColor="#FF000000" />
 	</LinearLayout>
 
@@ -53,7 +53,7 @@
 	        android:layout_width="50dp"
 	        android:layout_height="30dp"
 	        android:layout_marginRight="5dp"
-	        android:contentDescription="Editar"
+	        android:contentDescription="@string/imagem_editar"
 	        android:src="@drawable/edit" />
 	    
 	    	    <ImageView
@@ -61,7 +61,7 @@
 	        android:layout_width="50dp"
 	        android:layout_height="30dp"
 	        android:layout_marginRight="5dp"
-	        android:contentDescription="Editar"
+	        android:contentDescription="@string/imagem_apagar"
 	        android:onClick="deletar"
 	        android:src="@drawable/remove" />   
 	    

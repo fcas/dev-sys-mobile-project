@@ -80,6 +80,12 @@
     <string name="lugar_adicionar">Adicionar lugar</string>
     <string name="lugar_escolher">Lugares:</string>
     <string name="title_activity_redefine_senha">RedefinirSenha</string>
+    <string name="imagem_apagar">Apagar</string>
+    <string name="imagem_editar">Editar</string>
+    <string name="tarefa">Tarefa</string>
+    <string name="traco">-</string>
+    <string name="login">Login</string>
+    <string name="login_opcao">Manter-me autenticado</string>
    
 
 </resources>

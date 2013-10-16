@@ -13,7 +13,7 @@
         android:layout_marginTop="20dp"
         android:id="@+id/textView1"
         style="@style/padrao"
-        android:text="Login" />
+        android:text="@string/login" />
        
 
     <EditText
@@ -45,7 +45,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
-        android:text="Manter-se Autenticado" />
+        android:text="@string/login_opcao" />
     
     <Button
         android:id="@+id/button_fazerLogin"
