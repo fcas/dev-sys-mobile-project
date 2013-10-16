@@ -10,9 +10,12 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
@@ -75,7 +78,7 @@ public class TarefasListAdapter extends BaseAdapter {
 			TextView data = (TextView) v.findViewById(R.id.data);
 			TextView horario = (TextView) v.findViewById(R.id.horario);
 			TextView lugar = (TextView) v.findViewById(R.id.lugar);
-			ImageView img = (ImageView)v.findViewById(R.id.button_apagar);
+			final ImageView img = (ImageView)v.findViewById(R.id.button_apagar);
 			img.setOnClickListener(new View.OnClickListener() {		
 				@Override
 				public void onClick(View v) {
@@ -109,7 +112,7 @@ public class TarefasListAdapter extends BaseAdapter {
 			});
 			
 			
-			ImageView update = (ImageView)v.findViewById(R.id.button_editar);
+			final ImageView update = (ImageView)v.findViewById(R.id.button_editar);
 			update.setOnClickListener(new View.OnClickListener() {		
 				@Override
 				public void onClick(View v) {
@@ -121,9 +124,7 @@ public class TarefasListAdapter extends BaseAdapter {
 		   			context.startActivity(updateIntent);
 				}
 			});
-			
-			
-			
+
 			if (tarefa != null) {
 				tarefa.setText(p.getDescricao());
 			}
