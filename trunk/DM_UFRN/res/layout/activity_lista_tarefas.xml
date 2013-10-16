@@ -11,6 +11,12 @@
         style="@style/titulo"
         android:text="@string/tarefas" />
 
+    <CheckBox
+        android:id="@+id/checkTarefas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ver somente tarefas a partir de hoje" />
+
     <ListView
         android:id="@+id/list_tarefas"
         android:layout_width="fill_parent"
