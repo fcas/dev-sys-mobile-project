@@ -66,14 +66,14 @@ public class DAOComentario {
 		cursor.close();
 		return Comentarioss;
 	}
-	
+
 	public List<Comentarios> getComentariosByLugar(String lugar) {
 		List<Comentarios> Comentarioss = new ArrayList<Comentarios>();
 		int idLugar = daoLugar.idLugar(lugar);
-		
+
 		Cursor cursor = database.rawQuery("Select * from "
-				+ Comentarios.TABELA_COMENTARIOS
-				+ " where "+Comentarios.COLUNA_ID_LUGAR+" = ?",
+				+ Comentarios.TABELA_COMENTARIOS + " where "
+				+ Comentarios.COLUNA_ID_LUGAR + " = ?",
 				new String[] { String.valueOf(idLugar) });
 
 		cursor.moveToFirst();
@@ -86,8 +86,18 @@ public class DAOComentario {
 		return Comentarioss;
 	}
 
-	
-	
+	public Comentarios updateComentario(Comentarios comentario) {
+
+		String strFilter = MySQLiteHelper.COLUNA_ID + "='" + comentario.getId()
+				+ "'";
+		ContentValues values = new ContentValues();
+		values.put(Comentarios.COLUNA_AUTOR, comentario.getAutor());
+		values.put(Comentarios.COLUNA_COMENTARIO, comentario.getComment());
+		values.put(Comentarios.COLUNA_ID_LUGAR, comentario.getLugar()
+				.getId_local());
+		database.update(Comentarios.TABELA_COMENTARIOS, values, strFilter, null);
+		return comentario;
+	}
 
 	private Comentarios cursorToComentarios(Cursor cursor) {
 		Comentarios Comentarios = new Comentarios();
@@ -98,7 +108,7 @@ public class DAOComentario {
 		Comentarios.setLugar(daoLugar.getLugarById(cursor.getInt(3)));
 		daoLugar.close();
 		return Comentarios;
-		
+
 	}
 
 }
