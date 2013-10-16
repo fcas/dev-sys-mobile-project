@@ -47,7 +47,7 @@ public class UpdateComentario extends Activity implements
 		usuario = (Usuario) getIntent().getSerializableExtra("usuario");
 		comentario_anonimo = (CheckBox) findViewById(R.id.checkBox1);
 		spinner = (Spinner) findViewById(R.id.spinner);
-		btnAdd = (Button) findViewById(R.id.btn_add);
+		btnAdd = (Button) findViewById(R.id.btnadd);
 		inputLabel = (EditText) findViewById(R.id.input_label);
 		spinner.setOnItemSelectedListener(this);
 		datasource = new DAOComentario(this);

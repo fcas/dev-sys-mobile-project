@@ -3,17 +3,14 @@ package dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import excecoes.DadosIncompletosException;
-import excecoes.UsuarioJaExisteException;
-
 import model.Usuario;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
-import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
+import excecoes.DadosIncompletosException;
+import excecoes.UsuarioJaExisteException;
 
 public class DAOUsuario {
 
@@ -45,6 +42,7 @@ public class DAOUsuario {
 			    values.put(Usuario.COLUNA_NOME, usuario.getNome());
 			    values.put(Usuario.COLUNA_CURSO, usuario.getCurso());
 			    values.put(Usuario.COLUNA_SOBRE , usuario.getSobreMim());
+				@SuppressWarnings("unused")
 				long insertId = database.insert(Usuario.TABELA_USUARIO, null,
 			        values);
 			}
