@@ -18,6 +18,7 @@ import android.widget.ImageButton;
 import dao.DAOImagem;
 import dao.DAOUsuario;
 import dimap.ufrn.dm.R;
+import excecoes.DadosIncompletosException;
 public class ProfileEdit extends Activity {
 
 	DAOUsuario daoUsuario;
@@ -92,7 +93,12 @@ public class ProfileEdit extends Activity {
 				usuario.setSobreMim(edit_sobre.getText().toString());
 				daoImagem.putImagem(usuario.getLogin(), ((BitmapDrawable)trocaImagem.getDrawable()).getBitmap());
 				daoUsuario.open();
-				daoUsuario.updateUsuario(usuario.getLogin(), usuario);
+				try {
+					daoUsuario.updateUsuario(usuario.getLogin(), usuario);
+				} catch (DadosIncompletosException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				daoUsuario.close();
 		        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() { 
 		        	public void onClick(DialogInterface arg0, int arg1) {

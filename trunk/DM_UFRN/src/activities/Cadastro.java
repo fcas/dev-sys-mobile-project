@@ -20,6 +20,8 @@ import android.widget.ImageButton;
 import dao.DAOImagem;
 import dao.DAOUsuario;
 import dimap.ufrn.dm.R;
+import excecoes.DadosIncompletosException;
+import excecoes.UsuarioJaExisteException;
 
 public class Cadastro extends Activity {
 	Button cadastro;
@@ -53,36 +55,56 @@ private void setButtons() {
 			public void onClick(View view) {
 				final boolean senhaValida = edit_senha.getText().toString().equals(edit_confirmasenha.getText().toString());
 				final Builder builder = new AlertDialog.Builder(Cadastro.this);  
-				if(senhaValida){
-					builder.setTitle("Sucesso");  
-				    builder.setMessage("Cadastro efetuado com sucesso");  
+				Usuario usuario = new Usuario();
+        		usuario.setNome(edit_nome.getText().toString());
+        		usuario.setCurso(edit_curso.getText().toString());
+        		usuario.setSenha(edit_senha.getText().toString());
+        		usuario.setSobreMim(edit_sobre.getText().toString());
+        		usuario.setLogin(edit_login.getText().toString());
+        		try{
+	        		daoImagem.putImagem(usuario.getLogin(), ((BitmapDrawable)trocaImagem.getDrawable()).getBitmap());    		
+	        		daoUsuario.createUsuario(usuario);
+	        		
+	        		if(senhaValida){
+						builder.setTitle("Sucesso");  
+					    builder.setMessage("Cadastro efetuado com sucesso");  
+				        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() { 
+				        	public void onClick(DialogInterface arg0, int arg1) {
+						        		Intent mainIntent = new Intent();
+										mainIntent.setClass(Cadastro.this, Login.class);
+										daoUsuario.close();
+										startActivity(mainIntent);
+										finish();
+				        	}
+				        });
+					}
+				    else{
+	        			builder.setTitle("Erro");  
+				        builder.setMessage("Senhas nao se correspondem");  
+				        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() { 
+				        	public void onClick(DialogInterface arg0, int arg1) {
+										arg0.dismiss();
+				        	}
+				        });
+	        		}
+				}catch(DadosIncompletosException e){
+					builder.setTitle("Erro");  
+					builder.setMessage("Preencha todos os campos");
+					builder.setPositiveButton("OK", new DialogInterface.OnClickListener() { 
+			        	public void onClick(DialogInterface arg0, int arg1) {
+									arg0.dismiss();
+			        	}
+			        });
 				}
-			    else{
+        		catch(UsuarioJaExisteException e){
         			builder.setTitle("Erro");  
-			        builder.setMessage("Senhas nao se correspondem");  
+					builder.setMessage("Ja existe um usuario com este login");
+					builder.setPositiveButton("OK", new DialogInterface.OnClickListener() { 
+			        	public void onClick(DialogInterface arg0, int arg1) {
+									arg0.dismiss();
+			        	}
+			        });
         		}
-		        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() { 
-		        	public void onClick(DialogInterface arg0, int arg1) {
-		        		if(senhaValida){
-			        		Usuario usuario = new Usuario();
-			        		usuario.setNome(edit_nome.getText().toString());
-			        		usuario.setCurso(edit_curso.getText().toString());
-			        		usuario.setSenha(edit_senha.getText().toString());
-			        		usuario.setSobreMim(edit_sobre.getText().toString());
-			        		usuario.setLogin(edit_login.getText().toString());
-			        		daoImagem.putImagem(usuario.getLogin(), ((BitmapDrawable)trocaImagem.getDrawable()).getBitmap());    		
-			        		daoUsuario.createUsuario(usuario);
-			        		daoUsuario.close();
-			        	//	IServicoUsuario sUsuario = new ServicoUsuario();
-			        		//sUsuario.addUsuario(usuario);
-			        		Intent mainIntent = new Intent();
-							mainIntent.setClass(Cadastro.this, Login.class);
-							startActivity(mainIntent);
-							finish();
-		        		}
-		        	}
-		        });
-
 		        AlertDialog alert = builder.create();  
 		        alert.show();
 				
