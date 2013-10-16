@@ -3,12 +3,17 @@ package dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import excecoes.DadosIncompletosException;
+import excecoes.UsuarioJaExisteException;
+
 import model.Usuario;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
+import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 public class DAOUsuario {
 
@@ -31,29 +36,32 @@ public class DAOUsuario {
 	    dbHelper.close();
 	  }
 
-	  public Usuario createUsuario(Usuario usuario) {
-	    ContentValues values = new ContentValues();
-	    values.put(Usuario.COLUNA_LOGIN, usuario.getLogin());
-	    values.put(Usuario.COLUNA_SENHA, usuario.getSenha());
-	    values.put(Usuario.COLUNA_NOME, usuario.getNome());
-	    values.put(Usuario.COLUNA_CURSO, usuario.getCurso());
-	    values.put(Usuario.COLUNA_SOBRE , usuario.getSobreMim());
-	    @SuppressWarnings("unused")
-		long insertId = database.insert(Usuario.TABELA_USUARIO, null,
-	        values);
-	    /*Cursor cursor = database.query(Usuario.TABELA_Usuario,
-	        allColumns, MySQLiteHelper.COLUNA_ID + " = " + insertId, null,
-	        null, null, null);
-	    cursor.moveToFirst();
-	    Usuarios newUsuarios = cursorToUsuarios(cursor);
-	    cursor.close();*/
-	    return usuario;
+	  public Usuario createUsuario(Usuario usuario) throws DadosIncompletosException, UsuarioJaExisteException {
+		  if(!usuario.getNome().equals("") && !usuario.getSenha().trim().equals("") && !usuario.getLogin().trim().equals("")){
+		    if(getUsuarioByLogin(usuario.getLogin()) == null){
+				ContentValues values = new ContentValues();
+			    values.put(Usuario.COLUNA_LOGIN, usuario.getLogin());
+			    values.put(Usuario.COLUNA_SENHA, usuario.getSenha());
+			    values.put(Usuario.COLUNA_NOME, usuario.getNome());
+			    values.put(Usuario.COLUNA_CURSO, usuario.getCurso());
+			    values.put(Usuario.COLUNA_SOBRE , usuario.getSobreMim());
+				long insertId = database.insert(Usuario.TABELA_USUARIO, null,
+			        values);
+			}
+		    else{
+		    	throw new UsuarioJaExisteException();
+		    }
+		  }else{
+			  throw new DadosIncompletosException();
+		  }
+		  return usuario;
 	  }
 	  
-	  public Usuario updateUsuario(String login, Usuario usuario) {
+	  public Usuario updateUsuario(String login, Usuario usuario) throws DadosIncompletosException {
+		  if(!usuario.getNome().trim().equals("") && !usuario.getSenha().trim().equals("")){
+			  
 		    @SuppressWarnings("unused")
 			ContentValues values = new ContentValues();
-
 		    String strFilter = "login='" + login+"'";
 		    ContentValues args = new ContentValues();
 		    args.put(Usuario.COLUNA_NOME, usuario.getNome());
@@ -61,8 +69,11 @@ public class DAOUsuario {
 		    args.put(Usuario.COLUNA_SENHA, usuario.getSenha());
 		    args.put(Usuario.COLUNA_SOBRE, usuario.getSobreMim());
 		    database.update(Usuario.TABELA_USUARIO, args, strFilter, null);
-		    return usuario;
+		  }else{
+			  throw new DadosIncompletosException();
 		  }
+		  return usuario;
+	  }
 
 	  public void deleteUsuarios(Usuario usuario) {
 	    String login= usuario.getLogin();

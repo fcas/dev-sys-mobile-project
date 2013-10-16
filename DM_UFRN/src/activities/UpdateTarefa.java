@@ -101,7 +101,6 @@ public class UpdateTarefa extends Activity implements OnDateSetListener, OnItemS
 		        		tarefa.setLugar(new Lugar(daoLugar.idLugar(label)));
 		        		Log.d("LABEL",label);
 		        		Log.d("DAOLUGAR_IDLUGARLABEL", String.valueOf(daoLugar.idLugar(label)));
-		        		//tarefa.setLocal(tarefa_data.getText().toString());
 		        		daoTarefa.open();
 		        		daoTarefa.updateTarefa(tarefa);
 		        		daoTarefa.close();
