@@ -9,6 +9,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 public class DAOComentario {
 
@@ -55,7 +56,7 @@ public class DAOComentario {
 		List<Comentarios> Comentarioss = new ArrayList<Comentarios>();
 
 		Cursor cursor = database.query(Comentarios.TABELA_COMENTARIOS,
-				allColumns, null, null, null, null, null);
+				allColumns, null, null, null, null, MySQLiteHelper.COLUNA_ID+" DESC");
 
 		cursor.moveToFirst();
 		while (!cursor.isAfterLast()) {
@@ -106,6 +107,9 @@ public class DAOComentario {
 		Comentarios.setAutor(cursor.getString(1));
 		Comentarios.setComment(cursor.getString(2));
 		Comentarios.setLugar(daoLugar.getLugarById(cursor.getInt(3)));
+		if(Comentarios.getLugar() != null){
+			Log.d("Comentario-Lugar", Comentarios.getLugar().getNome());
+		}
 		daoLugar.close();
 		return Comentarios;
 

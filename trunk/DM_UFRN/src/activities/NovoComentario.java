@@ -63,7 +63,7 @@ public class NovoComentario extends Activity implements OnItemSelectedListener {
 
 			@Override
 			public void onClick(View view) {
-				label = inputLabel.getText().toString();
+				//label = inputLabel.getText().toString();
 				Builder builder = new AlertDialog.Builder(NovoComentario.this);
 				builder.setTitle("Sucesso");
 				builder.setMessage("Comentario adicionado com sucesso");
@@ -84,6 +84,7 @@ public class NovoComentario extends Activity implements OnItemSelectedListener {
 								comentario.getLugar().setId_local((db.idLugar(label)));
 								usuario.getComentarios().add(comentario);
 								datasource.createComentarios(comentario);
+								datasource.close();
 								intent.putExtra("usuario", usuario);
 								intent.setClass(NovoComentario.this,
 										TelaComentarios.class);
@@ -156,7 +157,7 @@ public class NovoComentario extends Activity implements OnItemSelectedListener {
 	@Override
 	public void onItemSelected(AdapterView<?> parent, View view, int position,
 			long id) {
-		String label = parent.getItemAtPosition(position).toString();
+		label = parent.getItemAtPosition(position).toString();
 
 		Toast.makeText(parent.getContext(), "Voce selecionou: " + label,
 				Toast.LENGTH_LONG).show();
@@ -167,13 +168,6 @@ public class NovoComentario extends Activity implements OnItemSelectedListener {
 	public void onNothingSelected(AdapterView<?> arg0) {
 	}
 
-	// private ContentValues toContentValue(Comentarios comentario) {
-	// ContentValues values = new ContentValues();
-	// // TODO Antes de se fazer o comentario, deve-se escolher o lugar
-	// // values.put("LUGAR", value);
-	// //values.put("AUTOR", comentario.getAutor());
-	// values.put("COMENTARIO", comentario.getComment());
-	// return values;
-	// }
+
 
 }

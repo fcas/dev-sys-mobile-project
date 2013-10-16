@@ -32,7 +32,7 @@ public class ListaComentarios extends Activity {
 
 		ListView lv = (ListView) findViewById(R.id.list_Comentarios);
 		ComentarioAdapter adapter = new ComentarioAdapter(this,
-				listaComentarios);
+				listaComentarios, usuario);
 
 		lv.setAdapter(adapter);
 		lv.setTextFilterEnabled(true);
