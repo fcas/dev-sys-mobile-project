@@ -83,8 +83,6 @@ public class NovoComentario extends Activity implements OnItemSelectedListener {
 										.toString());
 								comentario.getLugar().setId_local((db.idLugar(label)));
 								usuario.getComentarios().add(comentario);
-								// ContentValues values =
-								// toContentValue(comentario);
 								datasource.createComentarios(comentario);
 								intent.putExtra("usuario", usuario);
 								intent.setClass(NovoComentario.this,
