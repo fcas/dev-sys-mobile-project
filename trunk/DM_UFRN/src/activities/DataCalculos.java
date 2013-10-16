@@ -2,8 +2,6 @@ package activities;
 
 import java.util.Calendar;
 
-import android.util.Log;
-
 public class DataCalculos {
 	public static void main(String args[]){
 		//System.out.println(dataAtual());

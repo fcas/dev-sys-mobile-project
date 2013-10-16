@@ -2,7 +2,7 @@ package activities;
 //O bot�o voltar est� voltando para a tela principal
 
 import java.util.List;
-import dimap.ufrn.dm.R;
+
 import model.Tarefas;
 import model.Usuario;
 import adapters.TarefasListAdapter;
@@ -16,8 +16,8 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ListView;
-import android.widget.RadioGroup;
 import dao.DAOTarefa;
+import dimap.ufrn.dm.R;
 
 public class ListaTarefas extends Activity {
 	private Button button;

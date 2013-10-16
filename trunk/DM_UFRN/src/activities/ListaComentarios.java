@@ -4,49 +4,55 @@ import java.util.List;
 
 import model.Comentarios;
 import model.Usuario;
-import adapters.ListAdapter;
-import android.app.ListActivity;
+import adapters.ComentarioAdapter;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.ListView;
 import dao.DAOComentario;
 import dimap.ufrn.dm.R;
-public class ListaComentarios extends ListActivity {
 
-	  private DAOComentario datasource;
-	  Usuario usuario;
-	
+public class ListaComentarios extends Activity {
+
+	private DAOComentario datasource;
+	Usuario usuario;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_list_comment);
 		setTitle("UFRN ON TOUCH");
 		usuario = (Usuario) getIntent().getSerializableExtra("usuario");
 		datasource = new DAOComentario(this);
-	    datasource.open();
+		datasource.open();
+		List<Comentarios> listaComentarios = datasource.getAllComments();
+		datasource.close();
 
-	    List<Comentarios> listComentarios = datasource.getAllComments();
-
-		ListView lv = getListView();
-		ListAdapter adapter = new ListAdapter(this, R.layout.activity_list_comment, listComentarios);
+		ListView lv = (ListView) findViewById(R.id.list_Comentarios);
+		ComentarioAdapter adapter = new ComentarioAdapter(this,
+				listaComentarios);
 
 		lv.setAdapter(adapter);
 		lv.setTextFilterEnabled(true);
 
-		lv.setOnItemClickListener(new OnItemClickListener() {
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
+		Button button = (Button) findViewById(R.id.button_novo_comentario);
+		button.setOnClickListener(new View.OnClickListener() {
 
-				// Retrieve our class object and use index to resolve item
-				// tapped
-
+			@Override
+			public void onClick(View view) {
+				Intent novaTarefaIntent = new Intent();
+				novaTarefaIntent.putExtra("usuario", usuario);
+				novaTarefaIntent.setClass(ListaComentarios.this,
+						NovoComentario.class);
+				startActivity(novaTarefaIntent);
+				finish();
 			}
-
 		});
+
 	}
-	
+
 	@Override
 	public void onBackPressed() {
 		Intent voltaIntent = new Intent();
