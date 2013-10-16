@@ -1,7 +1,7 @@
 package adapters;
 
 import java.util.List;
-import dimap.ufrn.dm.R;
+
 import model.Lugar;
 import model.Tarefas;
 import activities.UpdateTarefa;
@@ -10,17 +10,15 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import dao.DAOTarefa;
+import dimap.ufrn.dm.R;
 
 
 public class TarefasListAdapter extends BaseAdapter {

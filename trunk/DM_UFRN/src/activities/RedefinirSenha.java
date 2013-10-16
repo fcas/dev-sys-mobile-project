@@ -1,19 +1,17 @@
 package activities;
 
 import model.Usuario;
-import dao.DAOImagem;
-import dao.DAOUsuario;
-import dimap.ufrn.dm.R;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import dao.DAOUsuario;
+import dimap.ufrn.dm.R;
 
 public class RedefinirSenha extends Activity {
 	EditText edit_senhaatual, edit_novasenha, edit_confirmasenha;
