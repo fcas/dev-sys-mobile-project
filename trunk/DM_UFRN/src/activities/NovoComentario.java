@@ -32,6 +32,7 @@ public class NovoComentario extends Activity implements OnItemSelectedListener {
 	private Usuario usuario;
 	private Spinner spinner;
 	private Button btnAdd;
+	private Comentarios comentarioUpdate;
 	private EditText inputLabel;
 	DAOLugar db;
 	String label;
@@ -43,6 +44,10 @@ public class NovoComentario extends Activity implements OnItemSelectedListener {
 		setTitle("UFRN ON TOUCH");
 		descricao = (EditText) findViewById(R.id.launch_codes);
 		usuario = (Usuario) getIntent().getSerializableExtra("usuario");
+		comentarioUpdate = (Comentarios)getIntent().getSerializableExtra("comentario");
+		if(comentarioUpdate != null){
+			
+		}
 		comentario_anonimo = (CheckBox) findViewById(R.id.checkBox1);
 		spinner = (Spinner) findViewById(R.id.spinner);
 		btnAdd = (Button) findViewById(R.id.btnadd);

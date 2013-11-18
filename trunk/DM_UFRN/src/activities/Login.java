@@ -1,12 +1,18 @@
 package activities;
+import servicos.ServicoConexao;
+import servicos.ServicoConexao.LocalBinder;
 import dimap.ufrn.dm.R;
 import model.Usuario;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -22,6 +28,8 @@ public class Login extends Activity {
 	EditText user, senha;
 	CheckBox manter_autenticado;
 	private DAOUsuario daoUsuario;
+	ServicoConexao mService;
+    boolean mBound = false;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		
@@ -39,6 +47,13 @@ public class Login extends Activity {
 		Log.d("ManterAutenticado-Login", String.valueOf(autoSave));
 		String login = settings.getString("Login", "");
 		//autoSave = false;
+		
+		startService(new Intent("INICIAR_SERVICO_CONEXAO"));
+		
+		if (mBound){
+			//Chama algum servico
+		}
+		
 		if(autoSave == true){
 			manter_autenticado.setChecked(true);
 			daoUsuario.open();
@@ -129,5 +144,41 @@ public class Login extends Activity {
 	public void onBackPressed() {
 		finish();
 	}
+	
+	 @Override
+	    protected void onStop() {
+	        super.onStop();
+	        // Unbind from the service
+	        if (mBound) {
+	            unbindService(mConnection);
+	            mBound = false;
+	        }
+	    }
+	    /** Defines callbacks for service binding, passed to bindService() */
+	    private ServiceConnection mConnection = new ServiceConnection() {
+
+	        @Override
+	        public void onServiceConnected(ComponentName className,
+	                IBinder service) {
+	            // We've bound to LocalService, cast the IBinder and get LocalService instance
+	            LocalBinder binder = (LocalBinder) service;
+	            mService = binder.getService();
+	            mBound = true;
+	        }
+
+	        @Override
+	        public void onServiceDisconnected(ComponentName arg0) {
+	            mBound = false;
+	        }
+	    };
+	    
+		@Override
+	    protected void onStart() {
+	        super.onStart();
+	        // Bind to LocalService
+	        Intent intent = new Intent(this, ServicoConexao.class);
+	        bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+	    }
+
 
 }
