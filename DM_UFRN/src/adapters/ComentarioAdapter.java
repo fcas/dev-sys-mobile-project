@@ -68,7 +68,7 @@ public class ComentarioAdapter extends BaseAdapter {
 
 		}
 
-		Comentarios p = itens.get(position);
+		final Comentarios p = itens.get(position);
 
 		if (p != null) {
 			TextView autor = (TextView) v.findViewById(R.id.id);
@@ -124,6 +124,7 @@ public class ComentarioAdapter extends BaseAdapter {
 				@Override
 				public void onClick(View v) {
 					Intent updateIntent = new Intent();
+					updateIntent.putExtra("comentario", p);
 					updateIntent.putExtra("usuario", ((Activity) context)
 							.getIntent().getSerializableExtra("usuario"));
 					updateIntent.putExtra("comentarios", itens.get(position));

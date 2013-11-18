@@ -1,13 +1,18 @@
 package activities;
 //O bot�o voltar est� voltando para a tela de login
+
 import dao.DAOImagem;
 import dimap.ufrn.dm.R;
 import model.Usuario;
 import android.app.Activity;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -25,7 +30,8 @@ public class MainActivity extends Activity {
 	private ImageButton profile;
 	private DAOImagem daoImagem;
 	Usuario usuario;
-	
+
+    
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -38,6 +44,7 @@ public class MainActivity extends Activity {
 		curso.setText(usuario.getCurso());
 		daoImagem = new DAOImagem();
 		setButtons();
+	
 	}
 	
 	@Override
@@ -151,5 +158,6 @@ public class MainActivity extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-
+	
+	   
 }
