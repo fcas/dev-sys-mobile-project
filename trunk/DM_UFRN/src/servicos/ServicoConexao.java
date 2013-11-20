@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import model.Comentarios;
+import model.Lugar;
+import model.Tarefas;
 import model.Usuario;
 
 import org.apache.http.HttpEntity;
@@ -27,6 +30,8 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 import org.json.*;
 
+import dao.DAOLugar;
+
 import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
@@ -37,7 +42,7 @@ public class ServicoConexao extends Service {
 	 
 	 public static final String IP_SERVIDOR = "http://192.168.0.183:8080";
 	 public static final String CATEGORIA = "servico";
-	 
+	 JSONParser jsonP;
 	 private final IBinder mBinder = new LocalBinder();
 	    // Random number generator
 	    private final Random mGenerator = new Random();
@@ -55,6 +60,10 @@ public class ServicoConexao extends Service {
 		 Log.w("Servico", "Startado");
 		 try {
 			getUsuarios();
+			getComentarios();
+			getLugares();
+			getTarefas();
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -99,24 +108,12 @@ public class ServicoConexao extends Service {
 				String texto = "";
 				texto = rd.readLine();
 				Log.w("JSON", texto);
-				//jsonToUsuarios(json);
+				
+				jsonP = new JSONParser();
+				List<Usuario> lista = jsonP.JSONToUsuario(texto);
+				
+				connection.disconnect();
 				return texto;
-	}
-	public String usuarioToJson(Usuario u){
-		JSONObject obj = new JSONObject();
-		
-		try {
-			obj.put("login", u.getLogin());
-			obj.put("senha", u.getSenha());
-			obj.put("nome", u.getNome());
-			obj.put("curso", u.getCurso());
-			obj.put("sobre", u.getSobreMim());
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		Log.w("JSON", obj.toString());
-		return obj.toString();
 	}
 	
 	public String getComentarios() throws IOException{
@@ -133,6 +130,9 @@ public class ServicoConexao extends Service {
 				String texto = "";
 				texto = rd.readLine();
 				Log.w("JSON", texto);
+				jsonP = new JSONParser();
+				List<Comentarios> lista = jsonP.JSONToComentarios(texto);
+				connection.disconnect();
 				return texto;
 	}
 	
@@ -141,23 +141,16 @@ public class ServicoConexao extends Service {
 				HttpPost httpPost = new HttpPost("http://192.168.0.183:8080/WebServiceMobile/resources/usuario/createUsuario");
 				HttpClient httpClient = new DefaultHttpClient();
 				
-				String urlParameters = usuarioToJson(u);
+				//String urlParameters = usuarioToJson(u);
 				List<NameValuePair> params = new ArrayList<NameValuePair>();
-				params.add(new BasicNameValuePair("usuario", urlParameters));
+				//params.add(new BasicNameValuePair("usuario", urlParameters));
 				
-				httpPost.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
+//				/httpPost.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
 		
 				HttpResponse response = httpClient.execute(httpPost);
 				HttpEntity entity = response.getEntity();
 				InputStream is = entity.getContent();
 				
-				
-				
-				/*BufferedReader rd = new BufferedReader(new InputStreamReader(
-				connection.getInputStream()));
-				//line = rd.readLine();
-				String texto = "";
-				texto = rd.readLine();*/
 				return "";
 	}
 	
@@ -175,6 +168,15 @@ public class ServicoConexao extends Service {
 				String texto = "";
 				texto = rd.readLine();
 				Log.w("JSON", texto);
+				jsonP = new JSONParser();
+				List<String> lista = jsonP.JSONToLugar(texto);
+				connection.disconnect();
+				
+				DAOLugar dao = new DAOLugar(this);
+				dao.atualizarLugares(lista);
+				dao.close();
+
+				
 				return texto;
 	}
 	
@@ -192,6 +194,9 @@ public class ServicoConexao extends Service {
 				String texto = "";
 				texto = rd.readLine();
 				Log.w("JSON", texto);
+				jsonP = new JSONParser();
+				List<Tarefas> lista = jsonP.JSONToTarefas(texto);
+				connection.disconnect();
 				return texto;
 	}
 }

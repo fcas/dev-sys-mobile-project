@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Lugar;
+import model.Tarefas;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -89,4 +90,17 @@ public class DAOLugar {
 		return lugar;
 	}
 
+	public void deleteTarefa(Tarefas tarefa) {
+		long id = tarefa.getId();
+		System.out.println("Tarefa deleted with id: " + id);
+		database.delete(Tarefas.TABELA_TAREFA, MySQLiteHelper.COLUNA_ID + " = "
+				+ id, null);
+	}
+	
+	public void atualizarLugares(List<String> lugares){
+		database.delete(Lugar.DATABASE_TABLE, null, null);
+		for(int i = 0; i < lugares.size(); i++){
+			salvarLugar(lugares.get(i));
+		}
+	}
 }
