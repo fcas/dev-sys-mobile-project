@@ -84,7 +84,7 @@ public class NovoComentario extends Activity implements OnItemSelectedListener {
 									comentario.setAutor(usuario.getNome()
 											.toString());
 								}
-								comentario.setComment(descricao.getText()
+								comentario.setComentario(descricao.getText()
 										.toString());
 								comentario.getLugar().setId_local((db.idLugar(label)));
 								usuario.getComentarios().add(comentario);

@@ -27,7 +27,7 @@ public class ListAdapter extends BaseAdapter {
 	}
 
 	public String getItem(int position) {
-		return items.get(position).getComment();
+		return items.get(position).getComentario();
 	}
 
 	public long getItemId(int position) {
@@ -46,7 +46,7 @@ public class ListAdapter extends BaseAdapter {
 
 			comentario = new Comentarios();
 			comentario.setAutor("Ninguem comentou");
-			comentario.setComment("Nenhum comentario");
+			comentario.setComentario("Nenhum comentario");
 
 			v.setTag(comentario);
 
@@ -64,7 +64,7 @@ public class ListAdapter extends BaseAdapter {
 			}
 			if (tt1 != null) {
 
-				tt1.setText(p.getComment());
+				tt1.setText(p.getComentario());
 			}
 
 		}

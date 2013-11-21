@@ -40,8 +40,10 @@ import android.util.Log;
 
 public class ServicoConexao extends Service {
 	 
-	 public static final String IP_SERVIDOR = "http://192.168.0.183:8080";
-	 public static final String CATEGORIA = "servico";
+	 //public static final String IP_SERVIDOR = "http://192.168.0.183:8080";
+	public static final String IP_SERVIDOR = "http://10.9.99.97:8080";
+
+		public static final String CATEGORIA = "servico";
 	 JSONParser jsonP;
 	 private final IBinder mBinder = new LocalBinder();
 	    // Random number generator
@@ -175,7 +177,6 @@ public class ServicoConexao extends Service {
 				DAOLugar dao = new DAOLugar(this);
 				dao.atualizarLugares(lista);
 				dao.close();
-
 				
 				return texto;
 	}

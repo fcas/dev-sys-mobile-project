@@ -3,6 +3,7 @@ package dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Comentarios;
 import model.Usuario;
 import android.content.ContentValues;
 import android.content.Context;
@@ -129,6 +130,13 @@ public class DAOUsuario {
 		return user;
 	  }
 
+		public void atualizarUsuario(List<Usuario> usuario){
+			open();
+			database.delete("Usuario", null, null);
+			for(int i = 0; i < usuario.size(); i++){
+				createUsuario(usuario.get(i));
+			}
+		}	  
 
 	  private Usuario cursorToUsuario(Cursor cursor) {
 	    Usuario usuario = new Usuario();

@@ -98,7 +98,8 @@ public class DAOLugar {
 	}
 	
 	public void atualizarLugares(List<String> lugares){
-		database.delete(Lugar.DATABASE_TABLE, null, null);
+		open();
+		database.delete("Lugar", null, null);
 		for(int i = 0; i < lugares.size(); i++){
 			salvarLugar(lugares.get(i));
 		}

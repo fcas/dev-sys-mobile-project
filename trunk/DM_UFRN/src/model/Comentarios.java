@@ -39,11 +39,11 @@ public class Comentarios implements Serializable {
 		this.id = id;
 	}
 
-	public String getComment() {
+	public String getComentario() {
 		return comentario;
 	}
 
-	public void setComment(String comment) {
+	public void setComentario(String comment) {
 		this.comentario = comment;
 	}
 
