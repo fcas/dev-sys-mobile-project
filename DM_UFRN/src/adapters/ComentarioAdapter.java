@@ -63,7 +63,7 @@ public class ComentarioAdapter extends BaseAdapter {
 
 			comentario = new Comentarios();
 			comentario.setAutor("Ninguem comentou");
-			comentario.setComment("Nenhum comentario");
+			comentario.setComentario("Nenhum comentario");
 			v.setTag(comentario);
 
 		}
@@ -140,7 +140,7 @@ public class ComentarioAdapter extends BaseAdapter {
 				autor.setText(p.getAutor());
 			}
 			if (comentario != null) {
-				comentario.setText(p.getComment());
+				comentario.setText(p.getComentario());
 			}
 			if (lugar != null) {
 				if(p.getLugar()!= null){

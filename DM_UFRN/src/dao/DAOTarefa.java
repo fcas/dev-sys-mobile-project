@@ -3,6 +3,7 @@ package dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Comentarios;
 import model.Tarefas;
 import activities.DataCalculos;
 import android.content.ContentValues;
@@ -172,4 +173,12 @@ public class DAOTarefa {
 		return tarefa;
 	}
 
+	public void atualizarTarefas(List<Tarefas> tarefas){
+		open();
+		database.delete("Tarefas", null, null);
+		for(int i = 0; i < tarefas.size(); i++){
+			createTarefa(tarefas.get(i));
+		}
+	}
+	
 }

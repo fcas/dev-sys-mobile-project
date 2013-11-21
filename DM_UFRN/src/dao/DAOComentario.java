@@ -36,7 +36,7 @@ public class DAOComentario {
 	public Comentarios createComentarios(Comentarios comment) {
 		ContentValues values = new ContentValues();
 		values.put(Comentarios.COLUNA_AUTOR, comment.getAutor());
-		values.put(Comentarios.COLUNA_COMENTARIO, comment.getComment());
+		values.put(Comentarios.COLUNA_COMENTARIO, comment.getComentario());
 		values.put(Comentarios.COLUNA_ID_LUGAR, comment.getLugar()
 				.getId_local());
 		long insertId = database.insert(Comentarios.TABELA_COMENTARIOS, null,
@@ -93,7 +93,7 @@ public class DAOComentario {
 				+ "'";
 		ContentValues values = new ContentValues();
 		values.put(Comentarios.COLUNA_AUTOR, comentario.getAutor());
-		values.put(Comentarios.COLUNA_COMENTARIO, comentario.getComment());
+		values.put(Comentarios.COLUNA_COMENTARIO, comentario.getComentario());
 		values.put(Comentarios.COLUNA_ID_LUGAR, comentario.getLugar()
 				.getId_local());
 		database.update(Comentarios.TABELA_COMENTARIOS, values, strFilter, null);
@@ -105,7 +105,7 @@ public class DAOComentario {
 		daoLugar.open();
 		Comentarios.setId(cursor.getLong(0));
 		Comentarios.setAutor(cursor.getString(1));
-		Comentarios.setComment(cursor.getString(2));
+		Comentarios.setComentario(cursor.getString(2));
 		Comentarios.setLugar(daoLugar.getLugarById(cursor.getInt(3)));
 		if(Comentarios.getLugar() != null){
 			Log.d("Comentario-Lugar", Comentarios.getLugar().getNome());
@@ -114,5 +114,13 @@ public class DAOComentario {
 		return Comentarios;
 
 	}
-
+	
+	public void atualizarComentarios(List<Comentarios> comentarios){
+		open();
+		database.delete("Comentarios", null, null);
+		for(int i = 0; i < comentarios.size(); i++){
+			createComentarios(comentarios.get(i));
+		}
+	}
+	
 }

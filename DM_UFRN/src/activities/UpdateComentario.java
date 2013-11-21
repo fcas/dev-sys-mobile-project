@@ -81,7 +81,7 @@ public class UpdateComentario extends Activity implements
 									comentario.setAutor(usuario.getNome()
 											.toString());
 								}
-								comentario.setComment(descricao.getText()
+								comentario.setComentario(descricao.getText()
 										.toString());
 								comentario.getLugar().setId_local(
 										(db.idLugar(label)));
