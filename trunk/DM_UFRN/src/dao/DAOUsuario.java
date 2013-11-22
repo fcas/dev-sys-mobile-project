@@ -134,7 +134,15 @@ public class DAOUsuario {
 			open();
 			database.delete("Usuario", null, null);
 			for(int i = 0; i < usuario.size(); i++){
-				createUsuario(usuario.get(i));
+				try {
+					createUsuario(usuario.get(i));
+				} catch (DadosIncompletosException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (UsuarioJaExisteException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}	  
 
