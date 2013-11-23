@@ -85,7 +85,7 @@ public class UpdateComentario extends Activity implements
 										.toString());
 								comentario.getLugar().setId_local(
 										(db.idLugar(label)));
-								usuario.getComentarios().add(comentario);
+								//usuario.getComentarios().add(comentario);
 								// ContentValues values =
 								// toContentValue(comentario);
 								datasource.open();

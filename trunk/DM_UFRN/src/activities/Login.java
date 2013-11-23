@@ -1,4 +1,6 @@
 package activities;
+import java.io.IOException;
+
 import servicos.ServicoConexao;
 import servicos.ServicoConexao.LocalBinder;
 import dimap.ufrn.dm.R;
@@ -51,7 +53,16 @@ public class Login extends Activity {
 		startService(new Intent("INICIAR_SERVICO_CONEXAO"));
 		
 		if (mBound){
-			//Chama algum servico
+			try {
+				mService.getUsuarios();
+
+				
+			} catch (IOException e) {
+				Log.w("Excecao","Excecao");
+				e.printStackTrace();
+			}
+		}else{
+			Log.w("Servico not bound","Servico not bound");
 		}
 		
 		if(autoSave == true){
@@ -90,10 +101,7 @@ public class Login extends Activity {
 
 			@Override
 			public void onClick(View view) {
-				
-				
-				
-				
+	
 				Usuario usuario = new Usuario();
 				Intent mainIntent = new Intent();
 
@@ -101,7 +109,7 @@ public class Login extends Activity {
 				usuario = daoUsuario.autenticar(user.getText().toString(), (senha.getText().toString()));
 				daoUsuario.close();
 				
-				if(usuario != null){
+				if(usuario != null && login.getText() != null){
 					
 					SharedPreferences settings = getSharedPreferences("login", Activity.MODE_PRIVATE);
 					SharedPreferences.Editor editor = settings.edit();

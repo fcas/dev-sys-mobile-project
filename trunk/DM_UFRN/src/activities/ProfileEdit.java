@@ -1,14 +1,22 @@
 package activities;
 
+import java.io.IOException;
+
+import servicos.ServicoConexao;
+import servicos.ServicoConexao.LocalBinder;
 import model.Usuario;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.View;
@@ -35,7 +43,10 @@ public class ProfileEdit extends Activity {
 		daoImagem = new DAOImagem();
 		usuario = (Usuario) getIntent().getSerializableExtra("usuario");
 		setContentView(R.layout.activity_profile_edit);
-		
+		startService(new Intent("INICIAR_SERVICO_CONEXAO"));
+		if (mBound){
+
+		} 
 		edit_nome = (EditText) findViewById(R.id.edit_nome);
 		edit_curso = (EditText) findViewById(R.id.edit_curso);
 		edit_sobre = (EditText) findViewById(R.id.edit_sobre);
@@ -95,10 +106,14 @@ public class ProfileEdit extends Activity {
 				daoUsuario.open();
 				try {
 					daoUsuario.updateUsuario(usuario.getLogin(), usuario);
+					mService.updateUsuario(usuario);
 				} catch (DadosIncompletosException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+				}catch(IOException e){
+					e.printStackTrace();
 				}
+				
 				daoUsuario.close();
 		        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() { 
 		        	public void onClick(DialogInterface arg0, int arg1) {
@@ -203,5 +218,43 @@ public class ProfileEdit extends Activity {
         });
         builder.show();
     }
+    ServicoConexao mService;
+    boolean mBound = false;
+    
+	   @Override
+	    protected void onStart() {
+	        super.onStart();
+	        // Bind to LocalService
+	        Intent intent = new Intent(this, ServicoConexao.class);
+	        bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+	    }
 
+	    @Override
+	    protected void onStop() {
+	        super.onStop();
+	        // Unbind from the service
+	        if (mBound) {
+	            unbindService(mConnection);
+	            mBound = false;
+	        }
+	    }
+	    /** Defines callbacks for service binding, passed to bindService() */
+	    private ServiceConnection mConnection = new ServiceConnection() {
+
+	        @Override
+	        public void onServiceConnected(ComponentName className,
+	                IBinder service) {
+	            // We've bound to LocalService, cast the IBinder and get LocalService instance
+	            LocalBinder binder = (LocalBinder) service;
+	            mService = binder.getService();
+	            mBound = true;
+	        }
+
+	        @Override
+	        public void onServiceDisconnected(ComponentName arg0) {
+	            mBound = false;
+	           
+	        }
+	    };	
+    
 }

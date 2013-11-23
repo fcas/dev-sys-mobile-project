@@ -1,16 +1,23 @@
 package activities;
 
+import java.io.IOException;
 import java.util.List;
+
+import servicos.ServicoConexao;
+import servicos.ServicoConexao.LocalBinder;
 
 import model.Comentarios;
 import model.Usuario;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.view.Menu;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -53,10 +60,22 @@ public class NovoComentario extends Activity implements OnItemSelectedListener {
 		btnAdd = (Button) findViewById(R.id.btnadd);
 		inputLabel = (EditText) findViewById(R.id.input_label);
 		spinner.setOnItemSelectedListener(this);
+		
+		startService(new Intent("INICIAR_SERVICO_CONEXAO"));
+		if (mBound){
+			try {
+				mService.getLugares();
+				mService.getComentarios();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		datasource = new DAOComentario(this);
-		datasource.open();
+		datasource.open();		
 		loadSpinnerData();
 		setButtons();
+
 	}
 
 	Button comentario;
@@ -87,8 +106,14 @@ public class NovoComentario extends Activity implements OnItemSelectedListener {
 								comentario.setComentario(descricao.getText()
 										.toString());
 								comentario.getLugar().setId_local((db.idLugar(label)));
-								usuario.getComentarios().add(comentario);
-								datasource.createComentarios(comentario);
+								//usuario.getComentarios().add(comentario);
+								try {
+									mService.insertComentario(comentario);
+									datasource.createComentarios(comentario);
+								} catch (IOException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
 								datasource.close();
 								intent.putExtra("usuario", usuario);
 								intent.setClass(NovoComentario.this,
@@ -172,7 +197,45 @@ public class NovoComentario extends Activity implements OnItemSelectedListener {
 	@Override
 	public void onNothingSelected(AdapterView<?> arg0) {
 	}
+    ServicoConexao mService;
+    boolean mBound = false;
+    
+	   @Override
+	    protected void onStart() {
+	        super.onStart();
+	        // Bind to LocalService
+	        Intent intent = new Intent(this, ServicoConexao.class);
+	        bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+	    }
 
+	    @Override
+	    protected void onStop() {
+	        super.onStop();
+	        // Unbind from the service
+	        if (mBound) {
+	            unbindService(mConnection);
+	            mBound = false;
+	        }
+	    }
+	    /** Defines callbacks for service binding, passed to bindService() */
+	    private ServiceConnection mConnection = new ServiceConnection() {
+
+	        @Override
+	        public void onServiceConnected(ComponentName className,
+	                IBinder service) {
+	            // We've bound to LocalService, cast the IBinder and get LocalService instance
+	            LocalBinder binder = (LocalBinder) service;
+	            mService = binder.getService();
+	            mBound = true;
+	        }
+
+	        @Override
+	        public void onServiceDisconnected(ComponentName arg0) {
+	            mBound = false;
+	           
+	        }
+	    };	    
+	    
 
 
 }
