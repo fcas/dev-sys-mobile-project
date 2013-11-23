@@ -10,8 +10,6 @@ public class Usuario implements Serializable {
 	private String login;
 	private String curso;
 	private String sobreMim;
-	private List<Comentarios> comentarios;
-	private List<Tarefas> tarefas;
 	private String senha;
 
 	public static final String TABELA_USUARIO = "Usuario";
@@ -30,8 +28,8 @@ public class Usuario implements Serializable {
 	+COLUNA_SOBRE +" TEXT);";
 
 	public Usuario() {
-		this.comentarios = new ArrayList<Comentarios>();
-		this.tarefas = new ArrayList<Tarefas>();
+		//this.comentarios = new ArrayList<Comentarios>();
+	//this.tarefas = new ArrayList<Tarefas>();
 	}
 
 	public String getNome() {
@@ -58,22 +56,6 @@ public class Usuario implements Serializable {
 
 	public void setCurso(String curso) {
 		this.curso = curso;
-	}
-	
-	public List<Comentarios> getComentarios() {
-		return comentarios;
-	}
-
-	public void setComentarios(List<Comentarios> comentarios) {
-		this.comentarios = comentarios;
-	}
-
-	public List<Tarefas> getTarefas() {
-		return tarefas;
-	}
-
-	public void setTarefas(List<Tarefas> tarefas) {
-		this.tarefas = tarefas;
 	}
 
 	public String getSenha() {
