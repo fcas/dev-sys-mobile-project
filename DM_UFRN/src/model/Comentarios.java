@@ -43,8 +43,8 @@ public class Comentarios implements Serializable {
 		return comentario;
 	}
 
-	public void setComentario(String comment) {
-		this.comentario = comment;
+	public void setComentario(String comentario) {
+		this.comentario = comentario;
 	}
 
 	public String getAutor() {
