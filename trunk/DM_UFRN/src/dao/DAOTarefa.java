@@ -175,7 +175,7 @@ public class DAOTarefa {
 
 	public void atualizarTarefas(List<Tarefas> tarefas){
 		open();
-		database.delete("Tarefas", null, null);
+		database.delete(Tarefas.TABELA_TAREFA, null, null);
 		for(int i = 0; i < tarefas.size(); i++){
 			createTarefa(tarefas.get(i));
 		}

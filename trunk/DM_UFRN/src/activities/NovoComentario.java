@@ -18,6 +18,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -61,7 +62,7 @@ public class NovoComentario extends Activity implements OnItemSelectedListener {
 		inputLabel = (EditText) findViewById(R.id.input_label);
 		spinner.setOnItemSelectedListener(this);
 		
-		startService(new Intent("INICIAR_SERVICO_CONEXAO"));
+		//startService(new Intent("INICIAR_SERVICO_CONEXAO"));
 		if (mBound){
 			try {
 				mService.getLugares();
@@ -106,10 +107,10 @@ public class NovoComentario extends Activity implements OnItemSelectedListener {
 								comentario.setComentario(descricao.getText()
 										.toString());
 								comentario.getLugar().setId_local((db.idLugar(label)));
-								//usuario.getComentarios().add(comentario);
+								Log.w("IdLugar - Primeiro", String.valueOf(comentario.getLugar().getId_local()));
 								try {
 									mService.insertComentario(comentario);
-									datasource.createComentarios(comentario);
+									//datasource.createComentarios(comentario);
 								} catch (IOException e) {
 									// TODO Auto-generated catch block
 									e.printStackTrace();
@@ -137,7 +138,7 @@ public class NovoComentario extends Activity implements OnItemSelectedListener {
 				label = inputLabel.getText().toString();
 				if (label.trim().length() > 0) {	
 					db.open();
-					db.salvarLugar(label);
+					//db.salvarLugar(label);
 					inputLabel.setText("");
 					InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 					imm.hideSoftInputFromWindow(inputLabel.getWindowToken(), 0);

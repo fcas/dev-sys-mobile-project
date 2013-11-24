@@ -38,7 +38,7 @@ public class ListaComentarios extends Activity {
 		Log.w("INiciou", "Servico");
 		if (mBound){
 			try {
-				Log.w("Vai Chamar", "Lugares");
+				//Log.w("Vai Chamar", "Lugares");
 				mService.getLugares();
 				
 				mService.getComentarios();
@@ -47,6 +47,7 @@ public class ListaComentarios extends Activity {
 				e.printStackTrace();
 			}
 		}
+		
 		datasource = new DAOComentario(this);
 		datasource.open();
 		List<Comentarios> listaComentarios = datasource.getAllComments();
@@ -92,6 +93,15 @@ public class ListaComentarios extends Activity {
 	        // Bind to LocalService
 	        Intent intent = new Intent(this, ServicoConexao.class);
 	        bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+			//try {
+				//mService.getLugares();
+				//mService.getComentarios();
+			//} catch (IOException e) {
+				// TODO Auto-generated catch block
+				//e.printStackTrace();
+			//}
+			
+			
 	    }
 
 	    @Override

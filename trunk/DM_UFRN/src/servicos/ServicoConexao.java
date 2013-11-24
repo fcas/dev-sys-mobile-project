@@ -67,8 +67,17 @@ public class ServicoConexao extends Service {
 	 	    
 	 @Override
 	 public void onStart(Intent intent, int startId) {
+		 Log.w("Servico Startado", "Servico Startado");
+		 try{
+			 getUsuarios();
+			 getLugares();
+			 getComentarios();
+			 getTarefas();
 
-	 }
+		 }catch(IOException e){
+			 
+		 }
+     }
 	 
 	 
 	 @Override
@@ -200,7 +209,7 @@ public class ServicoConexao extends Service {
 				Gson gson = new Gson();
 				HttpResponse response; 
 			    try{
-			    	Log.w("JSON", gson.toJson(c));
+			    	Log.w("JSON - "+String.valueOf(c.getLugar().getId_local()), gson.toJson(c));
 			        StringEntity se = new StringEntity(gson.toJson(c), HTTP.UTF_8);
 			        httpPost.setHeader("Content-type", "application/json");
 			        httpPost.setEntity(se);
@@ -316,7 +325,7 @@ public class ServicoConexao extends Service {
 				Gson gson = new Gson();
 				HttpResponse response; 
 			    try{
-			    	Log.w("JSON", gson.toJson(t));
+			    	Log.w("JSON-Tarefa", gson.toJson(t));
 			        StringEntity se = new StringEntity(gson.toJson(t), HTTP.UTF_8);
 			        httpPost.setHeader("Content-type", "application/json");
 			        httpPost.setEntity(se);
@@ -377,7 +386,7 @@ public class ServicoConexao extends Service {
 				texto = rd.readLine();
 				Log.w("JSON", texto);
 				jsonP = new JSONParser();
-				List<String> lista = jsonP.JSONToLugar(texto);
+				List<Lugar> lista = jsonP.JSONToLugar(texto);
 				connection.disconnect();
 				
 				DAOLugar dao = new DAOLugar(this);

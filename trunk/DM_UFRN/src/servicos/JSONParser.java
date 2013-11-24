@@ -44,11 +44,11 @@ public class JSONParser {
 		return lista;
 	}
 	
-	public List<String> JSONToLugar(String json){
+	public List<Lugar> JSONToLugar(String json){
 		Gson gson = new Gson();
-		String[] lugares;
-		lugares = gson.fromJson(json, String[].class);
-		List<String> lista = Arrays.asList(lugares);		
+		Lugar[] lugares;
+		lugares = gson.fromJson(json, Lugar[].class);
+		List<Lugar> lista = Arrays.asList(lugares);		
 		return lista;
 	}
 	
