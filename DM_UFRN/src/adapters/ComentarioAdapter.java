@@ -1,15 +1,23 @@
 package adapters;
 
+import java.io.IOException;
 import java.util.List;
+
+import servicos.ServicoConexao;
+import servicos.ServicoConexao.LocalBinder;
 
 import model.Comentarios;
 import model.Usuario;
+import activities.ListaComentarios;
 import activities.UpdateComentario;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.ServiceConnection;
+import android.os.IBinder;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,11 +36,12 @@ public class ComentarioAdapter extends BaseAdapter {
 	private Comentarios comentario;
 	Usuario usuario;
 
-	public ComentarioAdapter(Context context, List<Comentarios> itens, Usuario u) {
+	public ComentarioAdapter(Context context, List<Comentarios> itens, Usuario u, ServicoConexao service) {
 		this.itens = itens;
 		dao = new DAOComentario(context);
 		this.context = context;
 		this.usuario = u;
+		mService = service;
 	}
 
 	@Override
@@ -92,7 +101,13 @@ public class ComentarioAdapter extends BaseAdapter {
 								public void onClick(DialogInterface dialog,
 										int id) {
 									dao.open();
-									dao.deleteComentarios(itens.get(position));
+									//dao.deleteComentarios(itens.get(position));
+									try {
+										((ListaComentarios)context).mService.deleteComentario(itens.get(position).getId());
+									} catch (IOException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									}
 									dao.close();
 									itens.remove(position);
 									notifyDataSetChanged();
@@ -130,6 +145,7 @@ public class ComentarioAdapter extends BaseAdapter {
 					updateIntent.putExtra("comentarios", itens.get(position));
 					updateIntent.setClass(context, UpdateComentario.class);
 					context.startActivity(updateIntent);
+					((Activity) context).finish();
 				}
 			});
 			}else{
@@ -155,5 +171,8 @@ public class ComentarioAdapter extends BaseAdapter {
 	private Context getContext() {
 		return context;
 	}
-
+	
+    ServicoConexao mService;
+    boolean mBound = false;
+    
 }

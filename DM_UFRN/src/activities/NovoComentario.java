@@ -63,15 +63,7 @@ public class NovoComentario extends Activity implements OnItemSelectedListener {
 		spinner.setOnItemSelectedListener(this);
 		
 		//startService(new Intent("INICIAR_SERVICO_CONEXAO"));
-		if (mBound){
-			try {
-				mService.getLugares();
-				mService.getComentarios();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+		
 		datasource = new DAOComentario(this);
 		datasource.open();		
 		loadSpinnerData();
@@ -110,6 +102,7 @@ public class NovoComentario extends Activity implements OnItemSelectedListener {
 								Log.w("IdLugar - Primeiro", String.valueOf(comentario.getLugar().getId_local()));
 								try {
 									mService.insertComentario(comentario);
+									mService.getComentarios();
 									//datasource.createComentarios(comentario);
 								} catch (IOException e) {
 									// TODO Auto-generated catch block
@@ -119,7 +112,7 @@ public class NovoComentario extends Activity implements OnItemSelectedListener {
 								intent.putExtra("usuario", usuario);
 								intent.setClass(NovoComentario.this,
 										TelaComentarios.class);
-								startActivity(intent);
+								startActivity(intent);    
 								finish();
 							}
 

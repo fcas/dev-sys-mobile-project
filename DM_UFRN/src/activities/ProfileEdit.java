@@ -43,7 +43,7 @@ public class ProfileEdit extends Activity {
 		daoImagem = new DAOImagem();
 		usuario = (Usuario) getIntent().getSerializableExtra("usuario");
 		setContentView(R.layout.activity_profile_edit);
-		startService(new Intent("INICIAR_SERVICO_CONEXAO"));
+		//startService(new Intent("INICIAR_SERVICO_CONEXAO"));
 		if (mBound){
 
 		} 

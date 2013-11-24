@@ -39,6 +39,7 @@ public class DAOTarefa {
 
 	public Tarefas createTarefa(Tarefas tarefa) {
 		ContentValues values = new ContentValues();
+		values.put(MySQLiteHelper.COLUNA_ID, tarefa.getId());
 		values.put(Tarefas.COLUNA_USUARIO, tarefa.getUsuario());
 		values.put(Tarefas.COLUNA_ID_LUGAR, tarefa.getLugar().getId_local());
 		values.put(Tarefas.COLUNA_DATA,

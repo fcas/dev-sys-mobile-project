@@ -109,6 +109,7 @@ public class NovaTarefa extends Activity implements OnItemSelectedListener{
 		        		daoTarefa.open();
 		        		try {
 							mService.insertTarefa(tarefa);
+							mService.getTarefas();
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
