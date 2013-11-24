@@ -113,7 +113,7 @@ public class UpdateComentario extends Activity implements
 				label = inputLabel.getText().toString();
 				if (label.trim().length() > 0) {
 					db.open();
-					db.salvarLugar(label);
+					//db.salvarLugar(label);
 					inputLabel.setText("");
 					InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 					imm.hideSoftInputFromWindow(inputLabel.getWindowToken(), 0);

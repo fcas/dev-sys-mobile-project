@@ -41,7 +41,7 @@ public class NovoLugar extends Activity {
 
 
 
-		startService(new Intent("INICIAR_SERVICO_CONEXAO"));
+		//startService(new Intent("INICIAR_SERVICO_CONEXAO"));
 		setButtons();
 	}
 
@@ -72,7 +72,7 @@ public class NovoLugar extends Activity {
 											getApplicationContext());
 									try {
 										mService.insertLugar(label);
-										db.salvarLugar(label);
+										//db.salvarLugar(label);
 									} catch (IOException e) {
 										// TODO Auto-generated catch block
 										e.printStackTrace();

@@ -12,13 +12,13 @@ public class Tarefas implements Serializable {
 	private long id;
 	private String usuario;
 	@SuppressWarnings("unused")
-	private String local;
+	//private String local;
 	private String data;
 	private String horario;
 	private String descricao;
 	private Lugar lugar;
 	@SuppressWarnings("unused")
-	private int idLugar;
+	//private int idLugar;
 	public static final String TABELA_TAREFA = "Tarefa";
 	public static final String COLUNA_USUARIO = "Usuario";
 	public static final String COLUNA_ID_LUGAR = "IDLocal";

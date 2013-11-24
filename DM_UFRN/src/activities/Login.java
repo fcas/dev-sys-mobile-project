@@ -34,7 +34,7 @@ public class Login extends Activity {
     boolean mBound = false;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		
+		startService(new Intent("INICIAR_SERVICO_CONEXAO"));
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
 		setTitle("UFRN ON TOUCH");
@@ -50,12 +50,14 @@ public class Login extends Activity {
 		String login = settings.getString("Login", "");
 		//autoSave = false;
 		
-		startService(new Intent("INICIAR_SERVICO_CONEXAO"));
+		
 		
 		if (mBound){
 			try {
 				mService.getUsuarios();
-
+				mService.getLugares();
+				mService.getTarefas();
+				mService.getComentarios();
 				
 			} catch (IOException e) {
 				Log.w("Excecao","Excecao");
@@ -168,6 +170,7 @@ public class Login extends Activity {
 	        @Override
 	        public void onServiceConnected(ComponentName className,
 	                IBinder service) {
+	        	Log.w("SERVICO BINDADO", "SERVICO BINDADO");
 	            // We've bound to LocalService, cast the IBinder and get LocalService instance
 	            LocalBinder binder = (LocalBinder) service;
 	            mService = binder.getService();
@@ -179,14 +182,5 @@ public class Login extends Activity {
 	            mBound = false;
 	        }
 	    };
-	    
-		@Override
-	    protected void onStart() {
-	        super.onStart();
-	        // Bind to LocalService
-	        Intent intent = new Intent(this, ServicoConexao.class);
-	        bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
-	    }
-
 
 }

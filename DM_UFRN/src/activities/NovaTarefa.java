@@ -52,16 +52,16 @@ public class NovaTarefa extends Activity implements OnItemSelectedListener{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_nova_tarefa);
 		setTitle("UFRN ON TOUCH");
-		startService(new Intent("INICIAR_SERVICO_CONEXAO"));
-		if (mBound){
-			try {
-				mService.getLugares();
-				mService.getComentarios();
-			} catch (IOException e) {
+		//startService(new Intent("INICIAR_SERVICO_CONEXAO"));
+		//if (mBound){
+			//try {
+				//mService.getLugares();
+				//mService.getComentarios();
+			//} catch (IOException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+				//e.printStackTrace();
+			//}
+		//}
 		daoTarefa = new DAOTarefa(this);
 		spinner = (Spinner) findViewById(R.id.spinner);
 		spinner.setOnItemSelectedListener(this);
@@ -107,7 +107,14 @@ public class NovaTarefa extends Activity implements OnItemSelectedListener{
 		        		//tarefa.setLocal(tarefa_data.getText().toString());
 		        		Log.d("Tabela tarefa", Tarefas.CREATE_TAREFA);
 		        		daoTarefa.open();
-		        		daoTarefa.createTarefa(tarefa);
+		        		try {
+							mService.insertTarefa(tarefa);
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+		        		//daoTarefa.createTarefa(tarefa);
+		        		
 		        		daoTarefa.close();
 						Intent minhasTarefasIntent = new Intent();
 						minhasTarefasIntent.putExtra("usuario", usuario);

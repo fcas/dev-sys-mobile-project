@@ -29,10 +29,11 @@ public class DAOLugar {
 		dbHelper.close();
 	}
 
-	public void salvarLugar(String lugar) {
+	public void salvarLugar(Lugar lugar) {
 		open();
 		ContentValues values = new ContentValues();
-		values.put(Lugar.COLUNA_NOME_LUGAR, lugar);
+		values.put(MySQLiteHelper.COLUNA_ID, lugar.getId_local());
+		values.put(Lugar.COLUNA_NOME_LUGAR, lugar.getNome());
 		database.insert(Lugar.DATABASE_TABLE, null, values);
 		database.close();
 	}
@@ -97,11 +98,11 @@ public class DAOLugar {
 				+ id, null);
 	}
 	
-	public void atualizarLugares(List<String> lugares){
+	public void atualizarLugares(List<Lugar> lista){
 		open();
 		database.delete("Lugar", null, null);
-		for(int i = 0; i < lugares.size(); i++){
-			salvarLugar(lugares.get(i));
+		for(int i = 0; i < lista.size(); i++){
+			salvarLugar(lista.get(i));
 		}
 	}
 }

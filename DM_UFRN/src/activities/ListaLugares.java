@@ -36,7 +36,7 @@ public class ListaLugares extends Activity {
 		setButtons();
 		usuario = (Usuario) getIntent().getSerializableExtra("usuario");
 		// Log.w("NOME", usuario.getNome());
-		startService(new Intent("INICIAR_SERVICO_CONEXAO"));
+		//startService(new Intent("INICIAR_SERVICO_CONEXAO"));
 		if (mBound){
 			
 				try {
