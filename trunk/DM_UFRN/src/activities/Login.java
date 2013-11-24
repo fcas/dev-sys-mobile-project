@@ -34,7 +34,7 @@ public class Login extends Activity {
     boolean mBound = false;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		startService(new Intent("INICIAR_SERVICO_CONEXAO"));
+		//startService(new Intent("INICIAR_SERVICO_CONEXAO"));
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
 		setTitle("UFRN ON TOUCH");
@@ -51,21 +51,6 @@ public class Login extends Activity {
 		//autoSave = false;
 		
 		
-		
-		if (mBound){
-			try {
-				mService.getUsuarios();
-				mService.getLugares();
-				mService.getTarefas();
-				mService.getComentarios();
-				
-			} catch (IOException e) {
-				Log.w("Excecao","Excecao");
-				e.printStackTrace();
-			}
-		}else{
-			Log.w("Servico not bound","Servico not bound");
-		}
 		
 		if(autoSave == true){
 			manter_autenticado.setChecked(true);

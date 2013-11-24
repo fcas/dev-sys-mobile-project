@@ -1,15 +1,25 @@
 package adapters;
 
+import java.io.IOException;
 import java.util.List;
+
+import servicos.ServicoConexao;
+import servicos.ServicoConexao.LocalBinder;
 
 import model.Lugar;
 import model.Tarefas;
+import activities.ListaTarefas;
 import activities.UpdateTarefa;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Application.ActivityLifecycleCallbacks;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.ServiceConnection;
+import android.os.Bundle;
+import android.os.IBinder;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +31,7 @@ import dao.DAOTarefa;
 import dimap.ufrn.dm.R;
 
 
-public class TarefasListAdapter extends BaseAdapter {
+public class TarefasListAdapter extends BaseAdapter{
     private List<Tarefas> itens;
     private Context context;
     DAOTarefa dao;
@@ -32,6 +42,7 @@ public class TarefasListAdapter extends BaseAdapter {
     	dao = new DAOTarefa(context);
     	this.context = context;
     }
+    
 
     
     @Override
@@ -89,14 +100,22 @@ public class TarefasListAdapter extends BaseAdapter {
 				           public void onClick(DialogInterface dialog, int id) {
 				        	   dao.open();
 				        	   Log.d("IDTAREFA-Delete", String.valueOf(itens.get(position).getId()));
-							   dao.deleteTarefa(itens.get(position));
+							   
+				        	   dao.deleteTarefa(itens.get(position));
+							   try {
+								   
+								((ListaTarefas)context).mService.deleteTarefa(itens.get(position).getId());
+								} catch (IOException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
 							   dao.close();
 							   itens.remove(position);
 							   notifyDataSetChanged();
 							   dialog.dismiss();
 				           }
 				       });
-					builder.setNegativeButton("N�o", new DialogInterface.OnClickListener() {
+					builder.setNegativeButton("Nao", new DialogInterface.OnClickListener() {
 				           public void onClick(DialogInterface dialog, int id) {
 				              dialog.dismiss();
 				           }
@@ -155,6 +174,7 @@ public class TarefasListAdapter extends BaseAdapter {
 		dao.close();
 		notifyDataSetChanged();		
 	}
+	
 	public void mostrarFuturas(String userLogin) {
 		dao.open();
 		itens = dao.getFutureTasksByUser(userLogin);
@@ -162,6 +182,4 @@ public class TarefasListAdapter extends BaseAdapter {
 		notifyDataSetChanged();
 		
 	}
-	
-
 }

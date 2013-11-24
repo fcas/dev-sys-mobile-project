@@ -31,6 +31,7 @@ import android.widget.ImageButton;
 import dao.DAOImagem;
 import dao.DAOUsuario;
 import dimap.ufrn.dm.R;
+import excecoes.ConexaoException;
 import excecoes.DadosIncompletosException;
 import excecoes.UsuarioJaExisteException;
 
@@ -72,38 +73,63 @@ private void setButtons() {
         		usuario.setSenha(edit_senha.getText().toString());
         		usuario.setSobreMim(edit_sobre.getText().toString());
         		usuario.setLogin(edit_login.getText().toString());
-        		try{
+        		//try{
 	        		try {
-						mService.insertUsuario(usuario);
-						daoImagem.putImagem(usuario.getLogin(), ((BitmapDrawable)trocaImagem.getDrawable()).getBitmap());    		
-		        		daoUsuario.createUsuario(usuario);
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-	        		if(senhaValida){
-						builder.setTitle("Sucesso");  
-					    builder.setMessage("Cadastro efetuado com sucesso");  
-				        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() { 
-				        	public void onClick(DialogInterface arg0, int arg1) {
-						        		Intent mainIntent = new Intent();
-										mainIntent.setClass(Cadastro.this, Login.class);
-										daoUsuario.close();
-										startActivity(mainIntent);
-										finish();
-				        	}
-				        });
-					}
-				    else{
-	        			builder.setTitle("Erro");  
-				        builder.setMessage("Senhas nao se correspondem");  
-				        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() { 
+						if(senhaValida){
+							String result = mService.insertUsuario(usuario);
+							daoImagem.putImagem(usuario.getLogin(), ((BitmapDrawable)trocaImagem.getDrawable()).getBitmap());    		
+			        		//daoUsuario.createUsuario(usuario);
+							mService.getUsuarios();
+							if(result.equals("=") || result.equals("-")){
+								builder.setTitle("Erro");
+								if(result.equals("=")){
+							        builder.setMessage("Usuario ja existe");  
+								}else{
+									builder.setMessage("Preencha todos os campos");  
+								}
+								builder.setPositiveButton("OK", new DialogInterface.OnClickListener() { 
+						        	public void onClick(DialogInterface arg0, int arg1) {
+												arg0.dismiss();
+						        	}
+						        });	
+							}else{
+								builder.setTitle("Sucesso");  
+							    builder.setMessage("Cadastro efetuado com sucesso");  
+						        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() { 
+						        	public void onClick(DialogInterface arg0, int arg1) {
+								        		Intent mainIntent = new Intent();
+												mainIntent.setClass(Cadastro.this, Login.class);
+												daoUsuario.close();
+												startActivity(mainIntent);
+												finish();
+						        	}
+						        });
+							}
+						}
+					    else{
+		        			builder.setTitle("Erro");  
+					        builder.setMessage("Senhas nao se correspondem");  
+					        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() { 
+					        	public void onClick(DialogInterface arg0, int arg1) {
+											arg0.dismiss();
+					        	}
+					        });
+		        		}
+
+					} catch (ConexaoException e) {
+						builder.setTitle("Internet Indisponivel");  
+						builder.setMessage("Nao foi possivel cadastrar");
+						builder.setPositiveButton("OK", new DialogInterface.OnClickListener() { 
 				        	public void onClick(DialogInterface arg0, int arg1) {
 										arg0.dismiss();
 				        	}
 				        });
-	        		}
-				}catch(DadosIncompletosException e){
+						e.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+	        						/*}catch(DadosIncompletosException e){
 					builder.setTitle("Erro");  
 					builder.setMessage("Preencha todos os campos");
 					builder.setPositiveButton("OK", new DialogInterface.OnClickListener() { 
@@ -120,7 +146,7 @@ private void setButtons() {
 									arg0.dismiss();
 			        	}
 			        });
-        		}
+        		}*/
 		        AlertDialog alert = builder.create();  
 		        alert.show();
 				
@@ -206,6 +232,7 @@ private void setButtons() {
 	    
 	    ServicoConexao mService;
 	    boolean mBound = false;
+	    
 	    
 		   @Override
 		    protected void onStart() {

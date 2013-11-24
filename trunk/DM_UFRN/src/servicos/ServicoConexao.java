@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -25,6 +26,7 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
@@ -39,6 +41,7 @@ import dao.DAOComentario;
 import dao.DAOLugar;
 import dao.DAOTarefa;
 import dao.DAOUsuario;
+import excecoes.ConexaoException;
 
 import android.app.Service;
 import android.content.Intent;
@@ -68,15 +71,6 @@ public class ServicoConexao extends Service {
 	 @Override
 	 public void onStart(Intent intent, int startId) {
 		 Log.w("Servico Startado", "Servico Startado");
-		 try{
-			 getUsuarios();
-			 getLugares();
-			 getComentarios();
-			 getTarefas();
-
-		 }catch(IOException e){
-			 
-		 }
      }
 	 
 	 
@@ -137,8 +131,14 @@ public class ServicoConexao extends Service {
 				return texto;
 	}
 	
-	public String insertUsuario(Usuario u) throws IOException{			
-		URL url = new URL(IP_SERVIDOR+"/WebServiceMobile/resources/usuario/createUsuario");	
+	public String insertUsuario(Usuario u) throws ConexaoException{			
+			URL url = null;
+			try {
+				url = new URL(IP_SERVIDOR+"/WebServiceMobile/resources/usuario/createUsuario");
+			} catch (MalformedURLException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}	
 			HttpPost httpPost = null;
 			try {
 				httpPost = new HttpPost(url.toURI());
@@ -149,7 +149,8 @@ public class ServicoConexao extends Service {
 				HttpClient httpClient = new DefaultHttpClient();
 				Gson gson = new Gson();
 				HttpResponse response; 
-			    try{
+				String result = "";
+				try{
 			    	Log.w("JSON", gson.toJson(u));
 			        StringEntity se = new StringEntity(gson.toJson(u), HTTP.UTF_8);
 			        httpPost.setHeader("Content-type", "application/json");
@@ -157,13 +158,14 @@ public class ServicoConexao extends Service {
 			        response = httpClient.execute(httpPost);
 			        Log.w("Codigo de Erro", String.valueOf(response.getStatusLine().getStatusCode()));
 			        if(response!=null){
-                        InputStream in = response.getEntity().getContent(); //Get the data in the entity
-                    }
+			        	BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
+			        	result = reader.readLine();
+			        }
 			    }
-			    catch (Exception e) {
-			        e.printStackTrace();
+			    catch (IOException e) {
+			        throw new ConexaoException();
 			    }
-			    return "";
+			    return result;
 	}
 	
 	public String updateUsuario(Usuario u) throws IOException{			
@@ -237,7 +239,7 @@ public class ServicoConexao extends Service {
 				Gson gson = new Gson();
 				HttpResponse response; 
 			    try{
-			    	Log.w("JSON", gson.toJson(c));
+			    	Log.w("JSON-COMENTARIO", gson.toJson(c));
 			        StringEntity se = new StringEntity(gson.toJson(c), HTTP.UTF_8);
 			        httpPut.setHeader("Content-type", "application/json");
 			        httpPut.setEntity(se);
@@ -252,6 +254,34 @@ public class ServicoConexao extends Service {
 			    }
 			    return "";
 	}
+	
+	public String deleteComentario(long id) throws IOException{			
+		URL url = new URL(IP_SERVIDOR+"/WebServiceMobile/resources/comentario/deleteComentario/"+String.valueOf(id));	
+			HttpDelete httpDelete = null;
+			try {
+				httpDelete = new HttpDelete(url.toURI());
+			} catch (URISyntaxException e1) {
+				e1.printStackTrace();
+			}
+				HttpClient httpClient = new DefaultHttpClient();
+				Gson gson = new Gson();
+				HttpResponse response; 
+			    try{
+			    	//Log.w("JSON-Tarefa", gson.toJson(t));
+			        httpDelete.setHeader("Content-type", "application/json");
+			        
+			        response = httpClient.execute(httpDelete);
+			        Log.w("Codigo de Erro", String.valueOf(response.getStatusLine().getStatusCode()));
+			        if(response!=null){
+                        InputStream in = response.getEntity().getContent(); //Get the data in the entity
+			        }
+			    }
+			    catch (Exception e) {
+			        e.printStackTrace();
+			    }
+			    return "";
+	}	
+	
 	
 	public String insertLugar(String lugar) throws IOException{			
 		URL url = new URL(IP_SERVIDOR+"/WebServiceMobile/resources/lugar/createLugar");	
@@ -359,6 +389,33 @@ public class ServicoConexao extends Service {
 			        httpPut.setHeader("Content-type", "application/json");
 			        httpPut.setEntity(se);
 			        response = httpClient.execute(httpPut);
+			        Log.w("Codigo de Erro", String.valueOf(response.getStatusLine().getStatusCode()));
+			        if(response!=null){
+                        InputStream in = response.getEntity().getContent(); //Get the data in the entity
+			        }
+			    }
+			    catch (Exception e) {
+			        e.printStackTrace();
+			    }
+			    return "";
+	}	
+	
+	public String deleteTarefa(long id) throws IOException{			
+		URL url = new URL(IP_SERVIDOR+"/WebServiceMobile/resources/tarefa/deleteTarefa/"+String.valueOf(id));	
+			HttpDelete httpDelete = null;
+			try {
+				httpDelete = new HttpDelete(url.toURI());
+			} catch (URISyntaxException e1) {
+				e1.printStackTrace();
+			}
+				HttpClient httpClient = new DefaultHttpClient();
+				Gson gson = new Gson();
+				HttpResponse response; 
+			    try{
+			    	//Log.w("JSON-Tarefa", gson.toJson(t));
+			        httpDelete.setHeader("Content-type", "application/json");
+			        
+			        response = httpClient.execute(httpDelete);
 			        Log.w("Codigo de Erro", String.valueOf(response.getStatusLine().getStatusCode()));
 			        if(response!=null){
                         InputStream in = response.getEntity().getContent(); //Get the data in the entity

@@ -72,14 +72,13 @@ public class NovoLugar extends Activity {
 											getApplicationContext());
 									try {
 										mService.insertLugar(label);
+										mService.getLugares();
 										//db.salvarLugar(label);
 									} catch (IOException e) {
 										// TODO Auto-generated catch block
 										e.printStackTrace();
 									}
 									
-									
-
 									inputLabel.setText("");
 
 									InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);

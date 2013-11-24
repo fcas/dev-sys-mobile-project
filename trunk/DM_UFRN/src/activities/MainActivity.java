@@ -1,6 +1,10 @@
 package activities;
 //O bot�o voltar est� voltando para a tela de login
 
+import java.io.IOException;
+
+import servicos.ServicoConexao;
+import servicos.ServicoConexao.LocalBinder;
 import dao.DAOImagem;
 import dimap.ufrn.dm.R;
 import model.Usuario;
@@ -88,6 +92,12 @@ public class MainActivity extends Activity {
 
 			@Override
 			public void onClick(View view) {
+				try {
+					mService.getLugares();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				Intent lugaresIntent = new Intent();
 				lugaresIntent.putExtra("usuario", usuario);
 				lugaresIntent.setClass(MainActivity.this, ListaLugares.class);
@@ -114,6 +124,12 @@ public class MainActivity extends Activity {
 
 			@Override
 			public void onClick(View view) {
+				try {
+					mService.getTarefas();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				Intent tarefasIntent = new Intent();
 				tarefasIntent.putExtra("usuario", usuario);
 				tarefasIntent.setClass(MainActivity.this, ListaTarefas.class);
@@ -144,7 +160,6 @@ public class MainActivity extends Activity {
 			public void onClick(View view) {
 				SharedPreferences settings = getSharedPreferences("login", Activity.MODE_PRIVATE);
 				Log.d("ManterAutenticado-Main-Sair", String.valueOf(settings.getBoolean("ManterAutenticado", false)));
-				
 				finish();
 			}
 		});
@@ -158,6 +173,44 @@ public class MainActivity extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-	
+    ServicoConexao mService;
+    boolean mBound = false;
+    
+	   @Override
+	    protected void onStart() {
+	        super.onStart();
+	        // Bind to LocalService
+	        Intent intent = new Intent(this, ServicoConexao.class);
+	        bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+	    }
+
+	    @Override
+	    protected void onStop() {
+	        super.onStop();
+	        // Unbind from the service
+	        if (mBound) {
+	            unbindService(mConnection);
+	            mBound = false;
+	        }
+	    }
+	    /** Defines callbacks for service binding, passed to bindService() */
+	    private ServiceConnection mConnection = new ServiceConnection() {
+
+	        @Override
+	        public void onServiceConnected(ComponentName className,
+	                IBinder service) {
+	            // We've bound to LocalService, cast the IBinder and get LocalService instance
+	            LocalBinder binder = (LocalBinder) service;
+	            mService = binder.getService();
+	            mBound = true;
+	        }
+
+	        @Override
+	        public void onServiceDisconnected(ComponentName arg0) {
+	            mBound = false;
+	           
+	        }
+	    };	    
+	    
 	   
 }

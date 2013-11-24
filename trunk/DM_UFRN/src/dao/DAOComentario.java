@@ -35,6 +35,8 @@ public class DAOComentario {
 
 	public Comentarios createComentarios(Comentarios comment) {
 		ContentValues values = new ContentValues();
+		values.put(MySQLiteHelper.COLUNA_ID, comment.getId());
+		Log.w("Criando Comentario", "ID = "+String.valueOf(comment.getId()));
 		values.put(Comentarios.COLUNA_AUTOR, comment.getAutor());
 		values.put(Comentarios.COLUNA_COMENTARIO, comment.getComentario());
 		values.put(Comentarios.COLUNA_ID_LUGAR, comment.getLugar()

@@ -34,7 +34,7 @@ public class ListaComentarios extends Activity {
 		setContentView(R.layout.activity_list_comment);
 		setTitle("UFRN ON TOUCH");
 		usuario = (Usuario) getIntent().getSerializableExtra("usuario");
-		startService(new Intent("INICIAR_SERVICO_CONEXAO"));
+		//startService(new Intent("INICIAR_SERVICO_CONEXAO"));
 		Log.w("INiciou", "Servico");
 		if (mBound){
 			try {
@@ -55,7 +55,7 @@ public class ListaComentarios extends Activity {
 
 		ListView lv = (ListView) findViewById(R.id.list_Comentarios);
 		ComentarioAdapter adapter = new ComentarioAdapter(this,
-				listaComentarios, usuario);
+				listaComentarios, usuario, mService);
 
 		lv.setAdapter(adapter);
 		lv.setTextFilterEnabled(true);
@@ -84,7 +84,7 @@ public class ListaComentarios extends Activity {
 		startActivity(voltaIntent);
 		finish();
 	}
-    ServicoConexao mService;
+    public ServicoConexao mService;
     boolean mBound = false;
     
 	   @Override
@@ -130,7 +130,7 @@ public class ListaComentarios extends Activity {
 	            mBound = false;
 	           
 	        }
-	    };	    
-	    
+	    };
+
 
 }

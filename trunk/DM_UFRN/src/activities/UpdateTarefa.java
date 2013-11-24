@@ -53,15 +53,7 @@ public class UpdateTarefa extends Activity implements OnDateSetListener, OnItemS
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_update_tarefa);
 		setTitle("UFRN ON TOUCH");
-		startService(new Intent("INICIAR_SERVICO_CONEXAO"));
-		if (mBound){
-			try {
-				mService.getLugares();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} 
+
 		daoTarefa = new DAOTarefa(this);
 		
 		spinner = (Spinner) findViewById(R.id.spinner);
@@ -77,7 +69,6 @@ public class UpdateTarefa extends Activity implements OnDateSetListener, OnItemS
 		tarefa_data.setText(t.getData());
 		tarefa_descricao.setText(t.getDescricao());
 		//tarefa_local.setText(t.getLocal());
-		usuario = (Usuario) getIntent().getSerializableExtra("usuario");
 		loadSpinnerData();
 		setButtons();
 		
