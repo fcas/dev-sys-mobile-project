@@ -2,6 +2,8 @@ package activities;
 
 import java.util.Calendar;
 
+import android.util.Log;
+
 public class DataCalculos {
 	public static void main(String args[]){
 		//System.out.println(dataAtual());
@@ -38,8 +40,14 @@ public class DataCalculos {
 		return result;
 		}catch(ArrayIndexOutOfBoundsException e){
 			return data;
+			
 		}
 	}
-	
+	public static int taAtrasada(String data1){
+		Calendar c = Calendar.getInstance();
+		int result = visaoToBanco(data1).compareTo((normalizarData(c.get(Calendar.DAY_OF_MONTH), c.get(Calendar.MONTH) + 1, c.get(Calendar.YEAR))));	
+		Log.w("Resultado Comparacao - "+data1, String.valueOf(result));
+		return result;
+	}
 	
 }

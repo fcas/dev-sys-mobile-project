@@ -33,8 +33,8 @@ import android.widget.Toast;
 import dao.DAOComentario;
 import dao.DAOLugar;
 import dimap.ufrn.dm.R;
+import excecoes.ConexaoException;
 public class NovoComentario extends Activity implements OnItemSelectedListener {
-	private DAOComentario datasource;
 	private CheckBox comentario_anonimo;
 	private EditText descricao;
 	private Usuario usuario;
@@ -64,8 +64,6 @@ public class NovoComentario extends Activity implements OnItemSelectedListener {
 		
 		//startService(new Intent("INICIAR_SERVICO_CONEXAO"));
 		
-		datasource = new DAOComentario(this);
-		datasource.open();		
 		loadSpinnerData();
 		setButtons();
 
@@ -81,43 +79,66 @@ public class NovoComentario extends Activity implements OnItemSelectedListener {
 			@Override
 			public void onClick(View view) {
 				//label = inputLabel.getText().toString();
-				Builder builder = new AlertDialog.Builder(NovoComentario.this);
+				final Builder builder = new AlertDialog.Builder(NovoComentario.this); 
 				builder.setTitle("Sucesso");
 				builder.setMessage("Comentario adicionado com sucesso");
 
-				builder.setPositiveButton("OK",
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface arg0, int arg1) {
-								Intent intent = new Intent();
-								Comentarios comentario = new Comentarios();
-								if (comentario_anonimo.isChecked()) {
-									comentario.setAutor("Anonimo");
-								} else {
-									comentario.setAutor(usuario.getNome()
-											.toString());
-								}
-								comentario.setComentario(descricao.getText()
-										.toString());
-								comentario.getLugar().setId_local((db.idLugar(label)));
-								Log.w("IdLugar - Primeiro", String.valueOf(comentario.getLugar().getId_local()));
-								try {
-									mService.insertComentario(comentario);
-									mService.getComentarios();
-									//datasource.createComentarios(comentario);
-								} catch (IOException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-								}
-								datasource.close();
-								intent.putExtra("usuario", usuario);
-								intent.setClass(NovoComentario.this,
-										TelaComentarios.class);
-								startActivity(intent);    
-								finish();
-							}
-
-						});
-
+				final Intent intent = new Intent();
+				Comentarios comentario = new Comentarios();
+				if (comentario_anonimo.isChecked()) {
+					comentario.setAutor("Anonimo");
+				} else {
+					comentario.setAutor(usuario.getNome()
+							.toString());
+				}
+				comentario.setComentario(descricao.getText()
+						.toString());
+				comentario.getLugar().setId_local((db.idLugar(label)));
+				Log.w("IdLugar - Primeiro", String.valueOf(comentario.getLugar().getId_local()));
+				try {
+					String result = mService.insertComentario(comentario);
+					mService.getComentarios();
+					if(!result.equals("0")){
+	        			builder.setTitle("Sucesso");  
+				        builder.setMessage("Comentario Adicionado com Sucesso");  
+						builder.setPositiveButton("OK",
+								new DialogInterface.OnClickListener() {
+									public void onClick(DialogInterface arg0, int arg1) {
+																		intent.putExtra("usuario", usuario);
+										intent.setClass(NovoComentario.this,
+												TelaComentarios.class);
+										startActivity(intent);    
+										finish();
+									}
+	
+								});
+					}else{
+	        			builder.setTitle("Erro");  
+				        builder.setMessage("Verifique se os campos foram preenchidos corretamente");  
+						builder.setPositiveButton("OK",
+								new DialogInterface.OnClickListener() {
+									public void onClick(DialogInterface arg0, int arg1) {
+																		intent.putExtra("usuario", usuario);
+										intent.setClass(NovoComentario.this,
+												TelaComentarios.class);
+										startActivity(intent);    
+										finish();
+									}
+	
+								});
+					}
+				} catch (ConexaoException e) {
+        			builder.setTitle("Erro");  
+			        builder.setMessage("Nao foi possivel conectar a internet ou o servidor esta offline");  
+			        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() { 
+			        	public void onClick(DialogInterface arg0, int arg1) {
+									arg0.dismiss();
+			        	}
+			        });
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				AlertDialog alert = builder.create();
 				alert.show();
 
@@ -226,7 +247,6 @@ public class NovoComentario extends Activity implements OnItemSelectedListener {
 	        @Override
 	        public void onServiceDisconnected(ComponentName arg0) {
 	            mBound = false;
-	           
 	        }
 	    };	    
 	    

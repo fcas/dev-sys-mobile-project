@@ -85,8 +85,9 @@ public class ComentarioAdapter extends BaseAdapter {
 			final ImageView img = (ImageView) v
 					.findViewById(R.id.button_apagar_c);
 			TextView lugar = (TextView) v.findViewById(R.id.lugar);		
-			Log.d("Usuario " +usuario.getNome(), "Autor "+p.getAutor());
+			Log.d("Usuario " +usuario.getNome() +" Position = "+position, "Autor "+p.getAutor());
 			if(usuario.getNome().equals(p.getAutor())){
+				img.setVisibility(View.VISIBLE);
 			img.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -100,7 +101,6 @@ public class ComentarioAdapter extends BaseAdapter {
 							new DialogInterface.OnClickListener() {
 								public void onClick(DialogInterface dialog,
 										int id) {
-									dao.open();
 									//dao.deleteComentarios(itens.get(position));
 									try {
 										((ListaComentarios)context).mService.deleteComentario(itens.get(position).getId());
@@ -108,7 +108,6 @@ public class ComentarioAdapter extends BaseAdapter {
 										// TODO Auto-generated catch block
 										e.printStackTrace();
 									}
-									dao.close();
 									itens.remove(position);
 									notifyDataSetChanged();
 									dialog.dismiss();
@@ -122,7 +121,6 @@ public class ComentarioAdapter extends BaseAdapter {
 								}
 							});
 
-					// 3. Get the AlertDialog from create()
 					AlertDialog dialog = builder.create();
 					dialog.show();
 				}
@@ -135,6 +133,7 @@ public class ComentarioAdapter extends BaseAdapter {
 			final ImageView update = (ImageView) v
 					.findViewById(R.id.button_editar_c);
 			if(usuario.getNome().equals(p.getAutor())){
+				img.setVisibility(View.VISIBLE);
 			update.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -170,6 +169,10 @@ public class ComentarioAdapter extends BaseAdapter {
 
 	private Context getContext() {
 		return context;
+	}
+	
+	public void atualizarLista(List<Comentarios> itens){
+		this.itens = itens;
 	}
 	
     ServicoConexao mService;

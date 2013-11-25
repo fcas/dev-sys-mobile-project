@@ -8,8 +8,10 @@ import servicos.ServicoConexao.LocalBinder;
 
 import model.Lugar;
 import model.Tarefas;
+import activities.DataCalculos;
 import activities.ListaTarefas;
 import activities.UpdateTarefa;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Application.ActivityLifecycleCallbacks;
@@ -18,10 +20,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -29,6 +33,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import dao.DAOTarefa;
 import dimap.ufrn.dm.R;
+import excecoes.ConexaoException;
 
 
 public class TarefasListAdapter extends BaseAdapter{
@@ -60,10 +65,11 @@ public class TarefasListAdapter extends BaseAdapter{
 	}
 
 
+	@SuppressLint("NewApi")
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
 		View v = convertView;
-
+		
 		if (v == null) {
 
 			LayoutInflater vi;
@@ -82,7 +88,15 @@ public class TarefasListAdapter extends BaseAdapter{
 		Tarefas p = itens.get(position);
 
 		if (p != null) {
-
+			if(p.getData().length() < 5){
+				v.setBackgroundColor(Color.TRANSPARENT);
+			}else if(DataCalculos.taAtrasada(p.getData()) < 0){
+				v.setBackgroundColor(Color.RED);
+			}else if(DataCalculos.taAtrasada(p.getData()) == 0){
+				v.setBackgroundColor(Color.YELLOW);
+			}else{
+				v.setBackgroundColor(Color.TRANSPARENT);
+			}
 			TextView tarefa = (TextView) v.findViewById(R.id.tarefa);
 			TextView data = (TextView) v.findViewById(R.id.data);
 			TextView horario = (TextView) v.findViewById(R.id.horario);
@@ -91,27 +105,34 @@ public class TarefasListAdapter extends BaseAdapter{
 			img.setOnClickListener(new View.OnClickListener() {		
 				@Override
 				public void onClick(View v) {
-					AlertDialog.Builder builder = new AlertDialog.Builder(context);
+					final AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
 					builder.setMessage("Tem certeza que deseja apagar essa tarefa?");
 					builder.setTitle("Aviso");
 					
 					builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
 				           public void onClick(DialogInterface dialog, int id) {
-				        	   dao.open();
 				        	   Log.d("IDTAREFA-Delete", String.valueOf(itens.get(position).getId()));
-							   
-				        	   dao.deleteTarefa(itens.get(position));
+				        	    
 							   try {
 								   
-								((ListaTarefas)context).mService.deleteTarefa(itens.get(position).getId());
-								} catch (IOException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
+								   ((ListaTarefas)context).mService.deleteTarefa(itens.get(position).getId());
+									itens.remove(position);
+								    notifyDataSetChanged();
+								} catch (ConexaoException e) {
+									AlertDialog.Builder builder2 = new AlertDialog.Builder(context);
+									builder2.setTitle("Erro");  
+									builder2.setMessage("Nao foi possivel conectar a internet ou o servidor esta offline");  
+									builder2.setPositiveButton("OK", new DialogInterface.OnClickListener() { 
+							        	public void onClick(DialogInterface arg0, int arg1) {
+													arg0.dismiss();
+							        	}
+							        });
+									AlertDialog dialog2 = builder2.create();
+									dialog2.show();
+									   
 								}
-							   dao.close();
-							   itens.remove(position);
-							   notifyDataSetChanged();
+							  
 							   dialog.dismiss();
 				           }
 				       });

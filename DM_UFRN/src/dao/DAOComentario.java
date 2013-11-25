@@ -57,6 +57,7 @@ public class DAOComentario {
 	public List<Comentarios> getAllComments() {
 		List<Comentarios> Comentarioss = new ArrayList<Comentarios>();
 
+
 		Cursor cursor = database.query(Comentarios.TABELA_COMENTARIOS,
 				allColumns, null, null, null, null, MySQLiteHelper.COLUNA_ID+" DESC");
 
@@ -72,6 +73,8 @@ public class DAOComentario {
 
 	public List<Comentarios> getComentariosByLugar(String lugar) {
 		List<Comentarios> Comentarioss = new ArrayList<Comentarios>();
+		
+		Log.w("INDO ATRAS DOS COMENTARIOS", "Comentario lugar");
 		int idLugar = daoLugar.idLugar(lugar);
 
 		Cursor cursor = database.rawQuery("Select * from "
@@ -81,9 +84,10 @@ public class DAOComentario {
 
 		cursor.moveToFirst();
 		while (!cursor.isAfterLast()) {
-			Comentarios Comentarios = cursorToComentarios(cursor);
-			Comentarioss.add(Comentarios);
+			Comentarios com = cursorToComentarios(cursor);
+			Comentarioss.add(com);
 			cursor.moveToNext();
+			Log.w(com.getLugar().getNome(), com.getComentario());
 		}
 		cursor.close();
 		return Comentarioss;

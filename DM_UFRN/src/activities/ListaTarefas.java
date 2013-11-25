@@ -10,6 +10,7 @@ import servicos.ServicoConexao.LocalBinder;
 import model.Tarefas;
 import model.Usuario;
 import adapters.TarefasListAdapter;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
@@ -19,6 +20,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -32,6 +34,7 @@ public class ListaTarefas extends Activity {
 	private Button button;
 	Usuario usuario;
 	DAOTarefa daoTarefa;
+	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -63,6 +66,15 @@ public class ListaTarefas extends Activity {
 		final TarefasListAdapter adapter = new TarefasListAdapter(this, listaTarefas);
 
 		lv.setAdapter(adapter);
+		
+		lv.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+			
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		lv.setTextFilterEnabled(true);
 		
 		final CheckBox checkTarefas = (CheckBox)findViewById(R.id.checkTarefas);
@@ -107,6 +119,12 @@ public class ListaTarefas extends Activity {
 
 			@Override
 			public void onClick(View view) {
+				try {
+					mService.getLugares();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				Intent novaTarefaIntent = new Intent();
 				novaTarefaIntent.putExtra("usuario", usuario);
 				novaTarefaIntent.setClass(ListaTarefas.this, NovaTarefa.class);
