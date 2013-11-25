@@ -49,76 +49,12 @@
 		        android:ems="10"
 		        android:hint="@string/lugar_nome"
 		        android:inputType="text" />
-		    
-		        <EditText
-		            style="@style/editPadrao"
-		        android:id="@+id/EditText01"
-		        android:layout_width="fill_parent"
-		        android:layout_height="wrap_content"
-		        android:ems="10"
-		        android:hint="@string/lugar_localizacao"
-		        android:inputType="text" />
 		
 		        
 		<RadioGroup
 		        android:id="@+id/radioGroup1"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content">
-		        <RadioButton
-		            android:id="@+id/radio0"
-		            android:layout_width="wrap_content"
-		            android:layout_height="wrap_content"
-		            android:checked="true"
-		            android:text="@string/lugar_auditorio" />
-		
-		        <RadioButton
-		            android:id="@+id/radio1"
-		            android:layout_width="wrap_content"
-		            android:layout_height="wrap_content"
-		            android:checked="false"
-		            android:text="@string/lugar_cantina" />
-		        <RadioButton
-		            android:id="@+id/radio2"
-		            android:layout_width="wrap_content"
-		            android:layout_height="wrap_content"
-		            android:checked="false"
-		            android:text="@string/lugar_corredor" />
-		
-			    <RadioButton
-			        android:id="@+id/radio3"
-			        android:layout_width="203dp"
-			        android:layout_height="wrap_content"
-			        android:checked="false"
-			        android:text="@string/lugar_parada" />
-			    <RadioButton
-			        android:id="@+id/radio4"
-			        android:layout_width="wrap_content"
-			        android:layout_height="wrap_content"
-			        android:checked="false"
-			        android:text="@string/lugar_restaurante" />
-			
-			    <RadioButton
-			        android:id="@+id/radio5"
-			        android:layout_width="wrap_content"
-			        android:layout_height="wrap_content"
-			        android:checked="false"
-			        android:text="@string/lugar_sala" />
-
-
-
-		    <RadioButton
-		        android:id="@+id/radio7"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:checked="false"
-		        android:text="@string/lugar_secretaria" />
-		
-		    <RadioButton
-		        android:id="@+id/radio6"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:checked="false"
-		        android:text="@string/lugar_sala_prof" />
 
 		    </RadioGroup>
 
