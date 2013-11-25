@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import servicos.ServicoConexao;
 import servicos.ServicoConexao.LocalBinder;
+import model.Lugar;
 import model.Usuario;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -17,6 +18,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -25,6 +27,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 import dao.DAOLugar;
 import dimap.ufrn.dm.R;
+import excecoes.ConexaoException;
 public class NovoLugar extends Activity {
 
 	Button button;
@@ -55,48 +58,74 @@ public class NovoLugar extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				Builder builder = new AlertDialog.Builder(NovoLugar.this);
-				builder.setTitle("Sucesso");
-				builder.setMessage("Lugar adicionado com sucesso");
 
-				builder.setPositiveButton("OK",
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface arg0, int arg1) {
-								Intent intent = new Intent();
-								intent.putExtra("usuario", usuario);
 
-								String label = inputLabel.getText().toString();
+				final Intent intent = new Intent();
+				intent.putExtra("usuario", usuario);
 
-								if (label.trim().length() > 0) {
+				String label = inputLabel.getText().toString();
 
-									DAOLugar db = new DAOLugar(
-											getApplicationContext());
-									try {
-										mService.insertLugar(label);
-										mService.getLugares();
-										//db.salvarLugar(label);
-									} catch (IOException e) {
-										// TODO Auto-generated catch block
-										e.printStackTrace();
+				if (label.trim().length() > 0) {
+
+					DAOLugar db = new DAOLugar(
+							getApplicationContext());
+					try {
+						Lugar l = new Lugar();
+						l.setNome(label);
+						String result = mService.insertLugar(l);
+						mService.getLugares();
+						Log.w("ID RETORNADO", result);
+						if(result.equals("0")){
+							builder.setTitle("Erro");
+							builder.setMessage("Lugar ja existe");
+							builder.setPositiveButton("OK",
+									new DialogInterface.OnClickListener() {
+										public void onClick(DialogInterface arg0, int arg1) {
+											arg0.dismiss();
+										}
+									});
+						}else{
+							builder.setTitle("Sucesso");
+							builder.setMessage("Lugar adicionado com sucesso");
+							builder.setPositiveButton("OK",
+									new DialogInterface.OnClickListener() {
+										public void onClick(DialogInterface arg0, int arg1) {
+																			intent.setClass(NovoLugar.this,
+													ListaLugares.class);
+											startActivity(intent);
+											finish();
+										}
+									});
+						}
+						//db.salvarLugar(label);
+					} catch (ConexaoException e) {
+						builder.setTitle("Erro");
+						builder.setMessage("Nao foi possivel conectar a internet ou o servidor esta offline");
+						builder.setPositiveButton("OK",
+								new DialogInterface.OnClickListener() {
+									public void onClick(DialogInterface arg0, int arg1) {
+										arg0.dismiss();
 									}
-									
-									inputLabel.setText("");
+								});
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					inputLabel.setText("");
 
-									InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-									imm.hideSoftInputFromWindow(
-											inputLabel.getWindowToken(), 0);
+					InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+					imm.hideSoftInputFromWindow(
+							inputLabel.getWindowToken(), 0);
 
-								} else {
-									Toast.makeText(getApplicationContext(),
-											"Por favor, informe um lugar",
-											Toast.LENGTH_SHORT).show();
-								}
+				} else {
+					Toast.makeText(getApplicationContext(),
+							"Por favor, informe um lugar",
+							Toast.LENGTH_SHORT).show();
+				}
 
-								intent.setClass(NovoLugar.this,
-										ListaLugares.class);
-								startActivity(intent);
-								finish();
-							}
-						});
+
+
 
 				AlertDialog alert = builder.create();
 				alert.show();

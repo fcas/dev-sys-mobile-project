@@ -26,6 +26,7 @@ import android.widget.ImageButton;
 import dao.DAOImagem;
 import dao.DAOUsuario;
 import dimap.ufrn.dm.R;
+import excecoes.ConexaoException;
 import excecoes.DadosIncompletosException;
 public class ProfileEdit extends Activity {
 
@@ -97,37 +98,50 @@ public class ProfileEdit extends Activity {
 			@Override
 			public void onClick(View view) {
 				final Builder builder = new AlertDialog.Builder(ProfileEdit.this);  
-				builder.setTitle("Sucesso");  
-				builder.setMessage("Dados Editados com sucesso");  
-				usuario.setNome(edit_nome.getText().toString());
-				usuario.setCurso(edit_curso.getText().toString());
-				usuario.setSobreMim(edit_sobre.getText().toString());
-				daoImagem.putImagem(usuario.getLogin(), ((BitmapDrawable)trocaImagem.getDrawable()).getBitmap());
-				daoUsuario.open();
-				try {
-					daoUsuario.updateUsuario(usuario.getLogin(), usuario);
-					mService.updateUsuario(usuario);
-				} catch (DadosIncompletosException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}catch(IOException e){
-					e.printStackTrace();
-				}
-				
-				daoUsuario.close();
 		        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() { 
 		        	public void onClick(DialogInterface arg0, int arg1) {
-		        		Intent mainIntent = new Intent();
-						mainIntent.putExtra("usuario", usuario);
-						mainIntent.setClass(ProfileEdit.this, MainActivity.class);
-						startActivity(mainIntent);
-//						/this.dismiss();
-		        		finish();
+		        		arg0.dismiss();
 	        		}
 	        	
 		        });
-		        
-
+				usuario.setNome(edit_nome.getText().toString());
+				usuario.setCurso(edit_curso.getText().toString());
+				usuario.setSobreMim(edit_sobre.getText().toString());
+				
+				if(!usuario.getNome().equals("") && !usuario.getSenha().equals("")){
+					//daoUsuario.updateUsuario(usuario.getLogin(), usuario);
+					try {
+						mService.updateUsuario(usuario);
+						mService.getUsuarios();
+						daoImagem.putImagem(usuario.getLogin(), ((BitmapDrawable)trocaImagem.getDrawable()).getBitmap());	
+						builder.setTitle("Sucesso");  
+						builder.setMessage("Dados Editados com sucesso");  
+				        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() { 
+				        	public void onClick(DialogInterface arg0, int arg1) {
+				        		Intent mainIntent = new Intent();
+								mainIntent.putExtra("usuario", usuario);
+								mainIntent.setClass(ProfileEdit.this, MainActivity.class);
+								startActivity(mainIntent);
+//								/this.dismiss();
+				        		finish();
+			        		}
+			        	
+				        });
+					} catch (ConexaoException e) {
+						// TODO Auto-generated catch block
+						builder.setTitle("Erro");  
+						builder.setMessage("Nao foi possivel conectar a internet ou o servidor se encontra offline");  
+						e.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+				}else{
+					builder.setTitle("Erro");  
+					builder.setMessage("Preencha todos os campos corretamente");  
+				}
+				
 				AlertDialog alert = builder.create();  
 		        alert.show();
 			}

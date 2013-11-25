@@ -36,6 +36,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 import dao.DAOLugar;
 import dao.DAOTarefa;
+import excecoes.ConexaoException;
 
 public class NovaTarefa extends Activity implements OnItemSelectedListener{
 	private DAOTarefa daoTarefa;
@@ -93,38 +94,54 @@ public class NovaTarefa extends Activity implements OnItemSelectedListener{
 			@Override
 			public void onClick(View view) {
 				Builder builder = new AlertDialog.Builder(NovaTarefa.this);  
-		        builder.setTitle("Sucesso");  
-		        builder.setMessage("Tarefa adicionada com sucesso");  
-		        
-		        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() { 
-		        	public void onClick(DialogInterface arg0, int arg1) {
-		        		Tarefas tarefa = new Tarefas();
-		        		tarefa.setDescricao(tarefa_descricao.getText().toString());
-		        		tarefa.setUsuario(usuario.getLogin());
-		        		tarefa.setData(tarefa_data.getText().toString());
-		        		tarefa.setHorario(tarefa_hora.getText().toString());
-		        		tarefa.setLugar(new Lugar(daoLugar.idLugar(label)));
-		        		//tarefa.setLocal(tarefa_data.getText().toString());
-		        		Log.d("Tabela tarefa", Tarefas.CREATE_TAREFA);
-		        		daoTarefa.open();
-		        		try {
-							mService.insertTarefa(tarefa);
-							mService.getTarefas();
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-		        		//daoTarefa.createTarefa(tarefa);
-		        		
-		        		daoTarefa.close();
-						Intent minhasTarefasIntent = new Intent();
-						minhasTarefasIntent.putExtra("usuario", usuario);
-						minhasTarefasIntent.setClass(NovaTarefa.this, ListaTarefas.class);
-						startActivity(minhasTarefasIntent);
-						finish();
-		        	}
-		        });
 
+				Tarefas tarefa = new Tarefas();
+        		tarefa.setDescricao(tarefa_descricao.getText().toString());
+        		tarefa.setUsuario(usuario.getLogin());
+        		tarefa.setData(tarefa_data.getText().toString());
+        		tarefa.setHorario(tarefa_hora.getText().toString());
+        		tarefa.setLugar(new Lugar(daoLugar.idLugar(label)));
+        		//tarefa.setLocal(tarefa_data.getText().toString());
+        		Log.d("Tabela tarefa", Tarefas.CREATE_TAREFA);
+        		try {
+					String result = mService.insertTarefa(tarefa);
+					mService.getTarefas();
+					if(!result.equals("0")){
+						builder.setTitle("Sucesso");
+						builder.setMessage("Tarefa cadastrada com sucesso");
+				        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() { 
+				        	public void onClick(DialogInterface arg0, int arg1) {
+				        		
+								Intent minhasTarefasIntent = new Intent();
+								minhasTarefasIntent.putExtra("usuario", usuario);
+								minhasTarefasIntent.setClass(NovaTarefa.this, ListaTarefas.class);
+								startActivity(minhasTarefasIntent);
+								finish();
+				        	}
+				        });
+					}else{
+						builder.setTitle("Erro");
+						builder.setMessage("Nao foi possivel cadastrar a tarefa. Verifique se os campos foram preenchidos corretamente");
+				        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() { 
+				        	public void onClick(DialogInterface arg0, int arg1) {
+				        		arg0.dismiss();
+				        	}
+				        });
+					}
+
+					
+				} catch (ConexaoException e) {
+					builder.setTitle("Erro");
+					builder.setMessage("Nao foi possivel conectar a internet ou o servidor esta offline");
+			        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() { 
+			        	public void onClick(DialogInterface arg0, int arg1) {
+			        		arg0.dismiss();
+			        	}
+			        });
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 		        AlertDialog alert = builder.create();  
 		        alert.show();
 			}

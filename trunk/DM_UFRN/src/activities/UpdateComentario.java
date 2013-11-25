@@ -34,6 +34,7 @@ import android.widget.Toast;
 import dao.DAOComentario;
 import dao.DAOLugar;
 import dimap.ufrn.dm.R;
+import excecoes.ConexaoException;
 
 public class UpdateComentario extends Activity implements
 		OnItemSelectedListener {
@@ -83,45 +84,54 @@ public class UpdateComentario extends Activity implements
 			public void onClick(View view) {
 				//label = inputLabel.getText().toString();
 				Builder builder = new AlertDialog.Builder(UpdateComentario.this);
-				builder.setTitle("Sucesso");
-				builder.setMessage("Comentario atualizado com sucesso");
+				
 
-				builder.setPositiveButton("OK",
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface arg0, int arg1) {
-								Intent intent = new Intent();
-								
-								if (comentario_anonimo.isChecked()) {
-									com.setAutor("Anonimo");
-								} else {
-									com.setAutor(usuario.getNome()
-											.toString());
+				if (comentario_anonimo.isChecked()) {
+					com.setAutor("Anonimo");
+				} else {
+					com.setAutor(usuario.getNome()
+							.toString());
+				}
+				com.setComentario(descricao.getText()
+						.toString());
+				Log.w("ID_LOCAL - LOCAL", String.valueOf(db.idLugar(label))+"-"+label);
+				com.getLugar().setId_local(
+						(db.idLugar(label)));
+				try {
+					mService.updateComentario(com);
+					builder.setTitle("Sucesso");
+					builder.setMessage("Comentario atualizado com sucesso");
+					builder.setPositiveButton("OK",
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface arg0, int arg1) {
+									Intent intent = new Intent();
+																	intent.putExtra("usuario", usuario);
+									intent.setClass(UpdateComentario.this,
+											TelaComentarios.class);
+									startActivity(intent);
+									finish();
 								}
-								com.setComentario(descricao.getText()
-										.toString());
-								Log.w("ID_LOCAL - LOCAL", String.valueOf(db.idLugar(label))+"-"+label);
-								com.getLugar().setId_local(
-										(db.idLugar(label)));
-								//usuario.getComentarios().add(comentario);
-								// ContentValues values =
-								// toContentValue(comentario);
-								//datasource.open();
-								try {
-									mService.updateComentario(com);
-								} catch (IOException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-								}
-								//datasource.updateComentario(comentario);
-								//datasource.close();
-								intent.putExtra("usuario", usuario);
-								intent.setClass(UpdateComentario.this,
-										TelaComentarios.class);
-								startActivity(intent);
-								finish();
-							}
 
-						});
+							});
+				} catch (ConexaoException e) {
+					builder.setTitle("Erro");
+					builder.setMessage("Nao foi possivel se conectar com a internet ou o servidor esta offline");
+					e.printStackTrace();
+					builder.setPositiveButton("OK",
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface arg0, int arg1) {
+									arg0.dismiss();
+								}
+
+							});
+				}
+				//datasource.updateComentario(comentario);
+				//datasource.close();
+
+				
+
+
+
 
 				AlertDialog alert = builder.create();
 				alert.show();

@@ -168,9 +168,16 @@ public class ServicoConexao extends Service {
 			    return result;
 	}
 	
-	public String updateUsuario(Usuario u) throws IOException{			
-		URL url = new URL(IP_SERVIDOR+"/WebServiceMobile/resources/usuario/updateUsuario");	
+	public String updateUsuario(Usuario u) throws ConexaoException{			
+		URL url = null;
+		try {
+			url = new URL(IP_SERVIDOR+"/WebServiceMobile/resources/usuario/updateUsuario");
+		} catch (MalformedURLException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}	
 			HttpPut httpPut = null;
+			String result = "";
 			try {
 				httpPut = new HttpPut(url.toURI());
 			} catch (URISyntaxException e1) {
@@ -188,23 +195,29 @@ public class ServicoConexao extends Service {
 			        response = httpClient.execute(httpPut);
 			        Log.w("Codigo de Erro", String.valueOf(response.getStatusLine().getStatusCode()));
 			        if(response!=null){
-                        InputStream in = response.getEntity().getContent(); //Get the data in the entity
+			        	BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
+			        	result = reader.readLine();
                     }
 			    }
-			    catch (Exception e) {
-			        e.printStackTrace();
+			    catch (IOException e) {
+			        throw new ConexaoException();
 			    }
-			    return "";
+			    return result;
 	}
 	
 	
-	public String insertComentario(Comentarios c) throws IOException{			
-		URL url = new URL(IP_SERVIDOR+"/WebServiceMobile/resources/comentario/createComentario");	
+	public String insertComentario(Comentarios c) throws ConexaoException{			
+		URL url; //= new URL(IP_SERVIDOR+"/WebServiceMobile/resources/comentario/createComentario");	
 			HttpPost httpPost = null;
+			String result = "0";
 			try {
+				url = new URL(IP_SERVIDOR+"/WebServiceMobile/resources/comentario/createComentario");	
 				httpPost = new HttpPost(url.toURI());
 			} catch (URISyntaxException e1) {
 				e1.printStackTrace();
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 				
 				HttpClient httpClient = new DefaultHttpClient();
@@ -218,17 +231,24 @@ public class ServicoConexao extends Service {
 			        response = httpClient.execute(httpPost);
 			        Log.w("Codigo de Erro", String.valueOf(response.getStatusLine().getStatusCode()));
 			        if(response!=null){
-                        InputStream in = response.getEntity().getContent(); //Get the data in the entity
+			        	BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
+			        	result = reader.readLine();			        
 			        }
 			    }
-			    catch (Exception e) {
-			        e.printStackTrace();
+			    catch (IOException e) {
+			        throw new ConexaoException();
 			    }
-			    return "";
+			    return result;
 	}
 	
-	public String updateComentario(Comentarios c) throws IOException{			
-		URL url = new URL(IP_SERVIDOR+"/WebServiceMobile/resources/comentario/updateComentario");	
+	public String updateComentario(Comentarios c) throws ConexaoException{			
+		URL url = null;
+		try {
+			url = new URL(IP_SERVIDOR+"/WebServiceMobile/resources/comentario/updateComentario");
+		} catch (MalformedURLException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}	
 			HttpPut httpPut = null;
 			try {
 				httpPut = new HttpPut(url.toURI());
@@ -250,7 +270,7 @@ public class ServicoConexao extends Service {
 			        }
 			    }
 			    catch (Exception e) {
-			        e.printStackTrace();
+			        throw new ConexaoException();
 			    }
 			    return "";
 	}
@@ -283,9 +303,16 @@ public class ServicoConexao extends Service {
 	}	
 	
 	
-	public String insertLugar(String lugar) throws IOException{			
-		URL url = new URL(IP_SERVIDOR+"/WebServiceMobile/resources/lugar/createLugar");	
+	public String insertLugar(Lugar lugar) throws ConexaoException{			
+			URL url = null;
+			try {
+				url = new URL(IP_SERVIDOR+"/WebServiceMobile/resources/lugar/createLugar");
+			} catch (MalformedURLException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}	
 			HttpPost httpPost = null;
+			String result = "0";
 			try {
 				httpPost = new HttpPost(url.toURI());
 			} catch (URISyntaxException e1) {
@@ -303,17 +330,24 @@ public class ServicoConexao extends Service {
 			        response = httpClient.execute(httpPost);
 			        Log.w("Codigo de Erro", String.valueOf(response.getStatusLine().getStatusCode()));
 			        if(response!=null){
-                        InputStream in = response.getEntity().getContent(); //Get the data in the entity
+			        	BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
+			        	result = reader.readLine();		
 			        }
 			    }
-			    catch (Exception e) {
-			        e.printStackTrace();
+			    catch (IOException e) {
+			        throw new ConexaoException();
 			    }
-			    return "";
+			    return result;
 	}	
 	
-	public String updateLugar(Lugar lugar) throws IOException{			
-		URL url = new URL(IP_SERVIDOR+"/WebServiceMobile/resources/lugar/updateLugar");	
+	public String updateLugar(Lugar lugar){			
+			URL url = null;
+			try {
+				url = new URL(IP_SERVIDOR+"/WebServiceMobile/resources/lugar/updateLugar");
+			} catch (MalformedURLException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}	
 			HttpPut httpPut = null;
 			try {
 				httpPut = new HttpPut(url.toURI());
@@ -342,9 +376,16 @@ public class ServicoConexao extends Service {
 	}	
 	
 	
-	public String insertTarefa(Tarefas t) throws IOException{			
-		URL url = new URL(IP_SERVIDOR+"/WebServiceMobile/resources/tarefa/createTarefa");	
+	public String insertTarefa(Tarefas t) throws ConexaoException{			
+			URL url = null;
+			try {
+				url = new URL(IP_SERVIDOR+"/WebServiceMobile/resources/tarefa/createTarefa");
+			} catch (MalformedURLException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}	
 			HttpPost httpPost = null;
+			String result = "0";
 			try {
 				httpPost = new HttpPost(url.toURI());
 			} catch (URISyntaxException e1) {
@@ -362,17 +403,25 @@ public class ServicoConexao extends Service {
 			        response = httpClient.execute(httpPost);
 			        Log.w("Codigo de Erro", String.valueOf(response.getStatusLine().getStatusCode()));
 			        if(response!=null){
-                        InputStream in = response.getEntity().getContent(); //Get the data in the entity
+			        	BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
+			        	result = reader.readLine();		
 			        }
 			    }
-			    catch (Exception e) {
-			        e.printStackTrace();
+			    catch (IOException e) {
+			        throw new ConexaoException();
 			    }
 			    return "";
 	}	
 	
-	public String updateTarefa(Tarefas t) throws IOException{			
-		URL url = new URL(IP_SERVIDOR+"/WebServiceMobile/resources/tarefa/updateTarefa");	
+	public String updateTarefa(Tarefas t) throws ConexaoException{			
+		URL url = null;
+		String result = "0";
+		try {
+			url = new URL(IP_SERVIDOR+"/WebServiceMobile/resources/tarefa/updateTarefa");
+		} catch (MalformedURLException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}	
 			HttpPut httpPut = null;
 			try {
 				httpPut = new HttpPut(url.toURI());
@@ -391,17 +440,25 @@ public class ServicoConexao extends Service {
 			        response = httpClient.execute(httpPut);
 			        Log.w("Codigo de Erro", String.valueOf(response.getStatusLine().getStatusCode()));
 			        if(response!=null){
-                        InputStream in = response.getEntity().getContent(); //Get the data in the entity
+			        	BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
+			        	result = reader.readLine();		
 			        }
 			    }
 			    catch (Exception e) {
-			        e.printStackTrace();
+			       throw new ConexaoException();
 			    }
-			    return "";
+			    return result;
 	}	
 	
-	public String deleteTarefa(long id) throws IOException{			
-		URL url = new URL(IP_SERVIDOR+"/WebServiceMobile/resources/tarefa/deleteTarefa/"+String.valueOf(id));	
+	public String deleteTarefa(long id) throws ConexaoException{			
+		URL url = null;
+		String result = "0";
+		try {
+			url = new URL(IP_SERVIDOR+"/WebServiceMobile/resources/tarefa/deleteTarefa/"+String.valueOf(id));
+		} catch (MalformedURLException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}	
 			HttpDelete httpDelete = null;
 			try {
 				httpDelete = new HttpDelete(url.toURI());
@@ -418,11 +475,12 @@ public class ServicoConexao extends Service {
 			        response = httpClient.execute(httpDelete);
 			        Log.w("Codigo de Erro", String.valueOf(response.getStatusLine().getStatusCode()));
 			        if(response!=null){
-                        InputStream in = response.getEntity().getContent(); //Get the data in the entity
+			        	//BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
+			        	//result = reader.readLine();		
 			        }
 			    }
-			    catch (Exception e) {
-			        e.printStackTrace();
+			    catch (IOException e) {
+			       throw new ConexaoException();
 			    }
 			    return "";
 	}	

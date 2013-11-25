@@ -18,16 +18,26 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.Toast;
+import android.widget.AdapterView.OnItemSelectedListener;
 import dao.DAOComentario;
+import dao.DAOLugar;
 import dimap.ufrn.dm.R;
 
-public class ListaComentarios extends Activity {
+public class ListaComentarios extends Activity implements OnItemSelectedListener {
 
 	private DAOComentario datasource;
 	Usuario usuario;
-
+	private Spinner spinner;
+	String label;
+	ComentarioAdapter adapter;
+	ListView lv;
+	List<Comentarios> listaComentarios;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -50,16 +60,19 @@ public class ListaComentarios extends Activity {
 		
 		datasource = new DAOComentario(this);
 		datasource.open();
-		List<Comentarios> listaComentarios = datasource.getAllComments();
-		datasource.close();
-
-		ListView lv = (ListView) findViewById(R.id.list_Comentarios);
-		ComentarioAdapter adapter = new ComentarioAdapter(this,
+		listaComentarios = datasource.getAllComments();
+		
+		spinner = (Spinner) findViewById(R.id.spinner);
+		spinner.setOnItemSelectedListener(this);
+		loadSpinnerData();
+		lv = (ListView) findViewById(R.id.list_Comentarios);
+		adapter = new ComentarioAdapter(this,
 				listaComentarios, usuario, mService);
 
 		lv.setAdapter(adapter);
 		lv.setTextFilterEnabled(true);
 
+		datasource.close();
 		Button button = (Button) findViewById(R.id.button_novo_comentario);
 		button.setOnClickListener(new View.OnClickListener() {
 
@@ -131,6 +144,50 @@ public class ListaComentarios extends Activity {
 	           
 	        }
 	    };
+	    
+		private void loadSpinnerData() {
+			DAOLugar db = new DAOLugar(getApplicationContext());
+			db.open();
+			List<String> lables = db.listarLugares();
+			lables.add(0, "Qualquer");
+			ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+					android.R.layout.simple_spinner_item, lables);
+
+			dataAdapter
+					.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+			spinner.setAdapter(dataAdapter);
+			db.close();
+		}
+
+		@Override
+		public void onItemSelected(AdapterView<?> parent, View view, int position,
+				long id) {
+			label = parent.getItemAtPosition(position).toString();
+			Toast.makeText(parent.getContext(), "Voce selecionou: " + label,
+					Toast.LENGTH_LONG).show();
+			datasource.open();
+			if(label.equals("Qualquer")){
+				listaComentarios = datasource.getAllComments();
+				adapter.atualizarLista(listaComentarios);
+				adapter.notifyDataSetChanged();
+				//lv.setAdapter(adapter);
+			}else{
+
+				listaComentarios = datasource.getComentariosByLugar(label);
+				adapter.atualizarLista(listaComentarios);
+				adapter.notifyDataSetChanged();
+				//lv.setAdapter(adapter);
+			}
+			datasource.close();
+
+			
+
+		}
+
+		@Override
+		public void onNothingSelected(AdapterView<?> arg0) {
+		}
 
 
 }

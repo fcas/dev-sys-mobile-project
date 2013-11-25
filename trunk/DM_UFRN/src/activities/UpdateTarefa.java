@@ -37,6 +37,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 import dao.DAOLugar;
 import dao.DAOTarefa;
+import excecoes.ConexaoException;
 
 public class UpdateTarefa extends Activity implements OnDateSetListener, OnItemSelectedListener{
 	private DAOTarefa daoTarefa;
@@ -98,34 +99,45 @@ public class UpdateTarefa extends Activity implements OnDateSetListener, OnItemS
 		        builder.setTitle("Sucesso");  
 		        builder.setMessage("Tarefa atualizada com sucesso");  
 		        
-		        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() { 
-		        	public void onClick(DialogInterface arg0, int arg1) {
-		        		Tarefas tarefa = new Tarefas();
-		        		tarefa.setId(t.getId());
-		        		tarefa.setDescricao(tarefa_descricao.getText().toString());
-		        		tarefa.setUsuario(usuario.getLogin());
-		        		tarefa.setData(tarefa_data.getText().toString());
-		        		tarefa.setHorario(tarefa_hora.getText().toString());
-		        		tarefa.setLugar(new Lugar(daoLugar.idLugar(label)));
-		        		Log.d("LABEL",label);
-		        		Log.d("DAOLUGAR_IDLUGARLABEL", String.valueOf(daoLugar.idLugar(label)));
-		        		daoTarefa.open();
-		        		try {
-							mService.updateTarefa(tarefa);
-							daoTarefa.updateTarefa(tarefa);
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-		        		daoTarefa.close();
-						Intent minhasTarefasIntent = new Intent();
-						minhasTarefasIntent.putExtra("usuario", usuario);
-						minhasTarefasIntent.setClass(UpdateTarefa.this, ListaTarefas.class);
-						startActivity(minhasTarefasIntent);
-						finish();
-		        	}
-		        });
+        		try {
+        			Tarefas tarefa = new Tarefas();
+	        		tarefa.setId(t.getId());
+	        		tarefa.setDescricao(tarefa_descricao.getText().toString());
+	        		tarefa.setUsuario(usuario.getLogin());
+	        		tarefa.setData(tarefa_data.getText().toString());
+	        		tarefa.setHorario(tarefa_hora.getText().toString());
+	        		tarefa.setLugar(new Lugar(daoLugar.idLugar(label)));
 
+					mService.updateTarefa(tarefa);
+					mService.getTarefas();
+					builder.setTitle("Sucesso");
+					builder.setMessage("Comentario atualizado com sucesso");
+					builder.setPositiveButton("OK",
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface arg0, int arg1) {
+									Intent intent = new Intent();
+																	intent.putExtra("usuario", usuario);
+									intent.setClass(UpdateTarefa.this,
+											ListaTarefas.class);
+									startActivity(intent);
+									finish();
+								}
+
+							});
+				} catch (ConexaoException e) {
+					builder.setMessage("Nao foi possivel conectar a internet ou o servidor esta offline");
+					builder.setPositiveButton("OK",
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface arg0, int arg1) {
+									arg0.dismiss();
+								}
+
+							});
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		       
 		        AlertDialog alert = builder.create();  
 		        alert.show();
 			}
